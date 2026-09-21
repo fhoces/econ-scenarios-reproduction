@@ -2009,7 +2009,7 @@ tibble(
                         "Table 5, four capital-supply elasticities",
                         "Table 6, four wage rigidities"),
   Cells = c(80, 40, 49),
-  `Largest deviation` = c(0.08, 0.05, 0.13)
+  `Largest deviation` = c(0.08, 0.05, 0.11)
 ) |>
   knitr::kable(format = "html")
 ```
@@ -2064,7 +2064,7 @@ derivation uses 0.0384. At 0.0384 the row lands exactly.
 5. **The growth channel is small over five years**, by construction.
 
 .blue-box[
-The reproduction: `aiscen` Python package, 98 tests, reproduces Tables 3, 5 and 6 to
+The reproduction: `aiscen` Python package, 102 tests, reproduces Tables 3, 5 and 6 to
 the printed precision. Narrative walkthrough with every equation in `repro.qmd`.
 ]
 
