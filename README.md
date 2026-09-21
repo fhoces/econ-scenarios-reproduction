@@ -95,11 +95,15 @@ at Table 1's 0.038 for transcription fidelity; the tests check both.
   parameters as an indicative comparison only (it gives GDP 9.9 percent above the no-AI
   path against Table 4's median of 8.6).
 * **Figure 1** (the capability question by task) is survey output.
-* The paper's external inputs are public but not bundled here: IPUMS-CPS matched monthly
-  files 2010-19, the Carrillo-Tudela and Visschers (2023) Econometrica replication files
-  for the occupational switching matrix, CPS 2025 annual averages, JOLTS, the Census BTOS
-  AI supplement, and FRED. The calibration targets they produce are transcribed as
-  numbers in `aiscen/params.py` rather than recomputed from source.
+* The paper's external inputs are public but not bundled here:
+  [IPUMS-CPS](https://cps.ipums.org/cps/) matched monthly files 2010-19, the
+  Carrillo-Tudela and Visschers (2023) Econometrica replication files for the
+  occupational switching matrix, [CPS](https://www.bls.gov/cps/) 2025 annual averages,
+  [JOLTS](https://www.bls.gov/jlt/), the [Census BTOS](https://www.census.gov/hfp/btos/)
+  AI supplement, and [FRED](https://fred.stlouisfed.org/). The calibration targets they
+  produce are transcribed as numbers in `aiscen/params.py` rather than recomputed from
+  source. (No link for the Carrillo-Tudela and Visschers replication files: not
+  confident of a stable URL, so left as a citation only rather than guessed.)
 
 ## Usage
 

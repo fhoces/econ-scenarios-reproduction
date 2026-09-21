@@ -18,7 +18,8 @@ class Fixed:
     # --- Technology and factor markets (Table 1, panel A) ---
     sigma: float = 0.5          # elasticity of substitution across task instances
     s_L0: float = 0.60          # base-period labor share
-    cog_share: float = 0.624    # s_C,t0 / s_L,t0, cognitive share of employment (CPS 2025)
+    cog_share: float = 0.624    # s_C,t0 / s_L,t0, cognitive share of employment
+                                 # (CPS 2025 annual averages, https://www.bls.gov/cps/)
     eps: float = 3.0            # elasticity of capital supply
     r_bar: float = 0.115        # no-AI gross rental rate, per year
     delta: float = 0.05         # depreciation, per year
