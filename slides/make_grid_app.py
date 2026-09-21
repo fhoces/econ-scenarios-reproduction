@@ -1,7 +1,7 @@
 """Export every cell of the 3^7 dial grid, with paths, for the static explorer page.
 
-Writes slides/data/grid_app.json: the seven dials and their three levels, the 2030
-outcome snapshot for each of the 2187 combinations, and the monthly 2025-2030 paths
+Writes slides/data/grid_app.json: the seven dials and their levels, the 2030
+outcome snapshot for each of the 4374 combinations, and the monthly 2025-2030 paths
 for the GDP gap and the cognitive unemployment rate.
 
 Cells are stored in itertools.product order, so the JS side finds a cell by the
