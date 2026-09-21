@@ -676,50 +676,6 @@ right-hand equations are the **closures**: they pin the pool's split and the lev
 ]
 
 ---
-name: month-main
-
-# What the Model Does in One Month
-
-.small[
-1. &lt;b&gt;Paths.&lt;/b&gt; Evaluate the AI paths at &lt;i&gt;t&lt;/i&gt; and &lt;i&gt;t&lt;/i&gt;+1: a lookup, not a solve
-   (&lt;i&gt;m&lt;/i&gt;&lt;sub&gt;t&lt;/sub&gt;, &lt;i&gt;d&lt;/i&gt;&lt;sub&gt;t&lt;/sub&gt;, &lt;i&gt;a&lt;/i&gt;&lt;sub&gt;t&lt;/sub&gt;; &amp;psi; and &amp;rho; are constant
-   in the three scenarios, and &lt;i&gt;m&lt;/i&gt;, &lt;i&gt;d&lt;/i&gt; enter only as &lt;i&gt;m&lt;/i&gt;&lt;sub&gt;t&lt;/sub&gt;&lt;i&gt;d&lt;/i&gt;&lt;sub&gt;t&lt;/sub&gt;).
-2. &lt;b&gt;Capital market.&lt;/b&gt; Solve for the rental-rate gap &amp;Delta;ln &lt;i&gt;r&lt;/i&gt;&lt;sub&gt;t&lt;/sub&gt; by bisection,
-   from &lt;a href="#prop1-main" class="reflink"&gt;Proposition 1&lt;/a&gt;, the closed form for the
-   &lt;b&gt;frictionless&lt;/b&gt; economy where labor reallocates instantly.
-3. &lt;b&gt;Wage, shares and targets.&lt;/b&gt; Everything else in that closed form:
-   &amp;#8467;&amp;#771;&lt;sub&gt;N,t&lt;/sub&gt;, &lt;i&gt;s&lt;/i&gt;&lt;sub&gt;L,t&lt;/sub&gt;, &amp;Delta;ln &lt;i&gt;w&lt;/i&gt;&lt;sub&gt;t&lt;/sub&gt;,
-   &amp;Delta;ln &lt;i&gt;K&lt;/i&gt;&lt;sub&gt;t&lt;/sub&gt;, &amp;Delta;ln TFP&lt;sub&gt;t&lt;/sub&gt;, and the &lt;b&gt;targets&lt;/b&gt;
-   &amp;#8467;&lt;sup&gt;&amp;#8727;&lt;/sup&gt;&lt;sub&gt;C,t+1&lt;/sub&gt;, &amp;#8467;&lt;sup&gt;&amp;#8727;&lt;/sup&gt;&lt;sub&gt;N,t+1&lt;/sub&gt;. Steps 4 to 7
-   are all about the gap between those targets and where labor actually is.
-4. &lt;b&gt;Gaps and the AI-sensitive wage.&lt;/b&gt; Form the &lt;b&gt;overhang&lt;/b&gt; (&lt;i&gt;G&lt;/i&gt;&lt;sub&gt;o,t&lt;/sub&gt;), the
-   &lt;b&gt;shortfall&lt;/b&gt; (&lt;i&gt;B&lt;/i&gt;&lt;sub&gt;o,t&lt;/sub&gt;) and the attached force (&lt;i&gt;N&lt;/i&gt;&lt;sub&gt;C,t&lt;/sub&gt;); move the
-   actual wage (&lt;i&gt;w&lt;/i&gt;&lt;sub&gt;C,t&lt;/sub&gt;/&lt;i&gt;w&lt;/i&gt;&lt;sub&gt;t&lt;/sub&gt;) a fraction 1&amp;minus;&amp;xi;&lt;sub&gt;m&lt;/sub&gt;
-   toward the wage that would clear it (&lt;i&gt;w&lt;/i&gt;&lt;sup&gt;c&lt;/sup&gt;&lt;sub&gt;C,t&lt;/sub&gt;).
-5. &lt;b&gt;Separations and openings.&lt;/b&gt; At that wage read off labor demand
-   (&amp;#8467;&lt;sup&gt;d&lt;/sup&gt;&lt;sub&gt;C,t&lt;/sub&gt;); the excess (&lt;i&gt;E&lt;/i&gt;&lt;sub&gt;t&lt;/sub&gt;) becomes quits-not-replaced
-   (&lt;i&gt;q&lt;/i&gt;&lt;sub&gt;o,t&lt;/sub&gt;) and &lt;b&gt;layoffs&lt;/b&gt; (&lt;i&gt;D&lt;/i&gt;&lt;sub&gt;C,t&lt;/sub&gt;); post vacancies
-   (&lt;i&gt;v&lt;/i&gt;&lt;sub&gt;C,t&lt;/sub&gt;, &lt;i&gt;v&lt;/i&gt;&lt;sub&gt;N,t&lt;/sub&gt;) to replace quits plus &amp;theta;&lt;sub&gt;H&lt;/sub&gt; of the
-   shortfall (&lt;i&gt;Z&lt;/i&gt;&lt;sub&gt;t&lt;/sub&gt;, &lt;i&gt;B&lt;/i&gt;&lt;sub&gt;N,t&lt;/sub&gt;), over the normal filling rate
-   (&amp;pi;&amp;#772;&lt;sub&gt;o&lt;/sub&gt;).
-6. &lt;b&gt;Matching.&lt;/b&gt; Hires (&lt;i&gt;H&lt;/i&gt;&lt;sub&gt;j,t&lt;/sub&gt;) from effective search (&lt;i&gt;S&lt;/i&gt;&lt;sub&gt;j,t&lt;/sub&gt;) and
-   vacancies; finding rates by origin (&lt;i&gt;f&lt;/i&gt;&lt;sub&gt;C,t&lt;/sub&gt;, &lt;i&gt;f&lt;/i&gt;&lt;sub&gt;N,t&lt;/sub&gt;).
-7. &lt;b&gt;Stocks.&lt;/b&gt; Update employment (&amp;#8467;&lt;sub&gt;o,t+1&lt;/sub&gt;) and the pools (&lt;i&gt;U&lt;/i&gt;&lt;sub&gt;o,t+1&lt;/sub&gt;).
-8. &lt;b&gt;Reporting.&lt;/b&gt; The actual economy at &lt;i&gt;realized&lt;/i&gt; employment, system (39):
-   &lt;i&gt;Y&lt;/i&gt;&lt;sub&gt;t&lt;/sub&gt;, &lt;i&gt;w&lt;/i&gt;&lt;sub&gt;N,t&lt;/sub&gt;, &lt;i&gt;r&lt;/i&gt;&lt;sub&gt;t&lt;/sub&gt;, &lt;i&gt;K&lt;/i&gt;&lt;sub&gt;t&lt;/sub&gt;,
-   &lt;i&gt;s&lt;/i&gt;&lt;sub&gt;L,t&lt;/sub&gt;.
-9. &lt;b&gt;Ideas.&lt;/b&gt; Feed the GDP gap into research (&amp;Delta;ln &lt;i&gt;R&lt;/i&gt;&lt;sub&gt;t&lt;/sub&gt;), step the ideas
-   stock forward (&amp;Delta;&lt;i&gt;g&lt;/i&gt;&lt;sub&gt;t&lt;/sub&gt;, &amp;Delta;ln &lt;i&gt;A&lt;/i&gt;&lt;sub&gt;t+1&lt;/sub&gt;).
-]
-
-.highlight-box[
-44 equations per month, but the ordering is deliberately recursive: only two of them
-need a root-find, and both are one-dimensional and monotone.
-]
-
-&lt;a href="#the-44" class="nav-btn"&gt;which 44 equations, and where in the code &amp;rarr;&lt;/a&gt;
-
----
 
 # The Normal Labor Market, Before AI
 
@@ -765,6 +721,50 @@ then held fixed across scenarios.
 For a reproduction this block is the best available test: it has to hit six published
 numbers using none of them as inputs. The Python reimplementation matches all six.
 ]
+
+---
+name: month-main
+
+# What the Model Does in One Month
+
+.small[
+1. &lt;b&gt;Paths.&lt;/b&gt; Evaluate the AI paths at &lt;i&gt;t&lt;/i&gt; and &lt;i&gt;t&lt;/i&gt;+1: a lookup, not a solve
+   (&lt;i&gt;m&lt;/i&gt;&lt;sub&gt;t&lt;/sub&gt;, &lt;i&gt;d&lt;/i&gt;&lt;sub&gt;t&lt;/sub&gt;, &lt;i&gt;a&lt;/i&gt;&lt;sub&gt;t&lt;/sub&gt;; &amp;psi; and &amp;rho; are constant
+   in the three scenarios, and &lt;i&gt;m&lt;/i&gt;, &lt;i&gt;d&lt;/i&gt; enter only as &lt;i&gt;m&lt;/i&gt;&lt;sub&gt;t&lt;/sub&gt;&lt;i&gt;d&lt;/i&gt;&lt;sub&gt;t&lt;/sub&gt;).
+2. &lt;b&gt;Capital market.&lt;/b&gt; Solve for the rental-rate gap &amp;Delta;ln &lt;i&gt;r&lt;/i&gt;&lt;sub&gt;t&lt;/sub&gt; by bisection,
+   from &lt;a href="#prop1-main" class="reflink"&gt;Proposition 1&lt;/a&gt;, the closed form for the
+   &lt;b&gt;frictionless&lt;/b&gt; economy where labor reallocates instantly.
+3. &lt;b&gt;Wage, shares and targets.&lt;/b&gt; Everything else in that closed form:
+   &amp;#8467;&amp;#771;&lt;sub&gt;N,t&lt;/sub&gt;, &lt;i&gt;s&lt;/i&gt;&lt;sub&gt;L,t&lt;/sub&gt;, &amp;Delta;ln &lt;i&gt;w&lt;/i&gt;&lt;sub&gt;t&lt;/sub&gt;,
+   &amp;Delta;ln &lt;i&gt;K&lt;/i&gt;&lt;sub&gt;t&lt;/sub&gt;, &amp;Delta;ln TFP&lt;sub&gt;t&lt;/sub&gt;, and the &lt;b&gt;targets&lt;/b&gt;
+   &amp;#8467;&lt;sup&gt;&amp;#8727;&lt;/sup&gt;&lt;sub&gt;C,t+1&lt;/sub&gt;, &amp;#8467;&lt;sup&gt;&amp;#8727;&lt;/sup&gt;&lt;sub&gt;N,t+1&lt;/sub&gt;. Steps 4 to 7
+   are all about the gap between those targets and where labor actually is.
+4. &lt;b&gt;Gaps and the AI-sensitive wage.&lt;/b&gt; Form the &lt;b&gt;overhang&lt;/b&gt; (&lt;i&gt;G&lt;/i&gt;&lt;sub&gt;o,t&lt;/sub&gt;), the
+   &lt;b&gt;shortfall&lt;/b&gt; (&lt;i&gt;B&lt;/i&gt;&lt;sub&gt;o,t&lt;/sub&gt;) and the attached force (&lt;i&gt;N&lt;/i&gt;&lt;sub&gt;C,t&lt;/sub&gt;); move the
+   actual wage (&lt;i&gt;w&lt;/i&gt;&lt;sub&gt;C,t&lt;/sub&gt;/&lt;i&gt;w&lt;/i&gt;&lt;sub&gt;t&lt;/sub&gt;) a fraction 1&amp;minus;&amp;xi;&lt;sub&gt;m&lt;/sub&gt;
+   toward the wage that would clear it (&lt;i&gt;w&lt;/i&gt;&lt;sup&gt;c&lt;/sup&gt;&lt;sub&gt;C,t&lt;/sub&gt;).
+5. &lt;b&gt;Separations and openings.&lt;/b&gt; At that wage read off labor demand
+   (&amp;#8467;&lt;sup&gt;d&lt;/sup&gt;&lt;sub&gt;C,t&lt;/sub&gt;); the excess (&lt;i&gt;E&lt;/i&gt;&lt;sub&gt;t&lt;/sub&gt;) becomes quits-not-replaced
+   (&lt;i&gt;q&lt;/i&gt;&lt;sub&gt;o,t&lt;/sub&gt;) and &lt;b&gt;layoffs&lt;/b&gt; (&lt;i&gt;D&lt;/i&gt;&lt;sub&gt;C,t&lt;/sub&gt;); post vacancies
+   (&lt;i&gt;v&lt;/i&gt;&lt;sub&gt;C,t&lt;/sub&gt;, &lt;i&gt;v&lt;/i&gt;&lt;sub&gt;N,t&lt;/sub&gt;) to replace quits plus &amp;theta;&lt;sub&gt;H&lt;/sub&gt; of the
+   shortfall (&lt;i&gt;Z&lt;/i&gt;&lt;sub&gt;t&lt;/sub&gt;, &lt;i&gt;B&lt;/i&gt;&lt;sub&gt;N,t&lt;/sub&gt;), over the normal filling rate
+   (&amp;pi;&amp;#772;&lt;sub&gt;o&lt;/sub&gt;).
+6. &lt;b&gt;Matching.&lt;/b&gt; Hires (&lt;i&gt;H&lt;/i&gt;&lt;sub&gt;j,t&lt;/sub&gt;) from effective search (&lt;i&gt;S&lt;/i&gt;&lt;sub&gt;j,t&lt;/sub&gt;) and
+   vacancies; finding rates by origin (&lt;i&gt;f&lt;/i&gt;&lt;sub&gt;C,t&lt;/sub&gt;, &lt;i&gt;f&lt;/i&gt;&lt;sub&gt;N,t&lt;/sub&gt;).
+7. &lt;b&gt;Stocks.&lt;/b&gt; Update employment (&amp;#8467;&lt;sub&gt;o,t+1&lt;/sub&gt;) and the pools (&lt;i&gt;U&lt;/i&gt;&lt;sub&gt;o,t+1&lt;/sub&gt;).
+8. &lt;b&gt;Reporting.&lt;/b&gt; The actual economy at &lt;i&gt;realized&lt;/i&gt; employment, system (39):
+   &lt;i&gt;Y&lt;/i&gt;&lt;sub&gt;t&lt;/sub&gt;, &lt;i&gt;w&lt;/i&gt;&lt;sub&gt;N,t&lt;/sub&gt;, &lt;i&gt;r&lt;/i&gt;&lt;sub&gt;t&lt;/sub&gt;, &lt;i&gt;K&lt;/i&gt;&lt;sub&gt;t&lt;/sub&gt;,
+   &lt;i&gt;s&lt;/i&gt;&lt;sub&gt;L,t&lt;/sub&gt;.
+9. &lt;b&gt;Ideas.&lt;/b&gt; Feed the GDP gap into research (&amp;Delta;ln &lt;i&gt;R&lt;/i&gt;&lt;sub&gt;t&lt;/sub&gt;), step the ideas
+   stock forward (&amp;Delta;&lt;i&gt;g&lt;/i&gt;&lt;sub&gt;t&lt;/sub&gt;, &amp;Delta;ln &lt;i&gt;A&lt;/i&gt;&lt;sub&gt;t+1&lt;/sub&gt;).
+]
+
+.highlight-box[
+44 equations per month, but the ordering is deliberately recursive: only two of them
+need a root-find, and both are one-dimensional and monotone.
+]
+
+&lt;a href="#the-44" class="nav-btn"&gt;which 44 equations, and where in the code &amp;rarr;&lt;/a&gt;
 
 ---
 class: eqwall

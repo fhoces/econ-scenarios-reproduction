@@ -746,6 +746,28 @@ right-hand equations are the **closures**: they pin the pool's split and the lev
 ]
 
 ---
+
+# The Normal Labor Market, Before AI
+
+```{r steady-state, echo=FALSE}
+tibble(
+  object = c("pool, share of labor force", "quit rate, AI-sensitive / other, per month",
+             "aggregate finding rate, per month", "filling rate, AI-sensitive / other",
+             "matching efficiency chi", "job-finders who change group"),
+  value  = c("3.8%", "0.63% / 1.40%", "0.23", "0.66 / 0.64", "0.76", "1 in 7")
+) |>
+  knitr::kable(format = "html")
+```
+
+Nothing in this block is fitted to AI. It is solved once, from the CPS and JOLTS, and
+then held fixed across scenarios.
+
+.blue-box[
+For a reproduction this block is the best available test: it has to hit six published
+numbers using none of them as inputs. The Python reimplementation matches all six.
+]
+
+---
 name: month-main
 
 # What the Model Does in One Month
@@ -788,28 +810,6 @@ need a root-find, and both are one-dimensional and monotone.
 ]
 
 <a href="#the-44" class="nav-btn">which 44 equations, and where in the code &rarr;</a>
-
----
-
-# The Normal Labor Market, Before AI
-
-```{r steady-state, echo=FALSE}
-tibble(
-  object = c("pool, share of labor force", "quit rate, AI-sensitive / other, per month",
-             "aggregate finding rate, per month", "filling rate, AI-sensitive / other",
-             "matching efficiency chi", "job-finders who change group"),
-  value  = c("3.8%", "0.63% / 1.40%", "0.23", "0.66 / 0.64", "0.76", "1 in 7")
-) |>
-  knitr::kable(format = "html")
-```
-
-Nothing in this block is fitted to AI. It is solved once, from the CPS and JOLTS, and
-then held fixed across scenarios.
-
-.blue-box[
-For a reproduction this block is the best available test: it has to hit six published
-numbers using none of them as inputs. The Python reimplementation matches all six.
-]
 
 ---
 class: eqwall
