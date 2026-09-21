@@ -9,6 +9,21 @@ h3 { margin-top: 1.6rem; font-size: 1.15rem; }
 code.sourceCode { font-size: 0.8rem; }
 .published { color: #52514e; }
 
+/* Small cross-link line to the other two artifacts (the deck, the explorer) and the
+   repo, borrowed loosely from index.html's palette (--ink-3 #8994a0, --rule #e2e7ec,
+   --accent #2a78d6) since this document uses the Quarto cosmo theme rather than
+   those custom properties directly. */
+.site-nav {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.78rem;
+  color: #8994a0;
+  border-bottom: 1px solid #e2e7ec;
+  padding-bottom: 0.7rem;
+  margin-bottom: 1.6rem;
+}
+.site-nav a { color: #2a78d6; text-decoration: none; }
+.site-nav a:hover { text-decoration: underline; }
+
 /* Quarto emits these matplotlib figures without img-fluid, so nothing caps their
    width: a wide figure then overflows the text column on screen and is cropped by
    the print stylesheet. Cap them here. */

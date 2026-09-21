@@ -76,6 +76,16 @@
     padding-block: 32px 48px;
   }
 
+  /* ---- cross-link to the other two artifacts and the repo -------------- */
+  .site-nav {
+    font-family: var(--mono);
+    font-size: 11.5px;
+    color: var(--ink-3);
+    margin: 0 0 16px;
+  }
+  .site-nav a { color: var(--series-1); text-decoration: none; }
+  .site-nav a:hover { text-decoration: underline; }
+
   /* ---- masthead ------------------------------------------------------- */
   header { border-bottom: 1px solid var(--rule); padding-bottom: 20px; }
   h1 {
@@ -221,6 +231,13 @@
     color: var(--ink-2);
     line-height: 1.35;
     margin-top: 1px;
+  }
+  .dial .gloss {
+    font-size: 11.5px;
+    color: var(--ink-3);
+    line-height: 1.35;
+    margin-top: 3px;
+    font-style: italic;
   }
   .levels { display: flex; flex-wrap: wrap; gap: 3px; margin-top: 8px; }
   .levels button {
@@ -371,6 +388,13 @@
 <body>
 
 <div class="wrap">
+  <p class="site-nav">
+    Part of an independent reproduction of Korinek et al. (2026):
+    <a href="../repro.html">the report</a> &middot;
+    <a href="../slides/slides.html">the deck</a> &middot;
+    <a href="../index.html">overview</a> &middot;
+    <a href="https://github.com/fhoces/econ-scenarios-reproduction">GitHub</a>
+  </p>
   <header>
     <h1>AI Scenario Inputs</h1>
     <p class="standfirst">
@@ -628,6 +652,14 @@
     desc.className = "desc";
     desc.textContent = dial.desc;
 
+    var gloss = null;
+    if (dial.key === "rho") {
+      gloss = document.createElement("div");
+      gloss.className = "gloss";
+      gloss.textContent = "At or above 1, new tasks outpace automation: the labor share rises " +
+        "instead of falling.";
+    }
+
     var levels = document.createElement("div");
     levels.className = "levels";
     dial.levels.forEach(function (value, li) {
@@ -645,6 +677,7 @@
     row.appendChild(pop);
     row.appendChild(levels);
     row.appendChild(desc);
+    if (gloss) row.appendChild(gloss);
     rack.appendChild(row);
   });
 
