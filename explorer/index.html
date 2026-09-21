@@ -401,7 +401,7 @@
       Korinek, Jones, Sacher, Cotter and McCrory run their transformative-AI model at three
       settings and label them <em>modest</em>, <em>substantial</em> and <em>extreme</em>. But the
       model takes seven inputs, and those three scenarios move all seven in lockstep. Set them
-      independently here: every one of the <span id="cell-count">2187</span> combinations is
+      independently here: every one of the <span id="cell-count">4374</span> combinations is
       precomputed, so the 2030 outcomes appear as you click. Reinstatement is carried on a finer
       grid than the paper's, including values at and above one.
     </p>
@@ -464,13 +464,14 @@
   <footer>
     Every cell is a full monthly solve of the model from 2024 to 2030, computed by an independent
     Python reimplementation (<code>aiscen</code>) that reproduces the paper's Tables 3, 5 and 6 to
-    the printed precision. The three named scenarios sit at the corners of this grid and match
-    their published values. One convention to note: the gain <code>a</code> follows a straight line
-    from the mid-2026 anchor common to all scenarios, which is what the paper's own explorer does
-    for off-scenario values, so grid corners land within 0.03 points of the published table rather
-    than exactly on it. Reinstatement runs over six values here, three of them outside the range
-    the paper uses; at those settings the labor share rises above its 60 percent starting point,
-    territory the paper's own scenarios never enter.
+    the printed precision, except two documented rounding-fork cells. The three named scenarios
+    sit at the corners of this grid and match their published values. One convention to note: the
+    gain <code>a</code> follows a straight line from the mid-2026 anchor common to all scenarios,
+    which is what the paper's own explorer does for off-scenario values, so grid corners land
+    within 0.03 points of the published table rather than exactly on it. Reinstatement runs over
+    six values here, three of them (0.75, 1.00 and 1.25) outside the range the paper uses; at the
+    two of those at or above 1, the labor share rises above its 60 percent starting point,
+    territory the paper's own scenarios never enter (at 0.75 it is still just below 60 percent).
   </footer>
 </div>
 
