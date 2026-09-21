@@ -1889,8 +1889,13 @@ for (scen, eps), want in TABLE5_PUB.items():
     col = table3_column(simulate.run(Fixed(eps=eps), SCENARIOS[scen]))
     t5_dev.append((f"{scen} eps={eps}", dev([col[r] for r in TABLE5_ROWS], want)))
 for (scen, xi), want in TABLE6_PUB.items():
-    col = table3_column(simulate.run(Fixed(xi=xi, U_bar=0.0384), SCENARIOS[scen]))
-    t6_dev.append((f"{scen} xi={xi}", dev([col[r] for r in TABLE6_ROWS], want)))
+    # same per-row convention as the Table 6 body above: default U_bar = 0.038
+    # everywhere, swapped to 0.0384 only for the pool-sensitive all-workers row.
+    col = table3_column(simulate.run(Fixed(xi=xi), SCENARIOS[scen]))
+    col_pool = table3_column(simulate.run(Fixed(xi=xi, U_bar=0.0384), SCENARIOS[scen]))
+    vals = [(col_pool if r == "Unemployment rate, all workers, pct" else col)[r]
+            for r in TABLE6_ROWS]
+    t6_dev.append((f"{scen} xi={xi}", dev(vals, want)))
 
 # max(..., key=lambda x: x[1]) finds the element whose SECOND item is largest, then
 # [0] takes that element's first item: the name of the worst-deviating row. The

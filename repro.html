@@ -6,7 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="dcterms.date" content="2026-09-16">
+<meta name="dcterms.date" content="2026-09-21">
 
 <title>Economic Scenarios for Transformative AI</title>
 <style>
@@ -2416,7 +2416,7 @@ height: auto;
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">September 16, 2026</p>
+      <p class="date">September 21, 2026</p>
     </div>
   </div>
   
@@ -5258,23 +5258,28 @@ Figure 4: The labor market in the three scenarios, 2025-2030, reproducing the p
 <span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>    col <span class="op">=</span> table3_column(simulate.run(Fixed(eps<span class="op">=</span>eps), SCENARIOS[scen]))</span>
 <span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>    t5_dev.append((<span class="ss">f&quot;</span><span class="sc">{</span>scen<span class="sc">}</span><span class="ss"> eps=</span><span class="sc">{</span>eps<span class="sc">}</span><span class="ss">&quot;</span>, dev([col[r] <span class="cf">for</span> r <span class="kw">in</span> TABLE5_ROWS], want)))</span>
 <span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (scen, xi), want <span class="kw">in</span> TABLE6_PUB.items():</span>
-<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>    col <span class="op">=</span> table3_column(simulate.run(Fixed(xi<span class="op">=</span>xi, U_bar<span class="op">=</span><span class="fl">0.0384</span>), SCENARIOS[scen]))</span>
-<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a>    t6_dev.append((<span class="ss">f&quot;</span><span class="sc">{</span>scen<span class="sc">}</span><span class="ss"> xi=</span><span class="sc">{</span>xi<span class="sc">}</span><span class="ss">&quot;</span>, dev([col[r] <span class="cf">for</span> r <span class="kw">in</span> TABLE6_ROWS], want)))</span>
-<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a><span class="co"># max(..., key=lambda x: x[1]) finds the element whose SECOND item is largest, then</span></span>
-<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a><span class="co"># [0] takes that element&#39;s first item: the name of the worst-deviating row. The</span></span>
-<span id="cb24-16"><a href="#cb24-16" aria-hidden="true" tabindex="-1"></a><span class="co"># underscore in `for _, d in ...` is a conventional name for &quot;a value I must unpack</span></span>
-<span id="cb24-17"><a href="#cb24-17" aria-hidden="true" tabindex="-1"></a><span class="co"># but do not use&quot;.</span></span>
-<span id="cb24-18"><a href="#cb24-18" aria-hidden="true" tabindex="-1"></a>summary <span class="op">=</span> pd.DataFrame([</span>
-<span id="cb24-19"><a href="#cb24-19" aria-hidden="true" tabindex="-1"></a>    (<span class="st">&quot;Table 3, the three scenarios in 2030&quot;</span>, <span class="dv">20</span> <span class="op">*</span> <span class="dv">4</span>,</span>
-<span id="cb24-20"><a href="#cb24-20" aria-hidden="true" tabindex="-1"></a>     <span class="bu">max</span>(d <span class="cf">for</span> _, d <span class="kw">in</span> t3_dev), <span class="bu">max</span>(t3_dev, key<span class="op">=</span><span class="kw">lambda</span> x: x[<span class="dv">1</span>])[<span class="dv">0</span>]),</span>
-<span id="cb24-21"><a href="#cb24-21" aria-hidden="true" tabindex="-1"></a>    (<span class="st">&quot;Table 5, elasticities of capital supply&quot;</span>, <span class="dv">5</span> <span class="op">*</span> <span class="dv">8</span>,</span>
-<span id="cb24-22"><a href="#cb24-22" aria-hidden="true" tabindex="-1"></a>     <span class="bu">max</span>(d <span class="cf">for</span> _, d <span class="kw">in</span> t5_dev), <span class="bu">max</span>(t5_dev, key<span class="op">=</span><span class="kw">lambda</span> x: x[<span class="dv">1</span>])[<span class="dv">0</span>]),</span>
-<span id="cb24-23"><a href="#cb24-23" aria-hidden="true" tabindex="-1"></a>    (<span class="st">&quot;Table 6, rigidities of the cognitive wage&quot;</span>, <span class="dv">7</span> <span class="op">*</span> <span class="dv">7</span>,</span>
-<span id="cb24-24"><a href="#cb24-24" aria-hidden="true" tabindex="-1"></a>     <span class="bu">max</span>(d <span class="cf">for</span> _, d <span class="kw">in</span> t6_dev), <span class="bu">max</span>(t6_dev, key<span class="op">=</span><span class="kw">lambda</span> x: x[<span class="dv">1</span>])[<span class="dv">0</span>]),</span>
-<span id="cb24-25"><a href="#cb24-25" aria-hidden="true" tabindex="-1"></a>], columns<span class="op">=</span>[<span class="st">&quot;published table&quot;</span>, <span class="st">&quot;cells compared&quot;</span>, <span class="st">&quot;largest absolute deviation&quot;</span>,</span>
-<span id="cb24-26"><a href="#cb24-26" aria-hidden="true" tabindex="-1"></a>            <span class="st">&quot;where&quot;</span>])</span>
-<span id="cb24-27"><a href="#cb24-27" aria-hidden="true" tabindex="-1"></a>show(summary, floatfmt<span class="op">=</span><span class="st">&quot;.3f&quot;</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>    <span class="co"># same per-row convention as the Table 6 body above: default U_bar = 0.038</span></span>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a>    <span class="co"># everywhere, swapped to 0.0384 only for the pool-sensitive all-workers row.</span></span>
+<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a>    col <span class="op">=</span> table3_column(simulate.run(Fixed(xi<span class="op">=</span>xi), SCENARIOS[scen]))</span>
+<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a>    col_pool <span class="op">=</span> table3_column(simulate.run(Fixed(xi<span class="op">=</span>xi, U_bar<span class="op">=</span><span class="fl">0.0384</span>), SCENARIOS[scen]))</span>
+<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a>    vals <span class="op">=</span> [(col_pool <span class="cf">if</span> r <span class="op">==</span> <span class="st">&quot;Unemployment rate, all workers, pct&quot;</span> <span class="cf">else</span> col)[r]</span>
+<span id="cb24-16"><a href="#cb24-16" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> r <span class="kw">in</span> TABLE6_ROWS]</span>
+<span id="cb24-17"><a href="#cb24-17" aria-hidden="true" tabindex="-1"></a>    t6_dev.append((<span class="ss">f&quot;</span><span class="sc">{</span>scen<span class="sc">}</span><span class="ss"> xi=</span><span class="sc">{</span>xi<span class="sc">}</span><span class="ss">&quot;</span>, dev(vals, want)))</span>
+<span id="cb24-18"><a href="#cb24-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-19"><a href="#cb24-19" aria-hidden="true" tabindex="-1"></a><span class="co"># max(..., key=lambda x: x[1]) finds the element whose SECOND item is largest, then</span></span>
+<span id="cb24-20"><a href="#cb24-20" aria-hidden="true" tabindex="-1"></a><span class="co"># [0] takes that element&#39;s first item: the name of the worst-deviating row. The</span></span>
+<span id="cb24-21"><a href="#cb24-21" aria-hidden="true" tabindex="-1"></a><span class="co"># underscore in `for _, d in ...` is a conventional name for &quot;a value I must unpack</span></span>
+<span id="cb24-22"><a href="#cb24-22" aria-hidden="true" tabindex="-1"></a><span class="co"># but do not use&quot;.</span></span>
+<span id="cb24-23"><a href="#cb24-23" aria-hidden="true" tabindex="-1"></a>summary <span class="op">=</span> pd.DataFrame([</span>
+<span id="cb24-24"><a href="#cb24-24" aria-hidden="true" tabindex="-1"></a>    (<span class="st">&quot;Table 3, the three scenarios in 2030&quot;</span>, <span class="dv">20</span> <span class="op">*</span> <span class="dv">4</span>,</span>
+<span id="cb24-25"><a href="#cb24-25" aria-hidden="true" tabindex="-1"></a>     <span class="bu">max</span>(d <span class="cf">for</span> _, d <span class="kw">in</span> t3_dev), <span class="bu">max</span>(t3_dev, key<span class="op">=</span><span class="kw">lambda</span> x: x[<span class="dv">1</span>])[<span class="dv">0</span>]),</span>
+<span id="cb24-26"><a href="#cb24-26" aria-hidden="true" tabindex="-1"></a>    (<span class="st">&quot;Table 5, elasticities of capital supply&quot;</span>, <span class="dv">5</span> <span class="op">*</span> <span class="dv">8</span>,</span>
+<span id="cb24-27"><a href="#cb24-27" aria-hidden="true" tabindex="-1"></a>     <span class="bu">max</span>(d <span class="cf">for</span> _, d <span class="kw">in</span> t5_dev), <span class="bu">max</span>(t5_dev, key<span class="op">=</span><span class="kw">lambda</span> x: x[<span class="dv">1</span>])[<span class="dv">0</span>]),</span>
+<span id="cb24-28"><a href="#cb24-28" aria-hidden="true" tabindex="-1"></a>    (<span class="st">&quot;Table 6, rigidities of the cognitive wage&quot;</span>, <span class="dv">7</span> <span class="op">*</span> <span class="dv">7</span>,</span>
+<span id="cb24-29"><a href="#cb24-29" aria-hidden="true" tabindex="-1"></a>     <span class="bu">max</span>(d <span class="cf">for</span> _, d <span class="kw">in</span> t6_dev), <span class="bu">max</span>(t6_dev, key<span class="op">=</span><span class="kw">lambda</span> x: x[<span class="dv">1</span>])[<span class="dv">0</span>]),</span>
+<span id="cb24-30"><a href="#cb24-30" aria-hidden="true" tabindex="-1"></a>], columns<span class="op">=</span>[<span class="st">&quot;published table&quot;</span>, <span class="st">&quot;cells compared&quot;</span>, <span class="st">&quot;largest absolute deviation&quot;</span>,</span>
+<span id="cb24-31"><a href="#cb24-31" aria-hidden="true" tabindex="-1"></a>            <span class="st">&quot;where&quot;</span>])</span>
+<span id="cb24-32"><a href="#cb24-32" aria-hidden="true" tabindex="-1"></a>show(summary, floatfmt<span class="op">=</span><span class="st">&quot;.3f&quot;</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div id="verify" class="cell-output cell-output-display cell-output-markdown" data-execution_count="23">
 <table class="caption-top table table-sm table-striped small">
@@ -5308,14 +5313,14 @@ Figure 4: The labor market in the three scenarios, 2025-2030, reproducing the p
 <tr class="odd">
 <td style="text-align: left;">Table 6, rigidities of the cognitive wage</td>
 <td style="text-align: right;">49</td>
-<td style="text-align: right;">0.134</td>
+<td style="text-align: right;">0.106</td>
 <td style="text-align: left;">extreme xi=0.0</td>
 </tr>
 </tbody>
 </table>
 </div>
 </div>
-<p>The largest deviation anywhere is 0.13, on figures the paper prints to one decimal.</p>
+<p>The largest deviation anywhere is 0.11, on figures the paper prints to one decimal.</p>
 <p>Four internal identities, none of which involve the published numbers:</p>
 <div id="cell-identities" class="cell" data-execution_count="24">
 <details class="code-fold">
@@ -7813,111 +7818,116 @@ Figure 4: The labor market in the three scenarios, 2025-2030, reproducing the p
 <span id="cb28-1935"><a href="#cb28-1935" aria-hidden="true" tabindex="-1"></a>    col <span class="op">=</span> table3_column(simulate.run(Fixed(eps<span class="op">=</span>eps), SCENARIOS[scen]))</span>
 <span id="cb28-1936"><a href="#cb28-1936" aria-hidden="true" tabindex="-1"></a>    t5_dev.append((<span class="ss">f&quot;</span><span class="sc">{</span>scen<span class="sc">}</span><span class="ss"> eps=</span><span class="sc">{</span>eps<span class="sc">}</span><span class="ss">&quot;</span>, dev([col[r] <span class="cf">for</span> r <span class="kw">in</span> TABLE5_ROWS], want)))</span>
 <span id="cb28-1937"><a href="#cb28-1937" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (scen, xi), want <span class="kw">in</span> TABLE6_PUB.items():</span>
-<span id="cb28-1938"><a href="#cb28-1938" aria-hidden="true" tabindex="-1"></a>    col <span class="op">=</span> table3_column(simulate.run(Fixed(xi<span class="op">=</span>xi, U_bar<span class="op">=</span><span class="fl">0.0384</span>), SCENARIOS[scen]))</span>
-<span id="cb28-1939"><a href="#cb28-1939" aria-hidden="true" tabindex="-1"></a>    t6_dev.append((<span class="ss">f&quot;</span><span class="sc">{</span>scen<span class="sc">}</span><span class="ss"> xi=</span><span class="sc">{</span>xi<span class="sc">}</span><span class="ss">&quot;</span>, dev([col[r] <span class="cf">for</span> r <span class="kw">in</span> TABLE6_ROWS], want)))</span>
-<span id="cb28-1940"><a href="#cb28-1940" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-1941"><a href="#cb28-1941" aria-hidden="true" tabindex="-1"></a><span class="co"># max(..., key=lambda x: x[1]) finds the element whose SECOND item is largest, then</span></span>
-<span id="cb28-1942"><a href="#cb28-1942" aria-hidden="true" tabindex="-1"></a><span class="co"># [0] takes that element&#39;s first item: the name of the worst-deviating row. The</span></span>
-<span id="cb28-1943"><a href="#cb28-1943" aria-hidden="true" tabindex="-1"></a><span class="co"># underscore in `for _, d in ...` is a conventional name for &quot;a value I must unpack</span></span>
-<span id="cb28-1944"><a href="#cb28-1944" aria-hidden="true" tabindex="-1"></a><span class="co"># but do not use&quot;.</span></span>
-<span id="cb28-1945"><a href="#cb28-1945" aria-hidden="true" tabindex="-1"></a>summary <span class="op">=</span> pd.DataFrame([</span>
-<span id="cb28-1946"><a href="#cb28-1946" aria-hidden="true" tabindex="-1"></a>    (<span class="st">&quot;Table 3, the three scenarios in 2030&quot;</span>, <span class="dv">20</span> <span class="op">*</span> <span class="dv">4</span>,</span>
-<span id="cb28-1947"><a href="#cb28-1947" aria-hidden="true" tabindex="-1"></a>     <span class="bu">max</span>(d <span class="cf">for</span> _, d <span class="kw">in</span> t3_dev), <span class="bu">max</span>(t3_dev, key<span class="op">=</span><span class="kw">lambda</span> x: x[<span class="dv">1</span>])[<span class="dv">0</span>]),</span>
-<span id="cb28-1948"><a href="#cb28-1948" aria-hidden="true" tabindex="-1"></a>    (<span class="st">&quot;Table 5, elasticities of capital supply&quot;</span>, <span class="dv">5</span> <span class="op">*</span> <span class="dv">8</span>,</span>
-<span id="cb28-1949"><a href="#cb28-1949" aria-hidden="true" tabindex="-1"></a>     <span class="bu">max</span>(d <span class="cf">for</span> _, d <span class="kw">in</span> t5_dev), <span class="bu">max</span>(t5_dev, key<span class="op">=</span><span class="kw">lambda</span> x: x[<span class="dv">1</span>])[<span class="dv">0</span>]),</span>
-<span id="cb28-1950"><a href="#cb28-1950" aria-hidden="true" tabindex="-1"></a>    (<span class="st">&quot;Table 6, rigidities of the cognitive wage&quot;</span>, <span class="dv">7</span> <span class="op">*</span> <span class="dv">7</span>,</span>
-<span id="cb28-1951"><a href="#cb28-1951" aria-hidden="true" tabindex="-1"></a>     <span class="bu">max</span>(d <span class="cf">for</span> _, d <span class="kw">in</span> t6_dev), <span class="bu">max</span>(t6_dev, key<span class="op">=</span><span class="kw">lambda</span> x: x[<span class="dv">1</span>])[<span class="dv">0</span>]),</span>
-<span id="cb28-1952"><a href="#cb28-1952" aria-hidden="true" tabindex="-1"></a>], columns<span class="op">=</span>[<span class="st">&quot;published table&quot;</span>, <span class="st">&quot;cells compared&quot;</span>, <span class="st">&quot;largest absolute deviation&quot;</span>,</span>
-<span id="cb28-1953"><a href="#cb28-1953" aria-hidden="true" tabindex="-1"></a>            <span class="st">&quot;where&quot;</span>])</span>
-<span id="cb28-1954"><a href="#cb28-1954" aria-hidden="true" tabindex="-1"></a>show(summary, floatfmt<span class="op">=</span><span class="st">&quot;.3f&quot;</span>)</span>
-<span id="cb28-1955"><a href="#cb28-1955" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb28-1956"><a href="#cb28-1956" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-1957"><a href="#cb28-1957" aria-hidden="true" tabindex="-1"></a>The largest deviation anywhere is</span>
-<span id="cb28-1958"><a href="#cb28-1958" aria-hidden="true" tabindex="-1"></a><span class="in">`{python} num(max(max(d for _, d in t3_dev), max(d for _, d in t5_dev), max(d for _, d in t6_dev)), 2)`</span>,</span>
-<span id="cb28-1959"><a href="#cb28-1959" aria-hidden="true" tabindex="-1"></a>on figures the paper prints to one decimal.</span>
-<span id="cb28-1960"><a href="#cb28-1960" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-1961"><a href="#cb28-1961" aria-hidden="true" tabindex="-1"></a>Four internal identities, none of which involve the published numbers:</span>
-<span id="cb28-1962"><a href="#cb28-1962" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-1965"><a href="#cb28-1965" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb28-1966"><a href="#cb28-1966" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: identities</span></span>
-<span id="cb28-1967"><a href="#cb28-1967" aria-hidden="true" tabindex="-1"></a><span class="co">#| code-summary: &quot;internal consistency checks&quot;</span></span>
-<span id="cb28-1968"><a href="#cb28-1968" aria-hidden="true" tabindex="-1"></a>checks <span class="op">=</span> []</span>
-<span id="cb28-1969"><a href="#cb28-1969" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-1970"><a href="#cb28-1970" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. the labor force adds up every month, in every scenario.</span></span>
-<span id="cb28-1971"><a href="#cb28-1971" aria-hidden="true" tabindex="-1"></a><span class="co"># Two `for` clauses in one comprehension is a nested loop, read left to right: for</span></span>
-<span id="cb28-1972"><a href="#cb28-1972" aria-hidden="true" tabindex="-1"></a><span class="co"># each scenario, for each month of that scenario. It yields one number per month</span></span>
-<span id="cb28-1973"><a href="#cb28-1973" aria-hidden="true" tabindex="-1"></a><span class="co"># across all three runs, and max() keeps the largest. A result near 1e-16 means the</span></span>
-<span id="cb28-1974"><a href="#cb28-1974" aria-hidden="true" tabindex="-1"></a><span class="co"># identity holds to the limit of floating-point precision.</span></span>
-<span id="cb28-1975"><a href="#cb28-1975" aria-hidden="true" tabindex="-1"></a>worst <span class="op">=</span> <span class="bu">max</span>(<span class="bu">abs</span>(m.l_C <span class="op">+</span> m.l_N <span class="op">+</span> m.U_C <span class="op">+</span> m.U_N <span class="op">-</span> F.L)</span>
-<span id="cb28-1976"><a href="#cb28-1976" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> n <span class="kw">in</span> NAMES <span class="cf">for</span> m <span class="kw">in</span> RUNS[n].months)</span>
-<span id="cb28-1977"><a href="#cb28-1977" aria-hidden="true" tabindex="-1"></a>checks.append((<span class="st">&quot;l_C + l_N + U_C + U_N = L, every month (p. 20)&quot;</span>, <span class="ss">f&quot;</span><span class="sc">{</span>worst<span class="sc">:.2e}</span><span class="ss">&quot;</span>, <span class="st">&quot;0&quot;</span>))</span>
-<span id="cb28-1978"><a href="#cb28-1978" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-1979"><a href="#cb28-1979" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. system (39) at the targets reproduces Proposition 1 (Table A.1, panel D)</span></span>
-<span id="cb28-1980"><a href="#cb28-1980" aria-hidden="true" tabindex="-1"></a>worst <span class="op">=</span> <span class="fl">0.0</span></span>
-<span id="cb28-1981"><a href="#cb28-1981" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> n <span class="kw">in</span> NAMES:</span>
-<span id="cb28-1982"><a href="#cb28-1982" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> P[n].at(<span class="fl">2030.0</span>)</span>
-<span id="cb28-1983"><a href="#cb28-1983" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> dlnA <span class="kw">in</span> (<span class="fl">0.0</span>, <span class="fl">0.006</span>):</span>
-<span id="cb28-1984"><a href="#cb28-1984" aria-hidden="true" tabindex="-1"></a>        fr <span class="op">=</span> statics.frictionless(F, x[<span class="st">&quot;md&quot;</span>], x[<span class="st">&quot;a&quot;</span>], x[<span class="st">&quot;psi&quot;</span>], x[<span class="st">&quot;rho&quot;</span>], dlnA)</span>
-<span id="cb28-1985"><a href="#cb28-1985" aria-hidden="true" tabindex="-1"></a>        ac <span class="op">=</span> statics.actual_at_employment(F, x[<span class="st">&quot;md&quot;</span>], x[<span class="st">&quot;a&quot;</span>], x[<span class="st">&quot;psi&quot;</span>], x[<span class="st">&quot;rho&quot;</span>],</span>
-<span id="cb28-1986"><a href="#cb28-1986" aria-hidden="true" tabindex="-1"></a>                                          fr.l_C_star, fr.l_N_star, dlnA)</span>
-<span id="cb28-1987"><a href="#cb28-1987" aria-hidden="true" tabindex="-1"></a>        worst <span class="op">=</span> <span class="bu">max</span>(worst, <span class="bu">abs</span>(ac.dlnY <span class="op">-</span> fr.dlnYL), <span class="bu">abs</span>(ac.s_L <span class="op">-</span> fr.s_L),</span>
-<span id="cb28-1988"><a href="#cb28-1988" aria-hidden="true" tabindex="-1"></a>                    <span class="bu">abs</span>(ac.dlnw_C_tilde <span class="op">-</span> fr.dlnw_tilde))</span>
-<span id="cb28-1989"><a href="#cb28-1989" aria-hidden="true" tabindex="-1"></a>checks.append((<span class="st">&quot;(39) at the targets equals Proposition 1&quot;</span>, <span class="ss">f&quot;</span><span class="sc">{</span>worst<span class="sc">:.2e}</span><span class="ss">&quot;</span>, <span class="st">&quot;0&quot;</span>))</span>
-<span id="cb28-1990"><a href="#cb28-1990" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-1991"><a href="#cb28-1991" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. the monthly ideas step against the closed form (43)</span></span>
-<span id="cb28-1992"><a href="#cb28-1992" aria-hidden="true" tabindex="-1"></a>worst <span class="op">=</span> <span class="bu">max</span>(<span class="bu">abs</span>(RUNS[n].at(<span class="fl">2030.0</span>).dlnA <span class="op">-</span> simulate.ideas_closed_form(RUNS[n], <span class="fl">2030.0</span>))</span>
-<span id="cb28-1993"><a href="#cb28-1993" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> n <span class="kw">in</span> NAMES)</span>
-<span id="cb28-1994"><a href="#cb28-1994" aria-hidden="true" tabindex="-1"></a>checks.append((<span class="st">&quot;monthly ideas step vs closed form (43)&quot;</span>, <span class="ss">f&quot;</span><span class="sc">{</span><span class="dv">100</span> <span class="op">*</span> worst<span class="sc">:.4f}</span><span class="ss"> pp&quot;</span>,</span>
-<span id="cb28-1995"><a href="#cb28-1995" aria-hidden="true" tabindex="-1"></a>               <span class="st">&quot;&lt; 0.02 pp (p. 41)&quot;</span>))</span>
-<span id="cb28-1996"><a href="#cb28-1996" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-1997"><a href="#cb28-1997" aria-hidden="true" tabindex="-1"></a><span class="co"># 4. every hire leaves the pool</span></span>
-<span id="cb28-1998"><a href="#cb28-1998" aria-hidden="true" tabindex="-1"></a>worst <span class="op">=</span> <span class="bu">max</span>(<span class="bu">abs</span>(m.f_C <span class="op">*</span> m.U_C <span class="op">+</span> m.f_N <span class="op">*</span> m.U_N <span class="op">-</span> m.H_C <span class="op">-</span> m.H_N)</span>
-<span id="cb28-1999"><a href="#cb28-1999" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> n <span class="kw">in</span> NAMES <span class="cf">for</span> m <span class="kw">in</span> RUNS[n].months)</span>
-<span id="cb28-2000"><a href="#cb28-2000" aria-hidden="true" tabindex="-1"></a>checks.append((<span class="st">&quot;f_C U_C + f_N U_N = H_C + H_N (p. 20)&quot;</span>, <span class="ss">f&quot;</span><span class="sc">{</span>worst<span class="sc">:.2e}</span><span class="ss">&quot;</span>, <span class="st">&quot;0&quot;</span>))</span>
+<span id="cb28-1938"><a href="#cb28-1938" aria-hidden="true" tabindex="-1"></a>    <span class="co"># same per-row convention as the Table 6 body above: default U_bar = 0.038</span></span>
+<span id="cb28-1939"><a href="#cb28-1939" aria-hidden="true" tabindex="-1"></a>    <span class="co"># everywhere, swapped to 0.0384 only for the pool-sensitive all-workers row.</span></span>
+<span id="cb28-1940"><a href="#cb28-1940" aria-hidden="true" tabindex="-1"></a>    col <span class="op">=</span> table3_column(simulate.run(Fixed(xi<span class="op">=</span>xi), SCENARIOS[scen]))</span>
+<span id="cb28-1941"><a href="#cb28-1941" aria-hidden="true" tabindex="-1"></a>    col_pool <span class="op">=</span> table3_column(simulate.run(Fixed(xi<span class="op">=</span>xi, U_bar<span class="op">=</span><span class="fl">0.0384</span>), SCENARIOS[scen]))</span>
+<span id="cb28-1942"><a href="#cb28-1942" aria-hidden="true" tabindex="-1"></a>    vals <span class="op">=</span> [(col_pool <span class="cf">if</span> r <span class="op">==</span> <span class="st">&quot;Unemployment rate, all workers, pct&quot;</span> <span class="cf">else</span> col)[r]</span>
+<span id="cb28-1943"><a href="#cb28-1943" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> r <span class="kw">in</span> TABLE6_ROWS]</span>
+<span id="cb28-1944"><a href="#cb28-1944" aria-hidden="true" tabindex="-1"></a>    t6_dev.append((<span class="ss">f&quot;</span><span class="sc">{</span>scen<span class="sc">}</span><span class="ss"> xi=</span><span class="sc">{</span>xi<span class="sc">}</span><span class="ss">&quot;</span>, dev(vals, want)))</span>
+<span id="cb28-1945"><a href="#cb28-1945" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-1946"><a href="#cb28-1946" aria-hidden="true" tabindex="-1"></a><span class="co"># max(..., key=lambda x: x[1]) finds the element whose SECOND item is largest, then</span></span>
+<span id="cb28-1947"><a href="#cb28-1947" aria-hidden="true" tabindex="-1"></a><span class="co"># [0] takes that element&#39;s first item: the name of the worst-deviating row. The</span></span>
+<span id="cb28-1948"><a href="#cb28-1948" aria-hidden="true" tabindex="-1"></a><span class="co"># underscore in `for _, d in ...` is a conventional name for &quot;a value I must unpack</span></span>
+<span id="cb28-1949"><a href="#cb28-1949" aria-hidden="true" tabindex="-1"></a><span class="co"># but do not use&quot;.</span></span>
+<span id="cb28-1950"><a href="#cb28-1950" aria-hidden="true" tabindex="-1"></a>summary <span class="op">=</span> pd.DataFrame([</span>
+<span id="cb28-1951"><a href="#cb28-1951" aria-hidden="true" tabindex="-1"></a>    (<span class="st">&quot;Table 3, the three scenarios in 2030&quot;</span>, <span class="dv">20</span> <span class="op">*</span> <span class="dv">4</span>,</span>
+<span id="cb28-1952"><a href="#cb28-1952" aria-hidden="true" tabindex="-1"></a>     <span class="bu">max</span>(d <span class="cf">for</span> _, d <span class="kw">in</span> t3_dev), <span class="bu">max</span>(t3_dev, key<span class="op">=</span><span class="kw">lambda</span> x: x[<span class="dv">1</span>])[<span class="dv">0</span>]),</span>
+<span id="cb28-1953"><a href="#cb28-1953" aria-hidden="true" tabindex="-1"></a>    (<span class="st">&quot;Table 5, elasticities of capital supply&quot;</span>, <span class="dv">5</span> <span class="op">*</span> <span class="dv">8</span>,</span>
+<span id="cb28-1954"><a href="#cb28-1954" aria-hidden="true" tabindex="-1"></a>     <span class="bu">max</span>(d <span class="cf">for</span> _, d <span class="kw">in</span> t5_dev), <span class="bu">max</span>(t5_dev, key<span class="op">=</span><span class="kw">lambda</span> x: x[<span class="dv">1</span>])[<span class="dv">0</span>]),</span>
+<span id="cb28-1955"><a href="#cb28-1955" aria-hidden="true" tabindex="-1"></a>    (<span class="st">&quot;Table 6, rigidities of the cognitive wage&quot;</span>, <span class="dv">7</span> <span class="op">*</span> <span class="dv">7</span>,</span>
+<span id="cb28-1956"><a href="#cb28-1956" aria-hidden="true" tabindex="-1"></a>     <span class="bu">max</span>(d <span class="cf">for</span> _, d <span class="kw">in</span> t6_dev), <span class="bu">max</span>(t6_dev, key<span class="op">=</span><span class="kw">lambda</span> x: x[<span class="dv">1</span>])[<span class="dv">0</span>]),</span>
+<span id="cb28-1957"><a href="#cb28-1957" aria-hidden="true" tabindex="-1"></a>], columns<span class="op">=</span>[<span class="st">&quot;published table&quot;</span>, <span class="st">&quot;cells compared&quot;</span>, <span class="st">&quot;largest absolute deviation&quot;</span>,</span>
+<span id="cb28-1958"><a href="#cb28-1958" aria-hidden="true" tabindex="-1"></a>            <span class="st">&quot;where&quot;</span>])</span>
+<span id="cb28-1959"><a href="#cb28-1959" aria-hidden="true" tabindex="-1"></a>show(summary, floatfmt<span class="op">=</span><span class="st">&quot;.3f&quot;</span>)</span>
+<span id="cb28-1960"><a href="#cb28-1960" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb28-1961"><a href="#cb28-1961" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-1962"><a href="#cb28-1962" aria-hidden="true" tabindex="-1"></a>The largest deviation anywhere is</span>
+<span id="cb28-1963"><a href="#cb28-1963" aria-hidden="true" tabindex="-1"></a><span class="in">`{python} num(max(max(d for _, d in t3_dev), max(d for _, d in t5_dev), max(d for _, d in t6_dev)), 2)`</span>,</span>
+<span id="cb28-1964"><a href="#cb28-1964" aria-hidden="true" tabindex="-1"></a>on figures the paper prints to one decimal.</span>
+<span id="cb28-1965"><a href="#cb28-1965" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-1966"><a href="#cb28-1966" aria-hidden="true" tabindex="-1"></a>Four internal identities, none of which involve the published numbers:</span>
+<span id="cb28-1967"><a href="#cb28-1967" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-1970"><a href="#cb28-1970" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb28-1971"><a href="#cb28-1971" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: identities</span></span>
+<span id="cb28-1972"><a href="#cb28-1972" aria-hidden="true" tabindex="-1"></a><span class="co">#| code-summary: &quot;internal consistency checks&quot;</span></span>
+<span id="cb28-1973"><a href="#cb28-1973" aria-hidden="true" tabindex="-1"></a>checks <span class="op">=</span> []</span>
+<span id="cb28-1974"><a href="#cb28-1974" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-1975"><a href="#cb28-1975" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. the labor force adds up every month, in every scenario.</span></span>
+<span id="cb28-1976"><a href="#cb28-1976" aria-hidden="true" tabindex="-1"></a><span class="co"># Two `for` clauses in one comprehension is a nested loop, read left to right: for</span></span>
+<span id="cb28-1977"><a href="#cb28-1977" aria-hidden="true" tabindex="-1"></a><span class="co"># each scenario, for each month of that scenario. It yields one number per month</span></span>
+<span id="cb28-1978"><a href="#cb28-1978" aria-hidden="true" tabindex="-1"></a><span class="co"># across all three runs, and max() keeps the largest. A result near 1e-16 means the</span></span>
+<span id="cb28-1979"><a href="#cb28-1979" aria-hidden="true" tabindex="-1"></a><span class="co"># identity holds to the limit of floating-point precision.</span></span>
+<span id="cb28-1980"><a href="#cb28-1980" aria-hidden="true" tabindex="-1"></a>worst <span class="op">=</span> <span class="bu">max</span>(<span class="bu">abs</span>(m.l_C <span class="op">+</span> m.l_N <span class="op">+</span> m.U_C <span class="op">+</span> m.U_N <span class="op">-</span> F.L)</span>
+<span id="cb28-1981"><a href="#cb28-1981" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> n <span class="kw">in</span> NAMES <span class="cf">for</span> m <span class="kw">in</span> RUNS[n].months)</span>
+<span id="cb28-1982"><a href="#cb28-1982" aria-hidden="true" tabindex="-1"></a>checks.append((<span class="st">&quot;l_C + l_N + U_C + U_N = L, every month (p. 20)&quot;</span>, <span class="ss">f&quot;</span><span class="sc">{</span>worst<span class="sc">:.2e}</span><span class="ss">&quot;</span>, <span class="st">&quot;0&quot;</span>))</span>
+<span id="cb28-1983"><a href="#cb28-1983" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-1984"><a href="#cb28-1984" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. system (39) at the targets reproduces Proposition 1 (Table A.1, panel D)</span></span>
+<span id="cb28-1985"><a href="#cb28-1985" aria-hidden="true" tabindex="-1"></a>worst <span class="op">=</span> <span class="fl">0.0</span></span>
+<span id="cb28-1986"><a href="#cb28-1986" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> n <span class="kw">in</span> NAMES:</span>
+<span id="cb28-1987"><a href="#cb28-1987" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> P[n].at(<span class="fl">2030.0</span>)</span>
+<span id="cb28-1988"><a href="#cb28-1988" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> dlnA <span class="kw">in</span> (<span class="fl">0.0</span>, <span class="fl">0.006</span>):</span>
+<span id="cb28-1989"><a href="#cb28-1989" aria-hidden="true" tabindex="-1"></a>        fr <span class="op">=</span> statics.frictionless(F, x[<span class="st">&quot;md&quot;</span>], x[<span class="st">&quot;a&quot;</span>], x[<span class="st">&quot;psi&quot;</span>], x[<span class="st">&quot;rho&quot;</span>], dlnA)</span>
+<span id="cb28-1990"><a href="#cb28-1990" aria-hidden="true" tabindex="-1"></a>        ac <span class="op">=</span> statics.actual_at_employment(F, x[<span class="st">&quot;md&quot;</span>], x[<span class="st">&quot;a&quot;</span>], x[<span class="st">&quot;psi&quot;</span>], x[<span class="st">&quot;rho&quot;</span>],</span>
+<span id="cb28-1991"><a href="#cb28-1991" aria-hidden="true" tabindex="-1"></a>                                          fr.l_C_star, fr.l_N_star, dlnA)</span>
+<span id="cb28-1992"><a href="#cb28-1992" aria-hidden="true" tabindex="-1"></a>        worst <span class="op">=</span> <span class="bu">max</span>(worst, <span class="bu">abs</span>(ac.dlnY <span class="op">-</span> fr.dlnYL), <span class="bu">abs</span>(ac.s_L <span class="op">-</span> fr.s_L),</span>
+<span id="cb28-1993"><a href="#cb28-1993" aria-hidden="true" tabindex="-1"></a>                    <span class="bu">abs</span>(ac.dlnw_C_tilde <span class="op">-</span> fr.dlnw_tilde))</span>
+<span id="cb28-1994"><a href="#cb28-1994" aria-hidden="true" tabindex="-1"></a>checks.append((<span class="st">&quot;(39) at the targets equals Proposition 1&quot;</span>, <span class="ss">f&quot;</span><span class="sc">{</span>worst<span class="sc">:.2e}</span><span class="ss">&quot;</span>, <span class="st">&quot;0&quot;</span>))</span>
+<span id="cb28-1995"><a href="#cb28-1995" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-1996"><a href="#cb28-1996" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. the monthly ideas step against the closed form (43)</span></span>
+<span id="cb28-1997"><a href="#cb28-1997" aria-hidden="true" tabindex="-1"></a>worst <span class="op">=</span> <span class="bu">max</span>(<span class="bu">abs</span>(RUNS[n].at(<span class="fl">2030.0</span>).dlnA <span class="op">-</span> simulate.ideas_closed_form(RUNS[n], <span class="fl">2030.0</span>))</span>
+<span id="cb28-1998"><a href="#cb28-1998" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> n <span class="kw">in</span> NAMES)</span>
+<span id="cb28-1999"><a href="#cb28-1999" aria-hidden="true" tabindex="-1"></a>checks.append((<span class="st">&quot;monthly ideas step vs closed form (43)&quot;</span>, <span class="ss">f&quot;</span><span class="sc">{</span><span class="dv">100</span> <span class="op">*</span> worst<span class="sc">:.4f}</span><span class="ss"> pp&quot;</span>,</span>
+<span id="cb28-2000"><a href="#cb28-2000" aria-hidden="true" tabindex="-1"></a>               <span class="st">&quot;&lt; 0.02 pp (p. 41)&quot;</span>))</span>
 <span id="cb28-2001"><a href="#cb28-2001" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-2002"><a href="#cb28-2002" aria-hidden="true" tabindex="-1"></a>show(pd.DataFrame(checks, columns<span class="op">=</span>[<span class="st">&quot;identity&quot;</span>, <span class="st">&quot;largest violation&quot;</span>, <span class="st">&quot;expected&quot;</span>]))</span>
-<span id="cb28-2003"><a href="#cb28-2003" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb28-2004"><a href="#cb28-2004" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-2005"><a href="#cb28-2005" aria-hidden="true" tabindex="-1"></a>One further cross-check of the model against itself: the measured TFP index (45) is a</span>
-<span id="cb28-2006"><a href="#cb28-2006" aria-hidden="true" tabindex="-1"></a>base-weighted index, its dual (25) a chained one, and Appendix C.4 says the two agree</span>
-<span id="cb28-2007"><a href="#cb28-2007" aria-hidden="true" tabindex="-1"></a>only to first order. They do, and the wedge grows with the size of the shock, which is</span>
-<span id="cb28-2008"><a href="#cb28-2008" aria-hidden="true" tabindex="-1"></a>how those two index concepts should differ.</span>
+<span id="cb28-2002"><a href="#cb28-2002" aria-hidden="true" tabindex="-1"></a><span class="co"># 4. every hire leaves the pool</span></span>
+<span id="cb28-2003"><a href="#cb28-2003" aria-hidden="true" tabindex="-1"></a>worst <span class="op">=</span> <span class="bu">max</span>(<span class="bu">abs</span>(m.f_C <span class="op">*</span> m.U_C <span class="op">+</span> m.f_N <span class="op">*</span> m.U_N <span class="op">-</span> m.H_C <span class="op">-</span> m.H_N)</span>
+<span id="cb28-2004"><a href="#cb28-2004" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> n <span class="kw">in</span> NAMES <span class="cf">for</span> m <span class="kw">in</span> RUNS[n].months)</span>
+<span id="cb28-2005"><a href="#cb28-2005" aria-hidden="true" tabindex="-1"></a>checks.append((<span class="st">&quot;f_C U_C + f_N U_N = H_C + H_N (p. 20)&quot;</span>, <span class="ss">f&quot;</span><span class="sc">{</span>worst<span class="sc">:.2e}</span><span class="ss">&quot;</span>, <span class="st">&quot;0&quot;</span>))</span>
+<span id="cb28-2006"><a href="#cb28-2006" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-2007"><a href="#cb28-2007" aria-hidden="true" tabindex="-1"></a>show(pd.DataFrame(checks, columns<span class="op">=</span>[<span class="st">&quot;identity&quot;</span>, <span class="st">&quot;largest violation&quot;</span>, <span class="st">&quot;expected&quot;</span>]))</span>
+<span id="cb28-2008"><a href="#cb28-2008" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb28-2009"><a href="#cb28-2009" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-2012"><a href="#cb28-2012" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb28-2013"><a href="#cb28-2013" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: dual</span></span>
-<span id="cb28-2014"><a href="#cb28-2014" aria-hidden="true" tabindex="-1"></a><span class="co">#| code-summary: &quot;Equation (45) against its dual (25)&quot;</span></span>
-<span id="cb28-2015"><a href="#cb28-2015" aria-hidden="true" tabindex="-1"></a>rows <span class="op">=</span> []</span>
-<span id="cb28-2016"><a href="#cb28-2016" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> n <span class="kw">in</span> NAMES:</span>
-<span id="cb28-2017"><a href="#cb28-2017" aria-hidden="true" tabindex="-1"></a>    res <span class="op">=</span> RUNS[n]</span>
-<span id="cb28-2018"><a href="#cb28-2018" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Start the chain at the no-AI baseline (zero gaps, base labor share), then one</span></span>
-<span id="cb28-2019"><a href="#cb28-2019" aria-hidden="true" tabindex="-1"></a>    <span class="co"># point per month. `+` concatenates two lists.</span></span>
-<span id="cb28-2020"><a href="#cb28-2020" aria-hidden="true" tabindex="-1"></a>    pts <span class="op">=</span> [(F.s_L0, <span class="fl">0.0</span>, <span class="fl">0.0</span>)] <span class="op">+</span> [(m.s_L_star, m.dlnw_common, m.dlnr_star)</span>
-<span id="cb28-2021"><a href="#cb28-2021" aria-hidden="true" tabindex="-1"></a>                                  <span class="cf">for</span> m <span class="kw">in</span> res.months]</span>
-<span id="cb28-2022"><a href="#cb28-2022" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-2023"><a href="#cb28-2023" aria-hidden="true" tabindex="-1"></a>    <span class="co"># zip(pts, pts[1:]) pairs each point with the NEXT one: pts[1:] is the list from</span></span>
-<span id="cb28-2024"><a href="#cb28-2024" aria-hidden="true" tabindex="-1"></a>    <span class="co"># index 1 onward, so the pairs are (point 0, point 1), (point 1, point 2), and so</span></span>
-<span id="cb28-2025"><a href="#cb28-2025" aria-hidden="true" tabindex="-1"></a>    <span class="co"># on. That is the standard way to walk consecutive differences. Each pair is</span></span>
-<span id="cb28-2026"><a href="#cb28-2026" aria-hidden="true" tabindex="-1"></a>    <span class="co"># unpacked into previous (sp, wp, rp) and current (sc, wc, rc) values, and the</span></span>
-<span id="cb28-2027"><a href="#cb28-2027" aria-hidden="true" tabindex="-1"></a>    <span class="co"># sum accumulates the share-weighted change in the two factor prices.</span></span>
-<span id="cb28-2028"><a href="#cb28-2028" aria-hidden="true" tabindex="-1"></a>    dual <span class="op">=</span> <span class="bu">sum</span>(<span class="fl">0.5</span> <span class="op">*</span> (sp <span class="op">+</span> sc) <span class="op">*</span> (wc <span class="op">-</span> wp) <span class="op">+</span> (<span class="dv">1</span> <span class="op">-</span> <span class="fl">0.5</span> <span class="op">*</span> (sp <span class="op">+</span> sc)) <span class="op">*</span> (rc <span class="op">-</span> rp)</span>
-<span id="cb28-2029"><a href="#cb28-2029" aria-hidden="true" tabindex="-1"></a>               <span class="cf">for</span> (sp, wp, rp), (sc, wc, rc) <span class="kw">in</span> <span class="bu">zip</span>(pts, pts[<span class="dv">1</span>:]))</span>
-<span id="cb28-2030"><a href="#cb28-2030" aria-hidden="true" tabindex="-1"></a>    tfp <span class="op">=</span> res.at(<span class="fl">2030.0</span>).dln_tfp</span>
-<span id="cb28-2031"><a href="#cb28-2031" aria-hidden="true" tabindex="-1"></a>    rows.append({<span class="st">&quot;scenario&quot;</span>: n, <span class="st">&quot;TFP gap, index (45)&quot;</span>: <span class="dv">100</span> <span class="op">*</span> tfp,</span>
-<span id="cb28-2032"><a href="#cb28-2032" aria-hidden="true" tabindex="-1"></a>                 <span class="st">&quot;TFP gap, chained dual (25)&quot;</span>: <span class="dv">100</span> <span class="op">*</span> dual,</span>
-<span id="cb28-2033"><a href="#cb28-2033" aria-hidden="true" tabindex="-1"></a>                 <span class="st">&quot;wedge, pct of the gap&quot;</span>: <span class="dv">100</span> <span class="op">*</span> <span class="bu">abs</span>(tfp <span class="op">-</span> dual) <span class="op">/</span> tfp})</span>
-<span id="cb28-2034"><a href="#cb28-2034" aria-hidden="true" tabindex="-1"></a>show(pd.DataFrame(rows), floatfmt<span class="op">=</span><span class="st">&quot;.3f&quot;</span>)</span>
-<span id="cb28-2035"><a href="#cb28-2035" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb28-2036"><a href="#cb28-2036" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-2037"><a href="#cb28-2037" aria-hidden="true" tabindex="-1"></a><span class="fu">## Reproducing this document</span></span>
-<span id="cb28-2038"><a href="#cb28-2038" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-2039"><a href="#cb28-2039" aria-hidden="true" tabindex="-1"></a><span class="in">```sh</span></span>
-<span id="cb28-2040"><a href="#cb28-2040" aria-hidden="true" tabindex="-1"></a><span class="va">QUARTO_PYTHON</span><span class="op">=</span>/opt/anaconda3/bin/python3 <span class="ex">quarto</span> render repro.qmd</span>
-<span id="cb28-2041"><a href="#cb28-2041" aria-hidden="true" tabindex="-1"></a><span class="ex">python3</span> <span class="at">-m</span> pytest <span class="at">-q</span>          <span class="co"># the same checks as assertions, plus the ones not shown here</span></span>
-<span id="cb28-2042"><a href="#cb28-2042" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb28-2010"><a href="#cb28-2010" aria-hidden="true" tabindex="-1"></a>One further cross-check of the model against itself: the measured TFP index (45) is a</span>
+<span id="cb28-2011"><a href="#cb28-2011" aria-hidden="true" tabindex="-1"></a>base-weighted index, its dual (25) a chained one, and Appendix C.4 says the two agree</span>
+<span id="cb28-2012"><a href="#cb28-2012" aria-hidden="true" tabindex="-1"></a>only to first order. They do, and the wedge grows with the size of the shock, which is</span>
+<span id="cb28-2013"><a href="#cb28-2013" aria-hidden="true" tabindex="-1"></a>how those two index concepts should differ.</span>
+<span id="cb28-2014"><a href="#cb28-2014" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-2017"><a href="#cb28-2017" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb28-2018"><a href="#cb28-2018" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: dual</span></span>
+<span id="cb28-2019"><a href="#cb28-2019" aria-hidden="true" tabindex="-1"></a><span class="co">#| code-summary: &quot;Equation (45) against its dual (25)&quot;</span></span>
+<span id="cb28-2020"><a href="#cb28-2020" aria-hidden="true" tabindex="-1"></a>rows <span class="op">=</span> []</span>
+<span id="cb28-2021"><a href="#cb28-2021" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> n <span class="kw">in</span> NAMES:</span>
+<span id="cb28-2022"><a href="#cb28-2022" aria-hidden="true" tabindex="-1"></a>    res <span class="op">=</span> RUNS[n]</span>
+<span id="cb28-2023"><a href="#cb28-2023" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Start the chain at the no-AI baseline (zero gaps, base labor share), then one</span></span>
+<span id="cb28-2024"><a href="#cb28-2024" aria-hidden="true" tabindex="-1"></a>    <span class="co"># point per month. `+` concatenates two lists.</span></span>
+<span id="cb28-2025"><a href="#cb28-2025" aria-hidden="true" tabindex="-1"></a>    pts <span class="op">=</span> [(F.s_L0, <span class="fl">0.0</span>, <span class="fl">0.0</span>)] <span class="op">+</span> [(m.s_L_star, m.dlnw_common, m.dlnr_star)</span>
+<span id="cb28-2026"><a href="#cb28-2026" aria-hidden="true" tabindex="-1"></a>                                  <span class="cf">for</span> m <span class="kw">in</span> res.months]</span>
+<span id="cb28-2027"><a href="#cb28-2027" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-2028"><a href="#cb28-2028" aria-hidden="true" tabindex="-1"></a>    <span class="co"># zip(pts, pts[1:]) pairs each point with the NEXT one: pts[1:] is the list from</span></span>
+<span id="cb28-2029"><a href="#cb28-2029" aria-hidden="true" tabindex="-1"></a>    <span class="co"># index 1 onward, so the pairs are (point 0, point 1), (point 1, point 2), and so</span></span>
+<span id="cb28-2030"><a href="#cb28-2030" aria-hidden="true" tabindex="-1"></a>    <span class="co"># on. That is the standard way to walk consecutive differences. Each pair is</span></span>
+<span id="cb28-2031"><a href="#cb28-2031" aria-hidden="true" tabindex="-1"></a>    <span class="co"># unpacked into previous (sp, wp, rp) and current (sc, wc, rc) values, and the</span></span>
+<span id="cb28-2032"><a href="#cb28-2032" aria-hidden="true" tabindex="-1"></a>    <span class="co"># sum accumulates the share-weighted change in the two factor prices.</span></span>
+<span id="cb28-2033"><a href="#cb28-2033" aria-hidden="true" tabindex="-1"></a>    dual <span class="op">=</span> <span class="bu">sum</span>(<span class="fl">0.5</span> <span class="op">*</span> (sp <span class="op">+</span> sc) <span class="op">*</span> (wc <span class="op">-</span> wp) <span class="op">+</span> (<span class="dv">1</span> <span class="op">-</span> <span class="fl">0.5</span> <span class="op">*</span> (sp <span class="op">+</span> sc)) <span class="op">*</span> (rc <span class="op">-</span> rp)</span>
+<span id="cb28-2034"><a href="#cb28-2034" aria-hidden="true" tabindex="-1"></a>               <span class="cf">for</span> (sp, wp, rp), (sc, wc, rc) <span class="kw">in</span> <span class="bu">zip</span>(pts, pts[<span class="dv">1</span>:]))</span>
+<span id="cb28-2035"><a href="#cb28-2035" aria-hidden="true" tabindex="-1"></a>    tfp <span class="op">=</span> res.at(<span class="fl">2030.0</span>).dln_tfp</span>
+<span id="cb28-2036"><a href="#cb28-2036" aria-hidden="true" tabindex="-1"></a>    rows.append({<span class="st">&quot;scenario&quot;</span>: n, <span class="st">&quot;TFP gap, index (45)&quot;</span>: <span class="dv">100</span> <span class="op">*</span> tfp,</span>
+<span id="cb28-2037"><a href="#cb28-2037" aria-hidden="true" tabindex="-1"></a>                 <span class="st">&quot;TFP gap, chained dual (25)&quot;</span>: <span class="dv">100</span> <span class="op">*</span> dual,</span>
+<span id="cb28-2038"><a href="#cb28-2038" aria-hidden="true" tabindex="-1"></a>                 <span class="st">&quot;wedge, pct of the gap&quot;</span>: <span class="dv">100</span> <span class="op">*</span> <span class="bu">abs</span>(tfp <span class="op">-</span> dual) <span class="op">/</span> tfp})</span>
+<span id="cb28-2039"><a href="#cb28-2039" aria-hidden="true" tabindex="-1"></a>show(pd.DataFrame(rows), floatfmt<span class="op">=</span><span class="st">&quot;.3f&quot;</span>)</span>
+<span id="cb28-2040"><a href="#cb28-2040" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb28-2041"><a href="#cb28-2041" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-2042"><a href="#cb28-2042" aria-hidden="true" tabindex="-1"></a><span class="fu">## Reproducing this document</span></span>
 <span id="cb28-2043"><a href="#cb28-2043" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-2044"><a href="#cb28-2044" aria-hidden="true" tabindex="-1"></a>The package requires only the standard library; this document additionally uses</span>
-<span id="cb28-2045"><a href="#cb28-2045" aria-hidden="true" tabindex="-1"></a>pandas, matplotlib and tabulate for its tables and figures. <span class="in">`README.md`</span> records the</span>
-<span id="cb28-2046"><a href="#cb28-2046" aria-hidden="true" tabindex="-1"></a>places where the paper leaves a modelling choice implicit and how each was resolved.</span>
+<span id="cb28-2044"><a href="#cb28-2044" aria-hidden="true" tabindex="-1"></a><span class="in">```sh</span></span>
+<span id="cb28-2045"><a href="#cb28-2045" aria-hidden="true" tabindex="-1"></a><span class="va">QUARTO_PYTHON</span><span class="op">=</span>/opt/anaconda3/bin/python3 <span class="ex">quarto</span> render repro.qmd</span>
+<span id="cb28-2046"><a href="#cb28-2046" aria-hidden="true" tabindex="-1"></a><span class="ex">python3</span> <span class="at">-m</span> pytest <span class="at">-q</span>          <span class="co"># the same checks as assertions, plus the ones not shown here</span></span>
+<span id="cb28-2047"><a href="#cb28-2047" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb28-2048"><a href="#cb28-2048" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-2049"><a href="#cb28-2049" aria-hidden="true" tabindex="-1"></a>The package requires only the standard library; this document additionally uses</span>
+<span id="cb28-2050"><a href="#cb28-2050" aria-hidden="true" tabindex="-1"></a>pandas, matplotlib and tabulate for its tables and figures. <span class="in">`README.md`</span> records the</span>
+<span id="cb28-2051"><a href="#cb28-2051" aria-hidden="true" tabindex="-1"></a>places where the paper leaves a modelling choice implicit and how each was resolved.</span>
 </code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
