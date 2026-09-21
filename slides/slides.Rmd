@@ -409,7 +409,7 @@ below is a private artifact, shared per account.
 ]
 ]
 
-<a href="https://claude.ai/artifact/6mNth93dAtpa5T4bisoRUu" class="nav-btn-br" target="_blank">the explorer &rarr;</a>
+<a href="../explorer/" class="nav-btn-br" target="_blank">the explorer &rarr;</a>
 
 ---
 name: input-m
@@ -603,7 +603,7 @@ that box on one page, what goes in, what happens inside, what comes out. After i
 enough to put your own view of AI on the same axes as the paper's three, which is what the
 explorer is for.
 
-<a href="https://claude.ai/artifact/6mNth93dAtpa5T4bisoRUu" class="inline-btn" target="_blank">set the inputs yourself &rarr;</a>
+<a href="../explorer/" class="inline-btn" target="_blank">set the inputs yourself &rarr;</a>
 ]
 
 .pull-right[
@@ -707,7 +707,7 @@ from 2024 to 2030.</span>
 <span class="foot">Each one monthly, and each one a <b>gap against the same economy without
 AI</b>, never a forecast of the level.</span>
 
-<a href="https://claude.ai/artifact/6mNth93dAtpa5T4bisoRUu" class="inline-btn" target="_blank" style="margin-top:8px; display:inline-block;">set the seven yourself &rarr;</a>
+<a href="../explorer/" class="inline-btn" target="_blank" style="margin-top:8px; display:inline-block;">set the seven yourself &rarr;</a>
 </div>
 
 </div>
@@ -1229,7 +1229,7 @@ actual economy, and both are one monotone equation in
 <span class="foot">Each one monthly, and each one a <b>gap against the same economy without
 AI</b>, never a forecast of the level.</span>
 
-<a href="https://claude.ai/artifact/6mNth93dAtpa5T4bisoRUu" class="inline-btn" target="_blank" style="margin-top:8px; display:inline-block;">set the seven yourself &rarr;</a>
+<a href="../explorer/" class="inline-btn" target="_blank" style="margin-top:8px; display:inline-block;">set the seven yourself &rarr;</a>
 </div>
 
 </div>
@@ -1694,7 +1694,7 @@ class: center, middle, inverse
 class: figfull
 name: series-to-plots
 
-# Result: Eleven Series (Four Plotted Here) For Three Scenarios. <a href="https://claude.ai/artifact/6mNth93dAtpa5T4bisoRUu" class="reflink" target="_blank">Explore All Scenarios Here</a>
+# Result: Eleven Series (Four Plotted Here) For Three Scenarios. <a href="../explorer/" class="reflink" target="_blank">Explore All Scenarios Here</a>
 
 <div style="display:flex; justify-content:flex-end; gap:20px; font-size:13px; color:#5b6873; margin:0 24px 3px 0;">
 <span><i style="display:inline-block; width:18px; height:3px; background:#2a78d6; vertical-align:middle; margin-right:6px;"></i>modest</span>
@@ -1830,7 +1830,7 @@ normal 3.84 and the two groups&rsquo; wages move together.
 
 </div>
 
-<a href="https://claude.ai/artifact/6mNth93dAtpa5T4bisoRUu" class="nav-btn" target="_blank">explore all scenarios &rarr;</a>
+<a href="../explorer/" class="nav-btn" target="_blank">explore all scenarios &rarr;</a>
 
 ---
 name: sc-substantial
@@ -1882,7 +1882,7 @@ sits at `r f1(ov("substantial","wage_C"))`.<br><br>
 
 </div>
 
-<a href="https://claude.ai/artifact/6mNth93dAtpa5T4bisoRUu" class="nav-btn" target="_blank">explore all scenarios &rarr;</a>
+<a href="../explorer/" class="nav-btn" target="_blank">explore all scenarios &rarr;</a>
 
 ---
 name: sc-extreme
@@ -1934,7 +1934,7 @@ complementarity, from the other side.
 
 </div>
 
-<a href="https://claude.ai/artifact/6mNth93dAtpa5T4bisoRUu" class="nav-btn" target="_blank">explore all scenarios &rarr;</a>
+<a href="../explorer/" class="nav-btn" target="_blank">explore all scenarios &rarr;</a>
 
 ---
 
@@ -2114,7 +2114,7 @@ unemployment from `r n1(min(ext_size$u_C))` to `r n1(max(ext_size$u_C))` percent
 ]
 
 .small[
-<a href="https://claude.ai/artifact/6mNth93dAtpa5T4bisoRUu" class="inline-btn" target="_blank">set the inputs yourself &rarr;</a>
+<a href="../explorer/" class="inline-btn" target="_blank">set the inputs yourself &rarr;</a>
 Every cell is precomputed, so the 2030 outcomes and the 2025-2030 paths appear as you click.
 The link is a **private** Claude artifact: it opens only for accounts it has been shared with, so
 share it from the page's share menu before circulating this deck.
