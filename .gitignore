@@ -24,3 +24,7 @@ paper.pdf
 *.log
 *.fls
 *.fdb_latexmk
+
+# Personal learning tracker, kept local
+understanding.md
+understanding.html
