@@ -191,8 +191,8 @@ relabel <- function(x) {
 
 .blue-box[
 Every number in this deck comes from an independent Python reimplementation of the
-model, which reproduces the paper's Tables 3, 5 and 6 to the printed precision. The
-deck reads that package's CSV output.
+model, which reproduces the paper's Tables 3, 5 and 6 to the printed precision, except
+two documented rounding-fork cells. The deck reads that package's CSV output.
 ]
 
 ---
@@ -2065,7 +2065,8 @@ derivation uses 0.0384. At 0.0384 the row lands exactly.
 
 .blue-box[
 The reproduction: `aiscen` Python package, 102 tests, reproduces Tables 3, 5 and 6 to
-the printed precision. Narrative walkthrough with every equation in `repro.qmd`.
+the printed precision except two documented rounding-fork cells. Narrative walkthrough
+with every equation in `repro.qmd`.
 ]
 
 ---
