@@ -54,7 +54,11 @@ Four more conventions worth holding onto:
 
 - **Head counts are shares of the labor force.** $\ell_{C,t} + \ell_{N,t} + U_{C,t}
   + U_{N,t} = 1$ at every date, so employment and unemployment are fractions, not
-  millions of people.
+  millions of people. The subscript $C$ is the paper's own **"cognitive"** occupations
+  ($N$ is everyone else), which this document keeps; the slide deck alongside it
+  relabels the same group **"AI-sensitive occupations"** in prose while keeping the
+  same subscript and the same underlying data, so a reader moving from the deck to
+  this report isn't hit with a silent, unexplained vocabulary swap.
 - **The final good is the numeraire**, $P_t \equiv 1$. "The wage" is therefore a
   real wage, and the price index is a *constraint* rather than an output: if AI
   lowers the cost of some tasks, some other price has to rise to hold $P_t$ at one.
