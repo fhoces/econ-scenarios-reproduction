@@ -50,9 +50,9 @@ Appendix C (pp. 49-51), and the parameters of Tables 1 and A.2 (pp. 23-25, 43-45
 
 | Published table | Cells | Result |
 |---|---|---|
-| Table 3, the three scenarios in 2030 (p. 31) | 20 rows x 3 scenarios | reproduced to the printed precision, except one row (below) |
-| Table 5, four elasticities of capital supply (p. 37) | 5 rows x 8 columns | all cells reproduced, including the pegged-rental case eps = infinity |
-| Table 6, four rigidities of the cognitive wage (p. 38) | 7 rows x 7 columns | all cells reproduced |
+| Table 3, the three scenarios in 2030 (p. 31) | 20 rows x 4 columns (80 cells, including the No-AI baseline column) | reproduced to the printed precision, except two cells (below) |
+| Table 5, four elasticities of capital supply (p. 37) | 5 rows x 8 columns (40 cells) | all cells reproduced, including the pegged-rental case eps = infinity |
+| Table 6, four rigidities of the cognitive wage (p. 38) | 7 rows x 7 columns (49 cells) | all cells reproduced |
 
 Independent checks the paper states in prose and that the code hits without being
 targeted at them: the steady-state cross-group switching share of 1/7 (p. 21), the
@@ -72,11 +72,15 @@ the gap in the three scenarios), which is how a base-weighted and a chained inde
 behave. This validates the wage, rental-rate and labor-share paths against the TFP path
 independently of the published tables.
 
-**The one discrepancy.** The all-workers unemployment rate comes out about 0.07
-percentage points below the published figure in every scenario (e.g. 4.53 against 4.6 in
-the substantial scenario). Table 1 gives the normal search pool as `U_bar = 0.038`, but
-the quit-rate derivation on p. 26 uses 3.84 percent and the published pool split of
-1.76 / 2.08 percent (p. 21) requires 0.0384. At `Fixed(U_bar=0.0384)` that row lands on
+**The two discrepant cells.** Of the 80 cells in Table 3, two fall outside tolerance,
+both in unemployment-rate rows and both traceable to the same rounding. The all-workers
+rate in the substantial scenario comes out 4.53 against a published 4.6, a 0.07
+percentage-point gap (the modest and extreme columns are off by 0.04pp or less, and the
+No-AI column matches exactly). The cognitive rate in the No-AI baseline comes out 2.82
+against a published 2.9, a 0.08pp gap (the modest, substantial and extreme columns are
+off by 0.01pp or less). Table 1 gives the normal search pool as `U_bar = 0.038`, but the
+quit-rate derivation on p. 26 uses 3.84 percent and the published pool split of
+1.76 / 2.08 percent (p. 21) requires 0.0384. At `Fixed(U_bar=0.0384)` both cells land on
 the published values exactly and nothing else changes materially. The default here stays
 at Table 1's 0.038 for transcription fidelity; the tests check both.
 
@@ -102,7 +106,7 @@ at Table 1's 0.038 for transcription fidelity; the tests check both.
 ```sh
 python3 run.py                      # print the Table 3 / 5 / 6 comparisons
 python3 run.py --survey --csv out   # add the survey-median run, write monthly paths
-python3 -m pytest -q                # 98 tests, all of the checks described above
+python3 -m pytest -q                # 102 tests, all of the checks described above
 
 # the narrative report: every table and inline estimate, in the paper's own order
 QUARTO_PYTHON=/opt/anaconda3/bin/python3 quarto render repro.qmd
