@@ -124,8 +124,15 @@ the calibration to the results and the two robustness tables, computing each fig
 the text quotes inline rather than restating it. Rendering it is itself a check: a
 failed chunk aborts the render, and every published number appears next to the
 reproduced one. It needs pandas, matplotlib and tabulate on top of the package's
-standard-library-only core, and the `QUARTO_PYTHON` override points Quarto at the
-interpreter that has them.
+standard-library-only core (see `requirements.txt`), and the `QUARTO_PYTHON`
+override points Quarto at the interpreter that has them.
+
+`QUARTO_PYTHON=/opt/anaconda3/bin/python3` and
+`RSTUDIO_PANDOC=/Applications/quarto/bin/tools/aarch64` above are this machine's own
+paths, not portable constants: point `QUARTO_PYTHON` at wherever your `python3` with
+pandas/matplotlib/tabulate installed actually lives, and `RSTUDIO_PANDOC` at the
+`pandoc` binary bundled with your own Quarto or RStudio install (`quarto --version`
+and `quarto pandoc --version`, or `which pandoc`, will locate it).
 
 The package itself requires Python 3.9+ and the standard library only (`pytest` for the tests). No numpy or
 scipy dependency: the two root-finding problems, the rental-rate gap and the price index,
