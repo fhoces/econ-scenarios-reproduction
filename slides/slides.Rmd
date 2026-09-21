@@ -514,7 +514,7 @@ deepening, not productivity.
 
 .highlight-box[
 .small[
-**Status:** a range anchored to usage data, a point value assumed. Moving it across its range shifts the labor share from 57.3 to 55.4 percent while TFP moves only 3.07 to 3.10.
+**Status:** a range anchored to usage data, a point value assumed. Moving it across its range shifts the labor share from 57.3 to 55.4 percent while TFP moves only 3.06 to 3.09.
 ]
 ]
 
