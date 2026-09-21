@@ -7,12 +7,15 @@ __pycache__/
 *.quarto_ipynb
 /.quarto/
 
-# Large regenerable build products
-# repro.html:            QUARTO_PYTHON=/opt/anaconda3/bin/python3 quarto render repro.qmd   (~4 MB)
-# slides/data/grid_app.json + build/explorer/grid.js: python3 slides/make_grid_app.py       (~2.8 MB each)
-repro.html
+# Large regenerable build products.
+#
+# Two of them ARE committed, because GitHub Pages serves them directly and the site
+# is built by hand rather than in CI. Regenerate with:
+#   repro.html         QUARTO_PYTHON=/opt/anaconda3/bin/python3 quarto render repro.qmd   (~3.4 MB)
+#   explorer/grid.js   python3 slides/make_grid_app.py                                    (~2.8 MB)
+#
+# Still ignored: the JSON twin of grid.js, which only the deck build reads.
 slides/data/grid_app.json
-build/explorer/grid.js
 repro.quarto_ipynb_2
 
 # The paper itself: third-party content, not redistributed here.

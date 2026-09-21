@@ -6,6 +6,20 @@ An independent, from-scratch implementation of the model in
 > "Economic Scenarios for Transformative AI", The Anthropic Institute Working Paper
 > No. 2026-02, September 2026.
 
+## Read it online
+
+All three artifacts are published from this repository with GitHub Pages:
+
+| | |
+|---|---|
+| <https://fhoces.github.io/econ-scenarios-reproduction/> | landing page |
+| <https://fhoces.github.io/econ-scenarios-reproduction/slides/slides.html> | the slide deck |
+| <https://fhoces.github.io/econ-scenarios-reproduction/repro.html> | the full report |
+| <https://fhoces.github.io/econ-scenarios-reproduction/explorer/> | the scenario explorer |
+
+The deck pulls `remark.js` from a CDN, so it needs an internet connection to render; the
+report and the explorer are self-contained apart from web fonts.
+
 ### The paper itself is not in this repo
 
 It is third-party content, so it is deliberately untracked (see `.gitignore`) rather than
@@ -92,6 +106,13 @@ python3 -m pytest -q                # 98 tests, all of the checks described abov
 
 # the narrative report: every table and inline estimate, in the paper's own order
 QUARTO_PYTHON=/opt/anaconda3/bin/python3 quarto render repro.qmd
+
+# the scenario explorer's precomputed grid (writes explorer/grid.js, ~30s)
+python3 slides/make_grid_app.py
+
+# the slide deck
+cd slides && RSTUDIO_PANDOC=/Applications/quarto/bin/tools/aarch64 \
+  Rscript -e 'rmarkdown::render("slides.Rmd", quiet=TRUE)'
 ```
 
 `repro.qmd` walks the paper section by section, from the production function through
@@ -125,8 +146,10 @@ res.series("u_rate")        # monthly path of any field
 | `aiscen/report.py` | Table 3 rows, the published values, and the comparison printout |
 | `tests/` | The validation suite: paths, steady state, statics, Table 3, Tables 5-6, identities |
 | `repro.qmd`, `repro.css` | The narrative report: the paper's sections in order, every equation explained, tables and inline estimates computed |
-| `slides/` | A 46-slide xaringan deck walking through the paper: claim, theory, methods, results (see `slides/README.md`) |
-| `repro.html` | The rendered report |
+| `slides/` | The xaringan deck walking through the paper: claim, theory, methods, results (see `slides/README.md`) |
+| `repro.html` | The rendered report. Committed, not ignored, because Pages serves it |
+| `explorer/` | The scenario explorer: `index.html` plus the precomputed `grid.js`, also committed for Pages |
+| `index.html`, `.nojekyll` | The Pages landing page, and the marker that stops Jekyll eating `slides_files/` |
 | `run.py` | Command-line comparison tables and monthly CSV export |
 
 ## Readings the paper leaves implicit
