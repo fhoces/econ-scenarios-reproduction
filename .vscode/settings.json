@@ -1,0 +1,28 @@
+{
+  // Positron otherwise starts /usr/bin/python3 (Command Line Tools 3.9.6), which has
+  // no pandas/matplotlib and cannot run this document's chunks.
+
+  // Point at the resolved binary, not /opt/anaconda3/bin/python3, which is a symlink
+  // to python3.11 and may be skipped by interpreter discovery.
+  "python.defaultInterpreterPath": "/opt/anaconda3/bin/python3.11",
+
+  // Additive: adds these to discovery without hiding anything else. (The stricter
+  // python.interpreters.override hides every path it does not match, which leaves an
+  // empty picker if the path form is not the one discovery expects.)
+  "python.interpreters.include": [
+    "/opt/anaconda3/bin/python3.11",
+    "/opt/anaconda3"
+  ],
+
+  // conda base lives at /opt/anaconda3; this is the executable used to activate it.
+  "python.condaPath": "/opt/anaconda3/bin/conda",
+
+  // quarto preview/render runs in the integrated terminal, so pin the interpreter
+  // its jupyter engine uses there too.
+  "terminal.integrated.env.osx": {
+    "QUARTO_PYTHON": "/opt/anaconda3/bin/python3"
+  },
+
+  "quarto.render.previewType": "internal",
+  "quarto.render.renderOnSave": true
+}

@@ -1,0 +1,50 @@
+scenario,xi,row,simulated,published
+substantial,0.5,"GDP, pct above no-AI",8.2832,8.3
+substantial,0.5,"Average wage, pct above no-AI",2.1366,2.1
+substantial,0.5,  cognitive occupations w_C,-0.3308,-0.3
+substantial,0.5,  all other occupations w_N,5.8635,5.9
+substantial,0.5,"Cognitive employment, pct since mid-2026",-3.8660,-3.9
+substantial,0.5,"Unemployment rate, cognitive, pct",4.4980,4.5
+substantial,0.5,"Unemployment rate, all workers, pct",4.5641,4.6
+substantial,0.75,"GDP, pct above no-AI",7.9279,7.9
+substantial,0.75,"Average wage, pct above no-AI",2.2335,2.2
+substantial,0.75,  cognitive occupations w_C,0.7023,0.7
+substantial,0.75,  all other occupations w_N,4.5201,4.5
+substantial,0.75,"Cognitive employment, pct since mid-2026",-4.5589,-4.6
+substantial,0.75,"Unemployment rate, cognitive, pct",5.0264,5.1
+substantial,0.75,"Unemployment rate, all workers, pct",4.9175,4.9
+substantial,0.9,"GDP, pct above no-AI",7.6791,7.7
+substantial,0.9,"Average wage, pct above no-AI",2.2972,2.3
+substantial,0.9,  cognitive occupations w_C,1.3733,1.4
+substantial,0.9,  all other occupations w_N,3.6669,3.7
+substantial,0.9,"Cognitive employment, pct since mid-2026",-5.0216,-5.0
+substantial,0.9,"Unemployment rate, cognitive, pct",5.3921,5.4
+substantial,0.9,"Unemployment rate, all workers, pct",5.1615,5.2
+extreme,0.0,"GDP, pct above no-AI",36.5651,36.6
+extreme,0.0,"Average wage, pct above no-AI",1.5973,1.6
+extreme,0.0,  cognitive occupations w_C,-42.0941,-42.2
+extreme,0.0,  all other occupations w_N,70.1371,70.1
+extreme,0.0,"Cognitive employment, pct since mid-2026",-1.3010,-1.3
+extreme,0.0,"Unemployment rate, cognitive, pct",2.5929,2.6
+extreme,0.0,"Unemployment rate, all workers, pct",3.1109,3.1
+extreme,0.5,"GDP, pct above no-AI",32.4219,32.4
+extreme,0.5,"Average wage, pct above no-AI",9.6514,9.7
+extreme,0.5,  cognitive occupations w_C,-11.4893,-11.5
+extreme,0.5,  all other occupations w_N,33.6120,33.6
+extreme,0.5,"Cognitive employment, pct since mid-2026",-21.4450,-21.5
+extreme,0.5,"Unemployment rate, cognitive, pct",17.8894,17.9
+extreme,0.5,"Unemployment rate, all workers, pct",11.8962,11.9
+extreme,0.75,"GDP, pct above no-AI",30.5053,30.5
+extreme,0.75,"Average wage, pct above no-AI",11.1172,11.1
+extreme,0.75,  cognitive occupations w_C,-2.8589,-2.9
+extreme,0.75,  all other occupations w_N,25.8197,25.8
+extreme,0.75,"Cognitive employment, pct since mid-2026",-25.8270,-25.9
+extreme,0.75,"Unemployment rate, cognitive, pct",21.6472,21.7
+extreme,0.75,"Unemployment rate, all workers, pct",13.9231,13.9
+extreme,0.9,"GDP, pct above no-AI",29.1797,29.2
+extreme,0.9,"Average wage, pct above no-AI",11.9361,11.9
+extreme,0.9,  cognitive occupations w_C,2.8088,2.8
+extreme,0.9,  all other occupations w_N,21.1045,21.1
+extreme,0.9,"Cognitive employment, pct since mid-2026",-28.4672,-28.5
+extreme,0.9,"Unemployment rate, cognitive, pct",23.9673,24.0
+extreme,0.9,"Unemployment rate, all workers, pct",15.1541,15.2

@@ -1,0 +1,20 @@
+# Python caches
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# Quarto intermediates
+*.quarto_ipynb
+/.quarto/
+
+# Large regenerable build products
+# repro.html:            QUARTO_PYTHON=/opt/anaconda3/bin/python3 quarto render repro.qmd   (~4 MB)
+# slides/data/grid_app.json + build/explorer/grid.js: python3 slides/make_grid_app.py       (~2.8 MB each)
+repro.html
+slides/data/grid_app.json
+build/explorer/grid.js
+repro.quarto_ipynb_2
+
+# The paper itself: third-party content, not redistributed here.
+# Download it from https://www.anthropic.com/institute/econ-scenarios and save as paper.pdf
+paper.pdf

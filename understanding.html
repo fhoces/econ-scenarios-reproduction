@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Understanding tracker</title>
+<style>
+  :root { --ink:#1f2933; --muted:#5b6873; --line:#d6dbe0; --bg:#ffffff;
+          --solid:#1baf7a; --nearly:#eb6834; --partial:#c7a008; --none:#9aa6b2; }
+  body { max-width: 900px; margin: 0 auto; padding: 2.2rem 16px 5rem;
+         font: 16px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+         color: var(--ink); background: var(--bg); }
+  h1 { font-size: 1.85rem; line-height: 1.25; margin: 0 0 .4rem; }
+  h2 { font-size: 1.25rem; margin: 2.2rem 0 .6rem; padding-bottom: .3rem;
+       border-bottom: 1px solid var(--line); }
+  h1 + p { color: var(--muted); }
+  table { border-collapse: collapse; width: 100%; margin: .8rem 0 1.2rem; font-size: 14.5px; }
+  th, td { border: 1px solid var(--line); padding: 7px 10px; text-align: left; vertical-align: top; }
+  th { background: #f4f6f8; font-weight: 600; }
+  tbody tr:nth-child(even) { background: #fbfcfd; }
+  td:nth-child(2) { white-space: nowrap; }
+  td .tag { padding: 1px 8px; border-radius: 10px; color: #fff; font-size: 12.5px;
+            font-weight: 650; display: inline-block; }
+  hr { border: none; border-top: 1px solid var(--line); margin: 2.2rem 0; }
+  code { background: #f4f6f8; padding: 1px 5px; border-radius: 3px; font-size: 90%; }
+  li { margin: .3rem 0; }
+  @media (max-width: 620px) { td:nth-child(2) { white-space: normal; } body { font-size: 15px; } }
+</style></head><body>
+<h1>Understanding tracker: Korinek, Jones, Sacher, Cotter and McCrory (2026)</h1>
+<p>A running record of which parts of this material I claim to understand, so that a later
+session can test me on the parts marked solid and teach the parts that are not.</p>
+<p>Scope: the deck (<code>slides/slides.Rmd</code>, 75 slides), the reproduction report
+(<code>repro.qmd</code> / <code>repro.html</code>), and the Python package (<code>aiscen/</code>).</p>
+<p>Statuses are <strong>self-claimed and untested</strong> until a test happens. Test results go in the
+log at the bottom, and a failed question moves the row back a level.</p>
+<h2>How to use this file</h2>
+<ul>
+<li>Say <strong>"test me on X"</strong> and questions are drawn only from rows marked Solid or Nearly.
+  Rows below that get explained, not examined.</li>
+<li>Say <strong>"test me"</strong> with no topic and the questions are spread across every Solid row,
+  weighted toward the ones tested least recently.</li>
+<li>After a test, the status column is updated with the date and the log records what was
+  missed, so the next test can retry exactly those points.</li>
+</ul>
+<h2>Status legend</h2>
+<table>
+<thead>
+<tr>
+<th>Mark</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Solid</strong></td>
+<td>I can state it, explain why it holds, and answer follow-ups without the slides</td>
+</tr>
+<tr>
+<td><strong>Nearly</strong></td>
+<td>The structure is there; some steps still need the slide in front of me</td>
+</tr>
+<tr>
+<td><strong>Partial</strong></td>
+<td>I follow the narrative but could not reconstruct it</td>
+</tr>
+<tr>
+<td><strong>Not yet</strong></td>
+<td>Not worked through</td>
+</tr>
+<tr>
+<td><strong>Skipping</strong></td>
+<td>Deliberately out of scope for now</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>Part 1: the claim (slides 3-16)</h2>
+<table>
+<thead>
+<tr>
+<th>Area</th>
+<th>Status</th>
+<th>Where</th>
+<th>What counts as knowing it</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>The main claims of the model</td>
+<td><strong>Solid</strong></td>
+<td>5-7</td>
+<td>The three scenarios and what separates them; GDP 1.6 / 8.3 / 32.4 percent above the no-AI path by 2030 and why the wage split matters more than the level; that these are gaps against a counterfactual, not forecasts of growth</td>
+</tr>
+<tr>
+<td>What the paper is doing (the mapping exercise)</td>
+<td><strong>Solid</strong></td>
+<td>4, 7, 18, 57</td>
+<td>That it maps assumptions to consequences rather than estimating anything; which quantities are assumed and which are derived; why "scenario" is not "prediction"</td>
+</tr>
+<tr>
+<td>The seven inputs</td>
+<td><strong>Solid</strong></td>
+<td>8-15, 19</td>
+<td>Name all seven (m, d, a, psi, rho, mu, theta_H), say what each one does to the economy, which are anchored to data and which are assumptions, and which direction each moves wages and unemployment</td>
+</tr>
+<tr>
+<td>Terminology: AI-sensitive vs the paper's wording</td>
+<td><strong>Solid</strong></td>
+<td>4</td>
+<td>Why the deck renames the occupation group and what is unchanged underneath</td>
+</tr>
+<tr>
+<td>Two ways to read the rest</td>
+<td>Partial</td>
+<td>16</td>
+<td>The deck's own roadmap: solved-vs-derived</td>
+</tr>
+</tbody>
+</table>
+<h2>Part 2: how the model is solved (slides 17-30)</h2>
+<table>
+<thead>
+<tr>
+<th>Area</th>
+<th>Status</th>
+<th>Where</th>
+<th>What counts as knowing it</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>The shape of the whole thing</td>
+<td><strong>Nearly</strong></td>
+<td>18</td>
+<td>Inputs, the once-only steady state, the 73 monthly solves, the outputs; which eight variables carry over from month to month</td>
+</tr>
+<tr>
+<td>Calibration: where the numbers come from</td>
+<td><strong>Nearly</strong></td>
+<td>19</td>
+<td>Which rows are constants, which are anchors, which are ranges, and why none of them is one of the seven inputs</td>
+</tr>
+<tr>
+<td>The month, in nine steps</td>
+<td><strong>Nearly</strong></td>
+<td>20, 25-28</td>
+<td>Recite the order and say why each step can only run after the one before it</td>
+</tr>
+<tr>
+<td>Step 0: the steady state, equation (38)</td>
+<td><strong>Nearly</strong></td>
+<td>21-22, 60</td>
+<td>What goes in (six calibrated constants), what comes out (nine objects), and why none of the seven inputs may enter</td>
+</tr>
+<tr>
+<td>The 44 equations and the solve order</td>
+<td><strong>Nearly</strong></td>
+<td>23-24, 65</td>
+<td>Why the month is a sequence and not a simultaneous system; where the only two root-finds are</td>
+</tr>
+<tr>
+<td>Reading prices off quantities, system (39)</td>
+<td><strong>Nearly</strong></td>
+<td>29</td>
+<td>Why the demand system is inverted; that the price index row plus two labor demands plus capital supply pin three price changes; how it reduces to one monotone equation in the rental rate</td>
+</tr>
+<tr>
+<td>Why only two root-finds</td>
+<td><strong>Nearly</strong></td>
+<td>30</td>
+<td>Monotonicity, bisection, no solver library needed</td>
+</tr>
+</tbody>
+</table>
+<p>Open snag in this part: <strong>f_C and f_N</strong> (job-finding rates by worker origin, slides 18, 21,
+27). Asked about twice on 2026-09-17, now glossed on slide 18. Worth a question in the
+first test.</p>
+<h2>Part 3: where the equations come from (slides 31-45)</h2>
+<table>
+<thead>
+<tr>
+<th>Area</th>
+<th>Status</th>
+<th>Where</th>
+<th>What counts as knowing it</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Task-based production</td>
+<td>Not yet</td>
+<td>32-33</td>
+<td></td>
+</tr>
+<tr>
+<td>The assignment rule and the automation fork</td>
+<td>Not yet</td>
+<td>34, 66</td>
+<td></td>
+</tr>
+<tr>
+<td>Prices, shares, and why sigma &lt; 1 carries the result</td>
+<td>Not yet</td>
+<td>35, 67</td>
+<td></td>
+</tr>
+<tr>
+<td>TFP: Hulten and Domar weights</td>
+<td>Not yet</td>
+<td>36</td>
+<td></td>
+</tr>
+<tr>
+<td>The factor-price frontier and capital supply</td>
+<td>Not yet</td>
+<td>37-38</td>
+<td></td>
+</tr>
+<tr>
+<td>The labor share, three channels</td>
+<td>Not yet</td>
+<td>39, 68</td>
+<td></td>
+</tr>
+<tr>
+<td>Proposition 1</td>
+<td>Not yet</td>
+<td>40-41, 69-70</td>
+<td></td>
+</tr>
+<tr>
+<td>Growth vs levels</td>
+<td>Not yet</td>
+<td>42-43, 74</td>
+<td></td>
+</tr>
+<tr>
+<td>Unemployment and matching</td>
+<td>Not yet</td>
+<td>44-45, 71</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2>Part 4: results and what to trust (slides 46-57)</h2>
+<table>
+<thead>
+<tr>
+<th>Area</th>
+<th>Status</th>
+<th>Where</th>
+<th>What counts as knowing it</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>The three scenarios, one at a time</td>
+<td>Not yet</td>
+<td>47-49</td>
+<td></td>
+</tr>
+<tr>
+<td>The robustness tables</td>
+<td>Not yet</td>
+<td>50</td>
+<td></td>
+</tr>
+<tr>
+<td>The AI-slop extension</td>
+<td>Not yet</td>
+<td>51-52, 72</td>
+<td></td>
+</tr>
+<tr>
+<td>The survey</td>
+<td>Not yet</td>
+<td>53</td>
+<td></td>
+</tr>
+<tr>
+<td>What reproduces, and what does not</td>
+<td>Not yet</td>
+<td>54-55, 73</td>
+<td></td>
+</tr>
+<tr>
+<td>Takeaways</td>
+<td>Not yet</td>
+<td>56-57</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2>The reproduction itself</h2>
+<table>
+<thead>
+<tr>
+<th>Area</th>
+<th>Status</th>
+<th>Where</th>
+<th>What counts as knowing it</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>What the reproduction establishes</td>
+<td>Not yet</td>
+<td>54, <code>repro.qmd</code></td>
+<td>Which published tables are matched and to what precision</td>
+</tr>
+<tr>
+<td>The one number that does not reproduce</td>
+<td>Not yet</td>
+<td>73, <code>repro.qmd</code></td>
+<td>The U-bar rounding fork and why it is a fork rather than an error</td>
+</tr>
+<tr>
+<td>The code layout</td>
+<td>Not yet</td>
+<td><code>aiscen/</code></td>
+<td>Which file holds the steady state, the monthly loop, the scenarios</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>Question formats a test may use</h2>
+<ol>
+<li><strong>State it.</strong> Define a symbol or name the seven inputs, from memory.</li>
+<li><strong>Trace it.</strong> Given a step, say what must already be known and what it produces.</li>
+<li><strong>Move a dial.</strong> Raise one input, predict the sign of the move in GDP, the two wages,
+   and unemployment, and say through which equation.</li>
+<li><strong>Spot the error.</strong> A claim that is wrong in one specific way; find it.</li>
+<li><strong>Read the number.</strong> Given a figure or table from the deck, say what it does and does
+   not license you to conclude.</li>
+</ol>
+<h2>Log</h2>
+<ul>
+<li><strong>2026-09-17.</strong> Tracker created. Self-claimed at the start: main claims, the mapping
+  exercise, and the seven inputs marked Solid; Part 2 marked Nearly throughout ("almost
+  done understanding how the model is solved"). Nothing tested yet. Two questions asked
+  while building the deck this week point at specific gaps to probe first: what f_C and
+  f_N are, and why the Proposition 1 collapse check was a valid check on system (39).</li>
+</ul>
+<script>
+  var tint = { "Solid": "var(--solid)", "Nearly": "var(--nearly)", "Partial": "var(--partial)",
+               "Not yet": "var(--none)", "Skipping": "var(--none)" };
+  document.querySelectorAll("td").forEach(function (td) {
+    if (td.cellIndex !== 1) return;
+    var label = td.textContent.trim(), c = tint[label];
+    if (c) { td.innerHTML = '<span class="tag" style="background:' + c + '">' + label + '</span>'; }
+  });
+</script>
+</body></html>

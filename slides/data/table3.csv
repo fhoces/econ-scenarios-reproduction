@@ -1,0 +1,21 @@
+row,no_ai,modest,substantial,extreme,pub_no_ai,pub_modest,pub_substantial,pub_extreme
+"GDP, pct above no-AI",0.0000,1.6053,8.2832,32.4219,0.0,1.6,8.3,32.4
+"GDP, index 2024 = 100",112.7497,114.5596,122.0890,149.3053,112.7,114.5,122.1,149.3
+"GDP growth, pct per year",2.0000,2.4031,5.3726,15.4620,2.0,2.4,5.4,15.4
+"Average wage, pct above no-AI",0.0000,0.6885,2.1366,9.6514,0.0,0.7,2.1,9.7
+  cognitive occupations w_C,0.0000,0.4097,-0.3308,-11.4893,0.0,0.4,-0.3,-11.5
+  all other occupations w_N,0.0000,1.1434,5.8635,33.6120,0.0,1.1,5.9,33.6
+"Net return r - delta, pct per year",6.5000,6.5880,7.0074,8.3458,6.5,6.6,7.0,8.3
+"Capital stock, pct above no-AI",0.0000,2.3139,13.8292,56.2950,0.0,2.3,13.8,56.3
+"Labor share, pct of income",60.0000,59.4127,56.0961,45.2110,60.0,59.4,56.1,45.2
+"Capital share, pct of income",40.0000,40.5873,43.9039,54.7890,40.0,40.6,43.9,54.8
+"Labor income, pct above no-AI",0.0000,0.6257,1.3622,0.4602,0.0,0.6,1.4,0.5
+  wage bill of cognitive occs,0.0000,-0.2935,-4.6274,-30.9601,0.0,-0.3,-4.6,-31.0
+"Capital income, pct above no-AI",0.0000,3.0971,18.8515,81.3817,0.0,3.1,18.9,81.4
+"Cognitive employment, pct since mid-2026",0.0000,-0.4621,-3.8660,-21.4450,0.0,-0.5,-3.9,-21.5
+"Unemployment rate, cognitive, pct",2.8182,2.9140,4.4980,17.8894,2.9,2.9,4.5,17.9
+"Unemployment rate, all workers, pct",3.8000,3.8600,4.5294,11.8637,3.8,3.9,4.6,11.9
+"Measured TFP, pct above no-AI",0.0000,0.7113,3.0748,13.4090,0.0,0.7,3.1,13.4
+"Measured TFP growth, pct per year",1.0020,1.1812,2.3476,7.3164,1.0,1.2,2.3,7.3
+"Ideas stock A, pct above no-AI",0.0000,0.0653,0.1980,0.6075,0.0,0.07,0.2,0.61
+"Growth of the ideas stock, pct per year",1.6700,1.6904,1.7665,2.0271,1.67,1.69,1.76,2.02

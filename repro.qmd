@@ -1,0 +1,1996 @@
+---
+title: "Economic Scenarios for Transformative AI"
+subtitle: "An independent reproduction of Korinek, Jones, Sacher, Cotter and McCrory (2026), The Anthropic Institute Working Paper No. 2026-02"
+date: today
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    toc-location: left
+    code-fold: true
+    code-summary: "code"
+    code-tools: true
+    embed-resources: true
+    fig-align: center
+    tbl-cap-location: top
+    theme: cosmo
+    css: repro.css
+jupyter: python3
+execute:
+  echo: true
+  warning: false
+---
+
+## How to read this document
+
+No replication package was published with the paper, so every number below is
+computed from the equations printed in it: Proposition 1 (p. 15), the 44-equation
+monthly system of Table A.1 (pp. 42-43), the simulation procedure of Appendix A
+(pp. 40-41), the innovation block of Appendix C (pp. 49-51) and the parameters of
+Tables 1 and A.2 (pp. 23-25, 43-45). The implementation is the `aiscen` package
+beside this file; this document calls it in the order the paper develops the model
+and puts each reproduced quantity next to the published one.
+
+Two conventions, both from the note to Table 3: level differences are percent
+deviations from the no-AI path, $e^{\Delta \ln x} - 1$, and growth rates are log
+changes over the preceding twelve months.
+
+A third convention concerns the equations. **Every numbered equation here carries the
+paper's own number**, so (17) below is (17) in the paper, and the numbers therefore do
+not run in order: the document follows the order in which the paper develops the model,
+not the order in which it numbers it. One equation, one number, one anchor, so any
+number can be linked to directly. Equations that appear inside a refresher callout, or
+as an intermediate algebraic step, are deliberately left unnumbered because they are not
+in the paper.
+
+### Notation, in one place
+
+Every quantity the model reports is a **gap against a counterfactual without AI**,
+not a level: $\Delta \ln x_t \equiv \ln x_t - \ln \bar x_t$, where the bar is the
+no-AI path along which the economy grows at $g + n$. So "GDP is 8.3 percent above
+the no-AI path" says nothing about whether GDP is high or low in absolute terms.
+
+Four more conventions worth holding onto:
+
+- **Head counts are shares of the labor force.** $\ell_{C,t} + \ell_{N,t} + U_{C,t}
+  + U_{N,t} = 1$ at every date, so employment and unemployment are fractions, not
+  millions of people.
+- **The final good is the numeraire**, $P_t \equiv 1$. "The wage" is therefore a
+  real wage, and the price index is a *constraint* rather than an output: if AI
+  lowers the cost of some tasks, some other price has to rise to hold $P_t$ at one.
+  That constraint is what forces the productivity gains into factor prices.
+- **A tilde means deflated by the ideas stock**, $\tilde w = w / A_t$. The
+  labor-augmenting ideas stock $A_t$ raises the productivity of every worker, so
+  unit costs depend on $w/A$ rather than $w$ alone.
+- **The grid is monthly**, but dates are written in calendar years: $t = 2026.5$ is
+  mid-2026, and one period is $h = 1/12$.
+
+```{python}
+#| label: setup
+#| code-summary: "setup: imports, scenarios, simulated paths, plotting style"
+# `import X` makes module X's contents available as `X.thing`; `from X import a, b`
+# pulls specific names straight into this file's namespace so you can write `a`.
+import math                     # standard library: exp, log, sqrt
+
+import matplotlib as mpl        # plotting; `as mpl` is just a shorter alias
+import matplotlib.pyplot as plt
+import numpy as np              # arrays and NaN
+import pandas as pd             # DataFrames: tables with named columns
+from IPython.display import Markdown, display
+
+# `aiscen` is the package sitting next to this document (the aiscen/ folder). Python
+# finds it because Quarto runs this document from that folder.
+from aiscen import Fixed, SCENARIOS, simulate, statics, steady
+from aiscen.params import SURVEY_MEDIAN
+from aiscen.paths import Paths, research_share
+from aiscen.report import PUBLISHED, ROW_ORDER, build_table3, pct, table3_column
+
+# Fixed() creates one "parameter object". It is a dataclass, meaning its fields are
+# declared once and accessed by name: F.sigma, F.s_L0, F.eps. Nothing is a loose
+# global variable, so a typo like F.sigmaa raises an error instead of silently
+# returning something wrong.
+F = Fixed()                                   # Table 1, panels A and D
+SS = steady.solve(F)                          # Table A.1, panel E
+
+NAMES = ["modest", "substantial", "extreme"]  # a list: ordered, written with []
+
+# A "dict comprehension": {key: value for item in iterable}. This one runs the model
+# once per scenario and stores the results under the scenario's name, so RUNS is a
+# dictionary you index by string: RUNS["extreme"]. Written out longhand it would be
+#     RUNS = {}
+#     for n in NAMES:
+#         RUNS[n] = simulate.run(F, SCENARIOS[n])
+# The comprehension is the idiomatic one-line version of exactly that loop.
+P = {n: Paths.build(F, SCENARIOS[n]) for n in NAMES}
+RUNS = {n: simulate.run(F, SCENARIOS[n]) for n in NAMES}
+T3 = build_table3(F)                          # {row name: (no-AI, modest, subst, extreme)}
+
+# Categorical palette slots 1-3, validated for CVD separation and lightness; the
+# contrast warning on slot 3 is relieved by direct end-labels, which is also the
+# paper's own figure convention.
+COL = {"modest": "#2a78d6", "substantial": "#eb6834", "extreme": "#1baf7a"}
+INK, INK2, GRID = "#0b0b0b", "#52514e", "#d9d8d2"
+mpl.rcParams.update({
+    "figure.dpi": 150, "savefig.dpi": 150, "savefig.bbox": "tight",
+    "font.size": 8.0, "axes.titlesize": 8.5, "axes.labelsize": 7.5,
+    "axes.spines.top": False, "axes.spines.right": False,
+    "axes.edgecolor": GRID, "axes.labelcolor": INK2, "text.color": INK,
+    "xtick.color": INK2, "ytick.color": INK2, "xtick.labelsize": 7,
+    "ytick.labelsize": 7, "grid.color": GRID, "grid.linewidth": 0.6,
+    "axes.grid": True, "axes.axisbelow": True, "legend.frameon": False,
+    "figure.facecolor": "white", "axes.facecolor": "white", "lines.linewidth": 2.0,
+})
+
+
+def frame(res):
+    """One tidy monthly frame per scenario, in the paper's reporting units.
+
+    A docstring (the triple-quoted text right under `def`) is Python's built-in way
+    to document a function; `help(frame)` prints it. `res` is the object
+    simulate.run() returned: it holds the fixed parameters and a list of monthly
+    records.
+    """
+    f = res.fixed
+    # Tuple unpacking: the right side builds a pair, the left side names both halves
+    # in one line. res.at(date) returns the monthly record closest to that date.
+    l_C_2026, l_N_2026 = res.at(f.t_anchor).l_C, res.at(f.t_anchor).l_N
+
+    rows = []                       # collect one dict per month, then build a table
+    # enumerate() yields (position, item) pairs, so `i` counts months from 0 while
+    # `m` is the record itself. We need `i` to look 12 months back for growth rates.
+    for i, m in enumerate(res.months):
+        # A "conditional expression": VALUE_IF_TRUE if CONDITION else VALUE_IF_FALSE.
+        # For the first 12 months there is no year-ago record, so `back` is None and
+        # the growth columns below get NaN (numpy's missing-value marker).
+        back = res.months[i - 12] if i >= 12 else None
+        rows.append({
+            "t": m.t, "m": m.m, "d": m.d, "md": m.m * m.d, "a": m.a,
+            "gdp": pct(m.dlnY),
+            "gdp_growth": 100 * (f.g + f.n + m.dlnY - back.dlnY) if back else np.nan,
+            "wage": pct(m.dlnw_avg), "wC": pct(m.dlnw_C_paid), "wN": pct(m.dlnw_N),
+            "net_r": 100 * (f.r_bar * math.exp(m.dlnr) - f.delta),
+            "capital": pct(m.dlnK), "labor_share": 100 * m.s_L,
+            "cog_emp": 100 * (m.l_C / l_C_2026 - 1.0),
+            "oth_emp": 100 * (m.l_N / l_N_2026 - 1.0),
+            "u_C": 100 * m.u_rate_C, "u_all": 100 * m.u_rate,
+            "u_excess": 100 * m.u_excess, "tfp": pct(m.dln_tfp),
+            "tfp_growth": 100 * (f.s_L0 * f.g + m.dln_tfp - back.dln_tfp) if back else np.nan,
+            "ideas": pct(m.dlnA),
+            "ideas_growth": 100 * (f.g + m.dlnA - back.dlnA) if back else np.nan,
+            "dlnR": m.dlnR, "realloc": 100 * m.reallocation,
+        })
+    return pd.DataFrame(rows)
+
+
+D = {n: frame(RUNS[n]) for n in NAMES}
+
+
+def v(scen, col, d=1, t=2030.0):
+    """Inline value: column `col` of scenario `scen` at date `t`.
+
+    `d=1` and `t=2030.0` are default arguments: callers may omit them. So
+    v("extreme", "gdp") means v("extreme", "gdp", d=1, t=2030.0).
+    """
+    df = D[scen]
+    # Read this inside out: (df["t"] - t) is a column of differences, .abs() makes
+    # them positive, .idxmin() returns the row label of the smallest, and .iloc[...]
+    # fetches that row. In short: the row whose date is closest to t.
+    row = df.iloc[(df["t"] - t).abs().idxmin()]
+    return f"{row[col]:,.{d}f}"
+
+
+def num(x, d=1):
+    """Format a number for prose: 1 decimal by default, with thousands separators.
+
+    This is an f-string, Python's string interpolation: anything inside {} is
+    evaluated. The part after the colon is a format spec, where "," asks for
+    thousands separators and ".1f" means fixed-point with one decimal. The nested
+    {d} makes the number of decimals itself a variable.
+    """
+    return f"{x:,.{d}f}"
+
+
+def show(df, **kw):
+    """Render a DataFrame as a markdown table that Quarto will style.
+
+    `**kw` collects any extra keyword arguments and forwards them to to_markdown(),
+    so show(df, floatfmt=".3f") works without naming floatfmt here.
+    """
+    return Markdown(df.to_markdown(index=False, **kw))
+```
+
+## 2 The model
+
+### 2.1.1 Technology and factor markets
+
+Output is a CES aggregate not over capital and labor but over **task instances**: a
+task is a type of work (reviewing a contract), an instance is one performance of it
+(this contract).
+
+[]{#eq-1}
+$$
+Y_t = \Big[ \sum_i \omega_i^{1/\sigma}\, y_{i,t}^{(\sigma-1)/\sigma} \Big]^{\sigma/(\sigma-1)}
+\tag{1}
+$$
+
+::: {.callout-note appearance="simple" title="Refresher: what (1) is doing, and why the elasticity is the whole story"}
+This is the CES function from first-year graduate macro, with the inputs
+reinterpreted. The weights $\omega_i$ are base-period expenditure shares and sum to
+one, and $\sigma$ is the elasticity of substitution between any two instances,
+whether they belong to the same task or different ones.
+
+The single fact to carry forward is that $\sigma =$ `{python} num(F.sigma, 1)` is
+**below one**, so instances are *gross complements*: the economy needs some of
+everything, and whatever stays expensive becomes the bottleneck. In the
+Cobb-Douglas case $\sigma = 1$ expenditure shares are constant and nothing
+interesting happens to the labor share. Below one, a task whose cost *falls* sees
+its expenditure share *fall*, because quantity demanded rises less than
+proportionally to the price cut. That one inequality drives most of the paper's
+distributional results.
+:::
+
+Each instance can be produced by a worker or by a machine, and within an instance the
+two are perfect substitutes:
+
+[]{#eq-2}
+$$
+y_{i,t} = A_t\, \alpha_{L,i,t}\, \ell_{i,t} + \alpha_{K,i,t}\, k_{i,t}
+\tag{2}
+$$
+
+[]{#eq-3}
+$$
+p_{i,t} = c_{i,t} = \min\Big\{ \frac{w_t}{A_t \alpha_{L,i,t}},\ \frac{r_t}{\alpha_{K,i,t}} \Big\}
+\tag{3}
+$$
+
+::: {.callout-note appearance="simple" title="Refresher: perfect substitutes inside a task, complements across tasks"}
+[Equation (2)](#eq-2) says one contract review is one contract review, whoever does it: a
+worker delivering $A_t \alpha_L$ units and a machine delivering $\alpha_K$ units are
+interchangeable *for that instance*. $A_t$ is the stock of ideas and augments labor
+only.
+
+Competition then prices each instance at unit cost, and cost minimization assigns it
+to whichever factor is cheaper, which is [Equation (3)](#eq-3). Rank instances by capital's
+comparative advantage $\alpha_{K,i}/\alpha_{L,i}$ and the assignment is a **threshold
+rule**: everything above the cutoff is done by machines, everything below by people,
+and the cutoff moves with the factor price ratio $r_t/w_t$. This is the task-based
+setup of Zeira (1998) and Acemoglu and Restrepo (2018), and it is where the model
+departs from the aggregate production function of undergraduate macro: automation is
+not a shift in an exponent, it is a set of tasks changing hands.
+
+In this paper "automation" means AI raises $\alpha_{K,i}$ on an instance far enough
+that capital takes it over at the pre-AI rental rate; "augmentation" means AI raises
+$\alpha_{L,i}$ so the worker keeps the instance and does it faster. Both cut the
+instance's unit cost by the same $a_{i,t}$ log points. What differs is who is holding
+it afterwards, which is why $\psi_t$ moves the labor share without moving TFP.
+:::
+
+[]{#eq-4}
+$$
+s_{i,t} \equiv \frac{p_{i,t} y_{i,t}}{P_t Y_t} = \omega_i \Big(\frac{c_{i,t}}{P_t}\Big)^{1-\sigma},
+\qquad
+P_t = \Big[\sum_j \omega_j c_{j,t}^{1-\sigma}\Big]^{1/(1-\sigma)} \equiv 1
+\tag{4}
+$$
+
+::: {.callout-note appearance="simple" title="Refresher: deriving the expenditure share, and the sign that surprises people"}
+Two steps, both standard. Cost minimization on (1) gives the CES demand curve
+$y_{i} = \omega_i (c_{i}/P)^{-\sigma} Y$. Multiply by the price $c_i$ and divide by
+$PY$ to turn a quantity into an expenditure share, and the exponent goes from
+$-\sigma$ to $1-\sigma$: the price enters once through quantity demanded and once
+through revenue per unit.
+
+The sign is what trips people up. With $\sigma < 1$ the exponent $1 - \sigma$ is
+positive, so **a cheaper instance takes a smaller share of spending**. Concretely, at
+$\sigma = 0.5$ an instance whose unit cost falls by 0.45 log points, a factor of
+$e^{-0.45} =$ `{python} num(math.exp(-0.45), 2)`, has its expenditure share
+multiplied by `{python} num(math.exp(-0.45) ** 0.5, 2)`: down about a fifth, even
+though more of it is produced. Set $\sigma > 1$ and every result below flips sign.
+
+The normalization $P_t \equiv 1$ is not cosmetic. Since the price index is a weighted
+average of unit costs, holding it at one while AI cuts some costs *forces* the
+remaining prices, the wage and the rental rate, to rise. That is the mechanical
+channel through which productivity gains become factor income.
+:::
+
+[]{#eq-5}
+$$
+s_{L,t} = \sum_{i \in \mathcal{L}_t} s_{i,t} = \frac{w_t L_t}{P_t Y_t},
+\qquad
+\Delta \ln w_t = \Delta \ln (Y_t / L_t) + \Delta \ln s_{L,t}
+\tag{5}
+$$
+
+::: {.callout-note appearance="simple" title="Refresher: the wage identity is an accounting identity, and it does a lot of work"}
+The labor share is the sum of the expenditure shares of the instances labor still
+performs, which by definition equals the wage bill over GDP. Take logs of
+$s_L = wL/(PY)$ and rearrange: $\ln w = \ln(Y/L) + \ln s_L$. Nothing behavioural has
+been assumed, so it holds exactly at every date.
+
+Its use is that **any two of the three pin the third**. The paper's headline that
+wages rise much less than GDP is the same statement as the labor share falling.
+Check it in the extreme scenario at 2030: output per worker is
+`{python} num(100 * RUNS['extreme'].at(2030.0).dlnYL_star, 1)` log points above the no-AI
+path, the labor share change is
+`{python} num(100 * math.log(RUNS['extreme'].at(2030.0).s_L_star / F.s_L0), 1)` log
+points, and they sum to
+`{python} num(100 * (RUNS['extreme'].at(2030.0).dlnYL_star + math.log(RUNS['extreme'].at(2030.0).s_L_star / F.s_L0)), 1)`,
+the wage gap.
+:::
+
+[]{#eq-6}
+$$
+\Delta \ln K_t = \varepsilon\, \Delta \ln r_t
+\tag{6}
+$$
+
+::: {.callout-note appearance="simple" title="Refresher: why capital supply is a schedule rather than an Euler equation"}
+Rather than solve a household savings problem, the paper posits an upward-sloping
+supply curve: capital is $\varepsilon$ percent higher for every percent the rental
+rate exceeds its no-AI level $\bar r$. It is the reduced form of Moll, Rachel and
+Restrepo (2022), whose households hold more wealth when the return is higher.
+
+The two limits are the intuition. At $\varepsilon = 0$ the capital stock cannot
+respond within the horizon, so any extra demand for machines shows up entirely in the
+rental rate. At $\varepsilon = \infty$ the rental rate is pegged at $\bar r$, the
+small-open-economy case, and any amount of capital arrives at an unchanged return;
+then the whole productivity gain goes to labor, which is the Caselli and Manning
+(2019) result. The baseline $\varepsilon =$ `{python} num(F.eps, 0)` sits between
+them. It comes from converting Moll et al.'s semi-elasticity of 50 in the *net*
+return: $50 \bar r =$ `{python} num(50 * F.r_bar, 0)` in log-rental units
+(footnote 1, p. 9), halved because their economy takes decades to get there.
+Section 4.5 reruns everything at $\varepsilon = 1, 3, 6, \infty$, and this is the
+single parameter that decides whether the average wage rises or falls.
+:::
+
+Tasks are gross complements at $\sigma =$ `{python} num(F.sigma, 1)`, labor earns
+60 percent of income before AI, and the capital supply schedule (6) has elasticity
+$\varepsilon =$ `{python} num(F.eps, 0)`.
+
+```{python}
+#| label: factors
+#| code-summary: "base-period technology and factor markets"
+# A list of tuples. Each tuple is (label, value computed here, value printed in the
+# paper), so the table can put them side by side. Tuples are written with () and are
+# fixed-length; lists use [] and can grow.
+base = [
+    ("sigma, elasticity of substitution across tasks", F.sigma, "0.5"),
+    ("s_L,t0, base-period labor share", F.s_L0, "0.60"),
+    ("s_K,t0 = 1 - s_L,t0", F.s_K0, "0.40"),
+    ("s_C,t0 / s_L,t0, cognitive share of employment", F.cog_share, "0.624"),
+    ("s_N,t0 / s_C,t0, relative size of the two groups", (1 - F.cog_share) / F.cog_share, "0.603"),
+    ("eps, elasticity of capital supply", F.eps, "3"),
+    ("net return r_bar - delta, per year", F.r_bar - F.delta, "0.065"),
+    ("capital-output ratio s_K,t0 / r_bar", F.s_K0 / F.r_bar, "3.5"),
+    ("g + n, no-AI GDP growth, per year", F.g + F.n, "0.02"),
+    ("g_A = s_L,t0 g, no-AI TFP growth, per year", F.s_L0 * F.g, "0.010"),
+    ("l_C,t0, base cognitive employment, share of L", F.l_C0, "0.600"),
+    ("l_N,t0, base all-other employment, share of L", F.l_N0, "0.362"),
+]
+# pd.DataFrame({...}) builds a table from a dict of {column name: list of values}.
+# Each list here is a "list comprehension": [EXPRESSION for item in iterable], which
+# builds a new list by evaluating EXPRESSION once per item. r[0] is the first element
+# of each tuple, r[1] the second, and ".4g" formats to 4 significant digits.
+show(pd.DataFrame({"object": [r[0] for r in base],
+                   "this reproduction": [f"{r[1]:.4g}" for r in base],
+                   "paper": [r[2] for r in base]}))
+```
+
+### 2.1.2 AI scenarios
+
+The five exogenous objects are the affected mass $m_t$, the diffusion share $d_t$,
+the log gain per instance $a_t$, the automation share $\psi_t$ and the reinstatement
+ratio $\rho$. All three scenarios share the mid-2026 anchors $m = 0.14$ and
+$d = 0.10$, so they coincide there and separate only afterwards; each logistic's
+slope follows from the anchor, the 2030 value and the ceiling by Equation (8').
+
+```{python}
+#| label: paths-table
+#| code-summary: "Equation (8'): logistic slopes and the 2030 values"
+rows = []                            # start empty, append one dict per scenario
+for n in NAMES:
+    p, s = P[n], SCENARIOS[n]        # p: the fitted paths; s: the scenario's parameters
+    # .append() adds one element to the end of a list. Each element is a dict
+    # {"column name": value}, and pandas turns a list of such dicts into a table
+    # whose columns are the dict keys.
+    rows.append({
+        "scenario": n, "kappa_m": p.kappa_m, "kappa_d": p.kappa_d,
+        "t_mid m": p.t_mid_m, "t_mid d": p.t_mid_d,
+        "m 2030": p.m(2030.0), "d 2030": p.d(2030.0), "a 2030": p.a(2030.0),
+        "m d 2030": p.m(2030.0) * p.d(2030.0), "psi": s.psi, "rho": s.rho,
+    })
+show(pd.DataFrame(rows), floatfmt=".3f")
+```
+
+[]{#eq-8}
+$$
+m_t = \frac{\bar m}{1 + e^{-\kappa_m (t - t_m)}},
+\qquad
+d_t = \frac{\bar d}{1 + e^{-\kappa_d (t - t_d)}},
+\qquad
+a_t = a_0 + g_a (t - t_0)
+\tag{8}
+$$
+
+[]{#eq-8-prime}
+$$
+\kappa_m = \frac{1}{3.5} \ln\Big( \frac{\bar m - m_{2026}}{m_{2026}} \cdot
+\frac{m_{2030}}{\bar m - m_{2030}} \Big)
+\tag{8'}
+$$
+
+::: {.callout-note appearance="simple" title="Refresher: why a logistic, and where (8') comes from in one line"}
+Technology diffusion is S-shaped in the historical record (Griliches on hybrid corn,
+David on electricity), so reach and use follow logistics while the productivity gain
+per instance is allowed to drift linearly.
+
+Equation (8') looks worse than it is. A logistic is exactly the curve whose **log
+odds are linear in time**: rearranging (8) gives
+$\ln\!\big(m_t / (\bar m - m_t)\big) = \kappa_m (t - t_m)$. So the slope is just the
+change in log odds between the two dates the paper pins down, divided by the 3.5
+years between them,
+
+$$
+\kappa_m = \frac{1}{3.5}\Big[ \ln \frac{m_{2030}}{\bar m - m_{2030}}
+- \ln \frac{m_{2026}}{\bar m - m_{2026}} \Big],
+$$
+
+which is (8') with the two logs combined. The ceiling $\bar m = s_{C,t0}/s_{L,t0} =$
+`{python} num(F.cog_share, 3)` is all cognitive work: in the long run AI reaches all
+of it, and the scenarios differ only in how much it reaches by 2030. Since all three
+share the mid-2026 anchor, the scenarios are a fan opening from a single point, which
+is why the paper stresses that almost all divergence happens after 2027.
+:::
+
+For the substantial scenario the paper states those slopes as $\kappa_m = 0.33$ and
+$\kappa_d = 0.51$ (p. 48); here they are
+`{python} num(P['substantial'].kappa_m, 2)` and
+`{python} num(P['substantial'].kappa_d, 2)`. Because the paths start near zero, the
+largest GDP gap the AI objects imply at the 2024 base period is
+`{python} num(100 * max(F.s_L0 * P[n].at(F.t0)['md'] * P[n].at(F.t0)['a'] for n in NAMES), 2)`
+percent, matching the "at most a quarter of a percent" of Appendix A.
+
+By 2030 AI performs `{python} num(100 * D['modest'].iloc[-1].md, 0)`,
+`{python} num(100 * D['substantial'].iloc[-1].md, 0)` and
+`{python} num(100 * D['extreme'].iloc[-1].md, 0)` percent of the economy's task
+instances, the 4, 12 and 30 percent quoted in Sections 4.1 to 4.3. In
+the extreme scenario the gain per instance reaches
+`{python} num(P['extreme'].a(2030.0), 2)` log points, more than doubling
+productivity on the tasks it touches:
+$e^{0.8} =$ `{python} num(math.exp(P['extreme'].a(2030.0)), 1)`.
+
+```{python}
+#| label: fig-paths
+#| fig-cap: "The exogenous paths behind the paper's Figures 2 to 4: the share of task instances performed with AI and the log gain on each. The vertical rule is the mid-2026 anchor, where the three scenarios coincide by construction. Not a figure in the paper."
+#| code-summary: "the exogenous paths"
+fig, axes = plt.subplots(1, 2, figsize=(6.6, 2.3))
+for n in NAMES:
+    df = D[n][D[n].t >= 2024.0]
+    axes[0].plot(df.t, 100 * df.md, color=COL[n], label=n.capitalize())
+    axes[1].plot(df.t, df.a, color=COL[n], label=n.capitalize())
+    axes[0].annotate(f"{100 * df.md.iloc[-1]:.0f}", (df.t.iloc[-1], 100 * df.md.iloc[-1]),
+                     xytext=(4, 0), textcoords="offset points", fontsize=7,
+                     color=INK2, va="center")
+    axes[1].annotate(f"{df.a.iloc[-1]:.2f}", (df.t.iloc[-1], df.a.iloc[-1]),
+                     xytext=(4, 0), textcoords="offset points", fontsize=7,
+                     color=INK2, va="center")
+axes[0].set_title("Task instances performed with AI, $m_t d_t$", loc="left")
+axes[0].set_ylabel("percent of all instances")
+axes[1].set_title("Log gain per AI-performed instance, $a_t$", loc="left")
+axes[1].set_ylabel("log points")
+for ax in axes:
+    ax.set_xlim(2024, 2030.8)
+    ax.axvline(F.t_anchor, color=GRID, lw=0.8, zorder=0)
+axes[0].legend(loc="upper left", fontsize=7)
+plt.show()
+```
+
+### 2.1.3 Measured TFP and the factor-price frontier
+
+[]{#eq-9}
+$$
+\Delta \ln \mathrm{TFP}_t \approx \sum_i \omega_i d_{i,t} a_{i,t}
+= s_{L,t0} \sum_i m_i d_{i,t} a_{i,t}
+= s_{L,t0}\, m_t d_t a_t
+\tag{9}
+$$
+
+::: {.callout-note appearance="simple" title="Refresher: Hulten's theorem, Domar weights, and why the labor share shows up"}
+Hulten (1978) says that to a first order, the aggregate productivity gain is the sum
+of the microeconomic cost reductions, each weighted by its **Domar weight**: the
+producer's sales divided by GDP. The useful part is that you do not need to know how
+the production network is wired, only how big each piece is and how much cheaper it
+got.
+
+Here each task instance sells into final output, so its Domar weight is just its
+expenditure share $\omega_i$, and the cost decline is $a_{i,t}$ on the fraction
+$d_{i,t}$ of instances that use AI. Hence the first expression.
+
+Why does $s_{L,t0}$ appear in the last one? Purely as a change of units, not as a
+behavioural claim. The affected tasks are all tasks labor was doing, and the paper
+measures their size as a fraction of the *wage bill*, $m_i \equiv \omega_i/s_{L,t0}$,
+so that $\sum_i m_i = 1$ across labor's tasks. Converting back to a fraction of GDP
+multiplies by the labor share. So "AI touches 12 percent of task instances" means 12
+percent of labor's tasks, which is $0.6 \times 0.12$ of the whole economy.
+
+Notice what is *absent*: the automation share $\psi_t$. For aggregate productivity it
+is irrelevant whether the cheaper instance ends up in a machine's hands or a worker's,
+because the unit cost falls by $a_{i,t}$ either way. $\psi_t$ matters enormously for
+the *distribution* of the gain, and not at all for its size.
+:::
+
+[]{#eq-10}
+$$
+s_{L,t0}\, \Delta \ln w_t + s_{K,t0}\, \Delta \ln r_t \approx s_{L,t0}\, m_t d_t a_t
+\tag{10}
+$$
+
+::: {.callout-note appearance="simple" title="Refresher: the factor-price frontier, or the Solow residual read backwards"}
+The Solow residual you computed in graduate macro as
+$d\ln \mathrm{TFP} = d\ln Y - s_L d\ln L - s_K d\ln K$ has a **dual**: under constant
+returns and competitive pricing, factor payments exhaust output, and substituting the
+first-order conditions turns the same object into the share-weighted growth of factor
+*prices*,
+
+$$
+d\ln \mathrm{TFP}_t = s_{L,t}\, d\ln w_t + s_{K,t}\, d\ln r_t .
+$$
+
+Read from left to right it is a measurement identity. Read from right to left, as the
+paper does, it is a **budget constraint on the gains**: whatever productivity AI
+creates has to leave the model as higher wages or a higher return, in some
+combination, because there is nowhere else for it to go.
+
+That yields the paper's cleanest piece of intuition. If capital is elastic enough that
+the rental rate does not move, labor gets the entire gain and
+$\Delta \ln w \approx m d a$. Every percent the rental rate does rise costs the wage
+$s_{K,t0}/s_{L,t0} =$ `{python} num(F.s_K0 / F.s_L0, 2)` percent. The wage can even
+fall below its no-AI path, which happens exactly when
+$s_{K,t0} \Delta \ln r_t > s_{L,t0} m_t d_t a_t$: capital's claim exceeds the gain
+being distributed.
+:::
+
+The paper illustrates the mechanics with the substantial scenario's 2030 values,
+$m = 0.30$, $d = 0.40$, $a = 0.45$ (pp. 12-13). That passage, reproduced:
+
+```{python}
+#| label: worked
+#| code-summary: "the worked example of Section 2.1.3"
+# The paper's illustration uses round numbers rather than the fitted 2030 path
+# values, so they are written literally here. md_x is m times d; a_x is the gain.
+md_x, a_x = 0.30 * 0.40, 0.45
+
+# frictionless() solves Proposition 1: it finds the rental-rate gap that clears the
+# capital market, then returns every other variable implied by it. The arguments are
+# positional, in the order the function defines them: (params, m*d, a, psi, rho).
+ex = statics.frictionless(F, md_x, a_x, 0.75, 0.25)
+worked = [
+    ("m d, instances performed with AI", md_x, "0.12"),
+    ("m d a, the wage gain at a pegged rental rate", md_x * a_x, "0.054"),
+    ("first-order TFP gain, s_L,t0 m d a (26)", F.s_L0 * md_x * a_x, "0.032"),
+    ("exact TFP gain (45)", ex.dln_tfp, "0.029"),
+    ("rental-rate gap at eps = 3", ex.dlnr, "0.046"),
+    ("capital's term in the frontier, s_K,t0 dln r", F.s_K0 * ex.dlnr, "0.018"),
+    ("wage gap at eps = 3", ex.dlnw, "0.019"),
+    ("s_K,t0 / s_L,t0, wage cost per percent of rental rate", F.s_K0 / F.s_L0, "2/3"),
+]
+show(pd.DataFrame({"object": [r[0] for r in worked],
+                   "this reproduction": [f"{r[1]:.4f}" for r in worked],
+                   "paper": [r[2] for r in worked]}))
+```
+
+AI raises measured TFP by `{python} num(100 * F.s_L0 * md_x * a_x, 1)` percent to
+first order and `{python} num(100 * ex.dln_tfp, 1)` percent exactly. At a pegged
+rental rate the entire gain would accrue to labor and the wage would sit
+`{python} num(100 * md_x * a_x, 1)` percent above its no-AI path. With capital
+supplied at $\varepsilon = 3$ the rental rate instead rises
+`{python} num(100 * ex.dlnr, 1)` percent, capital's term absorbs
+`{python} num(100 * F.s_K0 * ex.dlnr, 1)` of the frontier, and the wage gains
+`{python} num(100 * ex.dlnw, 1)` percent rather than
+`{python} num(100 * md_x * a_x, 1)`.
+
+### 2.1.4 First-order solutions against the exact model
+
+[]{#eq-11}
+$$
+\begin{aligned}
+\Delta \ln w_t &\approx m_t d_t a_t - \frac{s_{K,t0}}{s_{L,t0}} \Delta \ln r_t \\[2pt]
+\Delta \ln r_t &\approx \frac{1}{\varepsilon + \sigma / s_{L,t0}}
+   \Big[ m_t d_t a_t + \big((1-\rho) - (1-\sigma) a_t\big)
+   \frac{\psi_t m_t d_t}{s_{K,t0}} + \Delta \ln A_t \Big] \\[2pt]
+\Delta \ln s_{L,t} &\approx -\underbrace{(1-\rho)\psi_t m_t d_t}_{\text{displacement}}
+   + \underbrace{(1-\sigma)\psi_t m_t d_t a_t}_{\text{weak-link effect}}
+   - \underbrace{(1-\sigma)\frac{s_{K,t0}}{s_{L,t0}}\Delta \ln r_t}_{\text{dearer capital}} \\[2pt]
+\Delta \ln (Y_t/L_t) &\approx m_t d_t a_t + (1-\rho)\psi_t m_t d_t
+   - (1-\sigma)\psi_t m_t d_t a_t - \sigma \frac{s_{K,t0}}{s_{L,t0}} \Delta \ln r_t
+\end{aligned}
+\tag{11}
+$$
+
+::: {.callout-note appearance="simple" title="Refresher: reading (11) line by line"}
+**The wage line** is just the frontier (10) rearranged: labor gets the productivity
+gain less whatever the rental rate takes. Note what is *not* there: net displacement
+$(1-\rho)\psi m d$ does not appear. At a fixed rental rate the wage tracks
+productivity, not the number of tasks labor lost. Displacement reaches the wage only
+indirectly, by pushing up the rental rate.
+
+**The rental line** is a supply-equals-demand solution. The bracket is the extra
+capital AI calls for at an unchanged rental price, from two sources: capital keeps
+pace with the output the gains themselves create ($m d a$), and each automated
+instance moves its wage bill onto capital ($\psi m d / s_{K,t0}$, adjusted for
+reinstatement $\rho$ and for the substitution the cost saving sends back toward
+labor). The denominator is the pair of elasticities that reconcile it: supply rises
+with the rental rate at $\varepsilon$, demand falls at $\sigma/s_{L,t0}$.
+
+**The labor-share line** has the three channels the paper names. Automation moves the
+*entire* wage bill of an instance to capital however small the cost saving, which is
+$-(1-\rho)\psi m d$ net of reinstated tasks. Then, because the instances labor keeps
+did not get cheaper while the automated ones did, labor's instances become the
+expensive ones, and with $\sigma < 1$ spending tilts *toward* what is expensive: that
+adds back $(1-\sigma)\psi m d a$. Finally the same complementarity works against
+labor when capital itself gets dearer.
+
+**The output line** is then the wage line minus the labor-share line, which is just
+identity (5) again.
+:::
+
+The same algebra answers a question worth asking directly: when does AI leave workers
+worse off than no AI at all? Substituting the first line into the second, the wage
+rises if and only if
+
+[]{#eq-12}
+$$
+\varepsilon > \varepsilon^*_t \approx \frac{1}{s_{L,t0}}
+\Big[ s_{K,t0} - \sigma + \psi_t \Big( \frac{1-\rho}{a_t} - (1-\sigma) \Big) \Big]
+\tag{12}
+$$
+
+::: {.callout-note appearance="simple" title="Refresher: what (12) says, and how far to trust it"}
+The threshold rises with the automation share $\psi$ and with $(1-\rho)/a$, the
+displacement per unit of cost saving. That ratio is the formal version of Acemoglu and
+Restrepo's "**so-so automation**": technology that takes tasks away from labor while
+saving very little on each. When the saving per automated task is small, capital's
+claim on output is large relative to the gain available to distribute, so the rental
+rate has to rise a lot to justify the transfer, and the wage ends up below its no-AI
+path.
+
+Since $\varepsilon^*$ is a first-order object, it is worth checking against the exact
+model, which the chunk below does by finding the elasticity at which the simulated
+2030 average wage actually crosses zero.
+:::
+
+```{python}
+#| label: eps-star
+#| code-summary: "the wage-sign threshold: first-order (12) against the exact model"
+# For each scenario, compare the paper's first-order threshold with the elasticity at
+# which the *simulated* average wage actually changes sign.
+rows = []
+for n in ["substantial", "extreme"]:
+    x = P[n].at(2030.0)                       # the 2030 values of the AI objects
+    psi, rho, a = x["psi"], x["rho"], x["a"]
+
+    # Equation (12), evaluated at those values.
+    eps_star = (F.s_K0 - F.sigma + psi * ((1 - rho) / a - (1 - F.sigma))) / F.s_L0
+
+    # The exact threshold: bisect on eps until the 2030 average wage gap is zero.
+    # Each evaluation is a full simulation, so keep the iteration count small.
+    def wage_gap(eps):
+        return table3_column(simulate.run(Fixed(eps=eps), SCENARIOS[n]))[
+            "Average wage, pct above no-AI"]
+
+    lo, hi = 0.3, 6.0                          # wage is negative at lo, positive at hi
+    for _ in range(12):                        # 12 halvings: enough for 2 decimals
+        mid = 0.5 * (lo + hi)
+        if wage_gap(mid) < 0:
+            lo = mid
+        else:
+            hi = mid
+    rows.append({"scenario": n, "first-order eps* (12)": eps_star,
+                 "exact sign flip": 0.5 * (lo + hi),
+                 "wage at eps = 1, pct": wage_gap(1.0)})
+show(pd.DataFrame(rows), floatfmt=".2f")
+```
+
+The approximation locates the threshold well when the shock is small and poorly when
+it is large, which is the honest summary of every first-order row in the paper: in the
+substantial scenario $\varepsilon^*$ misses the true crossing by about a fifth, in the
+extreme scenario it is off by a factor of nearly two. Table A.1 carries an exact and a
+first-order row for each variable and notes that the simulation runs the exact set.
+The spread between them is that same second-order error: negligible in the modest
+scenario, material in the extreme one.
+
+```{python}
+#| label: firstorder
+#| code-summary: "Equations (11) and (19) against Proposition 1, at the 2030 values"
+rows = []
+for n in NAMES:
+    # .at(2030.0) returns a dict of the five exogenous objects at that date, so
+    # x["md"] is m*d, x["a"] is the gain, and so on.
+    x = P[n].at(2030.0)
+    e = statics.frictionless(F, x["md"], x["a"], x["psi"], x["rho"])   # exact
+    o = statics.first_order(F, x["md"], x["a"], x["psi"], x["rho"])    # approximate
+
+    # Looping over a list of tuples and unpacking each into three names at once.
+    # `label` is the row name, `ev` the exact value, `ov` the first-order one.
+    for label, ev, ov in [("dln r", e.dlnr, o.dlnr), ("dln s_L", e.dln_sL, o.dln_sL),
+                          ("dln w", e.dlnw, o.dlnw), ("dln Y/L", e.dlnYL, o.dlnYL),
+                          ("ell~_N", e.ell_N_tilde, o.ell_N_tilde),
+                          ("dln TFP", e.dln_tfp, o.dln_tfp)]:
+        rows.append({"scenario": n, "variable": label, "exact": ev, "first order": ov,
+                     "gap, pct of exact": 100 * (ov - ev) / ev})
+fo_df = pd.DataFrame(rows)
+show(fo_df, floatfmt=(".0f", "", "", ".4f", ".4f", ".1f"))
+```
+
+### 2.1.5 Employment in the two groups
+
+[]{#eq-13}
+$$
+\tilde \ell_{N,t} \equiv \ln \frac{\ell^*_{N,t}}{\ell_{N,t0}}
+= \Delta \ln (Y_t/L_t) - \sigma \Delta \ln w_t,
+\qquad
+\frac{\ell_{C,t0} - \ell^*_{C,t}}{\ell_{C,t0}}
+= \frac{s_{N,t0}}{s_{C,t0}} \cdot \frac{\ell^*_{N,t} - \ell_{N,t0}}{\ell_{N,t0}}
+\tag{13}
+$$
+
+::: {.callout-note appearance="simple" title="Refresher: the trick in (13) is to look at the group AI does not touch"}
+The appealing move here is to solve for the group that is *unaffected*. AI does
+nothing to the productivity of nursing or electrical work, so the cost of those tasks
+depends only on the wage, and demand for that labor is an ordinary CES demand curve
+for a good priced at $w_t$: it rises one for one with output and falls with its own
+price at elasticity $\sigma$. That is the first equation, derived in two lines from
+$\ell_N = s_N Y / w$ with $\Delta \ln s_N = (1-\sigma)\Delta \ln w$.
+
+The second equation is pure adding up. The labor force is fixed, so every worker the
+"all other" group gains is one the cognitive group loses. Converting a proportional
+change in one group into a proportional change in the other requires the size ratio
+$s_{N,t0}/s_{C,t0} =$ `{python} num((1 - F.cog_share) / F.cog_share, 2)`, which is
+below one because cognitive occupations are the larger group. So cognitive employment
+falls proportionally by less than all-other employment rises, and, since output rises
+by more still, by much less than GDP.
+
+One wrinkle, worth flagging because it is the kind of thing that silently breaks a
+reimplementation. Once the ideas stock is endogenous, (13) as printed acquires a
+spurious term: $A_t$ raises the wage and output one for one, so
+$\Delta \ln(Y/L) - \sigma \Delta \ln w$ picks up an extra $(1-\sigma)\Delta \ln A_t$
+that does not belong. Deriving $\ell_N = s_N Y / w$ from scratch with $A_t$ present
+gives $\Delta \ln \ell_N = \Delta \ln Y - \sigma \Delta \ln w -
+(1-\sigma)\Delta \ln A$, and the exact row the simulation actually uses, Equation
+(15) below, has no ideas term at all. This code uses (15).
+:::
+
+Proposition 1 collects the exact solution, replacing every $\approx$ above with an
+equality:
+
+[]{#eq-14}
+$$
+s_{L,t} = 1 - \underbrace{\Big[ s_{K,t0} + s_{L,t0}\, \psi_t m_t d_t
+\big( e^{-(1-\sigma)a_t} - \rho \big) \Big]}_{\textstyle B_t}
+\, e^{(1-\sigma)\Delta \ln r_t}
+\tag{14}
+$$
+
+[]{#eq-15}
+$$
+\tilde \ell_{N,t} = -\ln \Big( 1 - m_t d_t
+\big[ 1 - \rho \psi_t - (1-\psi_t) e^{-(1-\sigma)a_t} \big] \Big)
+\tag{15}
+$$
+
+[]{#eq-16}
+$$
+\Delta \ln w_t = \frac{\Delta \ln s_{L,t} + \tilde \ell_{N,t}}{1-\sigma} + \Delta \ln A_t,
+\qquad
+\Delta \ln (Y_t/L_t) = \Delta \ln w_t - \Delta \ln s_{L,t}
+\tag{16}
+$$
+
+[]{#eq-17}
+$$
+\Delta \ln K_t = \ln \frac{1 - s_{L,t}}{s_{K,t0}} + \Delta \ln (Y_t/L_t) - \Delta \ln r_t
+\tag{17}
+$$
+
+[]{#eq-18}
+$$
+\varepsilon \Delta \ln r_t = \Delta \ln K_t
+\tag{18}
+$$
+
+::: {.callout-note appearance="simple" collapse="true" title="Refresher: where each line of Proposition 1 comes from (click to expand)"}
+**(14), the labor share.** Work with the capital share and subtract, since capital's
+expenditure share is easier to track. At an unchanged rental rate it is the bracket
+$B_t$: the base-period capital share, plus the wage bill of the instances automation
+just moved onto capital. That transferred bill is $\psi_t m_t d_t$ of labor's tasks,
+scaled by $e^{-(1-\sigma)a_t}$ because those instances are now cheaper and so command
+a smaller share, and reduced by $\rho$ for the new tasks handed back to labor. The
+factor $e^{(1-\sigma)\Delta \ln r_t}$ then applies the same expenditure-share logic as
+[Equation (4)](#eq-4) to capital itself: when capital gets dearer and $\sigma < 1$, spending
+tilts toward it.
+
+**(15), the shift in demand for unaffected labor.** Everything sits in the bracket,
+which is the net fraction of affected instances that leave labor's hands. Start from
+all of them, 1. Subtract $\rho\psi_t$, the automated ones handed back as new labor
+tasks. Subtract $(1-\psi_t)e^{-(1-\sigma)a_t}$, the augmented ones: they stay with
+labor, but each needs $a_t$ log points less labor time, and the $e^{-(1-\sigma)a_t}$
+records that only the fraction $1-\sigma$ of the saved labor is actually released,
+since the cheaper task also gets demanded more. The outer $-\ln(1-\cdot)$ converts
+that fraction into the log increase in demand for the other group's labor.
+
+**(16), the wage.** This is the one line that is not obvious, and it is two
+substitutions. Write (13) in ideas-deflated terms,
+$\tilde \ell_{N} = \Delta\ln(Y/L) - \Delta \ln A - \sigma \Delta \ln \tilde w$, then
+replace $\Delta \ln(Y/L)$ using the wage identity (5),
+$\Delta\ln(Y/L) = \Delta \ln \tilde w + \Delta \ln A - \Delta \ln s_L$. The ideas
+terms cancel and what is left is
+$\tilde \ell_{N} = (1-\sigma)\Delta \ln \tilde w - \Delta \ln s_L$. Solve for the
+wage and add $\Delta \ln A$ back to get from the deflated wage to the actual one.
+
+**(17) and (18), the capital market.** Capital demand is just $K = s_{K,t} Y / r$
+written in gaps. Setting it equal to the supply schedule (6) leaves one equation in
+one unknown, $\Delta \ln r_t$, whose right side is strictly decreasing in the rental
+rate: demand for capital falls as capital gets more expensive. A monotone function
+with a sign change has exactly one root, which is why the code can solve it by
+bisection rather than anything cleverer, and why the paper can assert the equilibrium
+is unique. At $\varepsilon = \infty$ the root is zero by construction.
+
+Everything else follows in order once $\Delta \ln r_t$ is known, which is what makes
+the model recursive within a month: no simultaneous system, just a sequence.
+:::
+
+Expanding (15) to first order separates the two forces that push workers out of
+cognitive jobs:
+
+[]{#eq-19}
+$$
+\tilde \ell_{N,t} \approx \underbrace{(1-\rho)\psi_t m_t d_t}_{\text{net displacement}}
++ \underbrace{(1-\sigma)(1-\psi_t) m_t d_t a_t}_{\text{labor released by the gains}}
+\tag{19}
+$$
+
+::: {.callout-note appearance="simple" title="Refresher: two different reasons a cognitive job disappears"}
+The first term is tasks changing hands: automation moves them to capital, and
+reinstatement gives a fraction $\rho$ back.
+
+The second is subtler and easy to miss. Even a task that stays entirely with workers
+sheds labor if AI makes it faster: each augmented instance needs $a_t$ log points less
+time. But because tasks are gross complements, the cheaper task is also demanded more,
+by $\sigma a_t$, so only the fraction $1 - \sigma$ of the saved time is actually
+released. At $\sigma =$ `{python} num(F.sigma, 1)`, half of every efficiency gain is
+spent on doing more of the same task and half shows up as labor no longer needed
+there. Set $\sigma = 1$ and this channel vanishes entirely.
+:::
+
+Target employment in the unaffected group follows from [Equation (15)](#eq-15) and the
+cognitive target from the adding-up rule (13). Since $s_{N} / s_{C}$ is `{python} num((1 - F.cog_share) / F.cog_share, 2)`, below one,
+cognitive employment falls proportionally by less than all-other employment rises,
+and therefore by less than output rises.
+
+```{python}
+#| label: targets
+#| code-summary: "Equations (13), (15) and (19): the group targets in 2030"
+rows = []
+for n in NAMES:
+    x = P[n].at(2030.0)
+    e = statics.frictionless(F, x["md"], x["a"], x["psi"], x["rho"])
+    o = statics.first_order(F, x["md"], x["a"], x["psi"], x["rho"])
+    rows.append({
+        "scenario": n,
+        "ell~_N, exact (15)": e.ell_N_tilde,
+        "ell~_N, first order (19)": o.ell_N_tilde,
+        "of which net displacement": (1 - x["rho"]) * x["psi"] * x["md"],
+        "of which labor released by gains": (1 - F.sigma) * (1 - x["psi"]) * x["md"] * x["a"],
+        "ell~_C, exact": math.log(e.l_C_star / F.l_C0),
+        "ell~_C approx -(s_N/s_C) ell~_N": -(1 - F.cog_share) / F.cog_share * e.ell_N_tilde,
+    })
+show(pd.DataFrame(rows), floatfmt=".4f")
+```
+
+### 2.2 Innovation
+
+So far $A_t$ has been held on its no-AI path. This section makes it
+semi-endogenous: AI raises GDP, a fixed share of GDP is spent on research, so AI buys
+more research.
+
+[]{#eq-20}
+$$
+\dot A_t = \nu R_t^{\lambda} A_t^{\phi_R},
+\qquad
+g_{A,t} = \nu R_t^{\lambda} A_t^{\phi_R - 1}
+\tag{20}
+$$
+
+[]{#eq-21}
+$$
+Y_t = C_t + I_t + R_t, \quad R_t = \iota_{R,t} Y_t
+\tag{21}
+$$
+
+::: {.callout-note appearance="simple" title="Refresher: semi-endogenous growth, and what the two exponents mean"}
+This is the Romer (1990) idea-production function with the Jones (1995) correction,
+and the two exponents are the whole content.
+
+$\lambda \le 1$ governs returns to *research input*: below one, doubling the research
+effort less than doubles the flow of new ideas, because researchers duplicate each
+other. The paper sets $\lambda =$ `{python} num(F.lam, 0)`, no duplication.
+
+$\phi_R < 1$ is **fishing out**: the more ideas already found, the harder the next one
+is. This is the parameter that decides what kind of growth model you are in. At
+$\phi_R = 1$ a constant research effort sustains constant growth forever, which is
+fully endogenous growth, and policy that permanently raises research permanently
+raises the growth rate. At $\phi_R < 1$, holding growth constant requires research
+input to *grow*, and a one-off increase in research raises the *level* of the idea
+stock but not its long-run growth rate. That is the semi-endogenous world, and it is
+why AI shows up here as a level effect that fades from the growth rate.
+
+[Equation (21)](#eq-21) is the "lab equipment" specification of Rivera-Batiz and Romer (1991):
+research uses final output rather than a separate stock of scientists. That choice is
+what makes the AI channel mechanical. AI raises $Y$, the research budget is a fixed
+share of $Y$, so the research budget rises without anyone deciding anything.
+:::
+
+[]{#eq-22}
+$$
+\Delta \ln R_t = \Delta \ln Y_t
+\tag{22}
+$$
+
+[]{#eq-42}
+$$
+\Delta g_t = g \Big[ e^{\lambda \Delta \ln R_t - (1-\phi_R)\Delta \ln A_t} - 1 \Big]
+\tag{42}
+$$
+
+$$
+\Delta \ln A_{t+1} \approx \Delta \ln A_t + h \Delta g_t
+$$
+
+The last line is the monthly Euler step the simulation takes, not an equation of the
+paper: Table A.1 gives it as the ideas-stock row and attributes it to (42) together with
+the level effect it approximates. That level effect has a closed form, which Appendix C.2
+states and Section 5 checks the monthly step against:
+
+[]{#eq-43}
+$$
+\Delta \ln A_t = \frac{1}{1 - \phi_R} \ln \Big[ e^{-(1-\phi_R) g (t - t_0)}
++ (1-\phi_R)\, g \int_{t_0}^{t} e^{-(1-\phi_R) g (t-s)} e^{\lambda \Delta \ln R_s}\, ds \Big]
+\tag{43}
+$$
+
+::: {.callout-note appearance="simple" title="Refresher: why a big GDP gap makes such a small growth gap"}
+[Equation (22)](#eq-22) is where the research share cancels. Both the AI and the no-AI path
+spend the same fraction $\iota_{R,t}$ of GDP on research, so in the *gap* between them
+only the GDP gap survives.
+
+[Equation (42)](#eq-42) is (20) log-differenced against the no-AI path, and the thing to notice
+is the leading $g$. The bracket is a proportional gap in the growth *rate*, and that
+rate is only `{python} num(100 * F.g, 2)` percent a year to begin with. So a 5 percent
+GDP gap does not add 5 points to growth; it adds roughly 5 percent *of* 1.67 percent,
+which is under a tenth of a point. The subtracted term
+$(1-\phi_R)\Delta \ln A_t$ is the drag: as the AI path accumulates ideas, the fishing
+out that (20) already contains makes the next ones harder, so the growth gap erodes as
+the level gap builds.
+
+In the extreme scenario this channel moves idea growth from
+`{python} num(100 * F.g, 2)` to `{python} v('extreme', 'ideas_growth', 2)` percent a
+year, and the ideas stock ends `{python} v('extreme', 'ideas', 2)` percent above the
+no-AI path after six years. Compare that with the level channel of Section 2.1, worth
+`{python} v('extreme', 'gdp', 1)` percent of GDP. Over a five-year horizon the
+innovation block is a rounding error; over fifty years it would not be.
+:::
+
+[]{#eq-24}
+$$
+\Delta \ln A^* = \gamma\, \Delta \ln R,
+\qquad
+\gamma \equiv \frac{\lambda}{1 - \phi_R}
+\tag{24}
+$$
+
+[]{#eq-40}
+$$
+1 - \phi_R = s_{L,t0}(1 - \phi) + \lambda
+\tag{40}
+$$
+
+::: {.callout-note appearance="simple" title="Refresher: deriving gamma, and the two unit conversions behind 2.86"}
+For $\gamma$, set $g_{A,t} = g$ in (20) and solve for the stock:
+$A^* = (\nu R^{\lambda}/g)^{1/(1-\phi_R)}$, so $A^* \propto R^{\lambda/(1-\phi_R)}$.
+The elasticity of the long-run *level* of ideas to a permanent research uplift is
+therefore $\gamma = \lambda/(1-\phi_R) =$
+`{python} num(F.lam / F.fishing_out_R, 2)`. A permanent 1 percent more research
+eventually buys 0.35 percent more ideas, and "eventually" means decades.
+
+[Equation (40)](#eq-40) is the bridge from Bloom et al. (2020), who estimate fishing out of
+$1 - \phi = 3.1$, to the $2.86$ this model needs. Two conversions, each worth
+following slowly because they are pure bookkeeping and easy to get backwards:
+
+1. **Ideas units.** Bloom et al. measure idea output in TFP units. Here $A_t$ is
+   labor-augmenting, and on a balanced path $\ln \mathrm{TFP} = s_{L,t0} \ln A$, so
+   measuring ideas by their effect on labor productivity instead of on TFP multiplies
+   the exponent by $s_{L,t0} =$ `{python} num(F.s_L0, 2)`. That gives
+   $0.6 \times 3.1 =$ `{python} num(F.s_L0 * 3.1, 2)`.
+2. **Research units.** They measure research input in researcher-equivalents (R&D
+   spending deflated by the skilled wage); here $R_t$ is goods. As the economy grows,
+   a unit of goods buys fewer researcher-hours, and correcting for that adds
+   $\lambda$.
+
+Sum: `{python} num(F.s_L0 * 3.1, 2)` + `{python} num(F.lam, 0)` =
+`{python} num(F.fishing_out_R, 2)`. The consequence is that keeping idea growth at $g$
+needs research input growing at $(1-\phi_R) g/\lambda =$
+`{python} num(100 * F.fishing_out_R * F.g / F.lam, 1)` percent a year while GDP grows
+at `{python} num(100 * (F.g + F.n), 0)`, so the research share of GDP has to climb,
+with or without AI, at
+
+[]{#eq-41}
+$$
+g_\iota = g_R - (g + n) = \frac{(1-\phi_R)\,g}{\lambda} - (g + n)
+\tag{41}
+$$
+
+which is `{python} num(100 * F.g_iota, 1)` percent a year.
+:::
+
+A permanent one percent uplift in research input raises the ideas stock by
+$\gamma = \lambda / (1 - \phi_R)$, which is 1 / `{python} num(F.fishing_out_R, 2)` =
+`{python} num(F.lam / F.fishing_out_R, 2)` percent, in the long run (Equation 24).
+Holding idea growth at $g$ requires research input to grow at
+`{python} num(100 * F.fishing_out_R * F.g / F.lam, 1)` percent a year against GDP
+growth of `{python} num(100 * (F.g + F.n), 0)` percent, so the research share rises
+at `{python} num(100 * F.g_iota, 1)` percent a year, from
+`{python} num(100 * research_share(F, 2024.0), 1)` percent of GDP in 2024 to
+`{python} num(100 * research_share(F, 2030.0), 1)` percent in 2030 (Appendix C.2).
+
+The channel is small over this horizon. On the extreme path the research uplift
+reaches `{python} num(RUNS['extreme'].at(2030.0).dlnR, 2)` log points by 2030, which
+points to an ideas stock
+`{python} num(100 * F.lam / F.fishing_out_R * RUNS['extreme'].at(2030.0).dlnR, 0)`
+percent above the no-AI path in the long run, but the realized 2030 gap is only
+`{python} v('extreme', 'ideas', 2)` percent because the cumulation takes decades.
+
+```{python}
+#| label: ideas
+#| code-summary: "Equations (22), (42) and (43): the ideas block in 2030"
+rows = []
+for n in NAMES:
+    res = RUNS[n]                 # the whole simulation for this scenario
+    m = res.at(2030.0)            # one month's record, as an object with named fields
+    rows.append({
+        "scenario": n,
+        "research uplift dln R": m.dlnR,
+        "long-run target, gamma dln R": F.lam / F.fishing_out_R * m.dlnR,
+        "realized dln A, monthly step (42)": m.dlnA,
+        "realized dln A, closed form (43)": simulate.ideas_closed_form(res, 2030.0),
+        "ideas growth, pct per year": D[n].iloc[-1].ideas_growth,
+    })
+show(pd.DataFrame(rows), floatfmt=".5f")
+```
+
+### 2.2.2 Measured TFP
+
+What an econometrician would measure is not $A_t$ but the Solow residual, which mixes
+the ideas channel with the level channel of Section 2.1.
+
+[]{#eq-25}
+$$
+g_{\mathrm{TFP},t} = s_{L,t} g_{w,t} + s_{K,t} g_{r,t}
+\tag{25}
+$$
+
+[]{#eq-26}
+$$
+\Delta \ln \mathrm{TFP}_t \approx s_{L,t0} \big( \Delta \ln A_t + m_t d_t a_t \big)
+\tag{26}
+$$
+
+[]{#eq-45}
+$$
+\Delta \ln \mathrm{TFP}_t \approx -\frac{1}{1-\sigma}
+\ln \Big[ s_{K,t0} + s_{L,t0} \big( 1 - m_t d_t (1 - e^{-(1-\sigma)a_t}) \big)
+e^{-(1-\sigma)\Delta \ln A_t} \Big]
+\tag{45}
+$$
+
+::: {.callout-note appearance="simple" title="Refresher: three ways to write the same residual, and why the paper uses the third"}
+[Equation (25)](#eq-25) is the dual from Section 2.1.3 again. [Equation (26)](#eq-26) is its first-order
+solution: both channels enter with the labor share as their Domar weight, because the
+ideas stock lowers the cost of every labor instance and the level channel lowers the
+cost of the affected ones.
+
+[Equation (45)](#eq-45) is what the simulation actually evaluates. It is the CES price index of
+[Equation (4)](#eq-4) rebuilt at *base-period* factor prices: hold $w$ and $r$ at their no-AI
+values, let only the technology change, and ask how much cheaper the basket of tasks
+becomes. The $-\frac{1}{1-\sigma}\ln[\cdot]$ out front is just inverting the CES
+aggregator. Inside, $m_t d_t (1 - e^{-(1-\sigma)a_t})$ is the share of the economy's
+cost the AI gains remove, and $e^{-(1-\sigma)\Delta \ln A_t}$ scales every labor
+instance for the ideas stock.
+
+The three agree to first order and diverge beyond it, because (45) is a base-weighted
+index while (25) chains its weights month by month. The verification section below
+quantifies that wedge: it is 0.001 percentage points in the modest scenario and grows
+with the size of the shock, exactly as an index-number problem should.
+:::
+
+### 2.3 Unemployment
+
+Sections 2.1 and 2.2 describe where employment *should* end up. This section is about
+the fact that getting there takes time, and that the transition is what unemployment
+is. The whole block runs on a monthly grid.
+
+[]{#eq-27}
+$$
+q_{o,t} = q^X_o + q^T_o \frac{f_{o,t-1}}{\bar f_o}
+\tag{27}
+$$
+
+[]{#eq-28}
+$$
+G_{C,t} = \max\{0, \ln \ell_{C,t} - \ln \ell^*_{C,t+1}\},
+\qquad
+B_{N,t} = \max\{0, \ln \ell^*_{N,t+1} - \ln \ell_{N,t}\}
+\tag{28}
+$$
+
+[]{#eq-29}
+$$
+N_{C,t} = \ell_{C,t} + \max\{0, U_{C,t} - \bar U_C\}
+\tag{29}
+$$
+
+[]{#eq-30}
+$$
+\frac{w_{C,t}}{w_t} = \Big(\frac{w_{C,t-1}}{w_{t-1}}\Big)^{\xi_m}
+\Big(\frac{w^c_{C,t}}{w_t}\Big)^{1-\xi_m},
+\quad \xi_m = \xi^{1/12}
+\tag{30}
+$$
+
+[]{#eq-31}
+$$
+D_{C,t} = \max\{0, E_t - q_{C,t}\ell_{C,t}\},
+\qquad E_t = \max\{0, \ell_{C,t} - \ell^d_{C,t}\}
+\tag{31}
+$$
+
+::: {.callout-note appearance="simple" title="Refresher: how a falling target turns into layoffs"}
+**(27) Quits.** Workers quit at a base rate plus a part that moves with how good
+prospects look, proxied by last month's job-finding rate relative to normal. In normal
+times $f = \bar f$ and the quit rate is just $\bar q_o$. The paper splits it
+`{python} num(100 * (1 - F.q_resp_share), 0)`/`{python} num(100 * F.q_resp_share, 0)`
+using the JOLTS-to-CPS elasticity. This is a small piece of realism, not a driver:
+quits matter because they let a shrinking group shed workers without laying anyone
+off.
+
+**(28) The gaps.** Each month firms compare where they are with next month's target
+from [Equation (13)](#eq-13). On these scenario paths the cognitive group is always above its
+target (an *overhang*, $G_C$) and the other group always below (a *shortfall*,
+$B_N$), so the two are tracked separately and the maxima never bind on the other side.
+
+**(29) The attached force.** A cognitive worker laid off last month is still a
+cognitive worker looking for cognitive work, so the group's effective labor force is
+its employment plus its own unemployed *in excess of the normal pool*. This is the
+quantity the group's wage has to clear.
+
+**(30) The rigid wage, in the Blanchard and Galí (2007) form.** In logs this is
+partial adjustment: the gap between the wage actually paid and the wage that would
+clear the group closes by a fraction $1 - \xi$ each year, $\xi^{1/12}$ each month. Two
+details are easy to misread. First, what is rigid is the cognitive **discount to the
+common wage**, $\ln(w_{C,t}/w_t)$, not the wage level, so the cognitive wage still
+inherits economy-wide productivity growth. Second, $\xi$ is a persistence, so higher
+means *more* rigid: at $\xi = 0$ the group clears every month, and as $\xi \to 1$ the
+cognitive wage never separates from the common wage at all. The baseline $\xi =$
+`{python} num(F.xi, 1)` is a half-life of one year.
+
+**(31) Layoffs.** Here is the piece that a pure Mortensen-Pissarides model does not
+have. With the wage stuck above its clearing level, firms want fewer cognitive workers
+than are attached to the group. Employment is predetermined within the month, so they
+get there by separating: quits from surplus positions go unreplaced, and layoffs
+$D_{C,t}$ remove the rest. This is **job rationing** in the sense of Michaillat
+(2012): the unemployment is not only frictional, some of it exists because the wage is
+too high and the jobs simply are not offered. It is also the mechanism behind the
+Table 6 trade-off: rigid wages convert the shock into unemployment, flexible wages
+convert it into wage declines.
+:::
+
+[]{#eq-32}
+$$
+v_{C,t} = \frac{\max\{0, q_{C,t}\ell_{C,t} - E_t\} + \theta_H Z_t}{\bar \pi_C},
+\qquad
+v_{N,t} = \frac{(q_{N,t} + \theta_H B_{N,t})\, \ell_{N,t}}{\bar \pi_N}
+\tag{32}
+$$
+
+[]{#eq-33}
+$$
+S_{C,t} = U_{C,t} + \mu U_{N,t},
+\qquad
+S_{N,t} = \mu U_{C,t} + U_{N,t}
+\tag{33}
+$$
+
+[]{#eq-34}
+$$
+H_{j,t} = \chi \frac{S_{j,t} v_{j,t}}{\big(S_{j,t}^{\iota} + v_{j,t}^{\iota}\big)^{1/\iota}},
+\qquad
+\pi_{j,t} = \frac{H_{j,t}}{v_{j,t}} = \chi \big(1 + \theta_{j,t}^{\iota}\big)^{-1/\iota},
+\quad \theta_{j,t} \equiv \frac{v_{j,t}}{S_{j,t}}
+\tag{34}
+$$
+
+[]{#eq-35}
+$$
+f_{C,t} = \frac{H_{C,t}}{S_{C,t}} + \mu \frac{H_{N,t}}{S_{N,t}},
+\qquad
+f_{N,t} = \mu \frac{H_{C,t}}{S_{C,t}} + \frac{H_{N,t}}{S_{N,t}}
+\tag{35}
+$$
+
+::: {.callout-note appearance="simple" title="Refresher: vacancies, the matching function, and the cross-occupation discount"}
+**(32) Postings.** Firms post to replace quits and to close a fraction $\theta_H$ of
+their shortfall. The division by the normal filling rate $\bar \pi_o$ is a unit
+conversion that is easy to skip past: a firm that wants ten hires this month must post
+more than ten vacancies, because only $\bar\pi_o \approx$
+`{python} num(F.fill_bar, 2)` of postings fill within the month. $\theta_H$ is the
+recruiting-and-training speed limit: at $\theta_H = 1$ the expanding group posts its
+entire shortfall at once, at `{python} num(SCENARIOS['modest'].theta_H, 2)` it closes
+a tenth of the gap per month.
+
+**(33) Effective search, and where occupational specificity lives.** A worker supplies
+one unit of search in their own group and only $\mu \le 1$ units in the other. This
+one parameter carries all of the occupational human capital in the model: a laid-off
+software engineer is not instantly a nurse (Kambourov and Manovskii, 2009). Normal
+times give $\bar\mu =$ `{python} num(F.mu_bar, 2)`, estimated from CPS switching, and
+the disruptive scenarios lower it to
+`{python} num(SCENARIOS['substantial'].mu, 2)` and
+`{python} num(SCENARIOS['extreme'].mu, 2)` on the reasoning that crossing is harder
+when a whole occupation tries at once.
+
+**(34) The matching function.** The workhorse Cobb-Douglas matching function
+$H = \chi S^{\alpha} v^{1-\alpha}$ has a defect that matters here: for extreme ratios
+of searchers to vacancies it can return more hires than there are searchers or
+vacancies, so it has to be capped, and the cap puts kinks in simulated paths. The den
+Haan, Ramey and Watson (2000) form used here is a CES-style aggregator that satisfies
+$H \le \min\{S, v\}$ automatically, with $\iota =$
+`{python} num(F.iota_match, 2)` controlling the curvature and
+$\iota \to \infty$ giving exactly $\chi \min\{S, v\}$. It has constant returns, so the
+filling rate depends only on **tightness** $\theta = v/S$, the standard result. This
+matters in the extreme scenario precisely because the ratios do get extreme.
+
+**(35) Finding rates.** A group hires $H_j/S_j$ per unit of effective search directed
+at it, and a worker supplies 1 unit at home and $\mu$ away, so their finding rate is
+the weighted sum. This is why a displaced cognitive worker's prospects depend on how
+hard the *other* group is hiring, and why $\mu$ and $\theta_H$ are the two parameters
+that decide how much unemployment a given amount of reallocation causes.
+:::
+
+[]{#eq-36}
+$$
+\ell_{o,t+1} = (1 - q_{o,t})\ell_{o,t} - D_{o,t} + H_{o,t}
+\tag{36}
+$$
+
+[]{#eq-37}
+$$
+U_{o,t+1} = U_{o,t} + q_{o,t}\ell_{o,t} + D_{o,t} - f_{o,t}U_{o,t}
+\tag{37}
+$$
+
+[]{#eq-38}
+$$
+\bar H_o = \bar q_o \ell_{o,t0} = \bar f_o \bar U_o,
+\qquad
+\bar f_o = \sum_j \bar\mu_{oj} \frac{\bar H_j}{\bar S_j},
+\qquad
+\bar \pi_o = \chi \Big[ 1 - \Big(\frac{\bar H_o}{\chi \bar S_o}\Big)^{\iota}\Big]^{1/\iota}
+\tag{38}
+$$
+
+::: {.callout-note appearance="simple" title="Refresher: the stocks, and what pins down the steady state"}
+**(36) and (37)** are bookkeeping: employment loses quits and layoffs and gains hires;
+the pool gains the separations and loses the job-finders. Every separation enters the
+pool and every hire leaves it, so
+$\ell_C + \ell_N + U_C + U_N$ is constant. The verification section checks that this
+holds to machine precision, which is a genuine test of the code rather than of the
+model.
+
+**(38)** solves for the labor market before AI arrives, and it is worth seeing what
+does the pinning. Hiring replaces quits, so $\bar H_o = \bar q_o \ell_{o,t0}$. Each
+origin's pool is then whatever makes its inflow equal its outflow,
+$\bar f_o \bar U_o = \bar H_o$, with the finding rates themselves depending on the
+pools through effective search: one equation in the split of the pool, plus adding up.
+Inverting the matching function at that point gives the normal filling rates that the
+posting rule (32) needs, and the one free parameter $\chi$ is set so the
+employment-weighted mean filling rate matches the JOLTS-based
+`{python} num(F.fill_bar, 2)`.
+
+Nothing in this block is fitted to anything about AI, so the numbers it produces are a
+clean test of the transcription. The steady state reproduces the paper's reported
+filling rates of `{python} num(SS.pi_C, 2)` and `{python} num(SS.pi_N, 2)`, matching
+efficiency `{python} num(SS.chi, 2)`, aggregate finding rate
+`{python} num(SS.f_agg, 2)`, and the calibration target that one job-finder in seven
+changes group, here `{python} num(SS.switch_share, 3)`.
+:::
+
+Finally, the model has to report GDP, wages and the labor share at the employment the
+flow block actually delivers, which is not the frictionless allocation of
+Proposition 1. That is the system (39):
+
+[]{#eq-39}
+$$
+\begin{aligned}
+s_{L,t0}\Lambda_{C,t} e^{(1-\sigma)\Delta \ln w_{C,t}}
+&+ s_{N,t0} e^{(1-\sigma)\Delta \ln w_{N,t}}
++ B_t e^{(1-\sigma)\Delta \ln r_t} = 1 \\[2pt]
+\frac{\ell_{C,t}}{\ell_{C,t0}} &= \frac{\Lambda_{C,t}}{s_{C,t0}/s_{L,t0}}
+e^{\Delta \ln (Y_t/\bar L) - \sigma \Delta \ln w_{C,t}},
+\qquad
+\frac{\ell_{N,t}}{\ell_{N,t0}} = e^{\Delta \ln (Y_t/\bar L) - \sigma \Delta \ln w_{N,t}} \\[2pt]
+\Delta \ln K_t &= \varepsilon \Delta \ln r_t
+\end{aligned}
+\tag{39}
+$$
+
+::: {.callout-note appearance="simple" title="Refresher: reading prices off quantities, and why that is legitimate"}
+The first row is the price index of [Equation (4)](#eq-4) with the tasks grouped three ways:
+surviving cognitive instances, all-other instances, and capital's instances.
+$\Lambda_{C,t}$ is the surviving cognitive mass, the same bracket as [Equation (15)](#eq-15)
+subtracted from the group's base share. The next two rows are the CES labor demands of
+[Equation (13)](#eq-13), one per group. The last is the capital supply schedule.
+
+The logic runs backwards from the usual direction. Ordinarily you would set prices and
+solve for quantities. Here employment is a *state variable* handed over by the flow
+block, so the system is inverted: find the prices at which the observed
+$(\ell_{C,t}, \ell_{N,t})$ is exactly what firms want to hire, and GDP follows. That
+is a legitimate primal-dual inversion, and it has a useful consequence for solving it:
+the capital row can be substituted out in closed form, leaving one monotone equation
+in $\Delta \ln r_t$, which is why a bisection is all the code needs. When the cognitive
+wage is rationed the price the system returns is the marginal product rather than the
+wage paid, and the difference is cognitive firms' profit, which the paper bounds at
+half a percent of GDP.
+
+The check that this reading is right: evaluated at the *targets* rather than at
+realized employment, the system must collapse back to Proposition 1, with both group
+wages equal to the common wage. It does, to machine precision, in every scenario and
+with or without an ideas gap; the verification section below reports the largest
+violation across all the variables.
+:::
+
+The flow block starts from the steady state of [Equation (38)](#eq-38), evaluated at the
+normal-times search discount in every scenario. Nothing in it is fitted to the AI
+paths, so it is an independent check on the transcription: the paper reports filling
+rates of 0.66 and 0.64, a matching efficiency of 0.76, an aggregate finding rate of
+0.23 a month, and a pool splitting into 1.76 and 2.08 percent of the labor force.
+
+```{python}
+#| label: steady-state
+#| code-summary: "Table A.1 panel E: the normal-times steady state"
+# Fixed(U_bar=0.0384) makes a *copy* of the parameter set with one field changed;
+# the original F is untouched, because the dataclass is frozen (immutable). This is
+# the safe way to ask "what if this one number were different?".
+ss_alt = steady.solve(Fixed(U_bar=0.0384))     # the pool the p. 26 derivation uses
+rows = [
+    ("quit rate, cognitive, pct per month", 100 * SS.q_C, "0.63"),
+    ("quit rate, all other, pct per month", 100 * SS.q_N, "1.40"),
+    ("pool of cognitive origin, pct of L", 100 * ss_alt.U_C, "1.76"),
+    ("pool of all-other origin, pct of L", 100 * ss_alt.U_N, "2.08"),
+    ("unemployment rate, cognitive group, pct", 100 * ss_alt.U_C / (ss_alt.U_C + F.l_C0), "2.9"),
+    ("unemployment rate, all-other group, pct", 100 * ss_alt.U_N / (ss_alt.U_N + F.l_N0), "5.4"),
+    ("aggregate finding rate, per month", SS.f_agg, "0.23"),
+    ("finding rate, cognitive origin", SS.f_C, "not reported"),
+    ("finding rate, all-other origin", SS.f_N, "not reported"),
+    ("filling rate, cognitive", SS.pi_C, "0.66"),
+    ("filling rate, all other", SS.pi_N, "0.64"),
+    ("matching efficiency chi", SS.chi, "0.76"),
+    ("share of job-finders changing group", SS.switch_share, "1/7 = 0.143"),
+]
+show(pd.DataFrame({"object": [r[0] for r in rows],
+                   "this reproduction": [f"{r[1]:.4g}" for r in rows],
+                   "paper": [r[2] for r in rows]}))
+```
+
+Two calibration steps behind that table reproduce directly. The quit rate comes from
+the pool and the CPS finding rate: $0.219 \times 3.84 / 96.16 =$
+`{python} num(100 * 0.219 * 3.84 / 96.16, 3)` percent a month, or
+`{python} num(12 * 0.219 * 3.84 / 96.16, 3)` a year, which the paper rounds to
+`{python} num(F.q_bar_ann, 2)`. And the search discount is the geometric mean of the
+two CPS switching odds, $\sqrt{(19/81)(11/89)} =$
+`{python} num(math.sqrt((19 / 81) * (11 / 89)), 2)`, the $\bar\mu = 0.17$ of Table 1.
+
+## 3 Calibration
+
+Table 1 of the paper, rebuilt from the parameter objects the simulation actually
+consumes. The scenarios differ in how fast AI advances (panel B) and in how
+disruptive a given amount of AI is (panel C).
+
+```{python}
+#| label: table1
+#| code-summary: "Table 1: parameters and scenario values"
+S = SCENARIOS
+t1 = [
+    ("A", "sigma, elasticity across tasks", F.sigma, F.sigma, F.sigma),
+    ("A", "s_L,t0, base-period labor share", F.s_L0, F.s_L0, F.s_L0),
+    ("A", "s_C,t0/s_L,t0, cognitive employment share", F.cog_share, F.cog_share, F.cog_share),
+    ("A", "eps, elasticity of capital supply", F.eps, F.eps, F.eps),
+    ("A", "lambda, returns to research input", F.lam, F.lam, F.lam),
+    ("A", "1 - phi_R, fishing out", F.fishing_out_R, F.fishing_out_R, F.fishing_out_R),
+    ("A", "g, no-AI growth of the ideas stock", F.g, F.g, F.g),
+    ("A", "n, labor-force growth", F.n, F.n, F.n),
+    ("A", "iota_R,t0; g_iota, research share and its trend", F.iota_R0, F.g_iota, float("nan")),
+    # The * before a list "unpacks" it: *[a, b, c] passes three separate arguments
+    # rather than one list, so each scenario's value lands in its own column.
+    ("B", "m, affected mass, mid-2026", *[S[n].m_anchor for n in NAMES]),
+    ("B", "m_2030, affected mass", *[S[n].m_2030 for n in NAMES]),
+    ("B", "m_bar, ceiling on affected mass", *[F.cog_share] * 3),
+    ("B", "d, diffusion share, mid-2026", *[S[n].d_anchor for n in NAMES]),
+    ("B", "d_2030, diffusion share", *[S[n].d_2030 for n in NAMES]),
+    ("B", "a, log gain, mid-2026", *[S[n].a_anchor for n in NAMES]),
+    ("B", "g_a, slope of the gain, per year", *[S[n].g_a for n in NAMES]),
+    ("B", "a_2030, implied log gain", *[P[n].a(2030.0) for n in NAMES]),
+    ("C", "psi, automation share", *[S[n].psi for n in NAMES]),
+    ("C", "rho, reinstatement ratio", *[S[n].rho for n in NAMES]),
+    ("C", "mu, search discount on the path", *[S[n].mu for n in NAMES]),
+    ("C", "theta_H, posting speed, per month", *[S[n].theta_H for n in NAMES]),
+    ("C", "xi, rigidity of the cognitive wage", F.xi, F.xi, F.xi),
+    ("D", "q_bar, normal quit rate, per year", *[F.q_bar_ann] * 3),
+    ("D", "q^T_o / q_bar_o, responsive share of quits", *[F.q_resp_share] * 3),
+    ("D", "q_bar_C / q_bar; q_bar_N / q_bar", F.q_rel_C, F.q_rel_N, float("nan")),
+    ("D", "U_bar, normal pool, share of L", *[F.U_bar] * 3),
+    ("D", "mu_bar, normal-times search discount", *[F.mu_bar] * 3),
+    ("D", "iota, matching curvature", *[F.iota_match] * 3),
+    ("D", "mean filling rate, per month", *[F.fill_bar] * 3),
+]
+t1df = pd.DataFrame(t1, columns=["panel", "symbol and meaning", "modest", "substantial", "extreme"])
+
+# .map() applies a function to every cell of a column. `lambda x: ...` is an
+# anonymous one-line function: here it returns "" for missing values and a formatted
+# number otherwise, so the two rows that span the scenario columns print blanks
+# rather than the string "nan".
+for c in ["modest", "substantial", "extreme"]:
+    t1df[c] = t1df[c].map(lambda x: "" if pd.isna(x) else f"{x:.4g}")
+show(t1df)
+```
+
+Note on the two rows that carry two numbers rather than three: the research share
+and its trend, and the two groups' relative separation rates, are single values in
+the paper spanning the scenario columns.
+
+## 4 Results
+
+Table 3 of the paper, with the published figure beside each reproduced one. The last
+column is the largest absolute deviation in the row.
+
+```{python}
+#| label: table3
+#| code-summary: "Table 3: the three scenarios in 2030"
+cols = ["No AI", "modest", "substantial", "extreme"]
+rows = []
+for row in ROW_ORDER:                      # ROW_ORDER keeps the paper's row order
+    got, want = T3[row], PUBLISHED[row]    # two 4-tuples: simulated, published
+
+    # zip() walks several sequences in step, yielding tuples: here (column name,
+    # simulated value, published value). The dict comprehension then builds one
+    # "8.28  (8.30)" string per column.
+    cells = {c: f"{g:,.2f}  ({w:,.2f})" for c, g, w in zip(cols, got, want)}
+
+    # **cells splices that dict's key/value pairs into this new dict, so the four
+    # scenario columns sit beside "row" and "max diff". max(... for ...) is a
+    # generator expression: it computes the values one at a time and keeps the
+    # largest, without building the intermediate list.
+    rows.append({"row": row, **cells,
+                 "max diff": max(abs(g - w) for g, w in zip(got, want))})
+t3_df = pd.DataFrame(rows)
+show(t3_df, floatfmt=".3f")
+```
+
+Every cell reproduces to the printed precision except the two unemployment-rate
+rows, which come out low by
+`{python} num(abs(T3['Unemployment rate, all workers, pct'][2] - 4.6), 2)`
+percentage points (all workers, substantial) and
+`{python} num(abs(T3['Unemployment rate, cognitive, pct'][0] - 2.9), 2)`
+(cognitive, no AI). Both trace to the same rounding: Table 1 gives the normal pool
+as $\bar U = 0.038$, while the quit-rate derivation on p. 26 uses 3.84 percent and
+the published pool split of 1.76 and 2.08 requires 0.0384. At 0.0384 both rows land
+on the published figures and nothing else moves, so the two rows are the only place
+this reproduction and the paper disagree at all. The default here stays at Table 1's
+rounded value; `Fixed(U_bar=0.0384)` switches to the other reading.
+
+```{python}
+#| label: figures-setup
+#| code-summary: "figure helper: one panel per variable, direct end-labels, no-AI baseline"
+def panel(ax, col, title, ylabel, baseline=None, fmt="{:.1f}", start=2025.0, ylim=None):
+    """Draw one scenario-comparison panel onto an existing matplotlib axis.
+
+    `ax` is the axis to draw on, `col` names the column of D[scenario] to plot.
+    Passing the axis in (rather than creating it here) is what lets the callers
+    below arrange one, two or three panels side by side.
+    """
+    for n in NAMES:
+        # Boolean indexing: D[n].t >= start is a column of True/False, and putting it
+        # inside D[n][...] keeps only the rows where it is True. This is pandas'
+        # equivalent of a WHERE clause.
+        df = D[n][D[n].t >= start]
+        ax.plot(df.t, df[col], color=COL[n], label=n.capitalize())
+        # .iloc[-1] takes the last row by position, so `y` is the 2030 value; the
+        # annotation below prints it at the end of the line (a "direct label", which
+        # is what keeps the chart readable without hunting through a legend).
+        y = df[col].iloc[-1]
+        ax.annotate(fmt.format(y), (df.t.iloc[-1], y), xytext=(4, 0),
+                    textcoords="offset points", fontsize=7, color=INK2, va="center")
+    if baseline is not None:
+        ax.axhline(baseline, ls=(0, (4, 3)), lw=1.1, color=INK2, alpha=0.6, zorder=0)
+    ax.set_title(title, loc="left")
+    ax.set_ylabel(ylabel)
+    ax.set_xlim(start, 2030.9)
+    ax.set_xticks([2025, 2026, 2027, 2028, 2029, 2030])
+    if ylim:
+        ax.set_ylim(*ylim)
+    return ax
+```
+
+```{python}
+#| label: fig-2
+#| fig-cap: "GDP and its growth rate in the three scenarios, 2025-2030, reproducing the paper's Figure 2. Dashed line: the economy without AI; each line carries its January 2030 value."
+#| code-summary: "Figure 2"
+fig, axes = plt.subplots(1, 2, figsize=(6.6, 2.4))
+panel(axes[0], "gdp", "GDP", "percent above the no-AI path", ylim=(0, 34))
+panel(axes[1], "gdp_growth", "GDP growth", "percent per year; 2 percent without AI",
+      baseline=100 * (F.g + F.n), ylim=(1.5, 16.5))
+axes[0].legend(loc="upper left", fontsize=7)
+plt.show()
+```
+
+### 4.1 The modest change scenario
+
+In the modest scenario AI is a small technology. By 2030 just
+`{python} num(100 * D['modest'].iloc[-1].md, 0)` percent of the economy's tasks have
+been touched by AI ($m_{2030} = 0.20$, $d_{2030} = 0.20$), productivity rises about
+`{python} num(100 * (math.exp(P['modest'].a(2030.0)) - 1), 0)` percent on those tasks
+($a_{2030} =$ `{python} num(P['modest'].a(2030.0), 2)`), half of affected instances
+are automated and half augmented, and one new task arrives for every two automated.
+
+GDP ends `{python} v('modest', 'gdp')` percent above its no-AI path, an extra
+`{python} num(12 * D['modest'].iloc[-1].gdp / (100 * (F.g + F.n)), 0)` months of
+ordinary growth accumulated over four years, and the economy grows at
+`{python} v('modest', 'gdp_growth')` percent a year rather than
+`{python} num(100 * (F.g + F.n), 0)`. The average wage is
+`{python} v('modest', 'wage')` percent higher and the cognitive wage
+`{python} v('modest', 'wC')` percent. The net return to capital is
+`{python} v('modest', 'net_r')` percent rather than
+`{python} num(100 * (F.r_bar - F.delta), 1)`, the capital stock is
+`{python} v('modest', 'capital')` percent larger, and the labor share falls from
+`{python} num(100 * F.s_L0, 1)` to `{python} v('modest', 'labor_share')` percent of
+income. Cognitive employment is `{python} v('modest', 'cog_emp')` percent below its
+mid-2026 level and the unemployment rate is `{python} v('modest', 'u_all')` percent
+against a normal `{python} num(100 * F.U_bar, 1)`.
+
+### 4.2 The substantial change scenario
+
+Here `{python} num(100 * D['substantial'].iloc[-1].md, 0)` percent of the economy's
+tasks are affected, roughly
+`{python} num(100 * D['substantial'].iloc[-1].md / F.cog_share, 0)` percent of the
+tasks cognitive workers performed in 2025, AI raises productivity by about
+`{python} num(100 * (math.exp(P['substantial'].a(2030.0)) - 1), 0)` percent on them,
+and three quarters of affected instances are automated.
+
+GDP is `{python} v('substantial', 'gdp')` percent above the no-AI path and growth
+over the twelve months to 2030 is `{python} v('substantial', 'gdp_growth')` percent
+a year, against a fastest dot-com-boom year of 4.7 percent in 1999. The average wage
+rises `{python} v('substantial', 'wage')` percent, far less than GDP: the cognitive
+wage is `{python} v('substantial', 'wC')` percent relative to no AI while wages in
+the rest of the economy are `{python} v('substantial', 'wN')` percent higher. The
+labor share falls to `{python} v('substantial', 'labor_share')` percent and the
+capital share rises to `{python} num(100 - float(v('substantial', 'labor_share', 4)), 1)`
+percent, a shift of
+`{python} num(100 * F.s_L0 - float(v('substantial', 'labor_share', 4)), 1)` points in
+four years. Cognitive employment is `{python} v('substantial', 'cog_emp')` percent
+below its mid-2026 level while all-other employment is
+`{python} v('substantial', 'oth_emp')` percent above it, and because reallocation
+takes time the cognitive unemployment rate rises to
+`{python} v('substantial', 'u_C')` percent in 2030, from
+`{python} num(100 * SS.U_C / (SS.U_C + F.l_C0), 1)` percent in normal times, an
+increase of
+`{python} num(100 * (float(v('substantial', 'u_C', 4)) / (100 * SS.U_C / (SS.U_C + F.l_C0)) - 1), 0)`
+percent. Section 4.2 puts the same rise at "more than a 50 percent increase", from
+2.9 percent; note that the base is the normal-times rate, since by mid-2026 this
+model is already at `{python} v('substantial', 'u_C', 1, F.t_anchor)` percent.
+
+```{python}
+#| label: fig-3
+#| fig-cap: "Factor prices and the labor share in the three scenarios, 2025-2030, reproducing the paper's Figure 3. Dashed lines: the economy without AI."
+#| code-summary: "Figure 3"
+fig, axes = plt.subplots(2, 2, figsize=(6.6, 4.2))
+panel(axes[0][0], "wage", "Average wage", "percent above the no-AI path", ylim=(-0.5, 11))
+panel(axes[0][1], "wC", "Cognitive wage", "percent above the no-AI path", baseline=0.0,
+      ylim=(-13, 3.5))
+panel(axes[1][0], "net_r", "Net return to capital",
+      "percent per year; 6.5 without AI", baseline=100 * (F.r_bar - F.delta),
+      ylim=(6.3, 8.6))
+panel(axes[1][1], "labor_share", "Labor share", "percent of income; 60 without AI",
+      baseline=100 * F.s_L0, ylim=(44, 61))
+axes[0][0].legend(loc="upper left", fontsize=7)
+plt.tight_layout()
+plt.show()
+```
+
+### 4.3 The extreme change scenario
+
+By 2030 `{python} num(100 * D['extreme'].iloc[-1].md, 0)` percent of the economy's
+tasks are affected, roughly
+`{python} num(100 * D['extreme'].iloc[-1].md / F.cog_share, 0)` percent of the tasks
+cognitive workers performed in 2025; AI more than doubles productivity on them
+($e^{a} =$ `{python} num(math.exp(P['extreme'].a(2030.0)), 1)`),
+`{python} num(100 * SCENARIOS['extreme'].psi, 0)` percent of affected instances are
+automated, and no new tasks are reinstated.
+
+GDP is `{python} v('extreme', 'gdp')` percent above its no-AI path, growing at
+`{python} v('extreme', 'gdp_growth')` percent a year. The labor share falls from
+`{python} num(100 * F.s_L0, 1)` to `{python} v('extreme', 'labor_share')` percent.
+Within labor the split is stark: the cognitive wage is
+`{python} v('extreme', 'wC')` percent relative to no AI while the all-other wage is
+`{python} v('extreme', 'wN')` percent above it. Cognitive employment is
+`{python} v('extreme', 'cog_emp')` percent below mid-2026,
+`{python} v('extreme', 'u_C')` percent of cognitive workers are unemployed, nearly
+one in five, and the unemployment rate for all workers is
+`{python} v('extreme', 'u_all')` percent. Capital is
+`{python} v('extreme', 'capital')` percent above its no-AI path and measured TFP
+`{python} v('extreme', 'tfp')` percent.
+
+```{python}
+#| label: fig-4
+#| fig-cap: "The labor market in the three scenarios, 2025-2030, reproducing the paper's Figure 4. Dashed lines: the no-AI economy, in which the two rates stay at their normal levels."
+#| code-summary: "Figure 4"
+fig, axes = plt.subplots(1, 3, figsize=(6.8, 2.3))
+panel(axes[0], "cog_emp", "Cognitive employment", "percent change since mid-2026",
+      baseline=0.0, ylim=(-23, 2))
+panel(axes[1], "u_C", "Unemployment rate, cognitive",
+      "percent of the group's labor force",
+      baseline=100 * SS.U_C / (SS.U_C + F.l_C0), ylim=(0, 19))
+panel(axes[2], "u_all", "Unemployment rate, all workers", "percent of the labor force",
+      baseline=100 * F.U_bar, ylim=(0, 13))
+axes[0].legend(loc="lower left", fontsize=7)
+plt.tight_layout()
+plt.show()
+```
+
+### 4.4 The scenarios implied by survey responses
+
+Table 2 reports the five parameters implied by the survey of 10,980 US adults. Those
+medians are transcribed here and run through the model, with everything the survey
+did not ask about held at the substantial scenario's values. The comparison against
+Table 4 is indicative only: its columns are medians *of outcomes across the 3,259
+respondents who answered all five items*, which is not the outcome at the median
+answers and cannot be recovered from published medians without the microdata.
+
+```{python}
+#| label: survey
+#| code-summary: "Table 2 medians, and the model run at them against Table 4"
+# Transcribed from Table 2 of the paper. Building a DataFrame from a dict of lists
+# requires every list to have the same length, one entry per row.
+surv_par = pd.DataFrame({
+    "object": ["m_2030", "d_2030", "psi", "a_2030", "mu"],
+    "survey median (Table 2)": [0.44, 0.40, 0.47, 0.44, 0.064],
+    "IQR (Table 2)": ["[0.20, 0.59]", "[0.22, 0.61]", "[0.25, 0.65]", "[0.09, 1.02]",
+                      "[0.025, 0.111]"],
+    "used here": [SURVEY_MEDIAN.m_2030, SURVEY_MEDIAN.d_2030, SURVEY_MEDIAN.psi,
+                  SURVEY_MEDIAN.a_anchor + SURVEY_MEDIAN.g_a * 3.5, SURVEY_MEDIAN.mu],
+})
+surv_run = table3_column(simulate.run(F, SURVEY_MEDIAN))
+table4_median = {
+    "GDP, pct above no-AI": 8.6, "GDP growth, pct per year": 5.3,
+    "Average wage, pct above no-AI": 2.6, "  cognitive occupations w_C": 0.6,
+    "  all other occupations w_N": 6.4, "Net return r - delta, pct per year": 7.0,
+    "Capital stock, pct above no-AI": 13.5, "Labor share, pct of income": 57.2,
+    "Cognitive employment, pct since mid-2026": -4.2,
+    "Unemployment rate, cognitive, pct": 4.6,
+    "Unemployment rate, all workers, pct": 4.6,
+}
+surv_out = pd.DataFrame({
+    # Iterating a dict gives its KEYS, so list(table4_median) is the row names and
+    # .values() is needed to get the numbers. [T3[k][2] for k in ...] pulls index 2
+    # of each 4-tuple, which is the substantial column.
+    "row": list(table4_median),
+    "model at the median answers": [surv_run[k] for k in table4_median],
+    "Table 4 median of outcomes": list(table4_median.values()),
+    "substantial scenario": [T3[k][2] for k in table4_median],
+})
+# A chunk shows only its LAST expression automatically, so an explicit display() is
+# needed to emit the first of two tables.
+display(show(surv_par, floatfmt=".3f"))
+show(surv_out, floatfmt=".1f")
+```
+
+The two columns bracket the same conclusion the paper draws, that the public's
+answers sit close to the substantial change scenario, but they are not the same
+statistic and the gap between them (GDP
+`{python} num(surv_run['GDP, pct above no-AI'], 1)` against 8.6) is what the
+distinction costs.
+
+### 4.5 Robustness: the supply of capital
+
+Table 5 reruns the substantial and extreme scenarios at four elasticities of capital
+supply. At $\varepsilon = 1$ the average wage changes sign in both scenarios: labor
+loses the tasks and works with capital that is scarce and expensive.
+
+```{python}
+#| label: table5
+#| code-summary: "Table 5: four elasticities of capital supply"
+TABLE5_ROWS = ["GDP, pct above no-AI", "Average wage, pct above no-AI",
+               "Net return r - delta, pct per year", "Capital stock, pct above no-AI",
+               "Labor share, pct of income"]
+TABLE5_PUB = {
+    ("substantial", 1.0): (6.4, -1.6, 7.6, 9.3, 55.1),
+    ("substantial", 3.0): (8.3, 2.1, 7.0, 13.8, 56.1),
+    ("substantial", 6.0): (9.1, 3.7, 6.8, 15.7, 56.5),
+    ("substantial", math.inf): (10.0, 5.6, 6.5, 18.2, 57.0),
+    ("extreme", 1.0): (21.3, -9.2, 10.3, 33.5, 41.2),
+    ("extreme", 3.0): (32.4, 9.7, 8.3, 56.3, 45.2),
+    ("extreme", 6.0): (37.2, 18.3, 7.5, 67.1, 46.9),
+    ("extreme", math.inf): (43.3, 30.1, 6.5, 82.2, 49.1),
+}
+t5 = {}
+# .items() yields (key, value) pairs. The key here is itself a tuple, so
+# `for (scen, eps), want in ...` unpacks the key into two names and the value into a
+# third, all in one line.
+for (scen, eps), want in TABLE5_PUB.items():
+    col = table3_column(simulate.run(Fixed(eps=eps), SCENARIOS[scen]))
+    label = f"{scen[:4]}, eps={'inf' if math.isinf(eps) else int(eps)}"
+    t5[label] = [f"{col[r]:,.2f}  ({w:,.1f})" for r, w in zip(TABLE5_ROWS, want)]
+show(pd.DataFrame({"row": TABLE5_ROWS, **t5}))
+```
+
+### 4.6 Robustness: wage rigidity
+
+Table 6 reruns them at four rigidities of the cognitive wage. The parameter governs
+where the cost to cognitive workers shows up: at $\xi = 0$ the wage takes it all and
+unemployment barely moves; at $\xi = 0.9$ the cognitive wage ends *above* its no-AI
+path while cognitive unemployment reaches 24 percent.
+
+```{python}
+#| label: table6
+#| code-summary: "Table 6: four rigidities of the cognitive wage"
+TABLE6_ROWS = ["GDP, pct above no-AI", "Average wage, pct above no-AI",
+               "  cognitive occupations w_C", "  all other occupations w_N",
+               "Cognitive employment, pct since mid-2026",
+               "Unemployment rate, cognitive, pct", "Unemployment rate, all workers, pct"]
+TABLE6_PUB = {
+    ("substantial", 0.5): (8.3, 2.1, -0.3, 5.9, -3.9, 4.5, 4.6),
+    ("substantial", 0.75): (7.9, 2.2, 0.7, 4.5, -4.6, 5.1, 4.9),
+    ("substantial", 0.9): (7.7, 2.3, 1.4, 3.7, -5.0, 5.4, 5.2),
+    ("extreme", 0.0): (36.6, 1.6, -42.2, 70.1, -1.3, 2.6, 3.1),
+    ("extreme", 0.5): (32.4, 9.7, -11.5, 33.6, -21.5, 17.9, 11.9),
+    ("extreme", 0.75): (30.5, 11.1, -2.9, 25.8, -25.9, 21.7, 13.9),
+    ("extreme", 0.9): (29.2, 11.9, 2.8, 21.1, -28.5, 24.0, 15.2),
+}
+t6 = {}
+for (scen, xi), want in TABLE6_PUB.items():
+    col = table3_column(simulate.run(Fixed(xi=xi), SCENARIOS[scen]))
+    # the pool-sensitive row is reported at the U_bar the p. 26 derivation implies
+    col_pool = table3_column(simulate.run(Fixed(xi=xi, U_bar=0.0384), SCENARIOS[scen]))
+    label = f"{scen[:4]}, xi={xi}"
+    t6[label] = [
+        f"{(col_pool if r == 'Unemployment rate, all workers, pct' else col)[r]:,.2f}  ({w:,.1f})"
+        for r, w in zip(TABLE6_ROWS, want)]
+show(pd.DataFrame({"row": TABLE6_ROWS, **t6}))
+```
+
+### 4.7 An extension the paper does not run: AI slop
+
+"Slop" means output that is plausible but low quality, so that using AI costs time in
+checking and rework. It is worth asking where that lands in this model, and the answer
+is unusually clean: it is not a missing mechanism, it is a low draw of $a_t$.
+
+The paper's gain per instance is defined **all-in, net of checking**. Its own survey
+question asks how long a task takes with AI "counting the time spent checking and
+fixing the AI's work", and Table 1 sources the 0.30 to 0.45 range to field trials and
+frontier firms. A slop world is one where the realised all-in gain in the wild is far
+below what trials measured.
+
+What makes that consequential is an asymmetry already visible in [Equation (19)](#eq-19):
+
+```{python}
+#| label: slop-decomposition
+#| code-summary: "Equation (19): what scales with the gain, and what does not"
+from aiscen import slop                     # the extension module, documented in aiscen/slop.py
+
+a0 = slop.gain_2030(slop.BASE)              # the substantial scenario's 2030 gain
+rows = [slop.decomposition(F, slop.scale_gain(slop.BASE, a))
+        for a in (a0, a0 / 2, 0.09)]        # 0.09 is the survey's own lower quartile
+show(pd.DataFrame(rows)[["a_2030", "displacement", "weak-link cushion", "ratio"]],
+     floatfmt=(".3f", ".3f", ".4f", ".4f", ".1f"))
+```
+
+Displacement, $(1-\rho)\psi_t m_t d_t$, contains no $a_t$: an automated instance takes
+its whole wage bill to capital whether the machine saved an hour or a minute. The
+weak-link cushion that partly protects the labor share,
+$(1-\sigma)\psi_t m_t d_t a_t$, is proportional to $a_t$. So slop subtracts the offset
+and leaves the harm intact.
+
+```{python}
+#| label: slop-cases
+#| code-summary: "the substantial scenario re-run under five slop variants"
+slop_tbl = pd.DataFrame(slop.cases(F))
+disp = slop_tbl[["case", "a_2030", "eps_star"] + slop.REPORT_ROWS].copy()
+# eps* diverges in the zero-gain row, so show the symbol rather than a huge number
+disp["eps_star"] = disp["eps_star"].map(lambda x: "inf" if not np.isfinite(x) else f"{x:.2f}")
+show(disp, floatfmt=".2f")
+```
+
+Three things to read off that table.
+
+**The wage sign flips before the gain is even halved.** [Equation (12)](#eq-12)'s threshold
+contains $(1-\rho)/a_t$, so a lower gain pushes $\varepsilon^*$ up, and slop pushes it
+straight through the calibrated $\varepsilon = 3$:
+
+```{python}
+#| label: slop-critical
+#| code-summary: "the all-in gain at which the average wage stops rising"
+a_crit = slop.critical_gain(F)
+print(f"average wage turns negative below a_2030 = {a_crit:.3f}"
+      f"   (baseline {a0:.2f}; survey lower quartile 0.09)")
+```
+
+That threshold is not exotic relative to what people believe. Table 2's interquartile
+range for $a_{2030}$ runs from 0.09 to 1.02, and Section 3.5 reports that about 30
+percent of respondents expect AI to save no time at all on a task it is suited to. The
+lower half of the survey's own distribution is a slop world.
+
+**Slop does not show up as a GDP disappointment.** In the limiting case where AI saves
+nothing at all, GDP is still
+`{python} num(slop_tbl.loc[slop_tbl.case.str.startswith('pure slop'), 'GDP, pct above no-AI'].iloc[0], 1)`
+percent above the no-AI path while measured TFP is
+`{python} num(slop_tbl.loc[slop_tbl.case.str.startswith('pure slop'), 'Measured TFP, pct above no-AI'].iloc[0], 1)`
+and the average wage is
+`{python} num(slop_tbl.loc[slop_tbl.case.str.startswith('pure slop'), 'Average wage, pct above no-AI'].iloc[0], 1)`.
+Automation converts work from a fixed factor into an accumulable one: the rental rate
+rises, capital deepens, output rises, and labor pays for it. The signature of slop in
+this model is therefore "output fine, wages falling, labor share sliding", not "the
+boom failed to arrive". That is Acemoglu and Restrepo's so-so automation in its purest
+form.
+
+**One version of slop helps workers.** If checking and fixing is genuinely new human
+work rather than pure waste, that is a rise in the reinstatement ratio $\rho$, and it
+is the only variant here that cushions the wage and raises the labor share, at the cost
+of lower output. "Slop that makes work" and "slop that just does not deliver" are
+different worlds, and the model separates them.
+
+::: {.callout-note appearance="simple" title="What the model cannot say about slop"}
+Three limits, in increasing order of seriousness.
+
+1. **Quality.** Instances are homogeneous and prices are quality-adjusted by
+   assumption, so the model can express slop only as a smaller cost saving, never as
+   *the same cost for a worse product*. If sloppy output is counted at full price but
+   is worth less, measured TFP overstates true gains and nothing here records the gap.
+2. **Heterogeneity.** The paper's equations carry $\sum_i m_i d_i a_i$, so "automated
+   instances are sloppy, augmented ones are not" is representable in principle. The
+   calibration sets a uniform $a_t$, and this reimplementation follows it, so the
+   variants above move the gain on both kinds of instance together.
+3. **Externalities.** [Equation (9)](#eq-9) is Hulten's theorem, which holds in an *efficient*
+   economy. If errors propagate downstream, force rework in other tasks, or erode
+   trust in the output, the Domar-weighted sum is no longer the right aggregation and
+   the TFP expression is an overstatement rather than an approximation. This is a
+   structural limit of the framework, not a calibration quibble, and it is the version
+   of the slop worry the model genuinely cannot host.
+:::
+
+## 5 Verification summary
+
+```{python}
+#| label: verify
+#| code-summary: "deviations against every published table, and the internal identities"
+def dev(sim, pub):
+    """Largest absolute gap between a row of simulated and published values."""
+    return max(abs(a - b) for a, b in zip(sim, pub))
+
+t3_dev = [(row, dev(T3[row], PUBLISHED[row])) for row in ROW_ORDER]
+t5_dev, t6_dev = [], []
+for (scen, eps), want in TABLE5_PUB.items():
+    col = table3_column(simulate.run(Fixed(eps=eps), SCENARIOS[scen]))
+    t5_dev.append((f"{scen} eps={eps}", dev([col[r] for r in TABLE5_ROWS], want)))
+for (scen, xi), want in TABLE6_PUB.items():
+    col = table3_column(simulate.run(Fixed(xi=xi, U_bar=0.0384), SCENARIOS[scen]))
+    t6_dev.append((f"{scen} xi={xi}", dev([col[r] for r in TABLE6_ROWS], want)))
+
+# max(..., key=lambda x: x[1]) finds the element whose SECOND item is largest, then
+# [0] takes that element's first item: the name of the worst-deviating row. The
+# underscore in `for _, d in ...` is a conventional name for "a value I must unpack
+# but do not use".
+summary = pd.DataFrame([
+    ("Table 3, the three scenarios in 2030", 20 * 4,
+     max(d for _, d in t3_dev), max(t3_dev, key=lambda x: x[1])[0]),
+    ("Table 5, elasticities of capital supply", 5 * 8,
+     max(d for _, d in t5_dev), max(t5_dev, key=lambda x: x[1])[0]),
+    ("Table 6, rigidities of the cognitive wage", 7 * 7,
+     max(d for _, d in t6_dev), max(t6_dev, key=lambda x: x[1])[0]),
+], columns=["published table", "cells compared", "largest absolute deviation",
+            "where"])
+show(summary, floatfmt=".3f")
+```
+
+The largest deviation anywhere is
+`{python} num(max(max(d for _, d in t3_dev), max(d for _, d in t5_dev), max(d for _, d in t6_dev)), 2)`,
+on figures the paper prints to one decimal.
+
+Four internal identities, none of which involve the published numbers:
+
+```{python}
+#| label: identities
+#| code-summary: "internal consistency checks"
+checks = []
+
+# 1. the labor force adds up every month, in every scenario.
+# Two `for` clauses in one comprehension is a nested loop, read left to right: for
+# each scenario, for each month of that scenario. It yields one number per month
+# across all three runs, and max() keeps the largest. A result near 1e-16 means the
+# identity holds to the limit of floating-point precision.
+worst = max(abs(m.l_C + m.l_N + m.U_C + m.U_N - F.L)
+            for n in NAMES for m in RUNS[n].months)
+checks.append(("l_C + l_N + U_C + U_N = L, every month (p. 20)", f"{worst:.2e}", "0"))
+
+# 2. system (39) at the targets reproduces Proposition 1 (Table A.1, panel D)
+worst = 0.0
+for n in NAMES:
+    x = P[n].at(2030.0)
+    for dlnA in (0.0, 0.006):
+        fr = statics.frictionless(F, x["md"], x["a"], x["psi"], x["rho"], dlnA)
+        ac = statics.actual_at_employment(F, x["md"], x["a"], x["psi"], x["rho"],
+                                          fr.l_C_star, fr.l_N_star, dlnA)
+        worst = max(worst, abs(ac.dlnY - fr.dlnYL), abs(ac.s_L - fr.s_L),
+                    abs(ac.dlnw_C_tilde - fr.dlnw_tilde))
+checks.append(("(39) at the targets equals Proposition 1", f"{worst:.2e}", "0"))
+
+# 3. the monthly ideas step against the closed form (43)
+worst = max(abs(RUNS[n].at(2030.0).dlnA - simulate.ideas_closed_form(RUNS[n], 2030.0))
+            for n in NAMES)
+checks.append(("monthly ideas step vs closed form (43)", f"{100 * worst:.4f} pp",
+               "< 0.02 pp (p. 41)"))
+
+# 4. every hire leaves the pool
+worst = max(abs(m.f_C * m.U_C + m.f_N * m.U_N - m.H_C - m.H_N)
+            for n in NAMES for m in RUNS[n].months)
+checks.append(("f_C U_C + f_N U_N = H_C + H_N (p. 20)", f"{worst:.2e}", "0"))
+
+show(pd.DataFrame(checks, columns=["identity", "largest violation", "expected"]))
+```
+
+One further cross-check of the model against itself: the measured TFP index (45) is a
+base-weighted index, its dual (25) a chained one, and Appendix C.4 says the two agree
+only to first order. They do, and the wedge grows with the size of the shock, which is
+how those two index concepts should differ.
+
+```{python}
+#| label: dual
+#| code-summary: "Equation (45) against its dual (25)"
+rows = []
+for n in NAMES:
+    res = RUNS[n]
+    # Start the chain at the no-AI baseline (zero gaps, base labor share), then one
+    # point per month. `+` concatenates two lists.
+    pts = [(F.s_L0, 0.0, 0.0)] + [(m.s_L_star, m.dlnw_common, m.dlnr_star)
+                                  for m in res.months]
+
+    # zip(pts, pts[1:]) pairs each point with the NEXT one: pts[1:] is the list from
+    # index 1 onward, so the pairs are (point 0, point 1), (point 1, point 2), and so
+    # on. That is the standard way to walk consecutive differences. Each pair is
+    # unpacked into previous (sp, wp, rp) and current (sc, wc, rc) values, and the
+    # sum accumulates the share-weighted change in the two factor prices.
+    dual = sum(0.5 * (sp + sc) * (wc - wp) + (1 - 0.5 * (sp + sc)) * (rc - rp)
+               for (sp, wp, rp), (sc, wc, rc) in zip(pts, pts[1:]))
+    tfp = res.at(2030.0).dln_tfp
+    rows.append({"scenario": n, "TFP gap, index (45)": 100 * tfp,
+                 "TFP gap, chained dual (25)": 100 * dual,
+                 "wedge, pct of the gap": 100 * abs(tfp - dual) / tfp})
+show(pd.DataFrame(rows), floatfmt=".3f")
+```
+
+## Reproducing this document
+
+```sh
+QUARTO_PYTHON=/opt/anaconda3/bin/python3 quarto render repro.qmd
+python3 -m pytest -q          # the same checks as assertions, plus the ones not shown here
+```
+
+The package requires only the standard library; this document additionally uses
+pandas, matplotlib and tabulate for its tables and figures. `README.md` records the
+places where the paper leaves a modelling choice implicit and how each was resolved.

@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Coverage tracker</title>
+<style>
+  :root { --ink:#1f2933; --muted:#5b6873; --line:#d6dbe0; --bg:#ffffff;
+          --solid:#1baf7a; --nearly:#eb6834; --partial:#c7a008; --none:#9aa6b2; }
+  body { max-width: 900px; margin: 0 auto; padding: 2.2rem 16px 5rem;
+         font: 16px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+         color: var(--ink); background: var(--bg); }
+  h1 { font-size: 1.85rem; line-height: 1.25; margin: 0 0 .4rem; }
+  h2 { font-size: 1.25rem; margin: 2.2rem 0 .6rem; padding-bottom: .3rem;
+       border-bottom: 1px solid var(--line); }
+  h1 + p { color: var(--muted); }
+  table { border-collapse: collapse; width: 100%; margin: .8rem 0 1.2rem; font-size: 14.5px; }
+  th, td { border: 1px solid var(--line); padding: 7px 10px; text-align: left; vertical-align: top; }
+  th { background: #f4f6f8; font-weight: 600; }
+  tbody tr:nth-child(even) { background: #fbfcfd; }
+  td:nth-child(2) { white-space: nowrap; }
+  td .tag { padding: 1px 8px; border-radius: 10px; color: #fff; font-size: 12.5px;
+            font-weight: 650; display: inline-block; }
+  hr { border: none; border-top: 1px solid var(--line); margin: 2.2rem 0; }
+  code { background: #f4f6f8; padding: 1px 5px; border-radius: 3px; font-size: 90%; }
+  li { margin: .3rem 0; }
+  @media (max-width: 620px) { td:nth-child(2) { white-space: normal; } body { font-size: 15px; } }
+</style></head><body>
+<h1>Coverage tracker: "Economic Scenarios for Transformative AI"</h1>
+<p>Reception of the paper: press, commentary, citations, and any revision of the artifact
+itself. This is not a tracker of whether the scenarios come true, and not a reading list
+of my own understanding, which lives in <code>understanding.md</code>.</p>
+<p>Updated by hand. Say "check for new coverage" and I sweep, verify, and append; paste a
+link and I slot it in. <code>understanding.html</code> and <code>coverage.html</code> are regenerated from
+these two files by the project hook in <code>.claude/settings.json</code>.</p>
+<h2>The artifact being tracked</h2>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Paper</td>
+<td>Korinek, Jones, Sacher, Cotter and McCrory (2026), "Economic Scenarios for Transformative AI"</td>
+</tr>
+<tr>
+<td>Venue</td>
+<td>The Anthropic Institute Working Paper No. 2026-02, September 2026</td>
+</tr>
+<tr>
+<td>Released</td>
+<td>2026-09-10 (first commentary appeared the same day)</td>
+</tr>
+<tr>
+<td>Landing page</td>
+<td><a href="https://www.anthropic.com/institute/econ-scenarios">anthropic.com/institute/econ-scenarios</a>, labelled <strong>Version 1.0</strong></td>
+</tr>
+<tr>
+<td>PDF</td>
+<td><a href="https://www-cdn.anthropic.com/files/4zrzovbb/website/cf58f84d46a4a76bf5a5b039ac695fba6b80041c.pdf">www-cdn.anthropic.com/files/4zrzovbb/...pdf</a>, 57 pages, local copy <code>paper.pdf</code></td>
+</tr>
+<tr>
+<td>Companion</td>
+<td>the interactive scenario explorer on the landing page</td>
+</tr>
+<tr>
+<td>Replication package</td>
+<td>none, checked 2026-09-10 and 2026-09-17</td>
+</tr>
+</tbody>
+</table>
+<h2>Conventions for an entry</h2>
+<ul>
+<li><strong>Read?</strong> distinguishes items I actually fetched and read from items logged off a
+  search result. An unread row is a lead, not a summary, and its Note is provisional.</li>
+<li><strong>Engagement</strong> is the column that matters for this project: <em>model</em> means it engages
+  the mechanics, the equations or the calibration; <em>numbers</em> means it uses the headline
+  figures correctly but does not look inside; <em>framing</em> means the paper is a hook for a
+  piece about something else.</li>
+</ul>
+<h2>Official</h2>
+<table>
+<thead>
+<tr>
+<th>Date</th>
+<th>Item</th>
+<th>Read?</th>
+<th>Engagement</th>
+<th>Note</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2026-09</td>
+<td>Landing page and scenario explorer</td>
+<td>yes</td>
+<td>model</td>
+<td>Gives the three scenarios as +1.6% / +8.3% / +32.4% with 2030 GDP of $34.1T / $36.3T / $44.4T. States "External reviewers were not asked to endorse our conclusions", flags itself as Version 1.0, and concedes the model "isolates a few key forces and omits many others"</td>
+</tr>
+<tr>
+<td>2026-09-10</td>
+<td>Anton Korinek, <a href="https://x.com/akorinek/status/2097687561565090189">thread on X</a></td>
+<td>no</td>
+<td>—</td>
+<td>Author's own launch thread, "My first working paper at Anthropic"</td>
+</tr>
+</tbody>
+</table>
+<h2>Commentary worth reading</h2>
+<table>
+<thead>
+<tr>
+<th>Date</th>
+<th>Item</th>
+<th>Read?</th>
+<th>Engagement</th>
+<th>Note</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2026-09-10</td>
+<td>Tyler Cowen, <a href="https://marginalrevolution.com/marginalrevolution/2026/09/economic-scenarios-for-transformative-ai.html">Marginal Revolution</a></td>
+<td>yes</td>
+<td>numbers</td>
+<td>"sober, reasoned, scientific, and (for the most part) dynamically consistent"; calls it "a strong line-up from Anthropic". Picks his own path: "I will opt for something a modest bit more than modest", i.e. between modest and substantial. Does not touch the equations or the calibration. Points readers to commentary by Alex Imas</td>
+</tr>
+<tr>
+<td>2026-09</td>
+<td>Alex Imas commentary, linked by Cowen</td>
+<td>no</td>
+<td>—</td>
+<td>Lead only, URL not yet found. Worth chasing since it is the one piece Cowen singled out</td>
+</tr>
+<tr>
+<td>2026-09</td>
+<td><a href="https://marginalrevolution.com/marginalrevolution/2026/09/ai-redistribution-and-the-size-of-the-pie.html">AI, Redistribution, and the Size of the Pie</a>, Marginal Revolution</td>
+<td>no</td>
+<td>—</td>
+<td>Appears to use the paper as a jumping-off point for the distributional question</td>
+</tr>
+<tr>
+<td>2026-09</td>
+<td><a href="https://longyield.substack.com/p/anthropic-modeled-the-end-of-the">Anthropic Modeled the End of the Knowledge Worker. Watch the Capital Share.</a></td>
+<td>no</td>
+<td>—</td>
+<td>Title suggests it keys on the labor share, the 60 to 45 percent fall, which is the paper's real distributional claim</td>
+</tr>
+<tr>
+<td>2026-09</td>
+<td><a href="https://harmoniousdiscourse.substack.com/p/anthropics-transformative-ai-economic">Anthropic's Transformative AI Economic Scenarios: Model, Evidence, and Civilizational Stakes</a></td>
+<td>no</td>
+<td>—</td>
+<td>Longest independent piece found. A search summary attributes to it the claim that critics think the paper <em>understates</em> AI by giving ideas only a 0.6 percent boost by 2030, contrasting Tom Davidson and Leopold Aschenbrenner. Unverified, and the 0.6 percent figure needs checking against the paper's innovation block</td>
+</tr>
+<tr>
+<td>2026-09</td>
+<td><a href="https://joseluischavezcalva.substack.com/p/three-paths-for-work-and-national">Three Paths for Work and Income under AI, 2026 to 2030</a></td>
+<td>no</td>
+<td>—</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2>Press</h2>
+<table>
+<thead>
+<tr>
+<th>Date</th>
+<th>Item</th>
+<th>Read?</th>
+<th>Engagement</th>
+<th>Note</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2026-09-11</td>
+<td>Euronews, <a href="https://www.euronews.com/business/2026/09/11/anthropic-says-ai-could-bring-both-15-growth-and-mass-unemployment-by-2030">Anthropic says AI could bring both 15% growth and mass unemployment by 2030</a></td>
+<td>no</td>
+<td>numbers</td>
+<td>The "15%" is the extreme scenario's annual growth rate in 2030, a different object from the 32.4 percent level gap. See the conflation note below</td>
+</tr>
+<tr>
+<td>2026-09</td>
+<td>The Next Web, <a href="https://thenextweb.com/news/anthropic-ai-economic-scenarios-2030">Anthropic's three AI economic scenarios for 2030, explained</a></td>
+<td>no</td>
+<td>—</td>
+<td></td>
+</tr>
+<tr>
+<td>2026-09</td>
+<td>unite.ai, <a href="https://www.unite.ai/anthropic-releases-interactive-model-of-ais-possible-economic-futures/">Anthropic Releases Interactive Model of AI's Possible Economic Futures</a></td>
+<td>no</td>
+<td>—</td>
+<td>Leads on the explorer rather than the paper</td>
+</tr>
+<tr>
+<td>2026-09</td>
+<td>XenoSpectrum, <a href="https://xenospectrum.com/en/anthropic-ai-economic-scenarios/">Growth and Worker Wages Can Diverge</a></td>
+<td>no</td>
+<td>—</td>
+<td>Framing matches the paper's actual point</td>
+</tr>
+<tr>
+<td>2026-09-15</td>
+<td>Disruption Banking, <a href="https://www.disruptionbanking.com/2026/09/15/anthropic-is-fine-with-you-losing-your-job-so-long-as-its-done-safely/">Anthropic is Fine With You Losing Your Job, So Long as It's Done Safely</a></td>
+<td>no</td>
+<td>framing</td>
+<td>Adversarial framing aimed at Anthropic, likely not at the model</td>
+</tr>
+<tr>
+<td>2026-09</td>
+<td>Startup Fortune, <a href="https://startupfortune.com/anthropic-says-ai-could-grow-the-economy-or-wreck-the-job-market-by-2030/">Anthropic Says AI Could Grow The Economy Or Wreck The Job Market By 2030</a></td>
+<td>no</td>
+<td>—</td>
+<td></td>
+</tr>
+<tr>
+<td>2026-09</td>
+<td><a href="https://asset-management-news.com/markets/anthropic-maps-three-ai-economic-scenarios-2030/">Anthropic Maps Three AI Economic Scenarios to 2030</a></td>
+<td>no</td>
+<td>—</td>
+<td>Asset-management trade press</td>
+</tr>
+</tbody>
+</table>
+<h2>Aggregators and career-advice derivatives</h2>
+<p>Logged for completeness, low signal, none of them read: <a href="https://workopia.io/resources/anthropic-ai-economic-scenarios-job-seekers">Workopia</a>,
+<a href="https://theaicareerlab.com/blog/anthropic-2030-economic-model-knowledge-workers">The AI Career Lab</a>,
+<a href="https://flowtivity.ai/blog/anthropic-2030-economy-report/">Flowtivity</a>,
+a <a href="https://dev.to/jamilxt/anthropic-modeled-the-2030-economy-three-ways-the-richer-the-country-gets-the-worse-it-gets-for-2ajd">dev.to repost</a>,
+and a <a href="https://java366.wordpress.com/2026/09/15/this-is-real-anthropic-published-an-economic-scenario-report-in-september-2026-titled-something-like-economic-scenarios-for-transformative-ai-modeling-three-possible-futures-for-the-us/">WordPress repost</a>.</p>
+<h2>Claims circulating in coverage that the paper does not support</h2>
+<p>Checked against the paper, since this is where a reproduction has something to say.</p>
+<ol>
+<li><strong>"Peer reviewers" or "external reviewers vetted it."</strong> The paper's first-page
+   footnote thanks 22 named economists, among them Acemoglu, Autor, Restrepo, Romer,
+   Nakamura, Klenow, Moll and Steinsson, "for insightful comments on an earlier version".
+   That is an acknowledgement, not review, and the landing page says outright that
+   reviewers were not asked to endorse the conclusions. Coverage that presents the list
+   as vetting overstates it. Verified against <code>paper.pdf</code> p. 1.</li>
+<li><strong>Level gaps reported as growth rates.</strong> The headline 1.6 / 8.3 / 32.4 percent are
+   2030 GDP <em>levels</em> relative to a no-AI path, not growth rates. Several outlets, and
+   the landing page's own "+32.4% GDP growth" label, blur this; Euronews's "15% growth"
+   is a third quantity again, the extreme scenario's 2030 annual rate. The deck's backup
+   slide on growth rates against level gaps exists precisely for this.</li>
+</ol>
+<h2>What to watch</h2>
+<ul>
+<li>A <strong>Version 1.1</strong> of the PDF. The landing page is explicitly versioned, so a revision
+  is likely and would need re-checking against the reproduction.</li>
+<li>A <strong>replication package</strong>. None so far, which is the reason this project exists.</li>
+<li>Whether any acknowledged economist publishes <strong>their own</strong> response, rather than being
+  cited as a reviewer. Acemoglu, Autor and Restrepo are the ones to watch.</li>
+<li><strong>Peer-reviewed placement</strong> of the paper or a descendant of it.</li>
+<li>The <strong>Alex Imas</strong> piece, and any serious critique of the innovation block, which is
+  where the "it understates AI" objection lands.</li>
+</ul>
+<h2>Log</h2>
+<ul>
+<li><strong>2026-09-17.</strong> Tracker created. First sweep: four web searches plus two pages read in
+  full (the landing page and Cowen's post). 20 items logged, 3 read, 17 leads. Two
+  circulating claims checked against the paper and recorded as overstatements. No
+  revision of the PDF and no replication package as of today.</li>
+</ul>
+<script>
+  var tint = { "Solid": "var(--solid)", "Nearly": "var(--nearly)", "Partial": "var(--partial)",
+               "Not yet": "var(--none)", "Skipping": "var(--none)" };
+  document.querySelectorAll("td").forEach(function (td) {
+    if (td.cellIndex !== 1) return;
+    var label = td.textContent.trim(), c = tint[label];
+    if (c) { td.innerHTML = '<span class="tag" style="background:' + c + '">' + label + '</span>'; }
+  });
+</script>
+</body></html>

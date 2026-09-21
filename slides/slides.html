@@ -1,0 +1,2599 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Economic Scenarios for Transformative AI</title>
+    <meta charset="utf-8" />
+    <script src="slides_files/header-attrs-2.29/header-attrs.js"></script>
+    <link href="slides_files/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link href="slides_files/remark-css-0.0.1/default-fonts.css" rel="stylesheet" />
+    <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      TeX: { extensions: ["color.js"], maxBuffer: 120 * 1024, maxMacros: 20000 }
+    });
+    </script>
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+.title[
+# Economic Scenarios for Transformative AI
+]
+.subtitle[
+## Korinek, Jones, Sacher, Cotter &amp; McCrory (2026) — the claim, the theory, and the machinery
+]
+
+---
+
+
+&lt;style type="text/css"&gt;
+.remark-code, .remark-inline-code { font-size: 80%; }
+.remark-slide-content { padding: 1em 2em; }
+.small { font-size: 80%; }
+.tiny { font-size: 65%; }
+.small table { font-size: 70%; }
+.tiny table { font-size: 62%; width: 100%; }
+.remark-slide-content.eqwall { padding: 4px 8px 0; font-size: 66%; }
+.remark-slide-content.eqstep { padding: 10px 16px 0; font-size: 108%; }
+.remark-slide-content.eq38fit { padding: 0.7em 2em; font-size: 90%; }
+.eqstep .eqnote { font-size: 15px; color: #333; margin: 0 0 6px; }
+.eqwall .eqnote { font-size: 15px; color: #333; margin: 0 0 4px; }
+.tiny td, .tiny th { padding: 1px 5px 1px 0; }
+.highlight-box {
+  background: #fff3e0;
+  border-left: 4px solid #e65100;
+  padding: 0.5em 1em;
+  margin: 0.5em 0;
+}
+.blue-box {
+  background: #e3f2fd;
+  border-left: 4px solid #1565c0;
+  padding: 0.5em 1em;
+  margin: 0.5em 0;
+}
+.nav-btn {
+  position: absolute;
+  bottom: 12px;
+  left: 40px;
+  font-size: 11px;
+  background: #e8eaf6;
+  padding: 2px 8px;
+  border-radius: 3px;
+  z-index: 100;
+  text-decoration: none;
+  color: #1a237e;
+}
+.nav-btn:hover { background: #c5cae9; }
+.nav-btn-br {
+  position: absolute;
+  bottom: 12px;
+  right: 70px;
+  font-size: 11px;
+  background: #e8eaf6;
+  padding: 2px 8px;
+  border-radius: 3px;
+  z-index: 100;
+  text-decoration: none;
+  color: #1a237e;
+}
+.nav-btn-br:hover { background: #c5cae9; }
+.inline-btn {
+  font-size: 11px;
+  background: #e8eaf6;
+  padding: 2px 8px;
+  border-radius: 3px;
+  text-decoration: none;
+  color: #1a237e;
+  margin-right: 6px;
+  vertical-align: middle;
+}
+.inline-btn:hover { background: #c5cae9; }
+a.reflink {
+  color: #3b4a5a;
+  text-decoration: none;
+  border-bottom: 1px dotted #9aa6b2;
+}
+a.reflink:hover { color: #1a237e; border-bottom-color: #1a237e; }
+&lt;/style&gt;
+
+
+
+# Deck Map
+
+&lt;table style="width:100%; font-size:85%; border-collapse:collapse;"&gt;
+&lt;tr style="background:#e8eaf6;"&gt;&lt;th style="text-align:left; padding:6px;"&gt;Part&lt;/th&gt;&lt;th style="text-align:left; padding:6px;"&gt;What it covers&lt;/th&gt;&lt;th style="padding:6px;"&gt;Slides&lt;/th&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td style="padding:6px;"&gt;&lt;b&gt;1. The claim&lt;/b&gt;&lt;/td&gt;&lt;td style="padding:6px;"&gt;What the paper asserts, and the seven inputs it rests on&lt;/td&gt;&lt;td style="text-align:center;"&gt;3&amp;ndash;16&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td style="padding:6px;"&gt;&lt;b&gt;2. How the model is solved&lt;/b&gt;&lt;/td&gt;&lt;td style="padding:6px;"&gt;Where the inputs come from, the steady state, all 44 equations and the order they run in&lt;/td&gt;&lt;td style="text-align:center;"&gt;17&amp;ndash;30&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td style="padding:6px;"&gt;&lt;b&gt;3. Where the equations come from&lt;/b&gt;&lt;/td&gt;&lt;td style="padding:6px;"&gt;Task-based production, prices, TFP, the labor share, ideas, unemployment&lt;/td&gt;&lt;td style="text-align:center;"&gt;31&amp;ndash;45&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td style="padding:6px;"&gt;&lt;b&gt;4. Results and trust&lt;/b&gt;&lt;/td&gt;&lt;td style="padding:6px;"&gt;Scenario by scenario, robustness, the survey, what reproduces&lt;/td&gt;&lt;td style="text-align:center;"&gt;46&amp;ndash;57&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td style="padding:6px;"&gt;&lt;b&gt;Backup&lt;/b&gt;&lt;/td&gt;&lt;td style="padding:6px;"&gt;Derivations, month 0 step by step, the gain &lt;i&gt;a&lt;/i&gt;, the slop extension&lt;/td&gt;&lt;td style="text-align:center;"&gt;58&amp;ndash;77&lt;/td&gt;&lt;/tr&gt;
+&lt;/table&gt;
+
+.blue-box[
+Every number in this deck comes from an independent Python reimplementation of the
+model, which reproduces the paper's Tables 3, 5 and 6 to the printed precision. The
+deck reads that package's CSV output.
+]
+
+---
+class: center, middle, inverse
+
+# Part 1: The Claim
+
+---
+name: terminology
+
+# A Note on Terminology
+
+The paper divides the workforce into **cognitive** occupations and everyone else, and its
+tables carry that label throughout.
+
+.highlight-box[
+**This deck does not use it.** The split the model actually makes is between the occupations
+whose tasks AI is assumed to affect and those it is not. Calling one side *cognitive* is
+inaccurate and demeaning to the work it excludes: it implies the nurse, the electrician and
+the warehouse planner are not thinking, which is false and is not what the model claims. From
+here on they are the **AI-sensitive occupations**.
+]
+
+.small[
+The subscript `\(C\)` stays, because the paper, the reproduction's code and the exported data all
+use it: read `\(\ell_C\)`, `\(w_C\)` and `\(u_C\)` as employment, the wage and the unemployment rate in
+the AI-sensitive group. Tables in this deck are relabelled on display only, so the underlying
+data still matches the paper row for row.
+]
+
+---
+name: claim-table-main
+
+# The Claim, in One Table
+
+&lt;table&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; Outcome &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; No AI &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; Modest &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; Substantial &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; Extreme &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; GDP, pct above no-AI &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.0 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1.6 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 8.3 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 32.4 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; GDP growth, pct per year &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2.0 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2.4 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 5.4 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 15.5 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Average wage, pct above no-AI &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.0 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.7 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2.1 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 9.7 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; AI-sensitive occupations w_C &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.0 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.4 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -0.3 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -11.5 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Labor share, pct of income &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 60.0 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 59.4 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 56.1 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 45.2 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; AI-sensitive employment, pct since mid-2026 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.0 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -0.5 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -3.9 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -21.4 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Unemployment rate, AI-sensitive, pct &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2.8 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2.9 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 4.5 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 17.9 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+.highlight-box[
+The range is the point. Between the modest and extreme scenarios, GDP in 2030 differs
+by a factor of twenty, and AI-sensitive unemployment by a factor of six. Both come from
+the *same model*: what differs is seven numbers about AI.
+]
+
+
+
+.small[
+**Why 15.5% growth is only a 32.4% level gap.** That is the rate for the twelve
+months *ending* in 2030, not an average: the scenario grows 3.6% in 2027 and 6.0% in
+2028, so 1.0061 × 1.0161 × 1.0411 × 1.0874 × 1.1441 = 1.324.
+]
+
+&lt;a href="#growth-vs-levels" class="nav-btn"&gt;year by year →&lt;/a&gt;
+
+---
+
+name: claim-pictures
+
+# The Claim, in Two Pictures
+
+&lt;img src="slides_files/figure-html/claim-figure-1.png" style="display: block; margin: auto;" /&gt;
+
+.small[
+Both panels are gaps against the same economy without AI. Almost all of the divergence
+happens after 2027: the scenarios share today's readings and separate only as AI's reach
+and use diverge. The average wage rises everywhere, but it hides a split: in the extreme
+scenario the average is 9.7% above the no-AI path while pay in AI-sensitive jobs
+ends 11.5% **below** it and everyone else's ends 33.6% above.
+]
+
+---
+
+# What Kind of Object This Is
+
+.pull-left[
+**It is** a mapping:
+
+`$$\{m, d, a, \psi, \rho, \mu, \theta_H\} \longrightarrow \{Y, w, s_L, u\}$$`
+
+Three assumptions about **how big** AI gets and four about **how disruptively** it
+arrives go in; paths for GDP, wages, the labor share and unemployment come out.
+
+The contribution is *comparability*: put anyone's view of AI on the same axes.
+]
+
+.pull-right[
+**It is not** a forecast.
+
+The paper attaches no probabilities to the three scenarios and says so explicitly.
+
+It also excludes, by construction: catastrophic risk, political economy, AI in
+physical tasks, and any feedback from ideas back into AI capability.
+]
+
+.blue-box[
+Read a scenario as "if you believe *these* seven numbers, you are committed to *those*
+outcomes". The interesting work is deciding which numbers you believe.
+]
+
+.small[
+Section 2.1.2 of the paper calls `\(m, d, a, \psi, \rho\)` the *five exogenous objects*, since
+those are the ones entering production; `\(\mu\)` and `\(\theta_H\)` act on the labor market only.
+Table 1 splits all seven the way the next slide does: panel B is how big, panel C is how
+disruptive.
+]
+
+---
+name: inputs-main
+
+# The Seven Inputs
+
+| Input | Meaning | Modest | Substantial | Extreme |
+|---|---|---|---|---|
+| `\(m_{2030}\)` | share of tasks AI can affect | 0.20 | 0.30 | 0.50 |
+| `\(d_{2030}\)` | share of those instances actually done with AI | 0.20 | 0.40 | 0.60 |
+| `\(a_{2030}\)` | log cost saving per AI-performed instance | 0.30 | 0.45 | 0.80 |
+| `\(\psi\)` | share of AI use that is automation, not augmentation | 0.50 | 0.75 | 0.90 |
+| `\(\rho\)` | new labor tasks created per task automated | 0.50 | 0.25 | 0 |
+| `\(\mu\)` | cross-occupation search efficiency | 0.17 | 0.08 | 0.04 |
+| `\(\theta_H\)` | share of the hiring shortfall posted per month | 0.10 | 0.25 | 0.50 |
+
+The first three set **how big** AI is. The last four set **how disruptive** a given
+size turns out to be. Two more are held fixed in all three scenarios: the elasticity of
+capital supply `\(\varepsilon = 3\)` and the wage-rigidity parameter `\(\xi = 0.5\)`, varied
+separately in robustness over `\(\{1, 3, 6, \infty\}\)` and `\(\{0, 0.5, 0.9\}\)`.
+
+.highlight-box[
+.small[
+**Each of the seven is an empirical quantity with a true value**, and for each one you can say
+what data would pin it down. The next seven slides take them one at a time. The explorer linked
+below is a private artifact, shared per account.
+]
+]
+
+&lt;a href="https://claude.ai/artifact/6mNth93dAtpa5T4bisoRUu" class="nav-btn-br" target="_blank"&gt;the explorer &amp;rarr;&lt;/a&gt;
+
+---
+name: input-m
+
+# Input 1 of 7: AI's Reach, `\(m\)`
+
+.pull-left[
+**What it is.** The share of the economy's tasks AI can affect, all of them belonging to the AI-sensitive occupations. Tasks are weighted by their share of base-period labor payments, not by headcount, so `\(m\)` is a share of the wage bill. It follows a logistic curve.
+
+**Where the scenarios put it.** A mid-2026 anchor of **0.14** shared by all three, rising to **0.20 / 0.30 / 0.50** by 2030.
+]
+
+.pull-right[
+**What is measured today.** The 2026 anchor is an observed-exposure measure (Massenkoff–McCrory 2026). That number is an estimate, not an assumption.
+
+**What would settle it.** Task-level capability evaluations mapped onto an occupational task taxonomy, then reweighted by wage-bill shares rather than task counts. The survey asked 10,980 adults which of eight knowledge-work tasks AI will do as well as a professional by 2030: median **0.44**.
+]
+
+.highlight-box[
+.small[
+**Status:** anchored to data in 2026, assumed in 2030. The gap between 0.20 and 0.50 is the single largest unmeasured quantity in the model.
+]
+]
+
+
+---
+name: input-d
+
+# Input 2 of 7: Adoption, `\(d\)`
+
+.pull-left[
+**What it is.** Of the tasks AI can do, the share of instances actually performed with AI. It never enters alone: `\(m \times d\)` is the share of *all* instances done with AI, which is `\(0.50 \times 0.60 = 30\%\)` by 2030 in the extreme scenario.
+
+**Where the scenarios put it.** A mid-2026 anchor of **0.10** shared by all three, rising to **0.20 / 0.40 / 0.60** by 2030.
+]
+
+.pull-right[
+**What is measured today.** The anchor comes from the Census BTOS AI supplement, **adjusted down from firm shares**: BTOS asks whether a firm uses AI, which is not the same as the share of instances done with AI.
+
+**What would settle it.** Instance-level usage rather than firm-level adoption. This is the input where the measured proxy and the modelled object differ most, and where usage telemetry could close the gap fastest. Survey median **0.40**.
+]
+
+.highlight-box[
+.small[
+**Status:** a proxy is measured, the exact object is not. The adjustment from firm shares to instance shares is itself a judgement call.
+]
+]
+
+
+---
+name: input-a
+
+# Input 3 of 7: The Gain, `\(a\)`
+
+.pull-left[
+**What it is.** A *log* saving on the unit cost of one instance done with AI, equivalently a log speed-up: `\(a = 0.80\)` means a task that took 100 minutes takes 45. It applies whether a worker does the instance with AI or capital does it outright.
+
+**Where the scenarios put it.** **0.30 / 0.45 / 0.80** by 2030, on a straight line rather than a logistic, from anchors that differ by scenario (0.30 / 0.35 / 0.45).
+]
+
+.pull-right[
+**What is measured today.** Nothing anchors the 2030 level. The survey asked how long an AI-suited task takes with AI versus without: median **0.44**, a cut of about a third.
+
+**What would settle it.** Randomized task-level productivity experiments, which already exist for a handful of occupations. Of the seven this is the **cheapest to measure directly**, though published estimates are short-run and cover few tasks.
+]
+
+.highlight-box[
+.small[
+**Status:** assumed, but experimentally measurable. Note it says nothing about jobs: whether the instance still employs a person is `\(\psi\)`, not `\(a\)`.
+]
+]
+
+&lt;a href="#gain-detail" class="nav-btn"&gt;the survey's plain-language version &amp;rarr;&lt;/a&gt;
+
+
+---
+name: input-psi
+
+# Input 4 of 7: Automation Share, `\(\psi\)`
+
+.pull-left[
+**What it is.** Of AI use, the share that replaces the worker on that instance rather than assisting them. This is the input that separates productivity from distribution: it moves the labor share while leaving measured TFP almost unchanged.
+
+**Where the scenarios put it.** **0.50 / 0.75 / 0.90**, held constant over time within each scenario.
+]
+
+.pull-right[
+**What is measured today.** The 0.5–0.9 range is taken from the Anthropic Economic Index automation-versus-augmentation split of observed usage. Of the four disruptiveness inputs, this has the best contemporaneous data.
+
+**What would settle it.** Classifying observed AI interactions by whether a human stays in the loop, weighted to the economy rather than to the users of one product. Survey median **0.47**, the modest scenario's value.
+]
+
+.small[
+**There is no separate augmentation input.** Augmentation is `\(1 - \psi\)`, and it delivers the
+*same* cost saving `\(a\)`: the paper applies the saving whether a worker performs the instance
+with AI or capital performs it outright (p. 11). So asking "what if AI mostly helps people
+rather than replacing them" means lowering `\(\psi\)`, not raising some other input. Across the
+full range from pure augmentation to pure automation, measured TFP moves only
+**3.03 to 3.11**, while the labor share moves **59.8 to 54.9** and AI-sensitive employment
+**−1.2% to −4.9%**. GDP does rise over that range (4.5 to 9.5), but through capital
+deepening, not productivity.
+]
+
+.highlight-box[
+.small[
+**Status:** a range anchored to usage data, a point value assumed. Moving it across its range shifts the labor share from 57.3 to 55.4 percent while TFP moves only 3.07 to 3.10.
+]
+]
+
+
+---
+name: input-rho
+
+# Input 5 of 7: Reinstatement, `\(\rho\)`
+
+.pull-left[
+**What it is.** New labor tasks created for each task automated. At 1 displacement is exactly offset, at 0 nothing comes back. New tasks go to the AI-sensitive occupations and enter at the same unit cost, so they offset displacement one for one in the affected wage bill.
+
+**Where the scenarios put it.** **0.50 / 0.25 / 0.00**. Nothing in the paper's scenarios goes above 0.5.
+]
+
+.pull-right[
+**What is measured today.** The 0–0.5 range comes from the Acemoglu–Restrepo (2019) decomposition, which is **historical and not about AI**. It was not asked in the survey.
+
+**What would settle it.** Nothing available today. You cannot measure tasks that do not exist yet, and a technology mid-diffusion offers no contemporaneous read. Only historical analogues, from a different technology.
+]
+
+.highlight-box[
+.small[
+**Status:** the **least identified** of the seven, and it does more work than any other friction: moved alone it shifts 2030 AI-sensitive unemployment by 1.35 points across the paper's range, more if you allow full offset.
+]
+]
+
+
+---
+name: input-mu
+
+# Input 6 of 7: Search Efficiency, `\(\mu\)`
+
+.pull-left[
+**What it is.** How easily a displaced worker finds work in another occupation, as a discount on normal-times search. Lower is worse. It is arguably a labor-market **institution** rather than a fact about AI.
+
+**Where the scenarios put it.** **0.17 / 0.08 / 0.04**, against a normal-times value of 0.17.
+]
+
+.pull-right[
+**What is measured today.** The normal-times value is well measured: IPUMS-CPS matched monthly 2010–19, the Carrillo-Tudela &amp; Visschers (2023) occupational switching matrix, JOLTS, CPS 2025.
+
+**What would settle it.** The baseline needs nothing further. What is assumed is how much harder reallocation becomes under a shock with no precedent. The survey asked how long re-employment would take against a three-month normal: median about eight months, implying **0.064**.
+]
+
+.highlight-box[
+.small[
+**Status:** baseline measured, shock response assumed. Hold everything else at the extreme setting and put this back to its normal-times 0.17 and you get the highest-GDP cell in the whole grid.
+]
+]
+
+
+---
+name: input-theta
+
+# Input 7 of 7: Posting Speed, `\(\theta_H\)`
+
+.pull-left[
+**What it is.** The share of the hiring shortfall that firms post as vacancies each month. It governs how *quickly* the labor market works through the reallocation rather than how large the reallocation is.
+
+**Where the scenarios put it.** **0.10 / 0.25 / 0.50** per month.
+]
+
+.pull-right[
+**What is measured today.** Normal-times vacancy behaviour is measured from JOLTS, alongside the employment-weighted fill rate of 0.65 and the matching curvature of 1.27 from den Haan et al. (2000).
+
+**What would settle it.** As with `\(\mu\)`, the baseline is measured and the scenario values are guesses about the speed of adjustment under an unprecedented shock. Not asked in the survey.
+]
+
+.highlight-box[
+.small[
+**Status:** baseline measured, scenario values assumed. It is the **weakest** of the seven: moved alone it shifts 2030 AI-sensitive unemployment by 0.66 points.
+]
+]
+
+---
+
+# Two Ways to Read the Rest
+
+.pull-left[
+**Stop here and use it.**
+
+Everything so far treats the model as a box: seven numbers in, four paths out. That is already
+enough to put your own view of AI on the same axes as the paper's three, which is exactly what
+the explorer does.
+
+&lt;a href="https://claude.ai/artifact/6mNth93dAtpa5T4bisoRUu" class="inline-btn" target="_blank"&gt;set the inputs yourself &amp;rarr;&lt;/a&gt;
+]
+
+.pull-right[
+**Or open the box.**
+
+Parts 2 and 3 are the mechanism: how tasks become output, why the labor share moves without
+productivity moving, where unemployment comes from, how the model is actually solved, and
+which assumptions are carrying the results.
+]
+
+.blue-box[
+Nothing after this slide changes a number you have already seen. It explains where those
+numbers come from, and which of them you should be least willing to believe.
+]
+
+---
+class: center, middle, inverse
+
+# Part 2: How the Model Is Solved
+
+---
+name: theory-map
+
+# The Shape of the Whole Thing
+
+&lt;div style="display:flex; align-items:stretch; gap:6px; margin-top:4px;"&gt;
+
+&lt;div style="flex:1.85; border:1px solid #d6dbe0; padding:10px 13px 11px; background:#fbfcfd; font-size:13px; line-height:1.4; border-left:4px solid #2a78d6;"&gt;
+&lt;div style="font-weight:600; font-size:14.5px; margin-bottom:5px;"&gt;Inputs&lt;/div&gt;
+&lt;div style="font-weight:600; font-size:11.5px; letter-spacing:.03em; text-transform:uppercase; color:#5b6873; margin-top:5px;"&gt;Seven that vary by scenario &amp;mdash; their 2030 values&lt;/div&gt;
+&lt;i&gt;m&lt;/i&gt; reach &amp;middot; &lt;i&gt;d&lt;/i&gt; adoption &amp;middot; &lt;i&gt;a&lt;/i&gt; gain &amp;middot; &amp;psi; automation &amp;middot;
+&amp;rho; reinstatement &amp;middot; &amp;mu; search &amp;middot; &amp;theta;&lt;sub&gt;H&lt;/sub&gt; posting
+&lt;div style="font-weight:600; font-size:11.5px; letter-spacing:.03em; text-transform:uppercase; color:#5b6873; margin-top:5px;"&gt;Given, but part of those seven's paths&lt;/div&gt;
+mid-2026 anchors &lt;i&gt;m&lt;/i&gt; = 0.14 and &lt;i&gt;d&lt;/i&gt; = 0.10, shared by all three; &lt;i&gt;a&lt;/i&gt;'s anchor
+differs (0.30 / 0.35 / 0.45); ceiling &lt;i&gt;d&amp;#772;&lt;/i&gt; = 1
+&lt;div style="font-weight:600; font-size:11.5px; letter-spacing:.03em; text-transform:uppercase; color:#5b6873; margin-top:5px;"&gt;Fixed across scenarios, varied in robustness&lt;/div&gt;
+&amp;epsilon; = 3 capital supply &amp;middot; &amp;xi; = 0.5 wage rigidity
+&lt;div style="font-weight:600; font-size:11.5px; letter-spacing:.03em; text-transform:uppercase; color:#5b6873; margin-top:5px;"&gt;Calibrated constants, never varied&lt;/div&gt;
+&lt;span style="color:#5b6873;"&gt;&amp;sigma; = 0.5, s&lt;sub&gt;L&lt;/sub&gt; = 0.60, s&lt;sub&gt;C&lt;/sub&gt;/s&lt;sub&gt;L&lt;/sub&gt; = 0.624,
+r&amp;#772; = 11.5%, &amp;delta; = 5% &amp;middot; ideas: 1&amp;minus;&amp;phi;&lt;sub&gt;R&lt;/sub&gt; = 2.86, &amp;lambda; = 1,
+g = 1.67%, n = 0.33%, &amp;iota;&lt;sub&gt;R&lt;/sub&gt; = 3.5% rising 2.8%/yr &amp;middot; labor market:
+U&amp;#772; = 3.8%, q&amp;#772; = 0.11/yr split 0.69 / 1.52 (55% responsive), &amp;mu;&amp;#772; = 0.17,
+&amp;iota; = 1.27, mean &amp;pi;&amp;#772; = 0.65 &amp;middot; dates 2024, 2026.5, 2030; step h = 1/12&lt;/span&gt;
+&lt;/div&gt;
+
+&lt;div style="align-self:center; font-size:26px; color:#9aa6b2; padding:0 1px; flex:0 0 auto;"&gt;&amp;rarr;&lt;/div&gt;
+
+&lt;div style="flex:1; border:1px solid #d6dbe0; padding:10px 13px 11px; background:#fbfcfd; font-size:13px; line-height:1.4; border-left:4px solid #eb6834;"&gt;
+&lt;div style="font-weight:600; font-size:14.5px; margin-bottom:5px;"&gt;The model&lt;/div&gt;
+&lt;div style="font-weight:600; font-size:11.5px; letter-spacing:.03em; text-transform:uppercase; color:#5b6873; margin-top:5px;"&gt;First, once&lt;/div&gt;
+The steady state, Eq. (38): solve for 9 SS values. &amp;chi;, &amp;pi;&amp;#772;&lt;sub&gt;o&lt;/sub&gt;, q&amp;#772;&lt;sub&gt;o&lt;/sub&gt; and
+f&amp;#772;&lt;sub&gt;o&lt;/sub&gt; become constants; U&amp;#772;&lt;sub&gt;o&lt;/sub&gt; are the starting pools.
+&lt;div style="font-weight:600; font-size:11.5px; letter-spacing:.03em; text-transform:uppercase; color:#5b6873; margin-top:5px;"&gt;Then 73 months, 2024 to 2030&lt;/div&gt;
+The 44 equations, solved &lt;b&gt;sequentially&lt;/b&gt; rather than all at once:&lt;br&gt;
+&lt;b&gt;A&lt;/b&gt; ideas (3) &amp;middot; &lt;b&gt;B&lt;/b&gt; capital, wage, shares, targets (9)&lt;br&gt;
+&lt;b&gt;C&lt;/b&gt; flows (23) &amp;middot; &lt;b&gt;D&lt;/b&gt; reporting (9)&lt;br&gt;
+&lt;b&gt;Each month solves&lt;/b&gt; employment &amp;#8467;&lt;sub&gt;C&lt;/sub&gt;, &amp;#8467;&lt;sub&gt;N&lt;/sub&gt;, pools
+U&lt;sub&gt;C&lt;/sub&gt;, U&lt;sub&gt;N&lt;/sub&gt;, job-finding rates f&lt;sub&gt;C&lt;/sub&gt;, f&lt;sub&gt;N&lt;/sub&gt; by worker origin,
+ideas &amp;Delta;ln A, relative wage w&lt;sub&gt;C&lt;/sub&gt;/w; they become next month's inputs.&lt;br&gt;
+&lt;span style="color:#5b6873;"&gt;The ordering is recursive, so only two rows need a root-find:
+the rental rate, and the actual economy at realized employment.&lt;/span&gt;
+&lt;/div&gt;
+
+&lt;div style="align-self:center; font-size:26px; color:#9aa6b2; padding:0 1px; flex:0 0 auto;"&gt;&amp;rarr;&lt;/div&gt;
+
+&lt;div style="flex:1; border:1px solid #d6dbe0; padding:10px 13px 11px; background:#fbfcfd; font-size:13px; line-height:1.4; border-left:4px solid #1baf7a;"&gt;
+&lt;div style="font-weight:600; font-size:14.5px; margin-bottom:5px;"&gt;Outputs: series&lt;/div&gt;
+GDP and measured TFP&lt;br&gt;
+Wages: average, AI-sensitive, all other&lt;br&gt;
+Labor share and the capital stock&lt;br&gt;
+Employment and unemployment, by group&lt;br&gt;
+&lt;span style="color:#5b6873;"&gt;Every one a monthly gap against the same economy without AI.&lt;/span&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+.blue-box[
+.small[
+The middle box comes in **two passes**. First **how the model is solved**, the rest of this part:
+where the inputs come from, all 44 equations, the order they run in, and what is already known
+when each one fires. Then **how it is derived**, Part 3: where each equation comes from and which
+assumptions are carrying the results. Part 4 is what the right box says.
+]
+]
+
+---
+name: calibration-main
+
+# Calibration: Where the Numbers Come From
+
+.small[
+| Object | Value | Role | Source |
+|---|---|---|---|
+| `\(\sigma\)` | 0.5 | constant | Acemoglu–Restrepo (2022), from Humlum (2019) |
+| `\(s_{L,t0}\)` | 0.60 | constant | conventional US labor share |
+| `\(s_C/s_L\)` | 0.624 | constant | CPS 2025, SOC groups 11–29, 41, 43 |
+| `\(1-\phi_R\)` | 2.86 | constant | Bloom et al. (2020) fishing-out of 3.1, converted |
+| `\(\bar U, \bar q, \bar \mu\)` | 3.8%, 0.11/yr, 0.17 | constant | CPS 2025, IPUMS-CPS 2010–19, JOLTS |
+| `\(\varepsilon\)` | 3 | fixed, varied in robustness | half the wealth elasticity of Moll–Rachel–Restrepo (2022) |
+| `\(m_{2026}\)` | 0.14 | **anchor** for input `\(m\)` | observed-exposure measure (Massenkoff–McCrory 2026) |
+| `\(d_{2026}\)` | 0.10 | **anchor** for input `\(d\)` | Census BTOS AI supplement, adjusted down from firm shares |
+| `\(\psi\)` range | 0.5–0.9 | **range** for input `\(\psi\)` | Anthropic Economic Index automation-vs-augmentation split |
+| `\(\rho\)` range | 0–0.5 | **range** for input `\(\rho\)` | Acemoglu–Restrepo (2019) decomposition |
+]
+
+.small[
+**None of these rows is one of the seven inputs.** The seven are the *2030 values* of `\(m\)`, `\(d\)`,
+`\(a\)`, `\(\psi\)`, `\(\rho\)`, `\(\mu\)`, `\(\theta_H\)`, and they are the only things that differ across the
+three scenarios. This slide is what sits behind them: five constants that never move, one
+more, `\(\varepsilon\)`, held fixed across scenarios and varied only in robustness, two mid-2026
+**anchors** that `\(m\)` and `\(d\)` start from and that all three scenarios share, and two **ranges**
+the `\(\psi\)` and `\(\rho\)` scenario values are drawn from. The 2030 values of `\(m\)`, `\(d\)` and `\(a\)`
+are **assumptions**, not estimates; everything on this slide is anchored to data.
+]
+
+---
+class: eq38fit
+name: eq38
+
+# Step 0: Pinning Down the Steady-State Constants
+
+.small[
+Equation (38), solved once before the first month. &lt;span style="color:#228B22;font-weight:600"&gt;Green&lt;/span&gt; is given, &lt;span style="color:#FF4500;font-weight:600"&gt;red&lt;/span&gt; is solved for.
+]
+
+$$
+`\begin{aligned}
+{\color{OrangeRed} \bar H_o} &amp;= {\color{ForestGreen} \bar q_o}\, {\color{ForestGreen} \ell_{o,t0}}, &amp;\qquad {\color{OrangeRed} \bar f_o} {\color{OrangeRed} \bar U_o} &amp;= {\color{OrangeRed} \bar H_o}, &amp;\qquad {\color{OrangeRed} \bar U_C} + {\color{OrangeRed} \bar U_N} &amp;= {\color{ForestGreen} \bar U} \\[1pt]
+{\color{OrangeRed} \bar f_C} &amp;= \frac{{\color{OrangeRed} \bar H_C}}{{\color{OrangeRed} \bar S_C}} + {\color{ForestGreen} \bar\mu} \frac{{\color{OrangeRed} \bar H_N}}{{\color{OrangeRed} \bar S_N}}, &amp;\qquad {\color{OrangeRed} \bar f_N} &amp;= {\color{ForestGreen} \bar\mu} \frac{{\color{OrangeRed} \bar H_C}}{{\color{OrangeRed} \bar S_C}} + \frac{{\color{OrangeRed} \bar H_N}}{{\color{OrangeRed} \bar S_N}} \\[1pt]
+{\color{OrangeRed} \bar \pi_o} &amp;= {\color{OrangeRed} \chi} \Big[ 1 - \Big(\frac{{\color{OrangeRed} \bar H_o}}{{\color{OrangeRed} \chi} {\color{OrangeRed} \bar S_o}}\Big)^{{\color{ForestGreen} \iota}}\Big]^{1/{\color{ForestGreen} \iota}}, &amp;\qquad \frac{{\color{ForestGreen} \ell_{C,t0}} {\color{OrangeRed} \bar \pi_C} + {\color{ForestGreen} \ell_{N,t0}} {\color{OrangeRed} \bar \pi_N}}{L - {\color{ForestGreen} \bar U}} &amp;= {\color{ForestGreen} \text{mean } \bar\pi}
+\end{aligned}`
+$$
+
+.pull-left[
+.tiny[
+&lt;span style="color:#228B22"&gt;&lt;b&gt;What goes in.&lt;/b&gt;&lt;/span&gt; Only calibrated constants, never a scenario:
+
+| | | source |
+|---|---|---|
+| `\(\bar U\)` | 0.038 | CPS 2025 |
+| `\(\bar q\)` | 0.11/yr, split 0.69 / 1.52 | IPUMS-CPS 2010-19 |
+| `\(\bar \mu\)` | 0.17 | occupational switching |
+| `\(\iota\)` | 1.27 | den Haan et al. (2000) |
+| mean `\(\bar \pi\)` | 0.65 | JOLTS |
+| `\(\ell_{C,t0}, \ell_{N,t0}\)` | 0.600, 0.362 | CPS employment split |
+]
+]
+
+.pull-right[
+.tiny[
+&lt;span style="color:#FF4500"&gt;&lt;b&gt;What comes out.&lt;/b&gt;&lt;/span&gt; Nine objects, solved once, then held fixed for all 72 months and all
+three scenarios:
+
+| | |
+|---|---|
+| pools `\(\bar U_C, \bar U_N\)` | 0.0174, 0.0206 |
+| hires `\(\bar H_C, \bar H_N\)` | 0.0038, 0.0051 |
+| finding `\(\bar f_C, \bar f_N\)` | 0.219, 0.247 |
+| filling `\(\bar \pi_C, \bar \pi_N\)` | 0.659, 0.635 |
+| efficiency `\(\chi\)` | 0.759 |
+]
+]
+
+&lt;a href="#eq38-solve" class="nav-btn"&gt;how the system is actually solved &amp;rarr;&lt;/a&gt;
+
+.highlight-box[
+.small[
+**None of the seven inputs enters here.** `\(\chi\)`, `\(\bar \pi_C\)` and `\(\bar \pi_N\)` are constants to
+the monthly system, so they must be pinned before any AI assumption exists. The one bridge to the
+seven is `\(\bar \mu = 0.17\)`, the normal-times value the scenario's `\(\mu\)` departs from. The two
+right-hand equations are the **closures**: they pin the pool's split and the level of `\(\chi\)`.
+]
+]
+
+---
+name: month-main
+
+# What the Model Does in One Month
+
+.small[
+1. &lt;b&gt;Paths.&lt;/b&gt; Evaluate the AI paths at &lt;i&gt;t&lt;/i&gt; and &lt;i&gt;t&lt;/i&gt;+1: a lookup, not a solve
+   (&lt;i&gt;m&lt;/i&gt;&lt;sub&gt;t&lt;/sub&gt;, &lt;i&gt;d&lt;/i&gt;&lt;sub&gt;t&lt;/sub&gt;, &lt;i&gt;a&lt;/i&gt;&lt;sub&gt;t&lt;/sub&gt;; &amp;psi; and &amp;rho; are constant
+   in the three scenarios, and &lt;i&gt;m&lt;/i&gt;, &lt;i&gt;d&lt;/i&gt; enter only as &lt;i&gt;m&lt;/i&gt;&lt;sub&gt;t&lt;/sub&gt;&lt;i&gt;d&lt;/i&gt;&lt;sub&gt;t&lt;/sub&gt;).
+2. &lt;b&gt;Capital market.&lt;/b&gt; Solve for the rental-rate gap &amp;Delta;ln &lt;i&gt;r&lt;/i&gt;&lt;sub&gt;t&lt;/sub&gt; by bisection,
+   from &lt;a href="#prop1-main" class="reflink"&gt;Proposition 1&lt;/a&gt;, the closed form for the
+   &lt;b&gt;frictionless&lt;/b&gt; economy where labor reallocates instantly.
+3. &lt;b&gt;Wage, shares and targets.&lt;/b&gt; Everything else in that closed form:
+   &amp;#8467;&amp;#771;&lt;sub&gt;N,t&lt;/sub&gt;, &lt;i&gt;s&lt;/i&gt;&lt;sub&gt;L,t&lt;/sub&gt;, &amp;Delta;ln &lt;i&gt;w&lt;/i&gt;&lt;sub&gt;t&lt;/sub&gt;,
+   &amp;Delta;ln &lt;i&gt;K&lt;/i&gt;&lt;sub&gt;t&lt;/sub&gt;, &amp;Delta;ln TFP&lt;sub&gt;t&lt;/sub&gt;, and the &lt;b&gt;targets&lt;/b&gt;
+   &amp;#8467;&lt;sup&gt;&amp;#8727;&lt;/sup&gt;&lt;sub&gt;C,t+1&lt;/sub&gt;, &amp;#8467;&lt;sup&gt;&amp;#8727;&lt;/sup&gt;&lt;sub&gt;N,t+1&lt;/sub&gt;. Steps 4 to 7
+   are all about the gap between those targets and where labor actually is.
+4. &lt;b&gt;Gaps and the AI-sensitive wage.&lt;/b&gt; Form the &lt;b&gt;overhang&lt;/b&gt; (&lt;i&gt;G&lt;/i&gt;&lt;sub&gt;o,t&lt;/sub&gt;), the
+   &lt;b&gt;shortfall&lt;/b&gt; (&lt;i&gt;B&lt;/i&gt;&lt;sub&gt;o,t&lt;/sub&gt;) and the attached force (&lt;i&gt;N&lt;/i&gt;&lt;sub&gt;C,t&lt;/sub&gt;); move the
+   actual wage (&lt;i&gt;w&lt;/i&gt;&lt;sub&gt;C,t&lt;/sub&gt;/&lt;i&gt;w&lt;/i&gt;&lt;sub&gt;t&lt;/sub&gt;) a fraction 1&amp;minus;&amp;xi;&lt;sub&gt;m&lt;/sub&gt;
+   toward the wage that would clear it (&lt;i&gt;w&lt;/i&gt;&lt;sup&gt;c&lt;/sup&gt;&lt;sub&gt;C,t&lt;/sub&gt;).
+5. &lt;b&gt;Separations and openings.&lt;/b&gt; At that wage read off labor demand
+   (&amp;#8467;&lt;sup&gt;d&lt;/sup&gt;&lt;sub&gt;C,t&lt;/sub&gt;); the excess (&lt;i&gt;E&lt;/i&gt;&lt;sub&gt;t&lt;/sub&gt;) becomes quits-not-replaced
+   (&lt;i&gt;q&lt;/i&gt;&lt;sub&gt;o,t&lt;/sub&gt;) and &lt;b&gt;layoffs&lt;/b&gt; (&lt;i&gt;D&lt;/i&gt;&lt;sub&gt;C,t&lt;/sub&gt;); post vacancies
+   (&lt;i&gt;v&lt;/i&gt;&lt;sub&gt;C,t&lt;/sub&gt;, &lt;i&gt;v&lt;/i&gt;&lt;sub&gt;N,t&lt;/sub&gt;) to replace quits plus &amp;theta;&lt;sub&gt;H&lt;/sub&gt; of the
+   shortfall (&lt;i&gt;Z&lt;/i&gt;&lt;sub&gt;t&lt;/sub&gt;, &lt;i&gt;B&lt;/i&gt;&lt;sub&gt;N,t&lt;/sub&gt;), over the normal filling rate
+   (&amp;pi;&amp;#772;&lt;sub&gt;o&lt;/sub&gt;).
+6. &lt;b&gt;Matching.&lt;/b&gt; Hires (&lt;i&gt;H&lt;/i&gt;&lt;sub&gt;j,t&lt;/sub&gt;) from effective search (&lt;i&gt;S&lt;/i&gt;&lt;sub&gt;j,t&lt;/sub&gt;) and
+   vacancies; finding rates by origin (&lt;i&gt;f&lt;/i&gt;&lt;sub&gt;C,t&lt;/sub&gt;, &lt;i&gt;f&lt;/i&gt;&lt;sub&gt;N,t&lt;/sub&gt;).
+7. &lt;b&gt;Stocks.&lt;/b&gt; Update employment (&amp;#8467;&lt;sub&gt;o,t+1&lt;/sub&gt;) and the pools (&lt;i&gt;U&lt;/i&gt;&lt;sub&gt;o,t+1&lt;/sub&gt;).
+8. &lt;b&gt;Reporting.&lt;/b&gt; The actual economy at &lt;i&gt;realized&lt;/i&gt; employment, system (39):
+   &lt;i&gt;Y&lt;/i&gt;&lt;sub&gt;t&lt;/sub&gt;, &lt;i&gt;w&lt;/i&gt;&lt;sub&gt;N,t&lt;/sub&gt;, &lt;i&gt;r&lt;/i&gt;&lt;sub&gt;t&lt;/sub&gt;, &lt;i&gt;K&lt;/i&gt;&lt;sub&gt;t&lt;/sub&gt;,
+   &lt;i&gt;s&lt;/i&gt;&lt;sub&gt;L,t&lt;/sub&gt;.
+9. &lt;b&gt;Ideas.&lt;/b&gt; Feed the GDP gap into research (&amp;Delta;ln &lt;i&gt;R&lt;/i&gt;&lt;sub&gt;t&lt;/sub&gt;), step the ideas
+   stock forward (&amp;Delta;&lt;i&gt;g&lt;/i&gt;&lt;sub&gt;t&lt;/sub&gt;, &amp;Delta;ln &lt;i&gt;A&lt;/i&gt;&lt;sub&gt;t+1&lt;/sub&gt;).
+]
+
+.highlight-box[
+44 equations per month, but the ordering is deliberately recursive: only two of them
+need a root-find, and both are one-dimensional and monotone.
+]
+
+&lt;a href="#the-44" class="nav-btn"&gt;which 44 equations, and where in the code &amp;rarr;&lt;/a&gt;
+
+---
+
+# The Normal Labor Market, Before AI
+
+&lt;table&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; object &lt;/th&gt;
+   &lt;th style="text-align:left;"&gt; value &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; pool, share of labor force &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 3.8% &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; quit rate, AI-sensitive / other, per month &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 0.63% / 1.40% &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; aggregate finding rate, per month &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 0.23 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; filling rate, AI-sensitive / other &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 0.66 / 0.64 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; matching efficiency chi &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 0.76 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; job-finders who change group &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 1 in 7 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+Nothing in this block is fitted to AI. It is solved once, from the CPS and JOLTS, and
+then held fixed across scenarios.
+
+.blue-box[
+For a reproduction this block is the best available test: it has to hit six published
+numbers using none of them as inputs. The Python reimplementation matches all six.
+]
+
+---
+class: eqwall
+name: month-zero
+
+.eqnote[
+**All 44 equations of Table A.1, the system solved once per month.**
+]
+
+$$
+`\begin{aligned}
+\Delta \ln R_t &amp; = \Delta \ln Y_t \;\; \text{(22)} &amp; &amp; &amp; w_{C,t}/w_t &amp; = (w_{C,t-1}/w_{t-1})^{\xi_m} (w^c_{C,t}/w_t)^{1-\xi_m}, \ \xi_m = \xi^{1/12} \;\; \text{(30)} \\[14pt]
+\Delta g_t &amp; = g \big[ e^{\lambda \Delta \ln R_t - (1-\phi_R)\Delta \ln A_t} - 1 \big] \;\; \text{(42)} &amp; &amp; &amp; \ell^d_{C,t} &amp; = \text{system (39) at } w_{C,t};\ E_t, Z_t = \text{excess, shortfall} \;\; \text{(39)} \\[14pt]
+\Delta \ln A_t &amp; = \text{closed form, } 0 \text{ at } t_0 \;\; \text{(43)} &amp; &amp; &amp; D_{C,t} &amp; = \max\{0, E_t - q_{C,t}\ell_{C,t}\}, \quad D_{N,t} \equiv 0 \;\; \text{(31)} \\[14pt]
+\varepsilon\, \Delta \ln r_t &amp; = \Delta \ln K_t \ \text{(one root)} \;\; \text{(18, 6)} &amp; &amp; &amp; v_{C,t} &amp; = \bar\pi_C^{-1}[\max\{0, q_C \ell_C - E\} + \theta_H Z] \;\; \text{(32)} \\[14pt]
+\tilde \ell_{N,t} &amp; = -\ln \big( 1 - m_t d_t [\, 1 - \rho \psi_t - (1-\psi_t) e^{-(1-\sigma)a_t} ] \big) \;\; \text{(15)} &amp; &amp; &amp; v_{N,t} &amp; = \bar\pi_N^{-1}(q_{N,t}+\theta_H B_{N,t})\,\ell_{N,t} \;\; \text{(32)} \\[14pt]
+s_{L,t} &amp; = 1 - \big[ s_{K,t0} + s_{L,t0} \psi_t m_t d_t ( e^{-(1-\sigma)a_t} - \rho ) \big] e^{(1-\sigma)\Delta \ln r_t} \;\; \text{(14)} &amp; &amp; &amp; S_{C,t} &amp; = U_{C,t} + \mu U_{N,t}, \quad S_{N,t} = \mu U_{C,t} + U_{N,t} \;\; \text{(33)} \\[14pt]
+\Delta \ln w_t &amp; = (\Delta \ln s_{L,t} + \tilde \ell_{N,t})/(1-\sigma) + \Delta \ln A_t \;\; \text{(16)} &amp; &amp; &amp; H_{j,t} &amp; = \chi S_{j,t} v_{j,t} (S_{j,t}^{\iota} + v_{j,t}^{\iota})^{-1/\iota}, \ j \in \{C,N\} \;\; \text{(34)} \\[14pt]
+\Delta \ln (Y_t/L_t) &amp; = \Delta \ln w_t - \Delta \ln s_{L,t} \;\; \text{(5)} &amp; &amp; &amp; f_{C,t} &amp; = H_{C,t}/S_{C,t} + \mu H_{N,t}/S_{N,t} \;\; \text{(35)} \\[14pt]
+\Delta \ln K_t &amp; = \ln [(1 - s_{L,t})/s_{K,t0}] + \Delta \ln (Y_t/L_t) - \Delta \ln r_t \;\; \text{(17)} &amp; &amp; &amp; f_{N,t} &amp; = \mu H_{C,t}/S_{C,t} + H_{N,t}/S_{N,t} \;\; \text{(35)} \\[14pt]
+\Delta \ln \mathrm{TFP}_t &amp; = -\tfrac{1}{1-\sigma} \ln \big[ s_{K,t0} + s_{L,t0} ( 1 - m_t d_t (1 - e^{-(1-\sigma)a_t}) ) e^{-(1-\sigma)\Delta \ln A_t} \big] \;\; \text{(45)} &amp; &amp; &amp; \ell_{o,t+1} &amp; = (1-q_{o,t})\ell_{o,t} - D_{o,t} + H_{o,t}, \ o \in \{C,N\} \;\; \text{(36)} \\[14pt]
+\ell^*_{N,t} &amp; = \ell_{N,t0}\, e^{\tilde \ell_{N,t}} \;\; \text{(13)} &amp; &amp; &amp; U_{o,t+1} &amp; = U_{o,t} + q_{o,t}\ell_{o,t} + D_{o,t} - f_{o,t}U_{o,t}, \ o \in \{C,N\} \;\; \text{(37)} \\[14pt]
+\ell^*_{C,t} &amp; = \ell_{C,t0} + \ell_{N,t0} - \ell^*_{N,t} \;\; \text{(13)} &amp; &amp; &amp; \tilde \ell_{C,t} &amp; = \ln(\ell^*_{C,t}/\ell_{C,t0}) \;\; \text{(19)} \\[14pt]
+q_{o,t} &amp; = q^X_o + q^T_o\, f_{o,t-1}/\bar f_o, \ o \in \{C,N\} \;\; \text{(27)} &amp; &amp; &amp; u^x_t &amp; = (U_{C,t} + U_{N,t} - \bar U)/L \;\; \text{(--)} \\[14pt]
+G_{o,t} &amp; = \max\{0, \ln \ell_{o,t} - \ln \ell^*_{o,t+1}\}, \ o \in \{C,N\} \;\; \text{(28)} &amp; &amp; &amp; \{Y_t, w_{N,t}, r_t, K_t, s_{L,t}\} &amp; = \text{system (39) at realized } (\ell_{C,t}, \ell_{N,t}) \;\; \text{(39)} \\[14pt]
+B_{o,t} &amp; = \max\{0, \ln \ell^*_{o,t+1} - \ln \ell_{o,t}\}, \ o \in \{C,N\} \;\; \text{(28)} &amp; &amp; &amp; X_t &amp; = \tfrac{1}{2L}(|\ell_{C,t+1}-\ell_{C,t}| + |\ell_{N,t+1}-\ell_{N,t}|) \;\; \text{(--)} \\[14pt]
+N_{C,t} &amp; = \ell_{C,t} + \max\{0, U_{C,t} - \bar U_C\} \;\; \text{(29)} &amp; &amp; &amp; G_t &amp; = G_{C,t}\,\ell_{C,t}/L \;\; \text{(--)}
+\end{aligned}`
+$$
+
+---
+class: eqwall
+name: month-zero-order
+
+.eqnote[
+**The same 44 equations, in the order the model actually solves them** (Appendix A, steps 2 to 9).
+]
+
+$$
+`\begin{aligned}
+&amp; \textbf{2 and 3. Capital market, wage, shares, targets} &amp; &amp; &amp; &amp; \textbf{6. Matching} \\[7pt]
+\varepsilon\, \Delta \ln r_t &amp; = \Delta \ln K_t \ \text{(one root, by bisection)} \;\; \text{(18, 6)} &amp; &amp; &amp; S_{C,t} &amp; = U_{C,t} + \mu U_{N,t}, \quad S_{N,t} = \mu U_{C,t} + U_{N,t} \;\; \text{(33)} \\[7pt]
+\tilde \ell_{N,t} &amp; = -\ln \big( 1 - m_t d_t [\, 1 - \rho \psi_t - (1-\psi_t) e^{-(1-\sigma)a_t} ] \big) \;\; \text{(15)} &amp; &amp; &amp; H_{j,t} &amp; = \chi S_{j,t} v_{j,t} (S_{j,t}^{\iota} + v_{j,t}^{\iota})^{-1/\iota}, \ j \in \{C,N\} \;\; \text{(34)} \\[7pt]
+s_{L,t} &amp; = 1 - \big[ s_{K,t0} + s_{L,t0} \psi_t m_t d_t ( e^{-(1-\sigma)a_t} - \rho ) \big] e^{(1-\sigma)\Delta \ln r_t} \;\; \text{(14)} &amp; &amp; &amp; f_{C,t} &amp; = H_{C,t}/S_{C,t} + \mu H_{N,t}/S_{N,t} \;\; \text{(35)} \\[7pt]
+\Delta \ln w_t &amp; = (\Delta \ln s_{L,t} + \tilde \ell_{N,t})/(1-\sigma) + \Delta \ln A_t \;\; \text{(16)} &amp; &amp; &amp; f_{N,t} &amp; = \mu H_{C,t}/S_{C,t} + H_{N,t}/S_{N,t} \;\; \text{(35)} \\[7pt]
+\Delta \ln (Y_t/L_t) &amp; = \Delta \ln w_t - \Delta \ln s_{L,t} \;\; \text{(5)} &amp; &amp; &amp; &amp; \textbf{7. Stocks} \\[7pt]
+\Delta \ln K_t &amp; = \ln [(1 - s_{L,t})/s_{K,t0}] + \Delta \ln (Y_t/L_t) - \Delta \ln r_t \;\; \text{(17)} &amp; &amp; &amp; \ell_{o,t+1} &amp; = (1-q_{o,t})\ell_{o,t} - D_{o,t} + H_{o,t}, \ o \in \{C,N\} \;\; \text{(36)} \\[7pt]
+\Delta \ln \mathrm{TFP}_t &amp; = -\tfrac{1}{1-\sigma} \ln \big[ s_{K,t0} + s_{L,t0} ( 1 - m_t d_t (1 - e^{-(1-\sigma)a_t}) ) e^{-(1-\sigma)\Delta \ln A_t} \big] \;\; \text{(45)} &amp; &amp; &amp; U_{o,t+1} &amp; = U_{o,t} + q_{o,t}\ell_{o,t} + D_{o,t} - f_{o,t}U_{o,t}, \ o \in \{C,N\} \;\; \text{(37)} \\[7pt]
+\ell^*_{N,t} &amp; = \ell_{N,t0}\, e^{\tilde \ell_{N,t}} \;\; \text{(13)} &amp; &amp; &amp; &amp; \textbf{8. Reporting, at realized employment} \\[7pt]
+\ell^*_{C,t} &amp; = \ell_{C,t0} + \ell_{N,t0} - \ell^*_{N,t} \;\; \text{(13)} &amp; &amp; &amp; \{Y_t, w_{N,t}, r_t, K_t, s_{L,t}\} &amp; = \text{system (39) at } (\ell_{C,t}, \ell_{N,t}) \;\; \text{(39)} \\[7pt]
+&amp; \textbf{4. Gaps and the AI-sensitive wage} &amp; &amp; &amp; \tilde \ell_{C,t} &amp; = \ln(\ell^*_{C,t}/\ell_{C,t0}) \;\; \text{(19)} \\[7pt]
+G_{o,t} &amp; = \max\{0, \ln \ell_{o,t} - \ln \ell^*_{o,t+1}\}, \ o \in \{C,N\} \;\; \text{(28)} &amp; &amp; &amp; u^x_t &amp; = (U_{C,t} + U_{N,t} - \bar U)/L \;\; \text{(--)} \\[7pt]
+B_{o,t} &amp; = \max\{0, \ln \ell^*_{o,t+1} - \ln \ell_{o,t}\}, \ o \in \{C,N\} \;\; \text{(28)} &amp; &amp; &amp; X_t &amp; = \tfrac{1}{2L}(|\ell_{C,t+1}-\ell_{C,t}| + |\ell_{N,t+1}-\ell_{N,t}|) \;\; \text{(--)} \\[7pt]
+N_{C,t} &amp; = \ell_{C,t} + \max\{0, U_{C,t} - \bar U_C\} \;\; \text{(29)} &amp; &amp; &amp; G_t &amp; = G_{C,t}\,\ell_{C,t}/L \;\; \text{(--)} \\[7pt]
+w_{C,t}/w_t &amp; = (w_{C,t-1}/w_{t-1})^{\xi_m} (w^c_{C,t}/w_t)^{1-\xi_m}, \ \xi_m = \xi^{1/12} \;\; \text{(30)} &amp; &amp; &amp; &amp; \textbf{9. Ideas} \\[7pt]
+\ell^d_{C,t} &amp; = \text{system (39) at } w_{C,t};\ E_t, Z_t = \text{excess, shortfall} \;\; \text{(39)} &amp; &amp; &amp; \Delta \ln R_t &amp; = \Delta \ln Y_t \;\; \text{(22)} \\[7pt]
+&amp; \textbf{5. Separations and openings} &amp; &amp; &amp; \Delta g_t &amp; = g \big[ e^{\lambda \Delta \ln R_t - (1-\phi_R)\Delta \ln A_t} - 1 \big] \;\; \text{(42)} \\[7pt]
+q_{o,t} &amp; = q^X_o + q^T_o\, f_{o,t-1}/\bar f_o, \ o \in \{C,N\} \;\; \text{(27)} &amp; &amp; &amp; \Delta \ln A_{t+1} &amp; = \Delta \ln A_t + h\, \Delta g_t \ \text{(a step on the closed form (43))} \;\; \text{(43)} \\[7pt]
+D_{C,t} &amp; = \max\{0, E_t - q_{C,t}\ell_{C,t}\}, \quad D_{N,t} \equiv 0 \;\; \text{(31)} \\[7pt]
+v_{C,t} &amp; = \bar\pi_C^{-1}[\max\{0, q_C \ell_C - E\} + \theta_H Z] \;\; \text{(32)} \\[7pt]
+v_{N,t} &amp; = \bar\pi_N^{-1}(q_{N,t}+\theta_H B_{N,t})\,\ell_{N,t} \;\; \text{(32)}
+\end{aligned}`
+$$
+
+---
+class: eqstep
+name: eqstep-1
+
+.eqnote[
+**2 and 3. Capital market, wage, shares and targets**&lt;br&gt;&lt;span style="color:#FF4500;font-weight:600"&gt;solved by this row&lt;/span&gt; &amp;nbsp; &lt;span style="color:#4169E1;font-weight:600"&gt;already solved this month&lt;/span&gt; &amp;nbsp; &lt;span style="color:#228B22;font-weight:600"&gt;carried in, or exogenous&lt;/span&gt; &amp;nbsp; black = calibrated constant
+]
+
+$$
+`\begin{aligned}
+\varepsilon\, {\color{OrangeRed} \Delta \ln r_t} &amp; = {\color{OrangeRed} \Delta \ln K_t} \ \text{(one root by bisection; the rows below are evaluated at each trial)} \;\; \text{(18, 6)} \\[10pt]
+{\color{OrangeRed} \tilde \ell_{N,t}} &amp; = -\ln \big( 1 - {\color{ForestGreen} m_t}{\color{ForestGreen} d_t} [\, 1 - {\color{ForestGreen} \rho}{\color{ForestGreen} \psi_t} - (1-{\color{ForestGreen} \psi_t}) e^{-(1-\sigma){\color{ForestGreen} a_t}} ] \big) \;\; \text{(15)} \\[10pt]
+{\color{OrangeRed} s_{L,t}} &amp; = 1 - \big[ s_{K,t0} + s_{L,t0} {\color{ForestGreen} \psi_t}{\color{ForestGreen} m_t}{\color{ForestGreen} d_t} ( e^{-(1-\sigma){\color{ForestGreen} a_t}} - {\color{ForestGreen} \rho} ) \big] e^{(1-\sigma){\color{RoyalBlue} \Delta \ln r_t}} \;\; \text{(14)} \\[10pt]
+{\color{OrangeRed} \Delta \ln w_t} &amp; = ({\color{RoyalBlue} \Delta \ln s_{L,t}} + {\color{RoyalBlue} \tilde \ell_{N,t}})/(1-\sigma) + {\color{ForestGreen} \Delta \ln A_t} \;\; \text{(16)} \\[10pt]
+{\color{OrangeRed} \Delta \ln (Y_t/L_t)} &amp; = {\color{RoyalBlue} \Delta \ln w_t} - {\color{RoyalBlue} \Delta \ln s_{L,t}} \;\; \text{(5)} \\[10pt]
+{\color{OrangeRed} \Delta \ln K_t} &amp; = \ln [(1 - {\color{RoyalBlue} s_{L,t}})/s_{K,t0}] + {\color{RoyalBlue} \Delta \ln (Y_t/L_t)} - {\color{RoyalBlue} \Delta \ln r_t} \;\; \text{(17)} \\[10pt]
+{\color{OrangeRed} \Delta \ln \mathrm{TFP}_t} &amp; = -\tfrac{1}{1-\sigma} \ln \big[ s_{K,t0} + s_{L,t0} ( 1 - {\color{ForestGreen} m_t}{\color{ForestGreen} d_t} (1 - e^{-(1-\sigma){\color{ForestGreen} a_t}}) ) e^{-(1-\sigma){\color{ForestGreen} \Delta \ln A_t}} \big] \;\; \text{(45)} \\[10pt]
+{\color{OrangeRed} \ell^*_{N,t}} &amp; = \ell_{N,t0}\, e^{{\color{RoyalBlue} \tilde \ell_{N,t}}} \;\; \text{(13)} \\[10pt]
+{\color{OrangeRed} \ell^*_{C,t}} &amp; = \ell_{C,t0} + \ell_{N,t0} - {\color{RoyalBlue} \ell^*_{N,t}} \;\; \text{(13)}
+\end{aligned}`
+$$
+
+&lt;div style="position:absolute; left:26px; bottom:26px; width:430px; border:1px solid #d6dbe0;
+border-left:4px solid #1baf7a; background:#fbfcfd; padding:9px 13px 10px; font-size:12px;
+line-height:1.45; text-align:left;"&gt;
+&lt;div style="font-weight:600; font-size:13px; margin-bottom:4px;"&gt;What comes into this system&lt;/div&gt;
+&lt;span style="color:#228B22; font-weight:600;"&gt;Exogenous at t&lt;/span&gt; &amp;nbsp;
+&lt;i&gt;m&lt;/i&gt;&lt;sub&gt;t&lt;/sub&gt;, &lt;i&gt;d&lt;/i&gt;&lt;sub&gt;t&lt;/sub&gt;, &lt;i&gt;a&lt;/i&gt;&lt;sub&gt;t&lt;/sub&gt;, &amp;psi;&lt;sub&gt;t&lt;/sub&gt;, &amp;rho;&lt;br&gt;
+&lt;span style="color:#228B22; font-weight:600;"&gt;Carried from last month&lt;/span&gt; &amp;nbsp;
+&amp;Delta;ln A&lt;sub&gt;t&lt;/sub&gt;&lt;br&gt;
+&lt;span style="color:#5b6873; font-weight:600;"&gt;Constants&lt;/span&gt; &amp;nbsp;
+&amp;sigma;, s&lt;sub&gt;L,t0&lt;/sub&gt;, s&lt;sub&gt;K,t0&lt;/sub&gt;, &amp;epsilon;,
+&amp;#8467;&lt;sub&gt;C,t0&lt;/sub&gt;, &amp;#8467;&lt;sub&gt;N,t0&lt;/sub&gt;
+&lt;/div&gt;
+
+&lt;div style="position:absolute; right:26px; bottom:40px; width:455px; border:1px solid #d6dbe0;
+border-left:4px solid #FF4500; background:#fbfcfd; padding:9px 13px 10px; font-size:12px;
+line-height:1.45; text-align:left;"&gt;
+&lt;div style="font-weight:600; font-size:13px; margin-bottom:4px;"&gt;The order this is solved in&lt;/div&gt;
+&lt;b&gt;1.&lt;/b&gt; Trial &amp;Delta;ln r&lt;sub&gt;t&lt;/sub&gt;&lt;br&gt;
+&lt;b&gt;2.&lt;/b&gt; s&lt;sub&gt;L,t&lt;/sub&gt; (14) &amp;rarr; &amp;Delta;ln w&lt;sub&gt;t&lt;/sub&gt; (16) &amp;rarr;
+&amp;Delta;ln(Y&lt;sub&gt;t&lt;/sub&gt;/L&lt;sub&gt;t&lt;/sub&gt;) (5) &amp;rarr; &amp;Delta;ln K&lt;sub&gt;t&lt;/sub&gt; (17)&lt;br&gt;
+&lt;b&gt;3.&lt;/b&gt; Residual of (18), &amp;Delta;ln K&lt;sub&gt;t&lt;/sub&gt; &amp;minus; &amp;epsilon;&amp;thinsp;&amp;Delta;ln r&lt;sub&gt;t&lt;/sub&gt;,
+falls in &amp;Delta;ln r&lt;sub&gt;t&lt;/sub&gt;: bisect, back to 2&lt;br&gt;
+&lt;b&gt;4.&lt;/b&gt; At the root, the targets (13). &amp;#8467;&amp;#771;&lt;sub&gt;N,t&lt;/sub&gt; (15) and
+&amp;Delta;ln TFP&lt;sub&gt;t&lt;/sub&gt; (45) need no r&lt;sub&gt;t&lt;/sub&gt; at all
+&lt;div style="margin-top:5px; color:#5b6873;"&gt;Each symbol is
+&lt;span style="color:#FF4500; font-weight:600;"&gt;red&lt;/span&gt; in the one row that pins it and
+&lt;span style="color:#4169E1; font-weight:600;"&gt;blue&lt;/span&gt; where a later row uses it. Inside the
+loop, blue means fixed for this pass, not final.&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;a href="#m0-1" class="nav-btn-br"&gt;month 0, these steps &amp;rarr;&lt;/a&gt;
+
+---
+class: eqstep
+name: eqstep-2
+
+.eqnote[
+**4. Gaps and the AI-sensitive wage &amp;nbsp;&amp;middot;&amp;nbsp; 5. Separations and openings**&lt;br&gt;&lt;span style="color:#FF4500;font-weight:600"&gt;solved by this row&lt;/span&gt; &amp;nbsp; &lt;span style="color:#4169E1;font-weight:600"&gt;already solved this month&lt;/span&gt; &amp;nbsp; &lt;span style="color:#228B22;font-weight:600"&gt;carried in, or exogenous&lt;/span&gt; &amp;nbsp; black = calibrated constant
+]
+
+$$
+`\begin{aligned}
+{\color{OrangeRed} G_{o,t}} &amp; = \max\{0, \ln {\color{ForestGreen} \ell_{o,t}} - \ln {\color{RoyalBlue} \ell^*_{o,t+1}}\}, \ o \in \{C,N\} \;\; \text{(28)} \\[10pt]
+{\color{OrangeRed} B_{o,t}} &amp; = \max\{0, \ln {\color{RoyalBlue} \ell^*_{o,t+1}} - \ln {\color{ForestGreen} \ell_{o,t}}\}, \ o \in \{C,N\} \;\; \text{(28)} \\[10pt]
+{\color{OrangeRed} N_{C,t}} &amp; = {\color{ForestGreen} \ell_{C,t}} + \max\{0, {\color{ForestGreen} U_{C,t}} - \bar U_C\} \;\; \text{(29)} \\[10pt]
+{\color{OrangeRed} w_{C,t}/w_t} &amp; = ({\color{ForestGreen} w_{C,t-1}}/{\color{ForestGreen} w_{t-1}})^{\xi_m} ({\color{RoyalBlue} w^c_{C,t}}/{\color{RoyalBlue} w_t})^{1-\xi_m} \;\; \text{(30)} \\[10pt]
+{\color{OrangeRed} \ell^d_{C,t}} &amp; = \text{system (39) at } {\color{RoyalBlue} w_{C,t}};\ {\color{OrangeRed} E_t}, {\color{OrangeRed} Z_t} = \text{excess, shortfall} \;\; \text{(39)} \\[10pt]
+{\color{OrangeRed} q_{o,t}} &amp; = q^X_o + q^T_o\, {\color{ForestGreen} f_{o,t-1}}/\bar f_o, \ o \in \{C,N\} \;\; \text{(27)} \\[10pt]
+{\color{OrangeRed} D_{C,t}} &amp; = \max\{0, {\color{RoyalBlue} E_t} - {\color{RoyalBlue} q_{C,t}}{\color{ForestGreen} \ell_{C,t}}\}, \quad {\color{OrangeRed} D_{N,t}} \equiv 0 \;\; \text{(31)} \\[10pt]
+{\color{OrangeRed} v_{C,t}} &amp; = \bar\pi_C^{-1}[\max\{0, {\color{RoyalBlue} q_{C,t}}{\color{ForestGreen} \ell_{C,t}} - {\color{RoyalBlue} E_t}\} + {\color{ForestGreen} \theta_H} {\color{RoyalBlue} Z_t}] \;\; \text{(32)} \\[10pt]
+{\color{OrangeRed} v_{N,t}} &amp; = \bar\pi_N^{-1}({\color{RoyalBlue} q_{N,t}}+{\color{ForestGreen} \theta_H} {\color{RoyalBlue} B_{N,t}})\, {\color{ForestGreen} \ell_{N,t}} \;\; \text{(32)}
+\end{aligned}`
+$$
+
+&lt;div style="position:absolute; left:26px; bottom:26px; width:500px; border:1px solid #d6dbe0;
+border-left:4px solid #1baf7a; background:#fbfcfd; padding:9px 13px 10px; font-size:12px;
+line-height:1.45; text-align:left;"&gt;
+&lt;div style="font-weight:600; font-size:13px; margin-bottom:4px;"&gt;What comes into this system&lt;/div&gt;
+&lt;span style="color:#228B22; font-weight:600;"&gt;Carried in, or exogenous&lt;/span&gt; &amp;nbsp;
+&amp;#8467;&lt;sub&gt;C,t&lt;/sub&gt;, &amp;#8467;&lt;sub&gt;N,t&lt;/sub&gt;, U&lt;sub&gt;C,t&lt;/sub&gt;, w&lt;sub&gt;C,t&amp;minus;1&lt;/sub&gt;/w&lt;sub&gt;t&amp;minus;1&lt;/sub&gt;, f&lt;sub&gt;o,t&amp;minus;1&lt;/sub&gt;, &amp;theta;&lt;sub&gt;H&lt;/sub&gt;&lt;br&gt;
+&lt;span style="color:#4169E1; font-weight:600;"&gt;Already solved this month&lt;/span&gt; &amp;nbsp;
+targets &amp;#8467;*&lt;sub&gt;C&lt;/sub&gt;, &amp;#8467;*&lt;sub&gt;N&lt;/sub&gt;; prices &amp;Delta;ln r&lt;sub&gt;t&lt;/sub&gt;, s&lt;sub&gt;L,t&lt;/sub&gt;, &amp;Delta;ln w&lt;sub&gt;t&lt;/sub&gt;&lt;br&gt;
+&lt;span style="color:#5b6873; font-weight:600;"&gt;Constants&lt;/span&gt; &amp;nbsp;
+U&amp;#772;&lt;sub&gt;C&lt;/sub&gt;, &amp;xi;&lt;sub&gt;m&lt;/sub&gt;, q&lt;sup&gt;X&lt;/sup&gt;&lt;sub&gt;o&lt;/sub&gt;, q&lt;sup&gt;T&lt;/sup&gt;&lt;sub&gt;o&lt;/sub&gt;, f&amp;#772;&lt;sub&gt;o&lt;/sub&gt;, &amp;pi;&amp;#772;&lt;sub&gt;C&lt;/sub&gt;, &amp;pi;&amp;#772;&lt;sub&gt;N&lt;/sub&gt;
+&lt;/div&gt;
+
+&lt;a href="#m0-2" class="nav-btn-br"&gt;month 0, these steps &amp;rarr;&lt;/a&gt;
+
+---
+class: eqstep
+name: eqstep-3
+
+.eqnote[
+**6. Matching &amp;nbsp;&amp;middot;&amp;nbsp; 7. Stocks**&lt;br&gt;&lt;span style="color:#FF4500;font-weight:600"&gt;solved by this row&lt;/span&gt; &amp;nbsp; &lt;span style="color:#4169E1;font-weight:600"&gt;already solved this month&lt;/span&gt; &amp;nbsp; &lt;span style="color:#228B22;font-weight:600"&gt;carried in, or exogenous&lt;/span&gt; &amp;nbsp; black = calibrated constant
+]
+
+$$
+`\begin{aligned}
+{\color{OrangeRed} S_{C,t}} &amp; = {\color{ForestGreen} U_{C,t}} + {\color{ForestGreen} \mu} {\color{ForestGreen} U_{N,t}}, \quad {\color{OrangeRed} S_{N,t}} = {\color{ForestGreen} \mu} {\color{ForestGreen} U_{C,t}} + {\color{ForestGreen} U_{N,t}} \;\; \text{(33)} \\[10pt]
+{\color{OrangeRed} H_{j,t}} &amp; = \chi {\color{RoyalBlue} S_{j,t}} {\color{RoyalBlue} v_{j,t}} ({\color{RoyalBlue} S_{j,t}}^{\iota} + {\color{RoyalBlue} v_{j,t}}^{\iota})^{-1/\iota}, \ j \in \{C,N\} \;\; \text{(34)} \\[10pt]
+{\color{OrangeRed} f_{C,t}} &amp; = {\color{RoyalBlue} H_{C,t}}/{\color{RoyalBlue} S_{C,t}} + {\color{ForestGreen} \mu} {\color{RoyalBlue} H_{N,t}}/{\color{RoyalBlue} S_{N,t}} \;\; \text{(35)} \\[10pt]
+{\color{OrangeRed} f_{N,t}} &amp; = {\color{ForestGreen} \mu} {\color{RoyalBlue} H_{C,t}}/{\color{RoyalBlue} S_{C,t}} + {\color{RoyalBlue} H_{N,t}}/{\color{RoyalBlue} S_{N,t}} \;\; \text{(35)} \\[10pt]
+{\color{OrangeRed} \ell_{o,t+1}} &amp; = (1-{\color{RoyalBlue} q_{o,t}}){\color{ForestGreen} \ell_{o,t}} - {\color{RoyalBlue} D_{o,t}} + {\color{RoyalBlue} H_{o,t}}, \ o \in \{C,N\} \;\; \text{(36)} \\[10pt]
+{\color{OrangeRed} U_{o,t+1}} &amp; = {\color{ForestGreen} U_{o,t}} + {\color{RoyalBlue} q_{o,t}}{\color{ForestGreen} \ell_{o,t}} + {\color{RoyalBlue} D_{o,t}} - {\color{RoyalBlue} f_{o,t}}{\color{ForestGreen} U_{o,t}}, \ o \in \{C,N\} \;\; \text{(37)}
+\end{aligned}`
+$$
+
+&lt;div style="position:absolute; left:26px; bottom:26px; width:460px; border:1px solid #d6dbe0;
+border-left:4px solid #1baf7a; background:#fbfcfd; padding:9px 13px 10px; font-size:12px;
+line-height:1.45; text-align:left;"&gt;
+&lt;div style="font-weight:600; font-size:13px; margin-bottom:4px;"&gt;What comes into this system&lt;/div&gt;
+&lt;span style="color:#228B22; font-weight:600;"&gt;Carried in, or exogenous&lt;/span&gt; &amp;nbsp;
+U&lt;sub&gt;C,t&lt;/sub&gt;, U&lt;sub&gt;N,t&lt;/sub&gt;, &amp;#8467;&lt;sub&gt;C,t&lt;/sub&gt;, &amp;#8467;&lt;sub&gt;N,t&lt;/sub&gt;, &amp;mu;&lt;br&gt;
+&lt;span style="color:#4169E1; font-weight:600;"&gt;Already solved this month&lt;/span&gt; &amp;nbsp;
+vacancies v&lt;sub&gt;C,t&lt;/sub&gt;, v&lt;sub&gt;N,t&lt;/sub&gt;, quits q&lt;sub&gt;C,t&lt;/sub&gt;, q&lt;sub&gt;N,t&lt;/sub&gt;, layoffs D&lt;sub&gt;C,t&lt;/sub&gt;&lt;br&gt;
+&lt;span style="color:#5b6873; font-weight:600;"&gt;Constants&lt;/span&gt; &amp;nbsp;
+&amp;chi;, &amp;iota;
+&lt;/div&gt;
+
+&lt;a href="#m0-3" class="nav-btn-br"&gt;month 0, these steps &amp;rarr;&lt;/a&gt;
+
+---
+class: eqstep
+name: eqstep-4
+
+.eqnote[
+**8. Reporting, at realized employment &amp;nbsp;&amp;middot;&amp;nbsp; 9. Ideas**&lt;br&gt;&lt;span style="color:#FF4500;font-weight:600"&gt;solved by this row&lt;/span&gt; &amp;nbsp; &lt;span style="color:#4169E1;font-weight:600"&gt;already solved this month&lt;/span&gt; &amp;nbsp; &lt;span style="color:#228B22;font-weight:600"&gt;carried in, or exogenous&lt;/span&gt; &amp;nbsp; black = calibrated constant
+]
+
+$$
+`\begin{aligned}
+{\color{OrangeRed} \{Y_t, w_{N,t}, r_t, K_t, s_{L,t}\}} &amp; = \text{system (39) at } ({\color{ForestGreen} \ell_{C,t}}, {\color{ForestGreen} \ell_{N,t}}) \;\; \text{(39)} \\[10pt]
+{\color{OrangeRed} \tilde \ell_{C,t}} &amp; = \ln({\color{RoyalBlue} \ell^*_{C,t}}/\ell_{C,t0}) \;\; \text{(19)} \\[10pt]
+{\color{OrangeRed} u^x_t} &amp; = ({\color{ForestGreen} U_{C,t}} + {\color{ForestGreen} U_{N,t}} - \bar U)/L \;\; \text{(--)} \\[10pt]
+{\color{OrangeRed} X_t} &amp; = \tfrac{1}{2L}(|{\color{RoyalBlue} \ell_{C,t+1}}-{\color{ForestGreen} \ell_{C,t}}| + |{\color{RoyalBlue} \ell_{N,t+1}}-{\color{ForestGreen} \ell_{N,t}}|) \;\; \text{(--)} \\[10pt]
+{\color{OrangeRed} G_t} &amp; = {\color{RoyalBlue} G_{C,t}}\, {\color{ForestGreen} \ell_{C,t}}/L \;\; \text{(--)} \\[10pt]
+{\color{OrangeRed} \Delta \ln R_t} &amp; = {\color{RoyalBlue} \Delta \ln Y_t} \;\; \text{(22)} \\[10pt]
+{\color{OrangeRed} \Delta g_t} &amp; = g \big[ e^{\lambda {\color{RoyalBlue} \Delta \ln R_t} - (1-\phi_R){\color{ForestGreen} \Delta \ln A_t}} - 1 \big] \;\; \text{(42)} \\[10pt]
+{\color{OrangeRed} \Delta \ln A_{t+1}} &amp; = {\color{ForestGreen} \Delta \ln A_t} + h\, {\color{RoyalBlue} \Delta g_t} \;\; \text{(43)}
+\end{aligned}`
+$$
+
+&lt;div style="position:absolute; left:26px; bottom:26px; width:500px; border:1px solid #d6dbe0;
+border-left:4px solid #1baf7a; background:#fbfcfd; padding:9px 13px 10px; font-size:12px;
+line-height:1.45; text-align:left;"&gt;
+&lt;div style="font-weight:600; font-size:13px; margin-bottom:4px;"&gt;What comes into this system&lt;/div&gt;
+&lt;span style="color:#228B22; font-weight:600;"&gt;Carried in, the state at t&lt;/span&gt; &amp;nbsp;
+&amp;#8467;&lt;sub&gt;C,t&lt;/sub&gt;, &amp;#8467;&lt;sub&gt;N,t&lt;/sub&gt;, U&lt;sub&gt;C,t&lt;/sub&gt;, U&lt;sub&gt;N,t&lt;/sub&gt;&lt;br&gt;
+&lt;span style="color:#228B22; font-weight:600;"&gt;Carried from last month&lt;/span&gt; &amp;nbsp;
+&amp;Delta;ln A&lt;sub&gt;t&lt;/sub&gt;&lt;br&gt;
+&lt;span style="color:#4169E1; font-weight:600;"&gt;Already solved this month&lt;/span&gt; &amp;nbsp;
+target &amp;#8467;*&lt;sub&gt;C,t&lt;/sub&gt;, next month's &amp;#8467;&lt;sub&gt;o,t+1&lt;/sub&gt;, overhang G&lt;sub&gt;C,t&lt;/sub&gt;&lt;br&gt;
+&lt;span style="color:#5b6873; font-weight:600;"&gt;Constants&lt;/span&gt; &amp;nbsp;
+&amp;#8467;&lt;sub&gt;C,t0&lt;/sub&gt;, U&amp;#772;, L, g, &amp;lambda;, 1&amp;minus;&amp;phi;&lt;sub&gt;R&lt;/sub&gt;, h = 1/12
+&lt;/div&gt;
+
+&lt;a href="#m0-4" class="nav-btn-br"&gt;month 0, these steps &amp;rarr;&lt;/a&gt;
+
+---
+
+# Reading Prices Off Quantities
+
+`$$s_{L,t0}\Lambda_{C,t} e^{(1-\sigma)\Delta \ln w_{C,t}} + s_{N,t0} e^{(1-\sigma)\Delta \ln w_{N,t}} + B_t e^{(1-\sigma)\Delta \ln r_t} = 1$$`
+
+At the end of each month, employment is a *state variable* handed over by the flow
+block (&lt;a href="#eqstep-3" class="reflink"&gt;step 7, &lt;b&gt;Stocks&lt;/b&gt;&lt;/a&gt;: equation
+&lt;a href="../repro.html#eq-36" class="reflink"&gt;(36)&lt;/a&gt; for employment,
+&lt;a href="../repro.html#eq-37" class="reflink"&gt;(37)&lt;/a&gt; for the unemployment pools),
+not a choice. So the demand system is **inverted**: find the prices at which
+the realized `\((\ell_C, \ell_N)\)` is exactly what firms want, and GDP follows.
+
+.pull-left[
+.small[
+**Where it comes from.** It is the price index of equation
+&lt;a href="../repro.html#eq-4" class="reflink"&gt;(4)&lt;/a&gt;, the base-period expenditure
+shares revalued at the new prices, with tasks grouped three ways: surviving
+AI-sensitive instances, whose mass `\(\Lambda_{C,t}\)` is the bracket of
+&lt;a href="../repro.html#eq-15" class="reflink"&gt;(15)&lt;/a&gt;; all-other instances; and the
+instances capital now does, `\(B_t\)`. Base-period units make the index equal 1, so it
+must stay 1: the three shares always add back up.
+]
+]
+
+.pull-right[
+.small[
+**How it recovers prices.** One equation cannot pin three price changes, so
+&lt;a href="../repro.html#eq-39" class="reflink"&gt;(39)&lt;/a&gt; stacks two more rows on it: the
+CES labor demands &lt;a href="../repro.html#eq-13" class="reflink"&gt;(13)&lt;/a&gt;, one per
+group, and capital supply `\(\Delta \ln K_t = \varepsilon\, \Delta \ln r_t\)`. With
+`\((\ell_C, \ell_N)\)` already known, the capital row substitutes out in closed form and
+one monotone equation in `\(\Delta \ln r_t\)` is left. Bisect it, and `\(w_C\)`, `\(w_N\)`, `\(r\)`,
+`\(Y\)` and the labor share all fall out.
+]
+]
+
+---
+
+# How the Model Is Actually Solved
+
+.pull-left[
+**Two root-finds, both easy**
+
+1. The rental rate: capital demanded equals capital supplied. Demand is strictly
+   decreasing in `\(\Delta \ln r\)`, so exactly one root; bisection.
+2. The actual economy at realized employment: substitute out the capital row and one
+   monotone equation in `\(\Delta \ln r\)` remains.
+]
+
+.pull-right[
+**Why the order matters**
+
+Every other row of Table A.1 depends only on parameters, exogenous paths, variables
+predetermined at `\(t\)`, or variables already computed this month.
+
+So the month is a *sequence*, not a system. That is a modelling choice as much as a
+numerical one.
+]
+
+.highlight-box[
+Practical consequence for anyone reimplementing: get the ordering right and you need
+no solver library at all. The Python reimplementation is standard library only.
+]
+
+---
+class: center, middle, inverse
+
+# Part 3: Where the Equations Come From
+
+---
+name: tasks-main
+
+# Production: Tasks, Not Factors
+
+`$$Y_t = \Big[ \sum_i \omega_i^{1/\sigma} y_{i,t}^{(\sigma-1)/\sigma} \Big]^{\sigma/(\sigma-1)}, \qquad y_{i,t} = A_t \alpha_{L,i,t} \ell_{i,t} + \alpha_{K,i,t} k_{i,t}$$`
+
+- A **task** is a type of work (reviewing a contract); an **instance** is one
+  performance of it. The CES runs over instances.
+- Within an instance, labor and capital are **perfect substitutes**: whoever is
+  cheaper does this contract.
+- Across instances they are **gross complements**, `\(\sigma = 0.5\)`.
+
+.highlight-box[
+This is the departure from the aggregate production function. Automation is not a
+change in an exponent; it is a set of tasks changing hands. That distinction is what
+lets the model separate "AI makes us productive" from "AI takes the work".
+]
+
+&lt;a href="#ces-refresher" class="nav-btn"&gt;CES refresher →&lt;/a&gt;
+
+---
+name: assignment-main
+
+# Who Does Each Instance
+
+`$$p_{i,t} = c_{i,t} = \min\Big\{ \frac{w_t}{A_t \alpha_{L,i,t}}, \; \frac{r_t}{\alpha_{K,i,t}} \Big\}$$`
+
+Rank instances by capital's comparative advantage `\(\alpha_K / \alpha_L\)`. The
+assignment is a **threshold rule**: everything above the cutoff goes to machines,
+everything below to people, and the cutoff moves with `\(r_t / w_t\)`.
+
+--
+
+AI enters by moving `\(\alpha\)`'s:
+
+- **Automation**: raise `\(\alpha_{K,i}\)` enough that capital takes the instance at the
+  pre-AI rental rate.
+- **Augmentation**: raise `\(\alpha_{L,i}\)` so the worker keeps it and is faster.
+
+Both cut that instance's unit cost by the same `\(a_{i,t}\)` log points.
+
+&lt;a href="#assignment-derivation" class="nav-btn"&gt;where this comes from &amp;rarr;&lt;/a&gt;
+
+---
+name: fork-main
+
+# The Fork That Does the Distributional Work
+
+.pull-left[
+**Same effect on productivity**
+
+An automated instance and an augmented instance are equally cheap afterwards. Measured
+TFP cannot tell them apart.
+]
+
+.pull-right[
+**Opposite effect on labor**
+
+The automated instance takes its whole wage bill to capital. The augmented one leaves
+it with labor.
+]
+
+`$$\psi_t = \text{share of AI-performed instances that are automated}$$`
+
+.blue-box[
+`\(\psi\)` is absent from the TFP equation and central to the labor-share equation. That
+single asymmetry is why the paper can produce "GDP up 32 percent, AI-sensitive wage down
+11 percent" without any market failure.
+]
+
+.small[
+Both equations arrive shortly; jump ahead if you want to see the asymmetry before the
+argument that builds to it.
+]
+
+&lt;a href="#tfp-main" class="nav-btn"&gt;the TFP equation &amp;rarr;&lt;/a&gt;
+&lt;a href="#labor-share-main" class="nav-btn-br"&gt;the labor-share equation &amp;rarr;&lt;/a&gt;
+
+---
+name: shares-main
+
+# Prices, Shares, and Why `\(\sigma &lt; 1\)` Is the Whole Story
+
+`$$s_{i,t} = \omega_i \Big(\frac{c_{i,t}}{P_t}\Big)^{1-\sigma}, \qquad P_t \equiv 1$$`
+
+With `\(\sigma &lt; 1\)` the exponent `\(1-\sigma\)` is **positive**: a task that gets cheaper (its
+unit cost `\(c_{i,t}\)` falls, so with the exponent positive `\((c_{i,t}/P_t)^{1-\sigma}\)` falls with
+it) takes a *smaller* share of spending, because quantity rises less than the price falls.
+
+--
+
+Two consequences used repeatedly:
+
+1. Tasks labor keeps become the expensive ones, so spending tilts toward them. This
+   *cushions* the labor share.
+2. When the rental rate rises, spending tilts toward capital's instances, which *cuts*
+   the labor share.
+
+`\(P_t \equiv 1\)` is a constraint, not a definition: if AI lowers some costs, some other
+price must rise. That is how productivity becomes factor income.
+
+&lt;a href="#share-derivation" class="nav-btn"&gt;derivation →&lt;/a&gt;
+
+---
+name: tfp-main
+
+# Productivity: Hulten and Domar Weights
+
+`$$\Delta \ln \mathrm{TFP}_t \approx \sum_i \omega_i d_{i,t} a_{i,t} = s_{L,t0}\, m_t d_t a_t$$`
+
+Hulten's theorem: the aggregate gain is the sum of micro cost reductions weighted by
+**Domar weights** (sales over GDP). You do not need the network structure, only sizes
+and cost declines.
+
+
+```r
+# Substantial scenario, 2030: m = 0.30, d = 0.40, a = 0.45
+0.60 * 0.30 * 0.40 * 0.45      # first-order TFP gain, matches the paper's 0.032
+```
+
+```
+## [1] 0.0324
+```
+
+.highlight-box[
+`\(s_{L,t0} = 0.6\)` appears as a **unit conversion**, not a behavioural claim: task sizes
+are measured against the wage bill, and this converts them to shares of GDP.
+Note what is missing: `\(\psi\)` and `\(\rho\)`.
+]
+
+---
+
+# Who Gets the Gain: the Factor-Price Frontier
+
+`$$s_{L,t0}\, \Delta \ln w_t + s_{K,t0}\, \Delta \ln r_t \approx s_{L,t0}\, m_t d_t a_t$$`
+
+The Solow residual read backwards. Factor payments exhaust output, so the whole
+productivity gain must leave as higher wages or a higher return.
+
+--
+
+.pull-left[
+If capital is **elastic**, `\(r\)` barely moves and labor gets nearly all of it:
+`\(\Delta \ln w \approx m d a\)`.
+]
+
+.pull-right[
+Every percent that `\(r\)` rises costs the wage
+`\(s_{K,t0}/s_{L,t0} = 2/3\)` percent.
+]
+
+The wage falls below its no-AI path exactly when
+`\(s_{K,t0}\Delta \ln r_t &gt; s_{L,t0} m_t d_t a_t\)`: capital's claim exceeds the gain
+being shared.
+
+---
+
+# The Input That Decides: Capital Supply
+
+`$$\Delta \ln K_t = \varepsilon\, \Delta \ln r_t$$`
+
+&lt;table&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; row &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; eps = 1 &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; eps = 3 &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; eps = 6 &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; eps = Inf &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; GDP, pct above no-AI &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 6.4 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 8.3 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 9.0 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 10.0 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Average wage, pct above no-AI &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -1.6 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2.1 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3.7 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 5.6 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Labor share, pct of income &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 55.1 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 56.1 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 56.5 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 57.0 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+.blue-box[
+Same AI, same displacement: only the elasticity of capital supply changes. The average
+wage swings from **−1.6 percent to +5.6 percent**. Whether AI is good for workers in
+this model is substantially a question about the supply of capital.
+]
+
+&lt;a href="#epsstar-derivation" class="nav-btn"&gt;when does the wage fall? →&lt;/a&gt;
+
+---
+name: labor-share-main
+
+# The Labor Share: Three Channels
+
+`$$\Delta \ln s_{L,t} \approx -\underbrace{(1-\rho)\psi_t m_t d_t}_{\text{displacement}} + \underbrace{(1-\sigma)\psi_t m_t d_t a_t}_{\text{weak link}} - \underbrace{(1-\sigma)\tfrac{s_{K,t0}}{s_{L,t0}}\Delta \ln r_t}_{\text{dearer capital}}$$`
+
+1. **Displacement.** An automated instance moves its *entire* wage bill to capital,
+   however small the cost saving. Reinstatement gives back a fraction `\(\rho\)`.
+2. **Weak link.** The instances labor keeps are now the expensive ones, and with
+   `\(\sigma &lt; 1\)` spending tilts toward them. This works *for* labor.
+3. **Dearer capital.** The same complementarity works *against* labor when the rental
+   rate rises.
+
+In the extreme scenario the first channel wins outright: the labor share falls from
+60 to 45 percent in six years.
+
+&lt;a href="#labor-share-derivation" class="nav-btn"&gt;derivation →&lt;/a&gt;
+
+---
+
+# Employment: Solve the Group AI Does Not Touch
+
+`$$\tilde \ell_{N,t} = \Delta \ln (Y_t/L_t) - \sigma \Delta \ln w_t$$`
+
+Nursing and electrical work are unaffected, so demand for that labor is an ordinary
+CES demand: up one-for-one with output, down with its own price at elasticity
+`\(\sigma\)`.
+
+Labor supply is fixed, so whatever `\(N\)` gains, `\(C\)` loses:
+
+`$$\frac{\ell_{C,t0} - \ell^*_{C,t}}{\ell_{C,t0}} = \frac{s_{N,t0}}{s_{C,t0}} \cdot \frac{\ell^*_{N,t} - \ell_{N,t0}}{\ell_{N,t0}}, \qquad \frac{s_N}{s_C} = 0.60$$`
+
+.highlight-box[
+Because AI-sensitive occupations are the *larger* group, their proportional decline is
+smaller than the other group's rise, and much smaller than the rise in GDP. In the
+extreme scenario GDP is up 32 percent while AI-sensitive employment is down 21 percent.
+]
+
+---
+name: prop1-main
+
+# Proposition 1: the Exact Solution
+
+`$$s_{L,t} = 1 - \big[ s_{K,t0} + s_{L,t0} \psi_t m_t d_t ( e^{-(1-\sigma)a_t} - \rho ) \big] e^{(1-\sigma)\Delta \ln r_t}$$`
+
+`$$\tilde \ell_{N,t} = -\ln \big( 1 - m_t d_t [ 1 - \rho \psi_t - (1-\psi_t) e^{-(1-\sigma)a_t} ] \big)$$`
+
+`$$\Delta \ln w_t = \frac{\Delta \ln s_{L,t} + \tilde \ell_{N,t}}{1-\sigma} + \Delta \ln A_t, \qquad \varepsilon \Delta \ln r_t = \Delta \ln K_t$$`
+
+Everything above was first-order intuition. This is the closed form the simulation
+actually runs, and it matters: in the extreme scenario the first-order approximation
+misses TFP by a fifth.
+
+.blue-box[
+Solution strategy: the last equation is one monotone equation in one unknown
+`\(\Delta \ln r_t\)`. Solve it by bisection, and every other variable follows in order.
+No simultaneous system.
+]
+
+&lt;a href="#prop1-derivation" class="nav-btn"&gt;where each line comes from →&lt;/a&gt;
+
+---
+
+# Does AI Raise the Growth Rate?
+
+`$$\dot A_t = \nu R_t^{\lambda} A_t^{\phi_R}, \qquad R_t = \iota_{R,t} Y_t, \qquad \Delta \ln R_t = \Delta \ln Y_t$$`
+
+Semi-endogenous growth, Jones (1995). Research uses final output ("lab equipment"), so
+a richer economy mechanically buys more research.
+
+--
+
+`$$\Delta g_t = g \big[ e^{\lambda \Delta \ln R_t - (1-\phi_R)\Delta \ln A_t} - 1 \big]$$`
+
+The leading `\(g\)` is the punchline. The bracket is a *proportional* gap in a growth rate
+that is only 1.67 percent a year, so a 28 percent research uplift adds a fraction of a
+percentage point, not 28.
+
+&lt;table&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; scenario &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; research uplift, log pts &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; ideas stock, pct above no-AI &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; modest &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.016 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.07 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; substantial &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.080 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.20 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; extreme &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.281 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.61 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+---
+
+# Why the Growth Channel Stays Small
+
+.pull-left[
+**Level channel** (Section 2.1)
+
+Extreme scenario, 2030: GDP **+32.4 percent**.
+
+Immediate, and the whole story over five years.
+]
+
+.pull-right[
+**Growth channel** (Section 2.2)
+
+Extreme scenario, 2030: ideas stock **+0.61 percent**.
+
+Long-run target is ~10 percent, but `\(\gamma = 0.35\)` and cumulation takes decades.
+]
+
+.highlight-box[
+Over a five-year horizon the innovation block is nearly a rounding error. Over fifty
+years it would not be. The paper is explicit that recursive self-improvement is
+*hard-coded into* `\(a_t\)` rather than modelled, which is where a reader who cares about
+fast takeoff should push.
+]
+
+---
+
+# Unemployment: Why It Exists Here
+
+Two frictions, and both are needed:
+
+1. **A wage that falls too slowly.** The AI-sensitive discount to the common wage closes
+   only a fraction `\(1 - \xi\)` of its gap per year (Blanchard–Galí form).
+2. **Search that takes time.** Displaced workers must find jobs in the other group,
+   and cross-occupation search is discounted by `\(\mu\)`.
+
+--
+
+`$$D_{C,t} = \max\{0, E_t - q_{C,t}\ell_{C,t}\}, \qquad E_t = \max\{0, \ell_{C,t} - \ell^d_{C,t}\}$$`
+
+With the wage above market clearing, firms want fewer AI-sensitive workers than are
+attached to the group. Quits absorb part of the gap; **layoffs** remove the rest.
+
+.blue-box[
+This is job rationing (Michaillat 2012), not just frictional unemployment: some jobs
+are not offered *because the wage is too high*, which is exactly why the `\(\xi\)`
+robustness table trades wage declines against unemployment.
+]
+
+---
+name: matching-main
+
+# Matching
+
+`$$H_{j,t} = \chi \frac{S_{j,t} v_{j,t}}{(S_{j,t}^{\iota} + v_{j,t}^{\iota})^{1/\iota}}, \qquad S_{C,t} = U_{C,t} + \mu U_{N,t}$$`
+
+Not Cobb-Douglas. The den Haan–Ramey–Watson form guarantees
+`\(H \le \min\{S, v\}\)` automatically, so no cap and no kinks in the simulated paths —
+which matters here because the extreme scenario pushes the ratios far from normal.
+
+The cross-group discount `\(\mu\)` carries all the occupational human capital in the
+model: a laid-off software engineer is not instantly a nurse.
+
+.blue-box[
+`\(\mu\)` and `\(\theta_H\)` are the two inputs that convert a given amount of *reallocation*
+into a given amount of *unemployment*. They are also the two the paper can least
+defend from data, since no episode of AI displacement exists to estimate them from.
+]
+
+&lt;a href="#matching-detail" class="nav-btn"&gt;why not Cobb-Douglas →&lt;/a&gt;
+
+---
+class: center, middle, inverse
+
+# Part 4: Results, and What to Trust
+
+---
+
+# Modest: AI as a Normal Technology
+
+&lt;img src="slides_files/figure-html/modest-fig-1.png" style="display: block; margin: auto;" /&gt;
+
+4 percent of tasks touched. GDP +1.6 percent by 2030, an extra ten months of ordinary
+growth. Unemployment 3.9 against a normal 3.8. **Nothing here would be visible in the
+macro data.**
+
+---
+
+# Substantial: A Pivotal Technology
+
+.pull-left[
+- 12 percent of task instances done by AI
+- GDP **+8.3 percent**, growth 5.4 percent a year
+- Average wage +2.1 percent, but the **AI-sensitive wage −0.3**
+- Labor share 60 → 56
+- AI-sensitive unemployment 2.9 → 4.5
+]
+
+.pull-right[
+&lt;img src="slides_files/figure-html/subst-fig-1.png" style="display: block; margin: auto;" /&gt;
+]
+
+A four-point fall in the labor share in four years is roughly the entire US decline of
+the four decades after 1980.
+
+---
+
+# Extreme: Transformative
+
+&lt;img src="slides_files/figure-html/extreme-fig-1.png" style="display: block; margin: auto;" /&gt;
+
+GDP +32 percent and growth at 15 percent a year, with the AI-sensitive wage 11 percent
+*below* its no-AI path and nearly one AI-sensitive worker in five unemployed.
+
+---
+
+# The Two Robustness Tables Are the Real Argument
+
+.pull-left[
+**Capital supply `\(\varepsilon\)`**
+
+Substantial scenario average wage:
+
+| `\(\varepsilon\)` | 1 | 3 | 6 | `\(\infty\)` |
+|---|---|---|---|---|
+| wage | −1.6 | +2.1 | +3.7 | +5.6 |
+
+Whether workers gain at all depends on how fast the capital stock can grow.
+]
+
+.pull-right[
+**Wage rigidity `\(\xi\)`**
+
+Extreme scenario:
+
+| `\(\xi\)` | 0 | 0.5 | 0.9 |
+|---|---|---|---|
+| AI-sensitive wage | −42 | −11.5 | +2.8 |
+| AI-sensitive unemp. | 2.6 | 17.9 | 24.0 |
+
+The cost to AI-sensitive workers is roughly fixed; `\(\xi\)` only decides whether it arrives
+as lower pay or as no job.
+]
+
+.highlight-box[
+Neither parameter is estimated from AI displacement, because no such episode exists.
+They are the honest soft spots of the exercise.
+]
+
+---
+name: slop-main
+
+# Extension: Where Would "AI Slop" Show Up?
+
+Slop is not a missing mechanism here. It is a **low draw of `\(a_t\)`**: the paper's gain
+is defined all-in, net of checking, and its survey asks for time saved "counting the
+time spent checking and fixing the AI's work".
+
+&lt;table&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; Case &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; a 2030 &lt;/th&gt;
+   &lt;th style="text-align:left;"&gt; eps* &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; GDP &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; TFP &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; Avg wage &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; AI-sens. wage &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; Labor share &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; substantial (baseline) &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.45 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 1.30 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 8.28 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3.07 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2.14 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -0.33 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 56.10 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; all-in gain halved &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.22 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 3.39 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 6.68 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1.64 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -0.34 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -2.64 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 55.59 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; gain halved, checking becomes new human work &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.22 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 2.00 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 5.04 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1.62 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.72 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -0.78 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 57.26 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; gain halved, adoption stalls &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.22 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 3.39 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 4.29 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1.04 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -0.16 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -1.48 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 57.25 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; all-in gain quartered &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.11 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 7.58 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 5.81 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.88 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -1.66 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -3.87 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 55.32 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; pure slop: no time saved at all &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.00 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; inf &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 4.90 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.07 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -3.04 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -5.17 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 55.03 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+.highlight-box[
+The average wage turns negative once the all-in gain falls below **0.25**, roughly
+half the substantial scenario's value. The survey's own lower quartile is 0.09, and
+about 30 percent of respondents expect AI to save *no* time on a task it suits.
+]
+
+&lt;a href="#slop-mechanism" class="nav-btn"&gt;why the sign flips →&lt;/a&gt;
+
+---
+
+# Slop Is a Distributional Event, Not a Missing Boom
+
+With **zero** time saved per instance, still: GDP **+4.9 percent**, capital **+13.2**,
+measured TFP **+0.1**, average wage **−3.0**, AI-sensitive wage **−5.2**.
+
+Automation converts work from a fixed factor (labor) into an accumulable one
+(capital, supplied at `\(\varepsilon = 3\)`). The rental rate rises, capital deepens,
+output rises, and labor pays for it.
+
+.blue-box[
+So the signature to look for in the data is **"output fine, wages sliding"**, not
+"the boom never arrived". Waiting for a GDP disappointment to reveal slop would be
+looking in the wrong series.
+]
+
+One variant helps workers: if checking is genuinely *new human work*, that is a rise
+in `\(\rho\)`, and it is the only case here that cushions wages (+0.7) and raises the
+labor share (57.3) — at the cost of lower output. "Slop that makes work" and "slop
+that just does not deliver" are different worlds.
+
+---
+
+# The Survey
+
+10,980 US adults, Morning Consult, August 2026. Five questions mapped to five of the
+seven inputs.
+
+.small[
+| Object | Survey median | Modest / Substantial / Extreme |
+|---|---|---|
+| `\(m_{2030}\)` | 0.44 | 0.2 / 0.3 / 0.5 |
+| `\(d_{2030}\)` | 0.40 | 0.2 / 0.4 / 0.6 |
+| `\(\psi\)` | 0.47 | 0.50 / 0.75 / 0.90 |
+| `\(a_{2030}\)` | 0.44 | 0.30 / 0.45 / 0.80 |
+| `\(\mu\)` | 0.064 | 0.17 / 0.08 / 0.04 |
+]
+
+The median respondent expects **capable but narrowly deployed** AI: capability between
+the substantial and extreme scenarios, adoption at the substantial level, and
+automation at the modest level.
+
+.blue-box[
+Careful with Table 4: it reports medians *of outcomes across respondents*, not the
+outcome at the median answers. Those differ, and without the microdata the first
+cannot be recovered from the second.
+]
+
+---
+name: verify-main
+
+# What Reproduces
+
+&lt;table&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; Published table &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; Cells &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; Largest deviation &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Table 3, three scenarios in 2030 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 80 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.08 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Table 5, four capital-supply elasticities &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 40 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.05 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Table 6, four wage rigidities &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 49 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.13 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+Also matched without being targeted: the steady-state switching share of 1 in 7,
+filling rates 0.66 / 0.64, `\(\chi = 0.76\)`, the logistic slopes `\(\kappa_m = 0.33\)` and
+`\(\kappa_d = 0.51\)`, and the worked example's exact TFP gain of 0.029.
+
+.highlight-box[
+One genuine discrepancy: the all-workers unemployment rate is 0.07 points low
+everywhere, because Table 1 rounds the normal pool to 0.038 while the paper's own
+derivation uses 0.0384. At 0.0384 the row lands exactly.
+]
+
+&lt;a href="#ubar-detail" class="nav-btn"&gt;the U-bar detail →&lt;/a&gt;
+
+---
+
+# What Does Not Reproduce, and What to Push On
+
+.pull-left[
+**Not reproducible**
+
+- Tables 2 and 4 and Figure 1: the survey microdata is not released.
+- Table 4's medians-of-outcomes cannot be recovered from published medians.
+- No replication package exists; the only public implementation is the minified
+  JavaScript behind the scenario explorer.
+]
+
+.pull-right[
+**Where I would push the model**
+
+- `\(a_t\)` is exogenous, so recursive self-improvement is assumed rather than modelled.
+- AI touches only non-physical tasks; robotics is out.
+- `\(\rho\)` (reinstatement) is a free input doing enormous work: it is the difference
+  between a 21 percent and a much smaller employment fall.
+- `\(\mu\)`, `\(\theta_H\)`, `\(\xi\)` are unidentified from any AI episode.
+]
+
+---
+
+# Takeaways
+
+1. **The claim is conditional, and the conditioning set is small.** Five numbers about
+   AI, two about labor-market frictions.
+2. **TFP and distribution are separate questions.** `\(\psi\)` moves the labor share
+   without moving productivity at all.
+3. **$\sigma &lt; 1$ is load-bearing.** Set it above one and the labor-share results
+   change sign.
+4. **Capital supply decides whether workers gain**, and wage rigidity decides whether
+   the cost is paid in wages or in jobs.
+5. **The growth channel is small over five years**, by construction.
+
+.blue-box[
+The reproduction: `aiscen` Python package, 98 tests, reproduces Tables 3, 5 and 6 to
+the printed precision. Narrative walkthrough with every equation in `repro.qmd`.
+]
+
+---
+name: three-labels
+
+# Postscript: Three Labels, Seven Inputs
+
+
+
+.small[
+The names read like one input labelled *how much AI*. They are seven inputs moved together, which
+asserts that a high-capability world is also a fast-adopting, automation-heavy, no-reinstatement,
+slow-search world. Nothing in the model requires that, and the paper's own survey says people do
+not hold bundled views: the median respondent is between substantial and extreme on `\(m\)` and `\(\mu\)`,
+substantial on `\(d\)` and `\(a\)`, and modest on `\(\psi\)`.
+
+**The alternative is cheap.** Three levels on each of the seven inputs is `\(3^7 = 2187\)`
+runs, which this reproduction completes in about 16 seconds (`slides/make_grid.py`); five levels
+would be 78,125 runs, roughly ten minutes. Run the factorial, then report each input's marginal
+effect and the interactions, instead of three labelled points.
+]
+
+.highlight-box[
+.small[
+Across the 2187 cells the 2030 GDP gap spans 1.5 to
+39.4 percent, and the three named scenarios sit at percentiles
+0, 52 and 99 of that spread: near a minimum, a
+median and a maximum, not three interior points.
+
+**The highest-GDP cell is not "extreme".** It is extreme's AI (all of `\(m\)`, `\(d\)`, `\(a\)`, `\(\psi\)` and
+`\(\rho\)` at their extreme values) combined with *normal-times* search efficiency,
+`\(\mu = 0.17\)`:
+GDP 39.4 percent above no-AI instead of 32.4, with AI-sensitive unemployment
+10.3 instead of 17.9.
+Holding the three size inputs at extreme, the four friction inputs alone move AI-sensitive
+unemployment from 4.7 to 19.5 percent.
+]
+]
+
+.small[
+&lt;a href="https://claude.ai/artifact/6mNth93dAtpa5T4bisoRUu" class="inline-btn" target="_blank"&gt;set the inputs yourself &amp;rarr;&lt;/a&gt;
+Every cell is precomputed, so the 2030 outcomes and the 2025-2030 paths appear as you click.
+The link is a **private** Claude artifact: it opens only for accounts it has been shared with, so
+share it from the page's share menu before circulating this deck.
+
+In fairness: GDP and AI-sensitive unemployment correlate 0.82
+across the grid, so the diagonal is not arbitrary, and the scenario explorer does let a user set
+the values freely. The objection is to what the headline table reports, not to what the model can
+do. Grid caveat: `\(a_t\)` is built from the common mid-2026 anchor, as the explorer does for
+off-scenario values, so the grid's corners reproduce the named scenarios to within 0.03 points.
+]
+
+---
+class: center, middle, inverse
+
+# Backup Slides
+
+---
+name: ces-refresher
+
+# Backup: CES Refresher
+
+For `\(Y = [\sum_i \omega_i^{1/\sigma} y_i^{(\sigma-1)/\sigma}]^{\sigma/(\sigma-1)}\)`,
+cost minimization gives demand and expenditure share
+
+`$$y_i = \omega_i \Big(\frac{c_i}{P}\Big)^{-\sigma} Y, \qquad s_i = \omega_i \Big(\frac{c_i}{P}\Big)^{1-\sigma}$$`
+
+- `\(\sigma \to 1\)`: Cobb-Douglas, constant expenditure shares, nothing to see.
+- `\(\sigma &gt; 1\)`: gross substitutes, cheap tasks take over spending.
+- `\(\sigma &lt; 1\)`: gross complements, expensive tasks take over spending. The economy is
+  bottlenecked by whatever is scarce, which here is human work.
+
+The paper's `\(\sigma = 0.5\)` comes from Acemoglu–Restrepo (2022) via Humlum (2019).
+Estimates in the literature straddle one, and Jones–Tonetti (2026) argue for lower.
+
+&lt;a href="#tasks-main" class="nav-btn"&gt;← back&lt;/a&gt;
+
+---
+name: eq38-solve
+
+# Backup: How Equation (38) Is Actually Solved
+
+.small[
+Ten conditions for nine unknowns, one redundant; each step substitutes what it can and leaves
+**one scalar equation** to bisect with `bisect()`, `numerics.py:4`; the monthly rental rate uses
+the same routine via `expand_and_bisect()`, `statics.py:92`. The definition row is not one of the ten.
+
+| Condition | Count | Used in |
+|---|---|---|
+| `\(\bar H_o = \bar q_o \ell_{o,t0}\)` | 2 | **step 1**, gives `\(\bar H_C, \bar H_N\)` directly |
+| `\(\bar U_C + \bar U_N = \bar U\)` | 1 | step 2, substituted to eliminate `\(\bar U_N\)` |
+| `\(\bar S_C = \bar U_C + \bar\mu \bar U_N\)`, `\(\ \bar S_N = \bar\mu \bar U_C + \bar U_N\)` | — | **definition** (33), not a condition; substituted in steps 2 and 3 |
+| `\(\bar f_C = \bar H_C/\bar S_C + \bar\mu \bar H_N/\bar S_N\)` | 1 | step 2, substituted to express `\(\bar f_C\)` |
+| `\(\bar f_o \bar U_o = \bar H_o\)`, for `\(o = C\)` | 1 | **step 2**, bisected at `steady.py:64` |
+| `\(\bar f_N = \bar\mu \bar H_C/\bar S_C + \bar H_N/\bar S_N\)` | 1 | evaluated once the root is known |
+| `\(\bar f_o \bar U_o = \bar H_o\)`, for `\(o = N\)` | 1 | never imposed: the **redundant** one; checked anyway, `\(-1.2 \times 10^{-14}\)` |
+| `\(\bar \pi_o = \chi[1 - (\bar H_o/\chi \bar S_o)^{\iota}]^{1/\iota}\)` | 2 | step 3, substituted to express `\(\bar\pi_o(\chi)\)` |
+| mean filling `\(=\)` mean `\(\bar\pi\)` | 1 | **step 3**, bisected at `steady.py:84` |
+]
+
+`$$\Big[\frac{\bar H_C}{{\color{OrangeRed} \bar U_C} + \bar\mu(\bar U - {\color{OrangeRed} \bar U_C})} + \bar\mu\,\frac{\bar H_N}{\bar\mu {\color{OrangeRed} \bar U_C} + (\bar U - {\color{OrangeRed} \bar U_C})}\Big] {\color{OrangeRed} \bar U_C} = \bar H_C$$`
+
+.small[
+**Step 2** substitutes rows two to four into row five, leaving `\({\color{OrangeRed} \bar U_C}\)` as the only unknown.
+The residual runs from `\(-\infty\)` at `\(\bar U_C \to 0\)` to `\(+0.086\)` at `\(\bar U_C = \bar U\)`, so bisect on
+`\((0, \bar U)\)`: the root is `\(\bar U_C = 0.0174\)`, 46% of the pool for 62% of employment. Step 3 has the same shape.
+]
+
+&lt;a href="#eq38" class="nav-btn"&gt;&amp;larr; back&lt;/a&gt;
+&lt;a href="#eq38-recover" class="nav-btn-br"&gt;then the other eight &amp;rarr;&lt;/a&gt;
+
+---
+name: eq38-recover
+
+# Backup: Recovering the Other Eight
+
+.small[
+After `\(\bar U_C\)`, just **one** unknown is left and the rest is substitution
+(`steady.py:50-90`). Below, &lt;span style="color:#228B22;font-weight:600"&gt;green&lt;/span&gt; is
+known, &lt;span style="color:#FF4500;font-weight:600"&gt;red&lt;/span&gt; is that unknown.
+
+| | Object | How it is obtained | Value |
+|---|---|---|---|
+| 1 | `\(\bar H_C, \bar H_N\)` | before any of it: hiring replaces quits, `\(\bar q_o \ell_{o,t0}\)` | 0.003809, 0.005075 |
+| 2 | `\(\bar U_C\)` | **bisection**, the scalar equation on the previous slide | 0.017408 |
+| 3 | `\(\bar U_N\)` | adding up, `\(\bar U - \bar U_C\)` | 0.020592 |
+| 4 | `\(\bar S_C, \bar S_N\)` | definition (33) evaluated at those pools | 0.020908, 0.023552 |
+| 5 | `\(\bar f_C\)` | its own row, now that `\(\bar S_o\)` is known | 0.2188 |
+| 6 | `\(\bar f_N\)` | its own row too; its flow-balance condition is the redundant one | 0.2465 |
+| 7 | `\(\chi\)` | **bisection**, the mean-filling condition, next slide | 0.7585 |
+| 8 | `\(\bar \pi_C, \bar \pi_N\)` | invert the matching function at that `\(\chi\)` | 0.6591, 0.6349 |
+]
+
+.small[
+Rows 1 to 6 are pure substitution. Row 7, the matching efficiency `\(\chi\)`, needs the second and
+last root-find of the whole steady state, and row 8 follows from it. Two checks then hold
+without being targeted: the redundant flow-balance condition to `\(-1.2 \times 10^{-14}\)`, and the
+cross-group switching share at 0.1436 against the paper's one in seven.
+]
+
+&lt;a href="#eq38" class="nav-btn"&gt;&amp;larr; back&lt;/a&gt;
+&lt;a href="#chi-pin" class="nav-btn-br"&gt;what pins `\(\chi\)` &amp;rarr;&lt;/a&gt;
+
+---
+name: chi-pin
+
+# Backup: What Pins the Matching Efficiency
+
+.small[
+Step 7 has **three** unknowns, `\(\chi\)`, `\(\bar\pi_C\)` and `\(\bar\pi_N\)`, against **three** equations:
+the condition once on the left, and the definition twice on the right, once per group.
+]
+
+$$
+`\begin{aligned}
+\frac{{\color{ForestGreen} \ell_{C,t0}}\, \bar\pi_C({\color{OrangeRed} \chi}) + {\color{ForestGreen} \ell_{N,t0}}\, \bar\pi_N({\color{OrangeRed} \chi})}{{\color{ForestGreen} L} - {\color{ForestGreen} \bar U}} &amp;= {\color{ForestGreen} \text{mean } \bar\pi = 0.65},
+&amp;\qquad \text{where } \bar\pi_o({\color{OrangeRed} \chi}) &amp;= {\color{OrangeRed} \chi} \Big[1 - \Big(\frac{{\color{ForestGreen} \bar H_o}}{{\color{OrangeRed} \chi} {\color{ForestGreen} \bar S_o}}\Big)^{{\color{ForestGreen} \iota}}\Big]^{1/{\color{ForestGreen} \iota}}, \ o \in \{C,N\}
+\end{aligned}`
+$$
+
+.pull-left[
+.small[
+**Which of them is solved.** The right-hand rows are *definitions*, the matching function
+inverted, each giving `\(\bar\pi_o\)` in closed form as a function of `\(\chi\)` alone. The left-hand
+row is the only *condition*, and it is the one bisected (`fill_resid`, `steady.py:78`,
+bisected at `:84`). How wrong a guess is = the mean filling rate it implies, minus the
+`\(0.65\)` target. `\(\chi\)` must exceed hires per searcher, `\(\max_o \bar H_o/\bar S_o = 0.2155\)`, or
+the bracket turns negative: at that floor the model fills `\(0.037\)` of vacancies, far too few,
+and at `\(\chi = 1\)` it fills `\(0.900\)`, too many. Opposite signs, so bisect between them.
+]
+]
+
+.pull-right[
+.small[
+**Why that condition is needed at all.** No survey reports matching efficiency. `\(\chi\)` is the
+model's one free scale parameter, and without this row any `\(\chi\)` above the floor would give an
+internally consistent pair of filling rates, so all three unknowns would float. Pinning the
+employment-weighted mean to the JOLTS `\(0.65\)` is what fixes them, and it is the ninth condition
+for the ninth object.
+]
+]
+
+.highlight-box[
+.small[
+**Substitute the explicit into the implicit, not the reverse.** Putting both definitions into
+the condition turns three unknowns into one scalar equation in `\(\chi\)`. Going the other way,
+using the condition to write `\(\bar\pi_C\)` in terms of `\(\bar\pi_N\)`, is equally valid and gives the
+same answer, but it leaves a `\(2 \times 2\)` system in `\(\chi\)` and `\(\bar\pi_N\)`: the `\(N\)` definition
+still has to be substituted before it reduces to that same scalar equation. Doing it in the
+first order is what keeps every root-find in this model one-dimensional and monotone.
+]
+]
+
+&lt;a href="#eq38-recover" class="nav-btn"&gt;&amp;larr; back&lt;/a&gt;
+
+---
+name: m0-1
+
+# Backup: Month 0 &amp;mdash; Steps 2 and 3
+
+.small[
+Carried in: `\(\Delta \ln A = 0\)`, `\(\ell_C = 0.6003\)`, `\(\ell_N = 0.3617\)`. Exogenous at `\(t_0\)`: `\(m = 0.0698\)`, `\(d = 0.0300\)`, `\(a = 0.280\)`, `\(\psi = 0.75\)`, `\(\rho = 0.25\)`, so `\(md = 0.0021\)`.
+
+| Eq. | Produces | Month 0 |
+|---|---|---|
+| 18, 6 | `\(\Delta \ln r^*\)`, the bisection root | 0.000776 |
+| 15 | `\(\tilde \ell_{N,t}\)` | 0.001246 |
+| 14 | `\(s_{L,t}^*\)` | 0.59926 |
+| 16 | `\(\Delta \ln w^*\)` | `\(2.83 \cdot 10^{-5}\)` |
+| 5 | `\(\Delta \ln (Y/L)^*\)` | 0.001260 |
+| 17 | `\(\Delta \ln K^*\)` | 0.002329 |
+| 45 | `\(\Delta \ln \mathrm{TFP}\)` | 0.000328 |
+| 13 | `\(\ell^*_{N,t}\)` | 0.36216 |
+| 13 | `\(\ell^*_{C,t}\)` | 0.59984 |
+]
+
+.highlight-box[
+.small[
+The targets are the output that matters next: `\(\ell^*_C = 0.59984\)` against employment of 0.60029, so **the model already wants fewer AI-sensitive workers than it has**. Everything else here is tiny because `\(md = 0.0021\)`.
+]
+]
+
+&lt;a href="#eqstep-1" class="nav-btn"&gt;&amp;larr; back to the equations&lt;/a&gt;
+
+---
+name: m0-2
+
+# Backup: Month 0 &amp;mdash; Steps 4 and 5
+
+.small[
+Now compare employment with those targets, move the sticky wage, and post vacancies.
+
+| Eq. | Produces | Month 0 |
+|---|---|---|
+| 28 | `\(G_{C}\)` overhang, `\(G_N\)` | 0.000803, 0 |
+| 28 | `\(B_{C}\)`, `\(B_N\)` shortfall | 0, 0.001332 |
+| 29 | `\(N_{C}\)` attached force | 0.60029 |
+| 30 | `\(\ln(w_C/w)\)` sticky wage | `\(-8.4 \cdot 10^{-5}\)` |
+| 39 | `\(\ell^d_{C}\)`, then `\(E\)` and `\(Z\)` | 0.59930, `\(E = 0.000988\)`, `\(Z = 0\)` |
+| 27 | `\(q_{C}\)`, `\(q_N\)` quit rates | 0.00635, 0.01403 |
+| 31 | `\(D_{C}\)` layoffs | **0** |
+| 32 | `\(v_{C}\)`, `\(v_N\)` openings | 0.00428, 0.00818 |
+]
+
+.highlight-box[
+.small[
+The layoff test is the moment of the month: the excess `\(E = 0.000988\)` is a quarter of the quit flow `\(q_C \ell_C = 0.003809\)`, so **quits alone absorb it and nobody is laid off**. Layoffs only appear later, when the excess outruns quits.
+]
+]
+
+&lt;a href="#eqstep-2" class="nav-btn"&gt;&amp;larr; back to the equations&lt;/a&gt;
+
+---
+name: m0-3
+
+# Backup: Month 0 &amp;mdash; Steps 6 and 7
+
+.small[
+Match searchers to vacancies, then step the stocks forward to `\(t+1\)`.
+
+| Eq. | Produces | Month 0 |
+|---|---|---|
+| 33 | `\(S_{C}\)`, `\(S_N\)` effective search | 0.01906, 0.02198 |
+| 34 | `\(H_{C}\)`, `\(H_N\)` hires | 0.00291, 0.00510 |
+| 35 | `\(f_{C}\)`, `\(f_N\)` finding rates | 0.1711, 0.2440 |
+| 36 | `\(\ell_{C,t+1}\)`, `\(\ell_{N,t+1}\)` | 0.599387, 0.361732 |
+| 37 | `\(U_{C,t+1}\)`, `\(U_{N,t+1}\)` | 0.018238, 0.020644 |
+]
+
+.highlight-box[
+.small[
+`\(f_C = 0.1711\)` has **already fallen below its steady-state 0.219**, because the AI-sensitive side is posting fewer vacancies than normal. Employment there drops to 0.599387 and its pool rises to 0.018238: the reallocation has started without a single layoff.
+]
+]
+
+&lt;a href="#eqstep-3" class="nav-btn"&gt;&amp;larr; back to the equations&lt;/a&gt;
+
+---
+name: m0-4
+
+# Backup: Month 0 &amp;mdash; Steps 8 and 9
+
+.small[
+Report the economy at **realized** employment, then feed the GDP gap into ideas.
+
+| Eq. | Produces | Month 0 |
+|---|---|---|
+| 39 | `\(\Delta \ln Y\)` | 0.001260 |
+| 39 | `\(\Delta \ln w_N\)`, `\(\Delta \ln r\)`, `\(\Delta \ln K\)` | 0.002519, 0.000776, 0.002329 |
+| 39 | `\(s_{L,t}\)` | 0.59926 |
+| 19 | `\(\tilde \ell_{C,t}\)` | `\(-0.000752\)` |
+| --- | `\(u^x\)`, `\(X\)`, `\(G\)` | 0, 0.000461, 0.000482 |
+| 22 | `\(\Delta \ln R = \Delta \ln Y\)` | 0.001260 |
+| 42 | `\(\Delta g\)` | `\(2.105 \cdot 10^{-5}\)` |
+| 43 | `\(\Delta \ln A_{t+1}\)` | `\(1.754 \cdot 10^{-6}\)` |
+]
+
+.highlight-box[
+.small[
+The GDP gap splits as TFP plus capital deepening: `\(0.000328 + 0.40 \times 0.002329 = 0.00126\)`, so **three quarters of it is capital**, a direct consequence of `\(\varepsilon = 3\)`. Unemployment is still exactly normal, `\(u^x = 0\)`, and the ideas stock leaves month 0 at `\(1.754 \cdot 10^{-6}\)`.
+]
+]
+
+&lt;a href="#eqstep-4" class="nav-btn"&gt;&amp;larr; back to the equations&lt;/a&gt;
+
+---
+name: the-44
+
+# Backup: The 44 Equations, and Where They Live
+
+.small[
+Table A.1 (pp. 42-43) writes the model as **44 equations in 44 unknowns per month**, in four
+panels. The nine steps on the main slide are these panels in solution order, not one step per
+equation. Every number below links to that equation in `repro.html`, which now carries one
+number and one anchor per equation, the paper's own numbering throughout.
+]
+
+.small[
+
+
+| Panel | Eq. | What they determine, with the paper's equation numbers | In `repro.qmd` and `aiscen` |
+|---|---|---|---|
+| **A. Ideas** | 3 | research uplift ([22](../repro.html#eq-22)), growth gap ([42](../repro.html#eq-42)), the ideas stock ([42](../repro.html#eq-42), [43](../repro.html#eq-43)) | [§2.2](../repro.html#innovation) · `simulate.py:196`; closed form at `:215` |
+| **B. Capital, wage, shares, targets** | 9 | `\(\Delta \ln r\)` ([18](../repro.html#eq-18), [6](../repro.html#eq-6)), `\(\tilde\ell_N\)` ([15](../repro.html#eq-15)), `\(s_L\)` ([14](../repro.html#eq-14)), `\(\Delta \ln w\)` ([16](../repro.html#eq-16)), `\(Y/L\)` ([5](../repro.html#eq-5)), `\(K\)` ([17](../repro.html#eq-17)), TFP ([45](../repro.html#eq-45)), the two targets ([13](../repro.html#eq-13)) | [§2.1.1](../repro.html#technology-and-factor-markets), [§2.1.3](../repro.html#measured-tfp-and-the-factor-price-frontier), [§2.1.5](../repro.html#employment-in-the-two-groups) · `statics.py:67` `frictionless()`, called at `simulate.py:129` |
+| **C. Flows** | 23 | overhang and shortfall ([28](../repro.html#eq-28)), quits ([27](../repro.html#eq-27)), attached force ([29](../repro.html#eq-29)), sticky wage ([30](../repro.html#eq-30)), demand ([39](../repro.html#eq-39)), layoffs ([31](../repro.html#eq-31)), openings ([32](../repro.html#eq-32)), search ([33](../repro.html#eq-33)), hires ([34](../repro.html#eq-34)), finding rates ([35](../repro.html#eq-35)), employment ([36](../repro.html#eq-36)), pools ([37](../repro.html#eq-37)) | [§2.3](../repro.html#unemployment) · `simulate.py:140-178`, stocks at `:200`; ([33](../repro.html#eq-33)) in `steady.py:46` |
+| **D. Reporting** | 9 | the AI-sensitive shift ([19](../repro.html#eq-19)), the actual economy ([39](../repro.html#eq-39)), and three rows the paper leaves unnumbered: excess unemployment, reallocation, aggregate overhang | [§2.3](../repro.html#unemployment), [§5](../repro.html#verification-summary) · `statics.py:152` `actual_at_employment()`, called at `simulate.py:179`; `report.py` |
+
+**The mapping runs both ways**, because Table A.1 is organised by endogenous variable, not by
+equation. One variable can take several equations: `\(\Delta \ln r\)` is where the supply schedule
+[(6)](../repro.html#eq-6) meets market clearing [(18)](../repro.html#eq-18), which is why it
+needs a root-find. One equation can cover several variables: [(28)](../repro.html#eq-28) is
+both the overhang and the shortfall, [(13)](../repro.html#eq-13) both targets, and
+[(39)](../repro.html#eq-39) five at once, which is why panel D counts the actual economy as five. Panel C's 23 are ten
+pairs plus three that exist only for `\(C\)`: the attached force, the sticky wage and layoffs.
+]
+
+.highlight-box[
+.small[
+Two rows are approximations when the exact set is run: **measured TFP**, a base-price index,
+and the **ideas update**, a monthly step on the closed form [(43)](../repro.html#eq-43). Every other row holds exactly
+given its right-hand side. A fifth panel, the steady state, is nine more objects solved once at
+`\(t_0\)` and deliberately outside the 44: `steady.py:51`.
+]
+]
+
+&lt;a href="#month-main" class="nav-btn"&gt;&amp;larr; back&lt;/a&gt;
+
+---
+name: assignment-derivation
+
+# Backup: Deriving the Assignment Rule
+
+.small[
+**1. Within an instance the two factors are perfect substitutes.** Equation (2) is
+`\(y_i = A\,\alpha_{L,i}\,\ell_i + \alpha_{K,i}\,k_i\)`, a **sum**, not a CES. One unit of output
+takes either `\(1/(A\alpha_{L,i})\)` units of labor *or* `\(1/\alpha_{K,i}\)` units of capital.
+
+**2. Cost-minimise.** The two routes cost `\(w/(A\alpha_{L,i})\)` and `\(r/\alpha_{K,i}\)`. Perfect
+substitutes means the cheaper route takes the **whole** instance, a corner solution, so unit
+cost is the smaller of the two; constant returns plus competition set price equal to it:
+]
+
+`$$p_{i,t} = c_{i,t} = \min\Big\{ \frac{w_t}{A_t \alpha_{L,i,t}}, \; \frac{r_t}{\alpha_{K,i,t}} \Big\}$$`
+
+.small[
+**3. Rearrange into a threshold.** Capital is cheaper exactly when
+`\(r/\alpha_K \le w/(A\alpha_L)\)`, which is `\(\alpha_{K,i}/\alpha_{L,i} \ge A_t r_t / w_t\)`. Rank
+instances by capital's comparative advantage and the rule is a cutoff: above it machines,
+below it people. The cutoff rises with `\(r/w\)`, and with `\(A\)`, since ideas augment labor only.
+
+**4. Where AI enters.** Automation raises `\(\alpha_{K,i}\)`, augmentation raises `\(\alpha_{L,i}\)`,
+and both are set to cut that instance's unit cost by the same `\(a_{i,t}\)`. That is why the fork
+is distributional, not productive.
+
+**5. When automation sticks.** Base-period units equalise all unit costs, so an automated
+instance sits `\(a_{i,t}\)` below labor's cost and stays on capital while
+`\(\Delta \ln r_t - \Delta \ln w_t \le a_{i,t}\)`, the paper's Equation (7). In the reproduction
+the squeeze reaches **0.004 / 0.047 / 0.271** log points at 2030 against gains of
+**0.30 / 0.45 / 0.80**: even the extreme scenario uses only a third of its margin, so no
+instance hands itself back.
+]
+
+&lt;a href="#assignment-main" class="nav-btn"&gt;&amp;larr; back&lt;/a&gt;
+
+---
+name: share-derivation
+
+# Backup: Deriving the Expenditure Share
+
+Start from CES demand, `\(y_i = \omega_i (c_i/P)^{-\sigma} Y\)`. Multiply by price and
+divide by nominal output:
+
+`$$s_i \equiv \frac{c_i y_i}{P Y} = \frac{c_i}{PY} \cdot \omega_i \Big(\frac{c_i}{P}\Big)^{-\sigma} Y = \omega_i \Big(\frac{c_i}{P}\Big)^{1-\sigma}$$`
+
+The exponent moves from `\(-\sigma\)` to `\(1-\sigma\)` because the price enters twice: once
+through quantity demanded, once through revenue per unit.
+
+**Numerically**, at `\(\sigma = 0.5\)`: a 0.45 log-point cost decline is a factor
+`\(e^{-0.45} = 0.64\)`, so the share is multiplied by `\(0.64^{0.5} = 0.80\)`. Down a fifth,
+even though more of the task is produced.
+
+&lt;a href="#shares-main" class="nav-btn"&gt;← back&lt;/a&gt;
+
+---
+name: labor-share-derivation
+
+# Backup: The Labor Share, Exactly
+
+`$$s_{L,t} = 1 - \underbrace{\big[ s_{K,t0} + s_{L,t0} \psi_t m_t d_t ( e^{-(1-\sigma)a_t} - \rho ) \big]}_{B_t} e^{(1-\sigma)\Delta \ln r_t}$$`
+
+Work with capital's share and subtract. At an unchanged rental rate, capital's share
+is `\(B_t\)`:
+
+- `\(s_{K,t0}\)`: what capital already had.
+- `\(+\, s_{L,t0}\psi_t m_t d_t\)`: the wage bill of instances automation just moved over.
+- `\(\times\, e^{-(1-\sigma)a_t}\)`: those instances are cheaper now, so they command a
+  smaller share (this is Equation 4 applied to them).
+- `\(-\, \rho\)`: minus the mass handed back to labor as new tasks.
+
+Then `\(e^{(1-\sigma)\Delta \ln r_t}\)` applies the same share logic to capital as a whole:
+dearer capital, bigger share, because `\(\sigma &lt; 1\)`.
+
+&lt;a href="#labor-share-main" class="nav-btn"&gt;← back&lt;/a&gt;
+
+---
+name: prop1-derivation
+
+# Backup: The Wage Line of Proposition 1
+
+The one line that is not obvious:
+
+`$$\Delta \ln w_t = \frac{\Delta \ln s_{L,t} + \tilde \ell_{N,t}}{1-\sigma} + \Delta \ln A_t$$`
+
+Two substitutions. Write the unaffected group's demand in ideas-deflated terms,
+
+`$$\tilde \ell_{N} = \Delta\ln(Y/L) - \Delta \ln A - \sigma \Delta \ln \tilde w,$$`
+
+then replace `\(\Delta \ln(Y/L)\)` using the wage identity
+`\(\Delta\ln(Y/L) = \Delta \ln \tilde w + \Delta \ln A - \Delta \ln s_L\)`. The ideas
+terms cancel:
+
+`$$\tilde \ell_{N} = (1-\sigma)\Delta \ln \tilde w - \Delta \ln s_L$$`
+
+Solve for `\(\Delta \ln \tilde w\)`, then add `\(\Delta \ln A\)` to return to the actual wage.
+
+.small[
+Note: Equation (13) as printed in the paper omits a `\(-(1-\sigma)\Delta \ln A\)` term
+once ideas are endogenous. The exact row the simulation runs, Equation (15), has no
+ideas term, and is what the reimplementation uses.
+]
+
+&lt;a href="#prop1-main" class="nav-btn"&gt;← back&lt;/a&gt;
+
+---
+name: epsstar-derivation
+
+# Backup: When Does the Wage Fall?
+
+Substituting the wage line into the rental line gives a threshold: the wage rises iff
+
+`$$\varepsilon &gt; \varepsilon^*_t \approx \frac{1}{s_{L,t0}}\Big[ s_{K,t0} - \sigma + \psi_t \Big( \frac{1-\rho}{a_t} - (1-\sigma) \Big) \Big]$$`
+
+The term `\((1-\rho)/a_t\)` is displacement per unit of cost saving: the formal version of
+**so-so automation**. Technology that takes tasks while saving little forces a large
+rental-rate rise to justify the transfer, and the wage ends up below its no-AI path.
+
+.small[
+How far to trust it: it is first-order. Computed against the exact model,
+`\(\varepsilon^* = 1.30\)` for the substantial scenario against a true sign flip at 1.53;
+for the extreme scenario, 0.96 against a true 1.67. Fine for intuition, not for a
+number you would quote.
+]
+
+&lt;a href="#labor-share-main" class="nav-btn"&gt;← back&lt;/a&gt;
+
+---
+name: matching-detail
+
+# Backup: Why Not Cobb-Douglas Matching
+
+The workhorse `\(H = \chi S^{\alpha} v^{1-\alpha}\)` can return more hires than there are
+searchers or vacancies once the ratio gets extreme, so it must be capped at
+`\(\min\{S, v\}\)` — and the cap puts a kink into simulated paths exactly where the
+extreme scenario spends its time.
+
+`$$H_{j,t} = \chi \frac{S_{j,t} v_{j,t}}{(S_{j,t}^{\iota} + v_{j,t}^{\iota})^{1/\iota}}$$`
+
+satisfies the bounds automatically, has constant returns (so the filling rate depends
+only on tightness `\(\theta = v/S\)`), and tends to `\(\chi \min\{S, v\}\)` as
+`\(\iota \to \infty\)`. Here `\(\iota = 1.27\)`, from den Haan, Ramey and Watson (2000).
+
+The efficiency `\(\chi = 0.76\)` is set so the employment-weighted mean filling rate is
+0.65 per month, computed from JOLTS 2010–19 with the daily model of Davis et al.
+(2013).
+
+&lt;a href="#matching-main" class="nav-btn"&gt;← back&lt;/a&gt;
+
+---
+name: slop-mechanism
+
+# Backup: Why Slop Flips the Wage Sign
+
+Equation (19), split into its two terms:
+
+`$$\tilde \ell_{N,t} \approx \underbrace{(1-\rho)\psi_t m_t d_t}_{\text{no } a_t \text{ in it}} + \underbrace{(1-\sigma)(1-\psi_t) m_t d_t a_t}_{\text{proportional to } a_t}$$`
+
+An automated instance takes its **whole wage bill** to capital whether the machine
+saved an hour or a minute. The weak-link cushion that partly protects the labor share
+is proportional to the saving. Slop removes the offset and leaves the harm.
+
+| all-in gain | displacement | weak-link cushion | ratio |
+|---|---|---|---|
+| 0.45 | 6.75 pp | 2.02 pp | 3.3x |
+| 0.22 | 6.75 pp | 1.01 pp | 6.7x |
+| 0.09 | 6.75 pp | 0.41 pp | 16.7x |
+
+Formally this is the `\(\varepsilon^*\)` threshold again, since it contains
+`\((1-\rho)/a_t\)`: slop pushes the required capital-supply elasticity from 1.30 to 3.39
+and then 7.58, straight through the calibrated `\(\varepsilon = 3\)`.
+
+.small[
+What the model cannot host: quality itself. Instances are homogeneous and prices are
+quality-adjusted by assumption, so slop can only be a smaller cost saving, never the
+same cost for a worse product. And if errors propagate downstream, Hulten's theorem
+(Equation 9) no longer applies, because it assumes an efficient economy.
+]
+
+&lt;a href="#slop-main" class="nav-btn"&gt;← back&lt;/a&gt;
+
+---
+name: ubar-detail
+
+# Backup: The One Number That Does Not Reproduce
+
+Table 1 gives the normal search pool as `\(\bar U = 0.038\)`. But:
+
+- the quit-rate derivation on p. 26 uses `\(0.219 \times 3.84 / 96.16\)`, i.e. 3.84%
+- the reported pool split, 1.76 and 2.08 percent of the labor force, sums to 3.84%
+
+At `\(\bar U = 0.038\)` the reimplementation gives an all-workers unemployment rate 0.07
+points below every published figure (4.53 against 4.6 in the substantial scenario). At
+`\(\bar U = 0.0384\)` every affected cell lands exactly, and nothing else moves.
+
+.blue-box[
+This is what a reproduction is for: not to catch an error, since the paper's own text
+contains the number that works, but to identify precisely which printed value was
+rounded and which was used.
+]
+
+&lt;a href="#verify-main" class="nav-btn"&gt;← back&lt;/a&gt;
+
+---
+name: growth-vs-levels
+
+# Backup: Growth Rates Against Level Gaps
+
+&lt;table&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; Year &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; AI economy &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; No AI &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; Excess, pp &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; Ratio factor &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; Cumulative gap &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 2027 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3.60 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2.00 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1.60 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1.0161 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2.23 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 2028 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 6.03 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2.00 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 4.03 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1.0411 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 6.44 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 2029 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 10.38 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2.00 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 8.38 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1.0874 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 15.74 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 2030 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 15.46 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2.00 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 13.46 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1.1441 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 32.42 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+.small[
+Each year's *ratio factor* is exp(AI growth) / exp(no-AI growth); the cumulative gap is the
+running product of them. Adding the excess column without compounding gives 27.5%,
+compounding it gives 32.4%.
+
+**Redoing this by hand has three traps.** *Ratio, not difference*: the gap divides the two
+2030 levels. *Log rates*: the gross factor for 15.5% is exp(0.155) =
+1.167, not 1.155. *Head start*: a factor of 1.00606, because
+AI adoption begins in mid-2026, so the paths have already separated by 0.61% before 2027 opens.
+]
+
+&lt;table&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; Calculation &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; 2030 gap, pct &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; prod(1 + g) minus the no-AI index (a difference, not a ratio) &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 31.76 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; prod(1 + g) / no-AI index &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 29.34 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; prod(exp g) / no-AI index (log rates) &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 31.62 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; the same, times the 1.00606 end-2026 head start &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 32.42 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+
+&lt;a href="#claim-table-main" class="nav-btn"&gt;← back&lt;/a&gt;
+
+---
+name: gain-detail
+
+# Backup: Reading the Gain `\(a\)`
+
+.small[
+Four things stack in this one symbol, which is why it is the hardest input to picture. It is
+in **log units**, so 0.80 is not 80% of anything. It is a **cost** concept, not a capability
+one. It is an **average over a moving set**: `\(a_t\)` weights each task's `\(a_{i,t}\)` by `\(m_i d_i\)`,
+and that set grows as AI diffuses. And it is **silent about jobs**, since the same `\(a\)` applies
+whether a worker does the instance with AI or capital does it outright. Which of the two
+happens is `\(\psi\)`, not `\(a\)`.
+]
+
+**The clearest reading is the paper's own survey question.** To ask 10,980 people for this
+parameter (Table 2, p. 30) the authors had to put it in plain language: *how long an AI-suited
+task takes with AI versus without*, with the answer set to the log of the reported speed-up.
+
+&lt;table&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; Scenario &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; a in 2030 &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; 100 minutes becomes &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; unit cost falls by &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; output per unit input &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; modest &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.30 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 74 min &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 26% &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1.35 x &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; substantial &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.45 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 64 min &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 36% &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1.57 x &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; extreme &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.80 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 45 min &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 55% &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2.23 x &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; survey median (Table 2) &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.44 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 64 min &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 36% &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1.55 x &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+.small[
+Two caveats. The stopwatch reading is literal only under augmentation, where the saving is
+worker-hours; when capital performs the instance outright the saving is in rental cost, and
+the model applies the same `\(a\)` to both (p. 11). And nothing here fixes the averaging: `\(a\)` is
+one number standing for a distribution over tasks that the model never carries around.
+]
+
+&lt;a href="#inputs-main" class="nav-btn"&gt;&amp;larr; back&lt;/a&gt;
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false,
+"ratio": "16:9"
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

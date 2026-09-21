@@ -1,0 +1,41 @@
+scenario,eps,row,simulated,published
+substantial,1.0,"GDP, pct above no-AI",6.3777,6.4
+substantial,1.0,"Average wage, pct above no-AI",-1.5641,-1.6
+substantial,1.0,"Net return r - delta, pct per year",7.5693,7.6
+substantial,1.0,"Capital stock, pct above no-AI",9.2981,9.3
+substantial,1.0,"Labor share, pct of income",55.0806,55.1
+substantial,3.0,"GDP, pct above no-AI",8.2832,8.3
+substantial,3.0,"Average wage, pct above no-AI",2.1366,2.1
+substantial,3.0,"Net return r - delta, pct per year",7.0074,7.0
+substantial,3.0,"Capital stock, pct above no-AI",13.8292,13.8
+substantial,3.0,"Labor share, pct of income",56.0961,56.1
+substantial,6.0,"GDP, pct above no-AI",9.0493,9.1
+substantial,6.0,"Average wage, pct above no-AI",3.6565,3.7
+substantial,6.0,"Net return r - delta, pct per year",6.7833,6.8
+substantial,6.0,"Capital stock, pct above no-AI",15.7196,15.7
+substantial,6.0,"Labor share, pct of income",56.5077,56.5
+substantial,inf,"GDP, pct above no-AI",10.0216,10.0
+substantial,inf,"Average wage, pct above no-AI",5.6144,5.6
+substantial,inf,"Net return r - delta, pct per year",6.5000,6.5
+substantial,inf,"Capital stock, pct above no-AI",18.1805,18.2
+substantial,inf,"Labor share, pct of income",57.0337,57.0
+extreme,1.0,"GDP, pct above no-AI",21.2770,21.3
+extreme,1.0,"Average wage, pct above no-AI",-9.2170,-9.2
+extreme,1.0,"Net return r - delta, pct per year",10.3493,10.3
+extreme,1.0,"Capital stock, pct above no-AI",33.4725,33.5
+extreme,1.0,"Labor share, pct of income",41.2422,41.2
+extreme,3.0,"GDP, pct above no-AI",32.4219,32.4
+extreme,3.0,"Average wage, pct above no-AI",9.6514,9.7
+extreme,3.0,"Net return r - delta, pct per year",8.3458,8.3
+extreme,3.0,"Capital stock, pct above no-AI",56.2950,56.3
+extreme,3.0,"Labor share, pct of income",45.2110,45.2
+extreme,6.0,"GDP, pct above no-AI",37.1690,37.2
+extreme,6.0,"Average wage, pct above no-AI",18.3199,18.3
+extreme,6.0,"Net return r - delta, pct per year",7.5274,7.5
+extreme,6.0,"Capital stock, pct above no-AI",67.1027,67.1
+extreme,6.0,"Labor share, pct of income",46.9175,46.9
+extreme,inf,"GDP, pct above no-AI",43.3313,43.3
+extreme,inf,"Average wage, pct above no-AI",30.1065,30.1
+extreme,inf,"Net return r - delta, pct per year",6.5000,6.5
+extreme,inf,"Capital stock, pct above no-AI",82.2428,82.2
+extreme,inf,"Labor share, pct of income",49.1408,49.1

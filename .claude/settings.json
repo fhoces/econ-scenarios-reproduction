@@ -1,0 +1,17 @@
+{
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit|Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/opt/anaconda3/bin/python3 /Users/fernando/Desktop/sandbox/repro_anthropic_report/render_understanding.py --if-stale 2>/dev/null || true",
+            "timeout": 30,
+            "statusMessage": "Refreshing understanding.html"
+          }
+        ]
+      }
+    ]
+  }
+}

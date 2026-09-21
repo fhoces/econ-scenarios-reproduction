@@ -1,0 +1,834 @@
+<title>AI Scenario Dials</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Serif:wght@400;600&display=swap">
+
+<style>
+  :root {
+    --paper:      #fbfcfd;
+    --panel:      #ffffff;
+    --ink:        #101519;
+    --ink-2:      #5b6873;
+    --ink-3:      #8994a0;
+    --rule:       #e2e7ec;
+    --rule-2:     #eef1f5;
+    --series-1:   #2a78d6;
+    --series-2:   #eb6834;
+    --ref:        #a8b2bb;
+    --chip:       #f1f4f7;
+    --chip-on:    #101519;
+    --chip-on-tx: #ffffff;
+    --serif: "IBM Plex Serif", Georgia, "Times New Roman", serif;
+    --sans:  "IBM Plex Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    --mono:  "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper:      #14171a;
+      --panel:      #1a1e22;
+      --ink:        #eef1f4;
+      --ink-2:      #9aa6b2;
+      --ink-3:      #6f7b87;
+      --rule:       #262c33;
+      --rule-2:     #1f242a;
+      --series-1:   #3987e5;
+      --series-2:   #d95926;
+      --ref:        #525c66;
+      --chip:       #232930;
+      --chip-on:    #eef1f4;
+      --chip-on-tx: #14171a;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper:      #14171a;
+    --panel:      #1a1e22;
+    --ink:        #eef1f4;
+    --ink-2:      #9aa6b2;
+    --ink-3:      #6f7b87;
+    --rule:       #262c33;
+    --rule-2:     #1f242a;
+    --series-1:   #3987e5;
+    --series-2:   #d95926;
+    --ref:        #525c66;
+    --chip:       #232930;
+    --chip-on:    #eef1f4;
+    --chip-on-tx: #14171a;
+  }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 15px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding-inline: 20px;
+    padding-block: 32px 48px;
+  }
+
+  /* ---- masthead ------------------------------------------------------- */
+  header { border-bottom: 1px solid var(--rule); padding-bottom: 20px; }
+  h1 {
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: clamp(26px, 4.2vw, 36px);
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    margin: 0 0 8px;
+    text-wrap: balance;
+  }
+  .standfirst {
+    font-family: var(--serif);
+    color: var(--ink-2);
+    max-width: 62ch;
+    margin: 0;
+    font-size: 15.5px;
+  }
+  .standfirst em { color: var(--ink); font-style: italic; }
+
+  /* ---- identity strip -------------------------------------------------- */
+  .identity {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 8px 18px;
+    margin-top: 22px;
+    padding: 14px 16px;
+    background: var(--panel);
+    border: 1px solid var(--rule);
+    border-left: 3px solid var(--series-1);
+  }
+  .identity .name {
+    font-family: var(--serif);
+    font-size: 17px;
+    font-weight: 600;
+  }
+  .identity .meta {
+    font-family: var(--mono);
+    font-size: 12.5px;
+    color: var(--ink-2);
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* ---- two-column body ------------------------------------------------- */
+  .cols {
+    display: grid;
+    grid-template-columns: minmax(0, 400px) minmax(0, 1fr);
+    gap: 34px;
+    margin-top: 28px;
+    align-items: start;
+  }
+  @media (max-width: 860px) {
+    .cols { grid-template-columns: minmax(0, 1fr); gap: 30px; }
+  }
+
+  h2 {
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    margin: 0 0 14px;
+  }
+
+  /* ---- the dial rack --------------------------------------------------- */
+  .rack { display: flex; flex-direction: column; gap: 3px; }
+  .dial {
+    padding: 10px 0;
+    border-bottom: 1px solid var(--rule-2);
+  }
+  .dial:last-child { border-bottom: 0; }
+  .dial { position: relative; }
+  .dial .label {
+    font: inherit;
+    font-weight: 500;
+    font-size: 14.5px;
+    color: inherit;
+    background: none;
+    border: 0;
+    padding: 0;
+    text-align: left;
+    cursor: help;
+    display: inline-flex;
+    align-items: baseline;
+    gap: 6px;
+    justify-self: start;
+  }
+  .dial .label .name { border-bottom: 1px dotted var(--ink-3); }
+  .dial .label:hover .name, .dial .label:focus-visible .name { border-bottom-color: var(--series-1); }
+  .dial .label:focus-visible { outline: 2px solid var(--series-1); outline-offset: 3px; }
+  .dial .label .sym {
+    font-family: var(--mono);
+    font-size: 12.5px;
+    color: var(--ink-3);
+  }
+
+  /* ---- the detail bubble ------------------------------------------------ */
+  .pop {
+    position: absolute;
+    z-index: 30;
+    top: calc(100% - 6px);
+    left: 0;
+    width: 360px;
+    max-width: calc(100vw - 40px);
+    background: var(--panel);
+    border: 1px solid var(--rule);
+    box-shadow: 0 6px 20px rgb(16 21 25 / 0.13);
+    padding: 13px 15px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-3px);
+    transition: opacity 110ms ease, transform 110ms ease, visibility 110ms;
+  }
+  .dial:hover .pop,
+  .dial .label:focus-visible ~ .pop,
+  .dial .label[aria-expanded="true"] ~ .pop {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+  .pop h3 {
+    font-family: var(--serif);
+    font-size: 15px;
+    font-weight: 600;
+    margin: 0 0 6px;
+  }
+  .pop h3 .sym { font-family: var(--mono); font-size: 12.5px; color: var(--ink-3); margin-left: 6px; }
+  .pop p { margin: 0 0 8px; font-size: 13px; line-height: 1.5; color: var(--ink-2); }
+  .pop p:last-child { margin-bottom: 0; }
+  .pop .levels-note {
+    font-family: var(--mono);
+    font-size: 11.5px;
+    color: var(--ink);
+    font-variant-numeric: tabular-nums;
+    border-left: 2px solid var(--series-1);
+    padding-left: 9px;
+  }
+  .pop .source { font-size: 11.5px; color: var(--ink-3); }
+  .dial .desc {
+    font-size: 12.5px;
+    color: var(--ink-2);
+    line-height: 1.35;
+    margin-top: 1px;
+  }
+  .levels { display: flex; flex-wrap: wrap; gap: 3px; margin-top: 8px; }
+  .levels button {
+    font-family: var(--mono);
+    font-variant-numeric: tabular-nums;
+    font-size: 13px;
+    color: var(--ink-2);
+    background: var(--chip);
+    border: 1px solid transparent;
+    border-radius: 2px;
+    padding: 6px 9px;
+    min-width: 48px;
+    cursor: pointer;
+    transition: background 120ms ease, color 120ms ease;
+  }
+  .levels button:hover { border-color: var(--ink-3); }
+  .levels button[aria-pressed="true"] {
+    background: var(--chip-on);
+    color: var(--chip-on-tx);
+    font-weight: 500;
+  }
+  .levels button:focus-visible { outline: 2px solid var(--series-1); outline-offset: 2px; }
+
+  .presets { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+  .presets button {
+    font-family: var(--sans);
+    font-size: 13px;
+    color: var(--ink);
+    background: none;
+    border: 1px solid var(--rule);
+    border-radius: 2px;
+    padding: 6px 12px;
+    cursor: pointer;
+  }
+  .presets button:hover { border-color: var(--ink-3); }
+  .presets button:focus-visible { outline: 2px solid var(--series-1); outline-offset: 2px; }
+
+  /* ---- outcomes -------------------------------------------------------- */
+  .outcomes { display: flex; flex-direction: column; }
+  .out-row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: baseline;
+    gap: 14px;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--rule-2);
+  }
+  .out-row .k { font-size: 14px; color: var(--ink-2); }
+  .out-row .v {
+    font-family: var(--mono);
+    font-variant-numeric: tabular-nums;
+    font-size: 16px;
+    font-weight: 500;
+  }
+  .out-row .v .u { font-size: 11.5px; color: var(--ink-3); margin-left: 3px; }
+
+  /* ---- charts ---------------------------------------------------------- */
+  .charts { display: grid; grid-template-columns: minmax(0, 1fr); gap: 22px; margin-top: 30px; }
+  @media (min-width: 620px) { .charts { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  figure { margin: 0; }
+  figcaption {
+    font-size: 13px;
+    font-weight: 500;
+    margin-bottom: 2px;
+  }
+  .legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 14px;
+    font-size: 11.5px;
+    color: var(--ink-2);
+    margin-bottom: 8px;
+  }
+  .legend span { display: inline-flex; align-items: center; gap: 5px; }
+  .swatch { width: 14px; height: 2px; border-radius: 1px; display: inline-block; }
+  .sw-1 { background: var(--series-1); }
+  .sw-2 { background: var(--series-2); }
+  .sw-ref { background: var(--ref); }
+
+  .plot { position: relative; }
+  svg { display: block; width: 100%; height: auto; overflow: visible; }
+  .grid-line { stroke: var(--rule); stroke-width: 1; fill: none; }
+  .axis-text { font-family: var(--mono); font-size: 9px; fill: var(--ink-3); }
+  .ref-line { fill: none; stroke: var(--ref); stroke-width: 1; }
+  .ref-text { font-family: var(--mono); font-size: 8.5px; fill: var(--ink-3); }
+  .main-1 { fill: none; stroke: var(--series-1); stroke-width: 2; stroke-linejoin: round; }
+  .main-2 { fill: none; stroke: var(--series-2); stroke-width: 2; stroke-linejoin: round; }
+  .dot-1 { fill: var(--series-1); }
+  .dot-2 { fill: var(--series-2); }
+  .end-text {
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 500;
+    fill: var(--ink);
+    font-variant-numeric: tabular-nums;
+  }
+  .cross { stroke: var(--ink-3); stroke-width: 1; stroke-dasharray: 2 3; }
+  .tip {
+    position: absolute;
+    pointer-events: none;
+    background: var(--panel);
+    border: 1px solid var(--rule);
+    padding: 4px 8px;
+    font-family: var(--mono);
+    font-size: 11.5px;
+    font-variant-numeric: tabular-nums;
+    color: var(--ink);
+    white-space: nowrap;
+    transform: translate(-50%, -120%);
+    box-shadow: 0 1px 4px rgb(0 0 0 / 0.12);
+  }
+
+  /* ---- table view ------------------------------------------------------ */
+  details { margin-top: 30px; border-top: 1px solid var(--rule); padding-top: 16px; }
+  summary { cursor: pointer; font-size: 13px; color: var(--ink-2); }
+  summary:focus-visible { outline: 2px solid var(--series-1); outline-offset: 2px; }
+  .table-scroll { overflow-x: auto; margin-top: 12px; }
+  table { border-collapse: collapse; font-size: 12.5px; min-width: 420px; }
+  th, td {
+    text-align: right;
+    padding: 4px 10px 4px 0;
+    border-bottom: 1px solid var(--rule-2);
+    font-family: var(--mono);
+    font-variant-numeric: tabular-nums;
+  }
+  th:first-child, td:first-child { text-align: left; font-family: var(--sans); }
+  th { color: var(--ink-3); font-weight: 500; }
+
+  footer {
+    margin-top: 40px;
+    padding-top: 18px;
+    border-top: 1px solid var(--rule);
+    font-size: 12.5px;
+    color: var(--ink-2);
+    max-width: 78ch;
+  }
+  footer code {
+    font-family: var(--mono);
+    font-size: 11.5px;
+    background: var(--chip);
+    padding: 1px 4px;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; }
+  }
+</style>
+
+<div class="wrap">
+  <header>
+    <h1>AI Scenario Dials</h1>
+    <p class="standfirst">
+      Korinek, Jones, Sacher, Cotter and McCrory run their transformative-AI model at three
+      settings and label them <em>modest</em>, <em>substantial</em> and <em>extreme</em>. But the
+      model takes seven inputs, and those three scenarios move all seven in lockstep. Set them
+      independently here: every one of the <span id="cell-count">2187</span> combinations is
+      precomputed, so the 2030 outcomes appear as you click. Reinstatement is carried on a finer
+      grid than the paper's, including values at and above one.
+    </p>
+  </header>
+
+  <div class="identity">
+    <span class="name" id="cell-name">the substantial scenario</span>
+    <span class="meta" id="cell-meta"></span>
+  </div>
+
+  <div class="cols">
+    <section>
+      <h2>The seven dials</h2>
+      <div class="rack" id="rack"></div>
+      <div class="presets">
+        <button type="button" data-preset="modest">Modest</button>
+        <button type="button" data-preset="substantial">Substantial</button>
+        <button type="button" data-preset="extreme">Extreme</button>
+        <button type="button" data-preset="best">Highest GDP cell</button>
+      </div>
+    </section>
+
+    <section>
+      <h2>Outcomes in 2030</h2>
+      <div class="outcomes" id="outcomes"></div>
+
+      <div class="charts">
+        <figure>
+          <figcaption>GDP, percent above the no-AI path</figcaption>
+          <div class="legend">
+            <span><i class="swatch sw-1"></i>this setting</span>
+            <span><i class="swatch sw-ref"></i>M / S / E scenarios</span>
+          </div>
+          <div class="plot" id="plot-gdp"></div>
+        </figure>
+        <figure>
+          <figcaption>Unemployment rate, cognitive occupations</figcaption>
+          <div class="legend">
+            <span><i class="swatch sw-2"></i>this setting</span>
+            <span><i class="swatch sw-ref"></i>M / S / E scenarios</span>
+          </div>
+          <div class="plot" id="plot-u"></div>
+        </figure>
+      </div>
+
+      <details>
+        <summary>Show the numbers as a table</summary>
+        <div class="table-scroll">
+          <table id="cmp">
+            <thead>
+              <tr><th>Outcome in 2030</th><th>This setting</th><th>Modest</th><th>Substantial</th><th>Extreme</th></tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </details>
+    </section>
+  </div>
+
+  <footer>
+    Every cell is a full monthly solve of the model from 2024 to 2030, computed by an independent
+    Python reimplementation (<code>aiscen</code>) that reproduces the paper's Tables 3, 5 and 6 to
+    the printed precision. The three named scenarios sit at the corners of this grid and match
+    their published values. One convention to note: the gain <code>a</code> follows a straight line
+    from the mid-2026 anchor common to all scenarios, which is what the paper's own explorer does
+    for off-scenario values, so grid corners land within 0.03 points of the published table rather
+    than exactly on it. Reinstatement runs over six values here, three of them outside the range
+    the paper uses; at those settings the labor share rises above its 60 percent starting point,
+    territory the paper's own scenarios never enter.
+  </footer>
+</div>
+
+<script src="grid.js"></script>
+<script>
+(function () {
+  "use strict";
+  var G = window.__GRID__;
+  var state = G.named.substantial.slice();
+  var SIZES = G.dials.map(function (d) { return d.levels.length; });
+
+  // ---- cell lookup -------------------------------------------------------
+  // Cells were written in itertools.product order. The dials no longer all have the same
+  // number of levels, so the index is mixed-radix rather than base 3.
+  function idx(levels) {
+    var i = 0;
+    for (var k = 0; k < levels.length; k++) i = i * SIZES[k] + levels[k];
+    return i;
+  }
+  var namedIdx = {
+    modest: idx(G.named.modest),
+    substantial: idx(G.named.substantial),
+    extreme: idx(G.named.extreme)
+  };
+
+  // GDP rank, computed once, for "where does this cell sit".
+  var gdpSorted = G.snap.map(function (s) { return s[0]; }).sort(function (a, b) { return a - b; });
+  var bestIdx = 0;
+  for (var c = 1; c < G.snap.length; c++) if (G.snap[c][0] > G.snap[bestIdx][0]) bestIdx = c;
+  function bestLevels() {
+    var out = [], n = bestIdx;
+    for (var k = SIZES.length - 1; k >= 0; k--) {
+      out[k] = n % SIZES[k];
+      n = Math.floor(n / SIZES[k]);
+    }
+    return out;
+  }
+  function percentile(v) {
+    var lo = 0, hi = gdpSorted.length;
+    while (lo < hi) { var mid = (lo + hi) >> 1; if (gdpSorted[mid] <= v) lo = mid + 1; else hi = mid; }
+    return Math.round(100 * lo / gdpSorted.length);
+  }
+  function ordinal(n) {
+    var t = n % 100;
+    if (t >= 11 && t <= 13) return n + "th";
+    return n + ({ 1: "st", 2: "nd", 3: "rd" }[n % 10] || "th");
+  }
+
+  // ---- what each dial means, for the hover bubble ------------------------
+  var DETAIL = {
+    m: {
+      title: "Affected mass", sym: "m",
+      body: "The share of the economy's tasks AI can affect, all of them cognitive. Tasks are " +
+            "weighted by their share of base-period labor payments rather than by headcount, so " +
+            "this is a share of the wage bill, not of job titles. It follows a logistic curve from " +
+            "a mid-2026 anchor of 0.14 that all three scenarios share.",
+      levels: "0.20 / 0.30 / 0.50 of all tasks by 2030",
+      source: "Table 1, panel B. The survey asked which of eight knowledge-work tasks AI will do " +
+              "as well as a professional by 2030; the median answer implies 0.44."
+    },
+    d: {
+      title: "Diffusion share", sym: "d",
+      body: "Of the tasks AI can do, the share of instances actually performed with AI. Reach and " +
+            "adoption only ever enter as their product: m x d is the share of all instances done " +
+            "with AI, which is 0.50 x 0.60 = 30 percent in the extreme scenario. Logistic, from a " +
+            "common mid-2026 anchor of 0.10.",
+      levels: "0.20 / 0.40 / 0.60 of affected instances by 2030",
+      source: "Table 1, panel B. Survey median 0.40."
+    },
+    a: {
+      title: "Gain per instance", sym: "a",
+      body: "A log saving on the unit cost of one instance done with AI, which is also a log " +
+            "speed-up: at 0.30 a task that took 100 minutes takes 74, at 0.45 it takes 64, at " +
+            "0.80 it takes 45. The saving applies whether a worker does the instance with AI or " +
+            "capital does it outright, so this dial says nothing about jobs on its own.",
+      levels: "0.30 / 0.45 / 0.80 log points by 2030, on a straight line rather than a logistic",
+      source: "Table 1, panel B. The survey asked how long an AI-suited task takes with AI versus " +
+              "without; the median implies 0.44."
+    },
+    psi: {
+      title: "Automation share", sym: "psi",
+      body: "Of AI use, the share that replaces the worker on that instance rather than assisting " +
+            "them. This is the dial that separates productivity from distribution. Moving it " +
+            "across its range from the substantial setting takes the labor share from 57.3 to " +
+            "55.4 percent while measured TFP moves only from 3.07 to 3.10.",
+      levels: "0.50 / 0.75 / 0.90 of AI use is automation",
+      source: "Table 1, panel C. Survey median 0.47, which is the modest scenario's value."
+    },
+    rho: {
+      title: "Reinstatement ratio", sym: "rho",
+      body: "New labor tasks created for each task automated. At 1 displacement is exactly " +
+            "offset; at 0 nothing comes back; above 1 more labor tasks appear than are automated. " +
+            "The new tasks go to the cognitive occupations and enter at the same unit cost as " +
+            "existing labor tasks, so they offset displacement one for one in the affected wage bill.",
+      levels: "1.25 / 1.00 / 0.75 / 0.50 / 0.25 / 0.00. Alone, this dial moves 2030 cognitive " +
+              "unemployment by 2.65 points, more than any other dial here",
+      source: "Table 1, panel C uses only 0.50 / 0.25 / 0.00. Everything above 0.50 is outside " +
+              "the paper's range, so read it as an extension rather than a result: at and above " +
+              "1 the labor share rises instead of falling."
+    },
+    mu: {
+      title: "Search efficiency", sym: "mu",
+      body: "How easily a displaced worker finds work in another occupation, as a discount on " +
+            "normal-times search. Normal times is 0.17 and lower is worse. This is arguably a " +
+            "labor-market institution rather than a fact about AI: hold everything else at the " +
+            "extreme setting and put this back to 0.17, and you get the highest-GDP cell in the " +
+            "entire grid.",
+      levels: "0.17 / 0.08 / 0.04. Alone, this dial moves 2030 cognitive unemployment by 1.47 " +
+              "points, the widest of the four frictions",
+      source: "Table 1, panel C. The survey asked how long re-employment would take against a " +
+              "three-month normal; the median answer, about eight months, implies 0.064."
+    },
+    theta_H: {
+      title: "Posting speed", sym: "theta_H",
+      body: "The share of the hiring shortfall that firms post as vacancies each month. It governs " +
+            "how quickly the labor market works through the reallocation rather than how large the " +
+            "reallocation is, which is why it has the smallest effect of the four friction dials.",
+      levels: "0.10 / 0.25 / 0.50 per month. Alone, this dial moves 2030 cognitive unemployment " +
+              "by 0.66 points",
+      source: "Table 1, panel C. Not asked in the survey; like the search discount and wage " +
+              "rigidity, it is not identified from any past AI episode."
+    }
+  };
+
+  // ---- build the dial rack ----------------------------------------------
+  var rack = document.getElementById("rack");
+  G.dials.forEach(function (dial, di) {
+    var row = document.createElement("div");
+    row.className = "dial";
+
+    var det = DETAIL[dial.key];
+    var popId = "pop-" + dial.key;
+
+    var label = document.createElement("button");
+    label.type = "button";
+    label.className = "label";
+    label.setAttribute("aria-expanded", "false");
+    label.setAttribute("aria-controls", popId);
+    var nameSpan = document.createElement("span");
+    nameSpan.className = "name";
+    nameSpan.textContent = dial.label;
+    label.appendChild(nameSpan);
+    var sym = document.createElement("span");
+    sym.className = "sym";
+    sym.textContent = dial.key === "theta_H" ? "theta_H" : dial.key;
+    label.appendChild(sym);
+    label.addEventListener("click", function () {
+      var open = label.getAttribute("aria-expanded") === "true";
+      document.querySelectorAll(".dial .label").forEach(function (o) {
+        o.setAttribute("aria-expanded", "false");
+      });
+      label.setAttribute("aria-expanded", open ? "false" : "true");
+    });
+
+    var pop = document.createElement("div");
+    pop.className = "pop";
+    pop.id = popId;
+    pop.setAttribute("role", "tooltip");
+    var h3 = document.createElement("h3");
+    h3.textContent = det.title;
+    var h3sym = document.createElement("span");
+    h3sym.className = "sym";
+    h3sym.textContent = det.sym;
+    h3.appendChild(h3sym);
+    var pBody = document.createElement("p");
+    pBody.textContent = det.body;
+    var pLevels = document.createElement("p");
+    pLevels.className = "levels-note";
+    pLevels.textContent = det.levels;
+    var pSource = document.createElement("p");
+    pSource.className = "source";
+    pSource.textContent = det.source;
+    pop.appendChild(h3);
+    pop.appendChild(pBody);
+    pop.appendChild(pLevels);
+    pop.appendChild(pSource);
+
+    var desc = document.createElement("div");
+    desc.className = "desc";
+    desc.textContent = dial.desc;
+
+    var levels = document.createElement("div");
+    levels.className = "levels";
+    dial.levels.forEach(function (value, li) {
+      var b = document.createElement("button");
+      b.type = "button";
+      b.id = "dial-" + dial.key + "-" + li;
+      b.textContent = value.toFixed(2);
+      b.title = dial.label + " = " + value.toFixed(2);
+      b.setAttribute("aria-label", dial.label + ", " + value.toFixed(2));
+      b.addEventListener("click", function () { state[di] = li; render(); });
+      levels.appendChild(b);
+    });
+
+    row.appendChild(label);
+    row.appendChild(pop);
+    row.appendChild(levels);
+    row.appendChild(desc);
+    rack.appendChild(row);
+  });
+
+  document.addEventListener("click", function (ev) {
+    if (!ev.target.closest(".dial")) {
+      document.querySelectorAll(".dial .label").forEach(function (o) {
+        o.setAttribute("aria-expanded", "false");
+      });
+    }
+  });
+
+  document.querySelectorAll("[data-preset]").forEach(function (b) {
+    b.addEventListener("click", function () {
+      var p = b.getAttribute("data-preset");
+      state = (p === "best" ? bestLevels() : G.named[p].slice());
+      render();
+    });
+  });
+
+  // ---- chart -------------------------------------------------------------
+  var W = 400, H = 208, L = 40, R = 30, T = 12, B = 24;
+  var SVG = "http://www.w3.org/2000/svg";
+
+  function el(name, attrs) {
+    var n = document.createElementNS(SVG, name);
+    for (var k in attrs) n.setAttribute(k, attrs[k]);
+    return n;
+  }
+  function niceMax(v) {
+    if (v <= 0) return 1;
+    var mag = Math.pow(10, Math.floor(Math.log10(v)));
+    var steps = [1, 1.5, 2, 2.5, 3, 4, 5, 7.5, 10];
+    for (var i = 0; i < steps.length; i++) {
+      if (steps[i] * mag >= v) return steps[i] * mag;
+    }
+    return 10 * mag;
+  }
+
+  function drawChart(host, series, refKeys, cls, dotCls) {
+    host.textContent = "";
+    var t = G.t;
+    var all = series.slice();
+    refKeys.forEach(function (r) { all = all.concat(r.values); });
+    var lo = 0, hi = niceMax(Math.max.apply(null, all));
+
+    var x = function (i) { return L + (W - L - R) * (i / (t.length - 1)); };
+    var y = function (v) { return H - B - (H - B - T) * ((v - lo) / (hi - lo)); };
+    var path = function (vals) {
+      var d = "";
+      for (var i = 0; i < vals.length; i++) d += (i ? "L" : "M") + x(i).toFixed(1) + " " + y(vals[i]).toFixed(1);
+      return d;
+    };
+
+    var svg = el("svg", { viewBox: "0 0 " + W + " " + H, role: "img" });
+
+    for (var g = 0; g <= 4; g++) {
+      var v = lo + (hi - lo) * g / 4;
+      svg.appendChild(el("line", { class: "grid-line", x1: L, x2: W - R, y1: y(v), y2: y(v) }));
+      var lab = el("text", { class: "axis-text", x: L - 6, y: y(v) + 3, "text-anchor": "end" });
+      lab.textContent = (hi >= 10 ? v.toFixed(0) : v.toFixed(1));
+      svg.appendChild(lab);
+    }
+    for (var yr = 2025; yr <= 2030; yr++) {
+      var i = (yr - 2025) * 12;
+      var xl = el("text", { class: "axis-text", x: x(i), y: H - B + 13, "text-anchor": "middle" });
+      xl.textContent = yr;
+      svg.appendChild(xl);
+    }
+
+    refKeys.forEach(function (r) {
+      svg.appendChild(el("path", { class: "ref-line", d: path(r.values) }));
+      var rt = el("text", {
+        class: "ref-text", x: W - R + 4,
+        y: Math.min(H - B, Math.max(T + 4, y(r.values[r.values.length - 1]) + 3))
+      });
+      rt.textContent = r.letter;
+      svg.appendChild(rt);
+    });
+
+    svg.appendChild(el("path", { class: cls, d: path(series) }));
+    var last = series[series.length - 1];
+    svg.appendChild(el("circle", { class: dotCls, cx: x(t.length - 1), cy: y(last), r: 3.5 }));
+    var et = el("text", {
+      class: "end-text", x: x(t.length - 1) - 6,
+      y: Math.min(H - B - 4, Math.max(T + 9, y(last) - 8)), "text-anchor": "end"
+    });
+    et.textContent = last.toFixed(1) + "%";
+    svg.appendChild(et);
+
+    var cross = el("line", { class: "cross", y1: T, y2: H - B, x1: 0, x2: 0, opacity: 0 });
+    svg.appendChild(cross);
+    host.appendChild(svg);
+
+    var tip = document.createElement("div");
+    tip.className = "tip";
+    tip.hidden = true;
+    host.appendChild(tip);
+
+    function move(ev) {
+      var r = svg.getBoundingClientRect();
+      var px = (ev.clientX - r.left) / r.width * W;
+      var i = Math.round((px - L) / (W - L - R) * (t.length - 1));
+      if (i < 0 || i >= t.length) { leave(); return; }
+      cross.setAttribute("x1", x(i));
+      cross.setAttribute("x2", x(i));
+      cross.setAttribute("opacity", 1);
+      var yr = Math.floor(t[i]), mo = Math.round((t[i] - yr) * 12);
+      tip.hidden = false;
+      tip.textContent = (mo === 0 ? "Jan" : ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"][mo]) +
+        " " + yr + "  " + series[i].toFixed(1) + "%";
+      tip.style.left = (x(i) / W * r.width) + "px";
+      tip.style.top = (y(series[i]) / H * r.height) + "px";
+    }
+    function leave() { cross.setAttribute("opacity", 0); tip.hidden = true; }
+    svg.addEventListener("pointermove", move);
+    svg.addEventListener("pointerleave", leave);
+  }
+
+  // ---- render ------------------------------------------------------------
+  var outcomes = document.getElementById("outcomes");
+  var tbody = document.querySelector("#cmp tbody");
+
+  document.getElementById("cell-count").textContent = G.snap.length;
+
+  function render() {
+    var i = idx(state);
+    var snap = G.snap[i];
+
+    document.querySelectorAll(".levels button").forEach(function (b) { b.setAttribute("aria-pressed", "false"); });
+    G.dials.forEach(function (dial, di) {
+      var b = document.getElementById("dial-" + dial.key + "-" + state[di]);
+      if (b) b.setAttribute("aria-pressed", "true");
+    });
+
+    var name = null;
+    for (var k in namedIdx) if (namedIdx[k] === i) name = k;
+    document.getElementById("cell-name").textContent =
+      name ? "This is the " + name + " scenario" :
+      (i === bestIdx ? "The highest-GDP cell in the grid" : "A mixed setting, not one of the three scenarios");
+    document.getElementById("cell-meta").textContent =
+      "cell " + (i + 1) + " of " + G.snap.length +
+      "   ·   GDP at the " + ordinal(percentile(snap[0])) + " percentile of the grid";
+
+    outcomes.textContent = "";
+    G.outcomes.forEach(function (label, oi) {
+      var row = document.createElement("div");
+      row.className = "out-row";
+      var k = document.createElement("span");
+      k.className = "k";
+      k.textContent = label;
+      var v = document.createElement("span");
+      v.className = "v";
+      v.textContent = snap[oi].toFixed(1);
+      var u = document.createElement("span");
+      u.className = "u";
+      u.textContent = G.units[oi];
+      v.appendChild(u);
+      row.appendChild(k);
+      row.appendChild(v);
+      outcomes.appendChild(row);
+    });
+
+    var refs = [
+      { letter: "M", key: "modest" },
+      { letter: "S", key: "substantial" },
+      { letter: "E", key: "extreme" }
+    ].filter(function (r) { return namedIdx[r.key] !== i; });
+
+    drawChart(document.getElementById("plot-gdp"), G.gdp[i],
+      refs.map(function (r) { return { letter: r.letter, values: G.gdp[namedIdx[r.key]] }; }),
+      "main-1", "dot-1");
+    drawChart(document.getElementById("plot-u"), G.u[i],
+      refs.map(function (r) { return { letter: r.letter, values: G.u[namedIdx[r.key]] }; }),
+      "main-2", "dot-2");
+
+    tbody.textContent = "";
+    G.outcomes.forEach(function (label, oi) {
+      var tr = document.createElement("tr");
+      var cells = [label, snap[oi].toFixed(1),
+        G.snap[namedIdx.modest][oi].toFixed(1),
+        G.snap[namedIdx.substantial][oi].toFixed(1),
+        G.snap[namedIdx.extreme][oi].toFixed(1)];
+      cells.forEach(function (text, ci) {
+        var cell = document.createElement(ci === 0 ? "th" : "td");
+        if (ci === 0) cell.setAttribute("scope", "row");
+        cell.textContent = text;
+        tr.appendChild(cell);
+      });
+      tbody.appendChild(tr);
+    });
+  }
+
+  render();
+})();
+</script>
