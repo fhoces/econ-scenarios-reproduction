@@ -18,3 +18,9 @@ repro.quarto_ipynb_2
 # The paper itself: third-party content, not redistributed here.
 # Download it from https://www.anthropic.com/institute/econ-scenarios and save as paper.pdf
 paper.pdf
+
+# LaTeX build artifacts from slides/img
+*.aux
+*.log
+*.fls
+*.fdb_latexmk

@@ -1,4 +1,4 @@
-<title>AI Scenario Dials</title>
+<title>AI Scenario Inputs</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Serif:wght@400;600&display=swap">
@@ -136,7 +136,7 @@
     margin: 0 0 14px;
   }
 
-  /* ---- the dial rack --------------------------------------------------- */
+  /* ---- the input rack --------------------------------------------------- */
   .rack { display: flex; flex-direction: column; gap: 3px; }
   .dial {
     padding: 10px 0;
@@ -364,7 +364,7 @@
 
 <div class="wrap">
   <header>
-    <h1>AI Scenario Dials</h1>
+    <h1>AI Scenario Inputs</h1>
     <p class="standfirst">
       Korinek, Jones, Sacher, Cotter and McCrory run their transformative-AI model at three
       settings and label them <em>modest</em>, <em>substantial</em> and <em>extreme</em>. But the
@@ -382,7 +382,7 @@
 
   <div class="cols">
     <section>
-      <h2>The seven dials</h2>
+      <h2>The seven inputs</h2>
       <div class="rack" id="rack"></div>
       <div class="presets">
         <button type="button" data-preset="modest">Modest</button>
@@ -406,7 +406,7 @@
           <div class="plot" id="plot-gdp"></div>
         </figure>
         <figure>
-          <figcaption>Unemployment rate, cognitive occupations</figcaption>
+          <figcaption>Unemployment rate, AI-sensitive occupations</figcaption>
           <div class="legend">
             <span><i class="swatch sw-2"></i>this setting</span>
             <span><i class="swatch sw-ref"></i>M / S / E scenarios</span>
@@ -451,7 +451,7 @@
   var SIZES = G.dials.map(function (d) { return d.levels.length; });
 
   // ---- cell lookup -------------------------------------------------------
-  // Cells were written in itertools.product order. The dials no longer all have the same
+  // Cells were written in itertools.product order. The inputs no longer all have the same
   // number of levels, so the index is mixed-radix rather than base 3.
   function idx(levels) {
     var i = 0;
@@ -487,11 +487,11 @@
     return n + ({ 1: "st", 2: "nd", 3: "rd" }[n % 10] || "th");
   }
 
-  // ---- what each dial means, for the hover bubble ------------------------
+  // ---- what each input means, for the hover bubble ------------------------
   var DETAIL = {
     m: {
       title: "Affected mass", sym: "m",
-      body: "The share of the economy's tasks AI can affect, all of them cognitive. Tasks are " +
+      body: "The share of the economy's tasks AI can affect, all of them in the AI-sensitive occupations. Tasks are " +
             "weighted by their share of base-period labor payments rather than by headcount, so " +
             "this is a share of the wage bill, not of job titles. It follows a logistic curve from " +
             "a mid-2026 anchor of 0.14 that all three scenarios share.",
@@ -521,7 +521,7 @@
     psi: {
       title: "Automation share", sym: "psi",
       body: "Of AI use, the share that replaces the worker on that instance rather than assisting " +
-            "them. This is the dial that separates productivity from distribution. Moving it " +
+            "them. This is the input that separates productivity from distribution. Moving it " +
             "across its range from the substantial setting takes the labor share from 57.3 to " +
             "55.4 percent while measured TFP moves only from 3.07 to 3.10.",
       levels: "0.50 / 0.75 / 0.90 of AI use is automation",
@@ -531,10 +531,10 @@
       title: "Reinstatement ratio", sym: "rho",
       body: "New labor tasks created for each task automated. At 1 displacement is exactly " +
             "offset; at 0 nothing comes back; above 1 more labor tasks appear than are automated. " +
-            "The new tasks go to the cognitive occupations and enter at the same unit cost as " +
+            "The new tasks go to the AI-sensitive occupations and enter at the same unit cost as " +
             "existing labor tasks, so they offset displacement one for one in the affected wage bill.",
-      levels: "1.25 / 1.00 / 0.75 / 0.50 / 0.25 / 0.00. Alone, this dial moves 2030 cognitive " +
-              "unemployment by 2.65 points, more than any other dial here",
+      levels: "1.25 / 1.00 / 0.75 / 0.50 / 0.25 / 0.00. Alone, this input moves 2030 AI-sensitive " +
+              "unemployment by 2.65 points, more than any other input here",
       source: "Table 1, panel C uses only 0.50 / 0.25 / 0.00. Everything above 0.50 is outside " +
               "the paper's range, so read it as an extension rather than a result: at and above " +
               "1 the labor share rises instead of falling."
@@ -546,7 +546,7 @@
             "labor-market institution rather than a fact about AI: hold everything else at the " +
             "extreme setting and put this back to 0.17, and you get the highest-GDP cell in the " +
             "entire grid.",
-      levels: "0.17 / 0.08 / 0.04. Alone, this dial moves 2030 cognitive unemployment by 1.47 " +
+      levels: "0.17 / 0.08 / 0.04. Alone, this input moves 2030 AI-sensitive unemployment by 1.47 " +
               "points, the widest of the four frictions",
       source: "Table 1, panel C. The survey asked how long re-employment would take against a " +
               "three-month normal; the median answer, about eight months, implies 0.064."
@@ -555,15 +555,15 @@
       title: "Posting speed", sym: "theta_H",
       body: "The share of the hiring shortfall that firms post as vacancies each month. It governs " +
             "how quickly the labor market works through the reallocation rather than how large the " +
-            "reallocation is, which is why it has the smallest effect of the four friction dials.",
-      levels: "0.10 / 0.25 / 0.50 per month. Alone, this dial moves 2030 cognitive unemployment " +
+            "reallocation is, which is why it has the smallest effect of the four friction inputs.",
+      levels: "0.10 / 0.25 / 0.50 per month. Alone, this input moves 2030 AI-sensitive unemployment " +
               "by 0.66 points",
       source: "Table 1, panel C. Not asked in the survey; like the search discount and wage " +
               "rigidity, it is not identified from any past AI episode."
     }
   };
 
-  // ---- build the dial rack ----------------------------------------------
+  // ---- build the input rack ----------------------------------------------
   var rack = document.getElementById("rack");
   G.dials.forEach(function (dial, di) {
     var row = document.createElement("div");

@@ -73,19 +73,27 @@ def main() -> None:
         "t": [round(t, 4) for t in months],
         "dials": [{"key": k, "label": lab, "desc": desc, "levels": list(lv)}
                   for k, lab, desc, lv in DIALS],
+        # Display labels only: the group the paper calls "cognitive" is relabelled
+        # "AI-sensitive" wherever a reader sees it, as the deck does. Keys stay.
         "outcomes": ["GDP vs no-AI", "Average wage vs no-AI", "Capital stock vs no-AI",
-                     "Measured TFP vs no-AI", "Labor share", "Unemployment, cognitive",
+                     "Measured TFP vs no-AI", "Labor share", "Unemployment, AI-sensitive",
                      "Unemployment, all workers"],
         "units": ["%", "%", "%", "%", "% of income", "%", "%"],
         "named": {name: [lv.index(v) for (_, _, _, lv), v in zip(DIALS, vals)]
                   for name, vals in NAMED.items()},
         "snap": snap, "gdp": gdp_path, "u": u_path,
     }
+    blob = json.dumps(out, separators=(",", ":"))
     p = pathlib.Path(__file__).parent / "data" / "grid_app.json"
-    p.write_text(json.dumps(out, separators=(",", ":")))
+    p.write_text(blob)
+    # The explorer page loads the same payload as a script, so write it here too:
+    # regenerating the JSON alone used to leave build/explorer serving a stale grid.
+    js = pathlib.Path(__file__).parent.parent / "build" / "explorer" / "grid.js"
+    js.write_text("window.__GRID__=" + blob + ";\n")
     shape = " x ".join(str(len(lv)) for _, _, _, lv in DIALS)
     print(f"{p}: {shape} = {len(snap)} cells, {p.stat().st_size / 1e6:.2f} MB, "
           f"{time.perf_counter() - t_start:.1f}s")
+    print(f"{js}: {js.stat().st_size / 1e6:.2f} MB")
 
 
 if __name__ == "__main__":
