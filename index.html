@@ -104,8 +104,20 @@
     position: absolute; top: 0; right: 0; height: 110px; width: auto; opacity: 0.218;
   }
 
+  .card p.lead { margin: 2px 0 14px; }
+  .card-subgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .subcard {
+    display: block; padding: 12px 14px; border: 1px solid var(--rule);
+    border-radius: 8px; text-decoration: none; color: inherit;
+    transition: border-color .15s, transform .15s;
+  }
+  .subcard:hover, .subcard:focus-visible {
+    border-color: var(--accent); transform: translateY(-1px);
+  }
+
   @media (max-width: 560px) {
     .cards { grid-template-columns: 1fr; }
+    .card-subgrid { grid-template-columns: 1fr; }
   }
 
   .note {
@@ -162,7 +174,7 @@
   <a class="card wide" href="explorer/">
     <div class="card-row">
       <div class="card-text">
-        <span class="kicker">Explorer</span>
+        <span class="kicker">Open Output</span>
         <h3>The effects on the economy &rarr;</h3>
         <p>A precomputed grid over the paper's seven scenario dials, with reinstatement
            (the new labor tasks that appear for each one automated) carried past the
@@ -174,42 +186,39 @@
     </div>
   </a>
 
-  <a class="card" href="repro.html">
+  <div class="card wide">
     <div class="card-row">
       <div class="card-text">
-        <span class="kicker">Report</span>
-        <h3>The full reproduction &rarr;</h3>
-        <p>The paper's sections in order, every equation explained and recomputed, with
-           the code folded beside each table. All 169 cells of published Tables 3, 5 and 6
-           reproduce cell by cell; sixteen of them round to a different printed digit
-           (details below).</p>
+        <span class="kicker">Open Analysis</span>
+        <p class="lead">The paper's claim and machinery, opened up in two forms: read in
+           full, or taught step by step.</p>
+        <div class="card-subgrid">
+          <a class="subcard" href="repro.html">
+            <h3>The full reproduction &rarr;</h3>
+            <p>The paper's sections in order, every equation explained and recomputed,
+               with the code folded beside each table. All 169 cells of published
+               Tables 3, 5 and 6 reproduce cell by cell; sixteen of them round to a
+               different printed digit (details below).</p>
+          </a>
+          <a class="subcard" href="slides/slides.html">
+            <h3>Teaching materials &rarr;</h3>
+            <p>A slide deck designed to teach the paper's main components, to yourself
+               or to others: the claim, the theory, the machinery and the results,
+               walked equation by equation. Cross-linked into the report for the
+               equations it walks through in detail.</p>
+          </a>
+        </div>
       </div>
       <div class="card-icon-box" aria-hidden="true">
         <img src="assets/opa/opa-details.png" alt="">
       </div>
     </div>
-  </a>
-
-  <a class="card" href="slides/slides.html">
-    <div class="card-row">
-      <div class="card-text">
-        <span class="kicker">Slide deck</span>
-        <h3>Teaching materials &rarr;</h3>
-        <p>A slide deck designed to teach the paper's main components, to yourself or to
-           others: the claim, the theory, the machinery and the results, walked equation by
-           equation. Cross-linked into the report for the equations it walks through in
-           detail.</p>
-      </div>
-      <div class="card-icon-box" aria-hidden="true">
-        <img src="assets/opa/opa-details.png" alt="">
-      </div>
-    </div>
-  </a>
+  </div>
 
   <a class="card wide" href="https://github.com/fhoces/econ-scenarios-reproduction">
     <div class="card-row">
       <div class="card-text">
-        <span class="kicker">Repository</span>
+        <span class="kicker">Open Materials</span>
         <h3>Every script, test and CSV &rarr;</h3>
         <p>The model, the 113-test validation suite and every exported CSV, self-contained
            and standard library only: no numpy, no scipy, nothing to install beyond
