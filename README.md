@@ -42,9 +42,10 @@ carries no data or code availability statement, and there is nothing on GitHub, 
 Face, Zenodo, OSF, RePEc, or the authors' pages). The only public implementation is the
 minified client-side bundle behind the scenario explorer at
 `anthropic.com/institute/econ-scenarios`. Everything here is written from the equations
-printed in the paper: Proposition 1 (p. 15), the 44-equation monthly system of Table A.1
-(pp. 42-43), the simulation procedure of Appendix A (pp. 40-41), the innovation block of
-Appendix C (pp. 49-51), and the parameters of Tables 1 and A.2 (pp. 23-25, 43-45).
+printed in the paper: Proposition 1 (p. 15), the closed form for a frictionless economy
+where labor reallocates instantly; the 44-equation monthly system of Table A.1
+(pp. 42-43); the simulation procedure of Appendix A (pp. 40-41); the innovation block of
+Appendix C (pp. 49-51); and the parameters of Tables 1 and A.2 (pp. 23-25, 43-45).
 
 ## Status: the paper's published tables reproduce
 
@@ -121,6 +122,27 @@ for Tables 5 and 6, in `tests/test_robustness.py`). That is what ordinary roundi
 nonlinear numerical solve looks like rather than a modelling discrepancy - but
 "reproduced to the printed precision" overstated it, and the table above is the
 accurate claim.
+
+## Where the inputs come from
+
+Table 1 of the paper gives a source for each number in a prose column. The report
+re-sorts the same information by how much evidence stands behind each input, in
+[Every input, by origin](https://fhoces.github.io/econ-scenarios-reproduction/repro.html#every-input-by-origin),
+using the three labels of the Open Policy Analysis guidelines: **data** (read off a
+public dataset), **research** (an estimate from a published paper, or a received
+conventional value) and **guesswork** (set by assumption, however well bounded). Of the
+31 rows, 9 are data, 8 research, 10 guesswork, 2 derived from other rows and 2 dates or
+grid conventions.
+
+The headline: **all seven scenario dials are guesswork**, and they are exactly what
+differs between modest, substantial and extreme, so they produce the entire spread in
+the results. Everything they are measured against is data or research. The normal-times
+labor market in particular is pinned hard (the search pool, the quit rate, the
+separation rates by group, the occupational switching matrix and the filling rate are
+all data). This is not a criticism of the calibration, it is what a scenario exercise
+is, but it means the results are a map from seven guesses to outcomes rather than a
+forecast. The [scenario explorer](https://fhoces.github.io/econ-scenarios-reproduction/explorer/)
+is that map, made clickable.
 
 ## Not reproducible without the authors' data
 

@@ -30,12 +30,19 @@ Part of an independent reproduction of Korinek et al. (2026): [overview](index.h
 ## How to read this document
 
 No replication package was published with the paper, so every number below is
-computed from the equations printed in it: Proposition 1 (p. 15), the 44-equation
-monthly system of Table A.1 (pp. 42-43), the simulation procedure of Appendix A
-(pp. 40-41), the innovation block of Appendix C (pp. 49-51) and the parameters of
+computed from the equations printed in it: Proposition 1 (p. 15), which is the closed
+form for a frictionless economy where labor reallocates instantly and which
+[Section 2.1.5](#employment-in-the-two-groups) states and derives; the 44-equation
+monthly system of Table A.1 (pp. 42-43); the simulation procedure of Appendix A
+(pp. 40-41); the innovation block of Appendix C (pp. 49-51); and the parameters of
 Tables 1 and A.2 (pp. 23-25, 43-45). The implementation is the `aiscen` package
 beside this file; this document calls it in the order the paper develops the model
 and puts each reproduced quantity next to the published one.
+
+The numbered sections below start at 2 and skip nothing: they are the paper's own
+section numbers, kept so a reader can hold the two documents side by side. The paper's
+Section 1 is its introduction, which states no equations, so there is nothing here to
+reproduce against it.
 
 Two conventions, both from the note to Table 3: level differences are percent
 deviations from the no-AI path, $e^{\Delta \ln x} - 1$, and growth rates are log
@@ -1466,6 +1473,159 @@ Note on the two rows that carry two numbers rather than three: the research shar
 and its trend, and the two groups' relative separation rates, are single values in
 the paper spanning the scenario columns.
 
+### Every input, by origin
+
+Table 1 says where each number comes from in prose, scattered down a "source or basis"
+column. This section is not in the paper: it re-sorts the same information by *how much
+evidence stands behind each input*, which is the question a reader who wants to argue
+with the results has to answer first. The three labels are the ones the Open Policy
+Analysis guidelines use.
+
+- **data** --- read off a public dataset, and in principle recomputable from it.
+- **research** --- an estimate taken from a published paper, or a received conventional
+  value.
+- **guesswork** --- set by assumption. Some are bounded by evidence, and the basis
+  column says so, but no dataset or estimate pins the value itself.
+
+Two further labels are needed for things that are not inputs at all: **derived**, for
+values another row implies, and **convention**, for the dates and the period length.
+
+The headline is short. All seven scenario dials --- everything that differs between
+modest, substantial and extreme, and therefore everything that produces the spread in
+the results --- are guesswork. Everything they are measured *against* is data or
+research.
+
+```{python}
+#| label: origins
+#| code-summary: "every model input, classified by the evidence behind it"
+# Values come from the parameter objects, so this table cannot drift from the model;
+# the origin and basis columns are editorial, read off Table 1 and Table A.2.
+def three(attr):
+    """The three scenarios' values for one Scenario field, as 'a / b / c'."""
+    return " / ".join(f"{getattr(SCENARIOS[n], attr):g}" for n in NAMES)
+
+origins = [
+    # --- the seven dials: everything that separates the scenarios
+    ("m_2030", "affected mass in 2030", three("m_2030"), "guesswork",
+     "Scenario values. The range spans the low end to near the high end of the task "
+     "feasibility ratings of Eloundou et al. (2024); the points inside it are chosen."),
+    ("d_2030", "diffusion share in 2030", three("d_2030"), "guesswork",
+     "Scenario values. Table 1 gives no basis beyond 'scenario assumptions'."),
+    ("a_2030", "log gain per AI-performed instance, 2030",
+     " / ".join(f"{P[n].a(F.t_target):.2f}" for n in NAMES), "guesswork",
+     "Scenario values, implied by the mid-2026 anchor and the slope g_a. Informed by "
+     "measured trial gains (Brynjolfsson et al. 2025; Huang et al. 2025; Demirer et al. 2026)."),
+    ("psi", "automation share of AI use", three("psi"), "guesswork",
+     "Scenario values. The low end is similar to the observed automation-like share of "
+     "use (Appel et al. 2025); 0.75 and 0.90 are assumed."),
+    ("rho", "reinstatement ratio", three("rho"), "guesswork",
+     "Scenario values. Acemoglu and Restrepo (2019) estimate 0.5 for past technologies, "
+     "which is the modest value; nothing measures it for AI."),
+    ("mu", "cross-group search discount on the path", three("mu"), "guesswork",
+     "Scenario values. Only the normal-times value below is measured; how much harder "
+     "reallocation becomes under the shock is assumed."),
+    ("theta_H", "share of the hiring shortfall posted per month", three("theta_H"),
+     "guesswork", "Scenario values. Table 1 gives no basis."),
+    # --- the anchors the dials start from
+    ("m_2026", "affected mass, mid-2026 anchor", f"{SCENARIOS['substantial'].m_anchor:g}", "research",
+     "Observed-exposure measure of Massenkoff and McCrory (2026): occupations scored by "
+     "the share of task time on tasks with significant work-related Claude use. Common "
+     "to the three scenarios."),
+    ("d_2026", "diffusion share, mid-2026 anchor", f"{SCENARIOS['substantial'].d_anchor:g}", "data",
+     "Census Business Trends and Outlook Survey and its 2026 AI supplement "
+     "(https://www.census.gov/hfp/btos/). Common to the three scenarios."),
+    ("a_2026", "log gain, mid-2026 anchor", three("a_anchor"), "guesswork",
+     "Scenario values: unlike m and d, the gain's anchor already differs by scenario."),
+    # --- technology and factor markets
+    ("sigma", "elasticity of substitution across tasks", f"{F.sigma:g}", "research",
+     "Gross complements: Acemoglu and Restrepo (2022), Humlum (2019), Jones and Tonetti (2026)."),
+    ("s_L,t0", "base-period labor share", f"{F.s_L0:g}", "research",
+     "Conventional US value; Table 1 cites no series."),
+    ("s_C,t0/s_L,t0", "AI-sensitive share of employment", f"{F.cog_share:g}", "data",
+     "CPS 2025 annual averages (https://www.bls.gov/cps/): employees in SOC major "
+     "groups 11-29, 41 and 43. This is also the ceiling m_bar on the affected mass."),
+    ("eps", "elasticity of capital supply", f"{F.eps:g}", "research",
+     "Half the long-run wealth elasticity of Moll, Rachel and Restrepo (2022); the "
+     "halving is the authors' judgement about the horizon. Varied over 1 / 3 / 6 / inf "
+     "in Table 5, which is where its weight shows."),
+    ("r_bar, delta", "no-AI rental rate and depreciation",
+     f"{F.r_bar:g}, {F.delta:g}", "research",
+     "Moll et al. (2022): a 6.5 percent net return at a capital-output ratio of 3.5."),
+    ("xi", "rigidity of the AI-sensitive wage, per year", f"{F.xi:g}", "research",
+     "Wage-setting evidence, Section 3.4. Varied over 0 / 0.5 / 0.75 / 0.9 in Table 6."),
+    # --- ideas production
+    ("lambda", "returns to research input", f"{F.lam:g}", "guesswork",
+     "Set to 1, no duplication in research. A normalization rather than an estimate."),
+    ("1 - phi_R", "fishing out, labor-augmenting units", f"{F.fishing_out_R:g}", "derived",
+     "s_L,t0 (1 - phi) + lambda, Equation (40), from the TFP-units value 3.1 of "
+     "Bloom et al. (2020), which is itself research."),
+    ("g", "no-AI growth of the ideas stock, per year", f"{F.g:g}", "data",
+     "Postwar US TFP growth, implying measured TFP growth of s_L,t0 g = 1 percent. "
+     "Table 1 cites no series."),
+    ("n", "labor-force growth, per year", f"{F.n:g}", "guesswork",
+     "Chosen so that GDP grows at 2 percent a year without AI. Table 1 notes BLS "
+     "projections put labor-force growth near 0.4 percent, so the value is close to "
+     "measured but is set by the target."),
+    ("iota_R,t0", "research share of GDP in 2024", f"{F.iota_R0:g}", "data",
+     "R&D share in the US national accounts."),
+    ("g_iota", "growth of the research share, per year", f"{F.g_iota:g}", "derived",
+     "Equation (41), set so the ideas stock grows at g without AI (iota_R,2030 = 0.041)."),
+    # --- the labor market in normal times
+    ("U_bar", "normal search pool, share of the labor force", f"{F.U_bar:g}", "data",
+     "CPS 2025. See the rounding discrepancy in Section 5: the p. 26 derivation and the "
+     "published pool split both imply 0.0384 rather than Table 1's 0.038."),
+    ("q_bar", "normal quit rate, per year", f"{F.q_bar_ann:g}", "data",
+     "Implied by the pool and the CPS finding rate, rounded (Section 3.2)."),
+    ("q^T_o / q_bar_o", "share of quits responding to job prospects",
+     f"{F.q_resp_share:g}", "research",
+     "Elasticity of JOLTS quits to the CPS finding rate, estimated at 0.53 and rounded "
+     "to 0.55 (Section 3.2)."),
+    ("q_bar_C/q_bar, q_bar_N/q_bar", "relative separation rates by group",
+     f"{F.q_rel_C:g}, {F.q_rel_N:g}", "data",
+     "IPUMS-CPS matched monthly files 2010-19 (https://cps.ipums.org/cps/)."),
+    ("mu_bar", "cross-group search discount in normal times", f"{F.mu_bar:g}", "data",
+     "CPS 2010-19 occupational switching matrix from the Carrillo-Tudela and Visschers "
+     "(2023) replication files, corrected by their method (Section 3.2)."),
+    ("iota", "matching curvature", f"{F.iota_match:g}", "research",
+     "den Haan, Ramey and Watson (2000)."),
+    ("mean filling rate", "employment-weighted filling rate, per month",
+     f"{F.fill_bar:g}", "data",
+     "JOLTS 2010-19 (https://www.bls.gov/jlt/), by the method of Davis et al. (2013). "
+     "The matching efficiency chi is then calibrated to hit it, so chi is derived."),
+    # --- conventions
+    ("t0, t_anchor, t_target", "base period, anchor, scenario date",
+     f"{F.t0:g}, {F.t_anchor:g}, {F.t_target:g}", "convention",
+     "Dates, not estimates."),
+    ("h", "period length, years", "1/12", "convention", "A monthly grid, Appendix A."),
+]
+odf = pd.DataFrame(origins, columns=["symbol", "what it is", "modest / substantial / extreme",
+                                     "origin", "basis"])
+show(odf)
+```
+
+```{python}
+#| label: origins-count
+#| code-summary: "how many inputs of each kind"
+# value_counts() tallies a column; reindex() fixes the row order so the table reads
+# from most evidence to least rather than by whichever label happens to be commonest.
+counts = (odf["origin"].value_counts()
+          .reindex(["data", "research", "guesswork", "derived", "convention"])
+          .rename_axis("origin").reset_index(name="rows"))
+show(counts)
+```
+
+Read the two tables together and the shape of the paper's argument is visible. The
+labor market of a normal year is pinned down hard: the pool, the quit rate, the
+separation rates by group, the switching matrix and the filling rate are all data, and
+the matching curvature is an estimate. The production side rests on received values.
+What AI does is guesswork, by construction and by the paper's own account: the seven
+dials are scenario assumptions, and Section 4 is a statement about what follows from
+them rather than a forecast.
+
+That is not a criticism of the calibration; it is what a scenario exercise is. It does
+mean that the only honest way to read the results is as a map from the seven guesses to
+outcomes, which is what the [scenario explorer](explorer/) makes clickable.
+
 ## 4 Results
 
 Table 3 of the paper, with the published figure beside each reproduced one. The last
@@ -1494,9 +1654,11 @@ t3_df = pd.DataFrame(rows)
 show(t3_df, floatfmt=".3f")
 ```
 
-Every cell is inside the tolerance the test suite applies, and the two unemployment-rate
-cells flagged above are the only two anywhere in Tables 3, 5 and 6 that need that
-tolerance widened. They come out low by
+Every cell is inside the tolerance the test suite applies: within 0.05 percentage points
+of the published value for Table 3, widened to 0.10 where the published value is 10 or
+larger, and within the larger of 0.12 points and 0.4 percent of the published value for
+Tables 5 and 6. The two unemployment-rate cells flagged above are the only two anywhere
+in Tables 3, 5 and 6 that need that tolerance widened. They come out low by
 `{python} num(abs(T3['Unemployment rate, all workers, pct'][2] - 4.6), 2)`
 percentage points (all workers, substantial) and
 `{python} num(abs(T3['Unemployment rate, cognitive, pct'][0] - 2.9), 2)`
