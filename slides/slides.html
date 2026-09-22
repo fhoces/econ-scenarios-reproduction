@@ -184,7 +184,7 @@ Part of an independent reproduction of Korinek et al. (2026):
 &lt;tr style="background:#e8eaf6;"&gt;&lt;th style="text-align:left; padding:6px;"&gt;Part&lt;/th&gt;&lt;th style="text-align:left; padding:6px;"&gt;What it covers&lt;/th&gt;&lt;th style="padding:6px;"&gt;Slides&lt;/th&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;td style="padding:6px;"&gt;&lt;b&gt;1. The claim&lt;/b&gt;&lt;/td&gt;&lt;td style="padding:6px;"&gt;What the paper asserts, and the seven inputs it rests on&lt;/td&gt;&lt;td style="text-align:center;"&gt;3&amp;ndash;17&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;td style="padding:6px;"&gt;&lt;b&gt;2. The model&lt;/b&gt;&lt;/td&gt;&lt;td style="padding:6px;"&gt;Task-based production, the assignment rule, prices and shares, TFP, the labor share, employment, ideas, unemployment: where every equation comes from&lt;/td&gt;&lt;td style="text-align:center;"&gt;18&amp;ndash;33&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;td style="padding:6px;"&gt;&lt;b&gt;3. Solving the model for US inputs&lt;/b&gt;&lt;/td&gt;&lt;td style="padding:6px;"&gt;Calibration, the steady state, all 44 equations and the order they run in, the two root-finds&lt;/td&gt;&lt;td style="text-align:center;"&gt;34&amp;ndash;47&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td style="padding:6px;"&gt;&lt;b&gt;3. Solving the model for US inputs&lt;/b&gt;&lt;/td&gt;&lt;td style="padding:6px;"&gt;Calibration, the steady state, all 44 equations and the order they run in, the root-finds&lt;/td&gt;&lt;td style="text-align:center;"&gt;34&amp;ndash;47&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;td style="padding:6px;"&gt;&lt;b&gt;4. Results: some scenarios and the explorer&lt;/b&gt;&lt;/td&gt;&lt;td style="padding:6px;"&gt;The three scenarios one at a time, robustness, the survey, what reproduces, and the whole grid&lt;/td&gt;&lt;td style="text-align:center;"&gt;48&amp;ndash;60&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;td style="padding:6px;"&gt;&lt;b&gt;Backup&lt;/b&gt;&lt;/td&gt;&lt;td style="padding:6px;"&gt;Derivations, month 0 step by step, the gain &lt;i&gt;a&lt;/i&gt;, the slop extension&lt;/td&gt;&lt;td style="text-align:center;"&gt;61&amp;ndash;80&lt;/td&gt;&lt;/tr&gt;
 &lt;/table&gt;
@@ -396,6 +396,8 @@ name: input-m
 .pull-left[
 **What it is.** The share of the economy's tasks AI can affect, all of them belonging to the AI-sensitive occupations. Tasks are weighted by their share of base-period labor payments, not by headcount, so `\(m\)` is a share of the wage bill. It follows a logistic curve.
 
+**Watch the denominator.** `\(m\)` is a share of *all* work, not of AI-sensitive work. Its ceiling is `\(\bar m = 0.624\)`, the AI-sensitive share of employment, and Table A.2 gives the conversion: the affected share of those occupations' own tasks is `\(m / 0.624\)`. So `\(m = 0.50\)` is four fifths of what they do today, not half.
+
 **Where the scenarios put it.** A mid-2026 anchor of **0.14** shared by all three, rising to **0.20 / 0.30 / 0.50** by 2030.
 ]
 
@@ -492,7 +494,7 @@ deepening, not productivity.
 
 .highlight-box[
 .small[
-**Status:** a range anchored to usage data, a point value assumed. Moving it across its range shifts the labor share from 57.3 to 55.4 percent while TFP moves only 3.06 to 3.09.
+**Status:** a range anchored to usage data, a point value assumed. Moving it across the paper's own 0.50-0.90 range shifts the labor share from 57.3 to 55.4 percent while TFP moves only 3.06 to 3.09.
 ]
 ]
 
@@ -1434,7 +1436,8 @@ name: month-main
 
 .highlight-box[
 44 equations per month, but the ordering is deliberately recursive: only two of them
-need a root-find, and both are one-dimensional and monotone.
+need a root-find, and both are one-dimensional and monotone. One of the two, (39), is
+solved three times a month, so a month costs four bisections.
 ]
 
 &lt;a href="#the-44" class="nav-btn"&gt;which 44 equations, and where in the code &amp;rarr;&lt;/a&gt;
@@ -1713,12 +1716,13 @@ one monotone equation in `\(\Delta \ln r_t\)` is left. Bisect it, and `\(w_C\)`,
 # How the Model Is Actually Solved
 
 .pull-left[
-**Two root-finds, both easy**
+**Two equations need one, four solves a month**
 
-1. The rental rate: capital demanded equals capital supplied. Demand is strictly
-   decreasing in `\(\Delta \ln r\)`, so exactly one root; bisection.
-2. The actual economy at realized employment: substitute out the capital row and one
-   monotone equation in `\(\Delta \ln r\)` remains.
+1. The rental rate, (18): capital demanded equals capital supplied. Demand is strictly
+   decreasing in `\(\Delta \ln r\)`, so exactly one root; bisection. Once a month.
+2. The actual economy, (39): substitute out the capital row and one monotone equation
+   in `\(\Delta \ln r\)` remains. **Three times a month**: twice in step 4, for the clearing
+   wage and for labor demand, and once in step 8 at realized employment.
 ]
 
 .pull-right[
@@ -1807,7 +1811,7 @@ name: sc-modest
 
 &lt;div style="flex:0.94;"&gt;
 &lt;h4&gt;If you believe that&amp;hellip;&lt;/h4&gt;
-&lt;div class="bul"&gt;&amp;bull;&amp;nbsp; AI ends up able to do &lt;b&gt;a fifth&lt;/b&gt; of today&amp;rsquo;s cognitive work &lt;span style="color:#5b6873;"&gt;(&lt;i&gt;m&lt;/i&gt; = 0.20)&lt;/span&gt;&lt;/div&gt;
+&lt;div class="bul"&gt;&amp;bull;&amp;nbsp; AI ends up able to do &lt;b&gt;a fifth&lt;/b&gt; of all the economy&amp;rsquo;s work, about &lt;b&gt;a third&lt;/b&gt; of what AI-sensitive occupations do &lt;span style="color:#5b6873;"&gt;(&lt;i&gt;m&lt;/i&gt; = 0.20)&lt;/span&gt;&lt;/div&gt;
 &lt;div class="bul"&gt;&amp;bull;&amp;nbsp; and only &lt;b&gt;a fifth of that&lt;/b&gt; is actually done with AI &lt;span style="color:#5b6873;"&gt;(&lt;i&gt;d&lt;/i&gt; = 0.20)&lt;/span&gt;&lt;/div&gt;
 &lt;div class="bul"&gt;&amp;bull;&amp;nbsp; each AI-done task costs about &lt;b&gt;a quarter less&lt;/b&gt; &lt;span style="color:#5b6873;"&gt;(&lt;i&gt;a&lt;/i&gt; = 0.30)&lt;/span&gt;&lt;/div&gt;
 &lt;div class="bul"&gt;&amp;bull;&amp;nbsp; &lt;b&gt;half&lt;/b&gt; of that use replaces the worker, half assists &lt;span style="color:#5b6873;"&gt;(&lt;i&gt;&amp;psi;&lt;/i&gt; = 0.50)&lt;/span&gt;&lt;/div&gt;
@@ -1858,7 +1862,7 @@ name: sc-substantial
 
 &lt;div style="flex:0.94;"&gt;
 &lt;h4&gt;If you believe that&amp;hellip;&lt;/h4&gt;
-&lt;div class="bul"&gt;&amp;bull;&amp;nbsp; AI ends up able to do &lt;b&gt;a third&lt;/b&gt; of today&amp;rsquo;s cognitive work &lt;span style="color:#5b6873;"&gt;(&lt;i&gt;m&lt;/i&gt; = 0.30)&lt;/span&gt;&lt;/div&gt;
+&lt;div class="bul"&gt;&amp;bull;&amp;nbsp; AI ends up able to do &lt;b&gt;a third&lt;/b&gt; of all the economy&amp;rsquo;s work, about &lt;b&gt;half&lt;/b&gt; of what AI-sensitive occupations do &lt;span style="color:#5b6873;"&gt;(&lt;i&gt;m&lt;/i&gt; = 0.30)&lt;/span&gt;&lt;/div&gt;
 &lt;div class="bul"&gt;&amp;bull;&amp;nbsp; and &lt;b&gt;two fifths of that&lt;/b&gt; is actually done with AI &lt;span style="color:#5b6873;"&gt;(&lt;i&gt;d&lt;/i&gt; = 0.40)&lt;/span&gt;&lt;/div&gt;
 &lt;div class="bul"&gt;&amp;bull;&amp;nbsp; each AI-done task costs about &lt;b&gt;a third less&lt;/b&gt; &lt;span style="color:#5b6873;"&gt;(&lt;i&gt;a&lt;/i&gt; = 0.45)&lt;/span&gt;&lt;/div&gt;
 &lt;div class="bul"&gt;&amp;bull;&amp;nbsp; &lt;b&gt;three quarters&lt;/b&gt; of that use replaces the worker &lt;span style="color:#5b6873;"&gt;(&lt;i&gt;&amp;psi;&lt;/i&gt; = 0.75)&lt;/span&gt;&lt;/div&gt;
@@ -1910,7 +1914,7 @@ name: sc-extreme
 
 &lt;div style="flex:0.94;"&gt;
 &lt;h4&gt;If you believe that&amp;hellip;&lt;/h4&gt;
-&lt;div class="bul"&gt;&amp;bull;&amp;nbsp; AI ends up able to do &lt;b&gt;half&lt;/b&gt; of today&amp;rsquo;s cognitive work &lt;span style="color:#5b6873;"&gt;(&lt;i&gt;m&lt;/i&gt; = 0.50)&lt;/span&gt;&lt;/div&gt;
+&lt;div class="bul"&gt;&amp;bull;&amp;nbsp; AI ends up able to do &lt;b&gt;half&lt;/b&gt; of all the economy&amp;rsquo;s work, about &lt;b&gt;four fifths&lt;/b&gt; of what AI-sensitive occupations do &lt;span style="color:#5b6873;"&gt;(&lt;i&gt;m&lt;/i&gt; = 0.50)&lt;/span&gt;&lt;/div&gt;
 &lt;div class="bul"&gt;&amp;bull;&amp;nbsp; and &lt;b&gt;three fifths of that&lt;/b&gt; is actually done with AI &lt;span style="color:#5b6873;"&gt;(&lt;i&gt;d&lt;/i&gt; = 0.60)&lt;/span&gt;&lt;/div&gt;
 &lt;div class="bul"&gt;&amp;bull;&amp;nbsp; each AI-done task costs &lt;b&gt;more than half less&lt;/b&gt; &lt;span style="color:#5b6873;"&gt;(&lt;i&gt;a&lt;/i&gt; = 0.80)&lt;/span&gt;&lt;/div&gt;
 &lt;div class="bul"&gt;&amp;bull;&amp;nbsp; &lt;b&gt;nine tenths&lt;/b&gt; of that use replaces the worker &lt;span style="color:#5b6873;"&gt;(&lt;i&gt;&amp;psi;&lt;/i&gt; = 0.90)&lt;/span&gt;&lt;/div&gt;
@@ -2121,7 +2125,9 @@ substantial on `\(d\)` and `\(a\)`, and modest on `\(\psi\)`.
 **The alternative is cheap.** Three levels on each of the seven inputs is `\(3^7 = 2187\)`
 runs, which this reproduction completes in about 16 seconds (`slides/make_grid.py`); five levels
 would be 78,125 runs, roughly ten minutes. Run the factorial, then report each input's marginal
-effect and the interactions, instead of three labelled points.
+effect and the interactions, instead of three labelled points. (The explorer linked below runs a
+slightly larger grid, 2187 `\(\times\, 2 = 4374\)` cells, because it carries reinstatement
+over six values rather than three.)
 ]
 
 .highlight-box[

@@ -198,7 +198,7 @@ Part of an independent reproduction of Korinek et al. (2026):
 <tr style="background:#e8eaf6;"><th style="text-align:left; padding:6px;">Part</th><th style="text-align:left; padding:6px;">What it covers</th><th style="padding:6px;">Slides</th></tr>
 <tr><td style="padding:6px;"><b>1. The claim</b></td><td style="padding:6px;">What the paper asserts, and the seven inputs it rests on</td><td style="text-align:center;">3&ndash;17</td></tr>
 <tr><td style="padding:6px;"><b>2. The model</b></td><td style="padding:6px;">Task-based production, the assignment rule, prices and shares, TFP, the labor share, employment, ideas, unemployment: where every equation comes from</td><td style="text-align:center;">18&ndash;33</td></tr>
-<tr><td style="padding:6px;"><b>3. Solving the model for US inputs</b></td><td style="padding:6px;">Calibration, the steady state, all 44 equations and the order they run in, the two root-finds</td><td style="text-align:center;">34&ndash;47</td></tr>
+<tr><td style="padding:6px;"><b>3. Solving the model for US inputs</b></td><td style="padding:6px;">Calibration, the steady state, all 44 equations and the order they run in, the root-finds</td><td style="text-align:center;">34&ndash;47</td></tr>
 <tr><td style="padding:6px;"><b>4. Results: some scenarios and the explorer</b></td><td style="padding:6px;">The three scenarios one at a time, robustness, the survey, what reproduces, and the whole grid</td><td style="text-align:center;">48&ndash;60</td></tr>
 <tr><td style="padding:6px;"><b>Backup</b></td><td style="padding:6px;">Derivations, month 0 step by step, the gain <i>a</i>, the slop extension</td><td style="text-align:center;">61&ndash;80</td></tr>
 </table>
@@ -432,6 +432,8 @@ name: input-m
 .pull-left[
 **What it is.** The share of the economy's tasks AI can affect, all of them belonging to the AI-sensitive occupations. Tasks are weighted by their share of base-period labor payments, not by headcount, so $m$ is a share of the wage bill. It follows a logistic curve.
 
+**Watch the denominator.** $m$ is a share of *all* work, not of AI-sensitive work. Its ceiling is $\bar m = 0.624$, the AI-sensitive share of employment, and Table A.2 gives the conversion: the affected share of those occupations' own tasks is $m / 0.624$. So $m = 0.50$ is four fifths of what they do today, not half.
+
 **Where the scenarios put it.** A mid-2026 anchor of **0.14** shared by all three, rising to **0.20 / 0.30 / 0.50** by 2030.
 ]
 
@@ -528,7 +530,7 @@ deepening, not productivity.
 
 .highlight-box[
 .small[
-**Status:** a range anchored to usage data, a point value assumed. Moving it across its range shifts the labor share from 57.3 to 55.4 percent while TFP moves only 3.06 to 3.09.
+**Status:** a range anchored to usage data, a point value assumed. Moving it across the paper's own 0.50-0.90 range shifts the labor share from 57.3 to 55.4 percent while TFP moves only 3.06 to 3.09.
 ]
 ]
 
@@ -1397,7 +1399,8 @@ name: month-main
 
 .highlight-box[
 44 equations per month, but the ordering is deliberately recursive: only two of them
-need a root-find, and both are one-dimensional and monotone.
+need a root-find, and both are one-dimensional and monotone. One of the two, (39), is
+solved three times a month, so a month costs four bisections.
 ]
 
 <a href="#the-44" class="nav-btn">which 44 equations, and where in the code &rarr;</a>
@@ -1676,12 +1679,13 @@ $Y$ and the labor share all fall out.
 # How the Model Is Actually Solved
 
 .pull-left[
-**Two root-finds, both easy**
+**Two equations need one, four solves a month**
 
-1. The rental rate: capital demanded equals capital supplied. Demand is strictly
-   decreasing in $\Delta \ln r$, so exactly one root; bisection.
-2. The actual economy at realized employment: substitute out the capital row and one
-   monotone equation in $\Delta \ln r$ remains.
+1. The rental rate, (18): capital demanded equals capital supplied. Demand is strictly
+   decreasing in $\Delta \ln r$, so exactly one root; bisection. Once a month.
+2. The actual economy, (39): substitute out the capital row and one monotone equation
+   in $\Delta \ln r$ remains. **Three times a month**: twice in step 4, for the clearing
+   wage and for labor demand, and once in step 8 at realized employment.
 ]
 
 .pull-right[
@@ -1807,7 +1811,7 @@ f2 <- function(x) sprintf("%.2f", x)
 
 <div style="flex:0.94;">
 <h4>If you believe that&hellip;</h4>
-<div class="bul">&bull;&nbsp; AI ends up able to do <b>a fifth</b> of today&rsquo;s cognitive work <span style="color:#5b6873;">(<i>m</i> = `r f2(iv("modest","m"))`)</span></div>
+<div class="bul">&bull;&nbsp; AI ends up able to do <b>a fifth</b> of all the economy&rsquo;s work, about <b>a third</b> of what AI-sensitive occupations do <span style="color:#5b6873;">(<i>m</i> = `r f2(iv("modest","m"))`)</span></div>
 <div class="bul">&bull;&nbsp; and only <b>a fifth of that</b> is actually done with AI <span style="color:#5b6873;">(<i>d</i> = `r f2(iv("modest","d"))`)</span></div>
 <div class="bul">&bull;&nbsp; each AI-done task costs about <b>a quarter less</b> <span style="color:#5b6873;">(<i>a</i> = `r f2(iv("modest","a"))`)</span></div>
 <div class="bul">&bull;&nbsp; <b>half</b> of that use replaces the worker, half assists <span style="color:#5b6873;">(<i>&psi;</i> = `r f2(iv("modest","psi"))`)</span></div>
@@ -1858,7 +1862,7 @@ name: sc-substantial
 
 <div style="flex:0.94;">
 <h4>If you believe that&hellip;</h4>
-<div class="bul">&bull;&nbsp; AI ends up able to do <b>a third</b> of today&rsquo;s cognitive work <span style="color:#5b6873;">(<i>m</i> = `r f2(iv("substantial","m"))`)</span></div>
+<div class="bul">&bull;&nbsp; AI ends up able to do <b>a third</b> of all the economy&rsquo;s work, about <b>half</b> of what AI-sensitive occupations do <span style="color:#5b6873;">(<i>m</i> = `r f2(iv("substantial","m"))`)</span></div>
 <div class="bul">&bull;&nbsp; and <b>two fifths of that</b> is actually done with AI <span style="color:#5b6873;">(<i>d</i> = `r f2(iv("substantial","d"))`)</span></div>
 <div class="bul">&bull;&nbsp; each AI-done task costs about <b>a third less</b> <span style="color:#5b6873;">(<i>a</i> = `r f2(iv("substantial","a"))`)</span></div>
 <div class="bul">&bull;&nbsp; <b>three quarters</b> of that use replaces the worker <span style="color:#5b6873;">(<i>&psi;</i> = `r f2(iv("substantial","psi"))`)</span></div>
@@ -1910,7 +1914,7 @@ name: sc-extreme
 
 <div style="flex:0.94;">
 <h4>If you believe that&hellip;</h4>
-<div class="bul">&bull;&nbsp; AI ends up able to do <b>half</b> of today&rsquo;s cognitive work <span style="color:#5b6873;">(<i>m</i> = `r f2(iv("extreme","m"))`)</span></div>
+<div class="bul">&bull;&nbsp; AI ends up able to do <b>half</b> of all the economy&rsquo;s work, about <b>four fifths</b> of what AI-sensitive occupations do <span style="color:#5b6873;">(<i>m</i> = `r f2(iv("extreme","m"))`)</span></div>
 <div class="bul">&bull;&nbsp; and <b>three fifths of that</b> is actually done with AI <span style="color:#5b6873;">(<i>d</i> = `r f2(iv("extreme","d"))`)</span></div>
 <div class="bul">&bull;&nbsp; each AI-done task costs <b>more than half less</b> <span style="color:#5b6873;">(<i>a</i> = `r f2(iv("extreme","a"))`)</span></div>
 <div class="bul">&bull;&nbsp; <b>nine tenths</b> of that use replaces the worker <span style="color:#5b6873;">(<i>&psi;</i> = `r f2(iv("extreme","psi"))`)</span></div>
@@ -2113,7 +2117,9 @@ substantial on $d$ and $a$, and modest on $\psi$.
 **The alternative is cheap.** Three levels on each of the seven inputs is $3^7 = `r nrow(grid)`$
 runs, which this reproduction completes in about 16 seconds (`slides/make_grid.py`); five levels
 would be 78,125 runs, roughly ten minutes. Run the factorial, then report each input's marginal
-effect and the interactions, instead of three labelled points.
+effect and the interactions, instead of three labelled points. (The explorer linked below runs a
+slightly larger grid, `r nrow(grid)` $\times\, 2 = 4374$ cells, because it carries reinstatement
+over six values rather than three.)
 ]
 
 .highlight-box[
