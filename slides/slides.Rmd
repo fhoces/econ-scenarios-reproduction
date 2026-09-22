@@ -250,8 +250,8 @@ t3 |>
                     "Cognitive employment, pct since mid-2026",
                     "Unemployment rate, cognitive, pct")) |>
   transmute(Outcome = relabel(str_trim(row)),
-            `No AI` = no_ai, Modest = modest,
-            Substantial = substantial, Extreme = extreme) |>
+            `No AI` = pub_no_ai, Modest = pub_modest,
+            Substantial = pub_substantial, Extreme = pub_extreme) |>
   knitr::kable(digits = 1, format = "html")
 ```
 
