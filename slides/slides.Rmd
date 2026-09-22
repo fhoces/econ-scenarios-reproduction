@@ -112,6 +112,13 @@ a.reflink {
   border-bottom: 1px dotted #9aa6b2;
 }
 a.reflink:hover { color: #1a237e; border-bottom-color: #1a237e; }
+.site-nav {
+  font-size: 11px;
+  color: #5b6873;
+  margin: 0 0 14px;
+}
+.site-nav a { color: #1a237e; text-decoration: none; }
+.site-nav a:hover { text-decoration: underline; }
 ```
 
 ```{r setup, include=FALSE}
@@ -177,6 +184,13 @@ relabel <- function(x) {
     str_replace("cognitive", "AI-sensitive")
 }
 ```
+
+.site-nav[
+Part of an independent reproduction of Korinek et al. (2026):
+[overview](../index.html) &middot; [the report](../repro.html) &middot;
+[the explorer](../explorer/) &middot;
+[source on GitHub](https://github.com/fhoces/econ-scenarios-reproduction)
+]
 
 # Deck Map
 
