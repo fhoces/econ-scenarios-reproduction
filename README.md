@@ -51,8 +51,8 @@ Appendix C (pp. 49-51), and the parameters of Tables 1 and A.2 (pp. 23-25, 43-45
 | Published table | Cells | Result |
 |---|---|---|
 | Table 3, the three scenarios in 2030 (p. 31) | 20 rows x 4 columns (80 cells, including the No-AI baseline column) | reproduced to the printed precision, except two cells (below) |
-| Table 5, four elasticities of capital supply (p. 37) | 5 rows x 8 columns (40 cells) | all cells reproduced, including the pegged-rental case eps = infinity |
-| Table 6, four rigidities of the cognitive wage (p. 38) | 7 rows x 7 columns (49 cells) | all cells reproduced |
+| Table 5, four elasticities of capital supply (p. 37) | 5 rows x 8 columns (40 cells) | within test tolerance on every cell, including the pegged-rental case eps = infinity; one cell rounds differently (below) |
+| Table 6, four rigidities of the cognitive wage (p. 38) | 7 rows x 7 columns (49 cells) | within test tolerance on every cell; five cells round differently (below) |
 
 Independent checks the paper states in prose and that the code hits without being
 targeted at them: the steady-state cross-group switching share of 1/7 (p. 21), the
@@ -83,6 +83,21 @@ quit-rate derivation on p. 26 uses 3.84 percent and the published pool split of
 1.76 / 2.08 percent (p. 21) requires 0.0384. At `Fixed(U_bar=0.0384)` both cells land on
 the published values exactly and nothing else changes materially. The default here stays
 at Table 1's 0.038 for transcription fidelity; the tests check both.
+
+**Six more cells, at test tolerance rather than printed precision.** Tables 5 and 6
+carry 89 cells between them; six of those round to a different published digit at one
+decimal place, even though every one of the six passes the test suite's looser
+numerical tolerance (`max(0.12, 0.004 * |published value|)` percentage points, in
+`tests/test_robustness.py`). Table 5: substantial, eps=6.0, GDP comes out 9.05 against
+a published 9.1. Table 6: substantial, xi=0.75, cognitive unemployment 5.03 against
+5.1; extreme, xi=0, cognitive wage -42.09 against -42.2; extreme, xi=0.5, cognitive
+employment -21.44 against -21.5; extreme, xi=0.75, cognitive employment -25.83 against
+-25.9; extreme, xi=0.75, cognitive unemployment 21.65 against 21.7. Each sits within
+0.11 percentage points of the published figure, none shares the U_bar rounding fork
+that explains Table 3's two cells above, and none is large enough to fail the tests -
+this looks like ordinary last-digit rounding noise in a nonlinear numerical solve
+rather than a modelling discrepancy, but "all cells reproduced" overstated it: these
+six match within tolerance, not to the printed digit.
 
 ## Not reproducible without the authors' data
 
