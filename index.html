@@ -99,6 +99,10 @@
   th { font-size: 12px; font-family: var(--mono); letter-spacing: 0.06em;
        text-transform: uppercase; color: var(--ink-3); font-weight: 500; }
   td:last-child { color: var(--ink-2); }
+  /* The scenario table's last column is a result, not a gloss: keep it full strength. */
+  table.scen td { color: var(--ink); }
+  table.scen td, table.scen th { text-align: right; }
+  table.scen td:first-child, table.scen th:first-child { text-align: left; }
 
   footer {
     margin-top: 52px; padding-top: 20px; border-top: 1px solid var(--rule);
@@ -137,19 +141,43 @@
     <span class="kicker">Report</span>
     <h3>The full reproduction &rarr;</h3>
     <p>The paper's sections in order, every equation explained and recomputed, with
-       the code folded beside each table. Published Tables 3, 5 and 6 reproduce within
-       the test suite's tolerance throughout; sixteen of the 169 cells round to a
-       different printed digit (details below).</p>
+       the code folded beside each table. All 169 cells of published Tables 3, 5 and 6
+       reproduce cell by cell; sixteen of them round to a different printed digit
+       (details below).</p>
   </a>
 
   <a class="card" href="explorer/">
     <span class="kicker">Explorer</span>
     <h3>Set the seven inputs yourself &rarr;</h3>
-    <p>A precomputed grid over the paper's seven scenario dials, reinstatement carried
-       past the range the paper uses, with eleven outcome series recomputed as you move
-       them.</p>
+    <p>A precomputed grid over the paper's seven scenario dials, with reinstatement (the
+       new labor tasks that appear for each one automated) carried past the range the
+       paper uses, and eleven outcome series recomputed as you move them.</p>
   </a>
 </div>
+
+<h2>What the model says</h2>
+
+<p>The paper's three scenarios, at the start of 2030. Every figure is a gap against the
+   same US economy without AI, which grows at its ordinary 2 percent a year: "8.3 percent"
+   means 8.3 percent <em>above that path</em>, not 8.3 percent of growth. The workforce is
+   split in two, the AI-sensitive occupations whose tasks AI is assumed to touch and all
+   other occupations.</p>
+
+<table class="scen">
+  <thead><tr><th>In 2030</th><th>No AI</th><th>Modest</th><th>Substantial</th><th>Extreme</th></tr></thead>
+  <tbody>
+    <tr><td>GDP, pct above the no-AI path</td><td>0</td><td>1.6</td><td>8.3</td><td>32.4</td></tr>
+    <tr><td>Average wage, pct above the no-AI path</td><td>0</td><td>0.7</td><td>2.1</td><td>9.7</td></tr>
+    <tr><td>Unemployment rate, AI-sensitive occupations, pct</td><td>2.9</td><td>2.9</td><td>4.5</td><td>17.9</td></tr>
+    <tr><td>Labor share, pct of income</td><td>60.0</td><td>59.4</td><td>56.1</td><td>45.2</td></tr>
+  </tbody>
+</table>
+
+<p style="margin-top:14px;">Those are the paper's numbers, from its Table 3. This
+   reproduction recomputes every one of them from the printed equations, and the four rows
+   above come back as 1.61 / 8.28 / 32.42, 0.69 / 2.14 / 9.65, 2.91 / 4.50 / 17.89 and
+   59.41 / 56.10 / 45.21. Nothing in the model assigns the three scenarios probabilities,
+   so the spread between them is the result, not any one column.</p>
 
 <h2>What reproduces</h2>
 
@@ -169,6 +197,12 @@
             to a different printed digit</td></tr>
   </tbody>
 </table>
+
+<p style="margin-top:14px;"><strong>"Within test tolerance"</strong> means the reproduced
+value sits within 0.05 percentage points of the published one for Table 3, widened to 0.10
+where the published value is 10 or larger, and within the larger of 0.12 points and
+0.4 percent of the published value for Tables 5 and 6. Rounding to the printed digit is a
+stricter test, which is why the two are counted separately above.</p>
 
 <p style="margin-top:14px;">The discrepant cells, and the readings the paper leaves
 implicit, are set out in the
