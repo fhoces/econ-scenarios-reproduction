@@ -50,15 +50,15 @@ Appendix C (pp. 49-51), and the parameters of Tables 1 and A.2 (pp. 23-25, 43-45
 
 | Published table | Cells | Result |
 |---|---|---|
-| Table 3, the three scenarios in 2030 (p. 31) | 20 rows x 4 columns (80 cells, including the No-AI baseline column) | reproduced to the printed precision, except two cells (below) |
-| Table 5, four elasticities of capital supply (p. 37) | 5 rows x 8 columns (40 cells) | within test tolerance on every cell, including the pegged-rental case eps = infinity; one cell rounds differently (below) |
-| Table 6, four rigidities of the cognitive wage (p. 38) | 7 rows x 7 columns (49 cells) | within test tolerance on every cell; five cells round differently (below) |
+| Table 3, the three scenarios in 2030 (p. 31) | 20 rows x 4 columns (80 cells, including the No-AI baseline column) | within test tolerance on every cell; two need a widened tolerance and seven round to a different printed digit (below) |
+| Table 5, four elasticities of capital supply (p. 37) | 5 rows x 8 columns (40 cells) | within test tolerance on every cell, including the pegged-rental case eps = infinity; one cell rounds to a different printed digit (below) |
+| Table 6, four rigidities of the cognitive wage (p. 38) | 7 rows x 7 columns (49 cells) | within test tolerance on every cell; eight cells round to a different printed digit (below) |
 
 Independent checks the paper states in prose and that the code hits without being
 targeted at them: the steady-state cross-group switching share of 1/7 (p. 21), the
 monthly filling rates 0.66 and 0.64 with matching efficiency chi = 0.76 (p. 21), the
 aggregate finding rate 0.23 (p. 26), the logistic slopes kappa_m = 0.33 and
-kappa_d = 0.51 (p. 48), the research share going from 3.5 to 4.1 percent of GDP
+kappa_d = 0.51 (Table A.2, p. 45), the research share going from 3.5 to 4.1 percent of GDP
 (p. 50), the worked example in Section 2.1.3 where the TFP gain is 0.032 to first order
 and 0.029 exactly (p. 12), and the claim that the monthly ideas step stays within
 0.02 percentage points of the closed form (p. 41).
@@ -72,32 +72,55 @@ the gap in the three scenarios), which is how a base-weighted and a chained inde
 behave. This validates the wage, rental-rate and labor-share paths against the TFP path
 independently of the published tables.
 
-**The two discrepant cells.** Of the 80 cells in Table 3, two fall outside tolerance,
-both in unemployment-rate rows and both traceable to the same rounding. The all-workers
-rate in the substantial scenario comes out 4.53 against a published 4.6, a 0.07
-percentage-point gap (the modest and extreme columns are off by 0.04pp or less, and the
-No-AI column matches exactly). The cognitive rate in the No-AI baseline comes out 2.82
-against a published 2.9, a 0.08pp gap (the modest, substantial and extreme columns are
-off by 0.01pp or less). Table 1 gives the normal search pool as `U_bar = 0.038`, but the
-quit-rate derivation on p. 26 uses 3.84 percent and the published pool split of
-1.76 / 2.08 percent (p. 21) requires 0.0384. At `Fixed(U_bar=0.0384)` both cells land on
-the published values exactly and nothing else changes materially. The default here stays
-at Table 1's 0.038 for transcription fidelity; the tests check both.
+**Where the printed digit differs.** The three tables hold 169 cells between them.
+Every one is inside the test suite's numerical tolerance, and 153 of them also round to
+the digit the paper prints. These 16 do not. None is off by more than 0.11 percentage
+points, and two are the same model run reported in two tables (the baseline is
+`xi = 0.5`, `eps = 3`), so there are 14 distinct results here.
+`tests/test_printed_precision.py` carries this list as an exact allowlist, rounding
+half-up to the paper's own number of decimals, so a cell moving in or out of agreement
+fails the suite rather than quietly ageing the text.
 
-**Six more cells, at test tolerance rather than printed precision.** Tables 5 and 6
-carry 89 cells between them; six of those round to a different published digit at one
-decimal place, even though every one of the six passes the test suite's looser
-numerical tolerance (`max(0.12, 0.004 * |published value|)` percentage points, in
-`tests/test_robustness.py`). Table 5: substantial, eps=6.0, GDP comes out 9.05 against
-a published 9.1. Table 6: substantial, xi=0.75, cognitive unemployment 5.03 against
-5.1; extreme, xi=0, cognitive wage -42.09 against -42.2; extreme, xi=0.5, cognitive
-employment -21.44 against -21.5; extreme, xi=0.75, cognitive employment -25.83 against
--25.9; extreme, xi=0.75, cognitive unemployment 21.65 against 21.7. Each sits within
-0.11 percentage points of the published figure, none shares the U_bar rounding fork
-that explains Table 3's two cells above, and none is large enough to fail the tests -
-this looks like ordinary last-digit rounding noise in a nonlinear numerical solve
-rather than a modelling discrepancy, but "all cells reproduced" overstated it: these
-six match within tolerance, not to the printed digit.
+| Table | Cell | Reproduced | Published |
+|---|---|---|---|
+| Table 3 | modest, GDP index 2024 = 100 | 114.56 | 114.5 |
+| Table 3 | extreme, GDP growth pct per year | 15.46 | 15.4 |
+| Table 3 | extreme, cognitive employment since mid-2026 | -21.44 | -21.5 |
+| Table 3 | No AI, unemployment rate cognitive | 2.82 | 2.9 |
+| Table 3 | substantial, unemployment rate all workers | 4.53 | 4.6 |
+| Table 3 | substantial, growth of the ideas stock | 1.767 | 1.76 |
+| Table 3 | extreme, growth of the ideas stock | 2.027 | 2.02 |
+| Table 5 | substantial, eps=6, GDP above no-AI | 9.05 | 9.1 |
+| Table 6 | substantial, xi=0.5, unemployment all workers | 4.53 | 4.6 |
+| Table 6 | substantial, xi=0.75, unemployment cognitive | 5.03 | 5.1 |
+| Table 6 | substantial, xi=0.9, unemployment all workers | 5.12 | 5.2 |
+| Table 6 | extreme, xi=0, cognitive wage w_C | -42.09 | -42.2 |
+| Table 6 | extreme, xi=0.5, cognitive employment | -21.44 | -21.5 |
+| Table 6 | extreme, xi=0.75, cognitive employment | -25.83 | -25.9 |
+| Table 6 | extreme, xi=0.75, unemployment cognitive | 21.65 | 21.7 |
+| Table 6 | extreme, xi=0.9, unemployment all workers | 15.12 | 15.2 |
+
+**The pool rounding accounts for seven of them.** Table 1 gives the normal search pool
+as `U_bar = 0.038`, but the quit-rate derivation on p. 26 uses 3.84 percent and the
+published pool split of 1.76 / 2.08 percent (p. 21) requires 0.0384. At
+`Fixed(U_bar=0.0384)` seven of the sixteen cells above land on the published digit,
+including every all-workers unemployment cell, and nothing else changes materially. The
+No-AI cognitive rate is the near miss: it improves from 2.82 to 2.85, which still prints
+as 2.8 rather than the paper's 2.9, so the pool accounts for the size of that gap
+without closing it. Those same two Table 3 cells - all workers in the substantial column
+(4.53 against 4.6, a 0.07pp gap) and cognitive in the No-AI column (2.82 against 2.9, a
+0.08pp gap) - are also the only two of the 169 that fall outside the suite's standard
+tolerance, which is why `tests/test_table3.py` widens it for exactly those two. The
+default here stays at Table 1's 0.038 for transcription fidelity; the tests check both
+readings.
+
+**The remaining nine are last-digit noise.** They sit between 0.006 and 0.11 percentage
+points of the published figure, share no common cause, and every one passes the test
+suite's numerical tolerance (`max(0.12, 0.004 * |published value|)` percentage points
+for Tables 5 and 6, in `tests/test_robustness.py`). That is what ordinary rounding in a
+nonlinear numerical solve looks like rather than a modelling discrepancy - but
+"reproduced to the printed precision" overstated it, and the table above is the
+accurate claim.
 
 ## Not reproducible without the authors' data
 
@@ -125,7 +148,7 @@ six match within tolerance, not to the printed digit.
 ```sh
 python3 run.py                      # print the Table 3 / 5 / 6 comparisons
 python3 run.py --survey --csv out   # add the survey-median run, write monthly paths
-python3 -m pytest -q                # 102 tests, all of the checks described above
+python3 -m pytest -q                # 113 tests, all of the checks described above
 
 # the narrative report: every table and inline estimate, in the paper's own order
 QUARTO_PYTHON=/opt/anaconda3/bin/python3 quarto render repro.qmd
@@ -176,10 +199,11 @@ res.series("u_rate")        # monthly path of any field
 | `aiscen/report.py` | Table 3 rows, the published values, and the comparison printout |
 | `tests/` | The validation suite: paths, steady state, statics, Table 3, Tables 5-6, identities |
 | `repro.qmd`, `repro.css` | The narrative report: the paper's sections in order, every equation explained, tables and inline estimates computed |
-| `slides/` | The xaringan deck walking through the paper: claim, theory, methods, results (see `slides/README.md`) |
+| `slides/` | The xaringan deck walking through the paper in four parts: the claim, the model, solving it for US inputs, results (see `slides/README.md`) |
 | `repro.html` | The rendered report. Committed, not ignored, because Pages serves it |
 | `explorer/` | The scenario explorer: `index.html` plus the precomputed `grid.js`, also committed for Pages |
 | `index.html`, `.nojekyll` | The Pages landing page, and the marker that stops Jekyll eating `slides_files/` |
+| `coverage.md`, `coverage.html` | Reception of the paper: press, commentary, revisions. Linked from the landing page; the `.md` is the source and `render_understanding.py` rebuilds the `.html` |
 | `run.py` | Command-line comparison tables and monthly CSV export |
 
 ## Readings the paper leaves implicit
