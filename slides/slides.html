@@ -18,14 +18,17 @@
          "present" throughout: that counter isn't per-slide markup either, it's a single
          element remark repositions/relabels on each transition. A real <a> can't be done
          that way (remark owns that element), so this attaches one plain, position:fixed
-         link straight to <body>, outside every .remark-slide-container, which has the
-         same visual effect: it never moves as slides change because it was never part of
-         any slide to begin with. Colors match this deck's existing .nav-btn buttons. -->
+         link straight to <body>, outside every .remark-slide-container. It used to sit at
+         a fixed viewport offset (top:8px/left:10px), which put it in the grey letterboxing
+         outside the slide's own box whenever the browser window wasn't exactly the deck's
+         aspect ratio: remark scales every .remark-slide-scaler identically to fit the
+         current viewport (same transform on all 80 of them, since they share one ratio),
+         so this now reads that shared scaler's on-screen rect and offsets from IT instead,
+         landing the link inside the visible slide regardless of window size. Colors match
+         this deck's existing .nav-btn buttons. -->
     <style>
       .site-footer-link {
         position: fixed;
-        top: 8px;
-        left: 10px;
         z-index: 200;
         font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
         font-size: 11px;
@@ -44,6 +47,19 @@
       a.className = "site-footer-link";
       a.textContent = "← overview";
       document.body.appendChild(a);
+
+      function positionLink() {
+        var scaler = document.querySelector(".remark-slide-scaler");
+        if (!scaler) return;
+        var rect = scaler.getBoundingClientRect();
+        a.style.top = (rect.top + 8) + "px";
+        a.style.left = (rect.left + 10) + "px";
+      }
+      positionLink();
+      window.addEventListener("resize", positionLink);
+      if (window.slideshow && typeof window.slideshow.on === "function") {
+        window.slideshow.on("afterShowSlide", positionLink);
+      }
     });
     </script>
   </head>
