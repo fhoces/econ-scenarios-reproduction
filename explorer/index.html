@@ -353,15 +353,14 @@
   th:first-child, td:first-child { text-align: left; font-family: var(--sans); }
   th { color: var(--ink-3); font-weight: 500; }
 
-  footer {
-    margin-top: 40px;
+  .note {
+    margin-top: 32px;
     padding-top: 18px;
     border-top: 1px solid var(--rule);
     font-size: 12.5px;
     color: var(--ink-2);
-    max-width: 78ch;
   }
-  footer code {
+  .note code {
     font-family: var(--mono);
     font-size: 11.5px;
     background: var(--chip);
@@ -410,6 +409,19 @@
         <button type="button" data-preset="best">Highest GDP cell</button>
         <button type="button" data-preset="best-wage">Highest wage growth</button>
       </div>
+
+      <div class="note">
+        Every cell is a full monthly solve of the model from 2024 to 2030, computed by an independent
+        Python reimplementation (<code>aiscen</code>) that reproduces the paper's Tables 3, 5 and 6 to
+        the printed precision, except two documented rounding-fork cells. The three named scenarios
+        sit at the corners of this grid and match their published values. One convention to note: the
+        gain <code>a</code> follows a straight line from the mid-2026 anchor common to all scenarios,
+        which is what the paper's own explorer does for off-scenario values, so grid corners land
+        within 0.03 points of the published table rather than exactly on it. Reinstatement runs over
+        six values here, three of them (0.75, 1.00 and 1.25) outside the range the paper uses; at the
+        two of those at or above 1, the labor share rises above its 60 percent starting point,
+        territory the paper's own scenarios never enter (at 0.75 it is still just below 60 percent).
+      </div>
     </section>
 
     <section>
@@ -454,19 +466,6 @@
       </details>
     </section>
   </div>
-
-  <footer>
-    Every cell is a full monthly solve of the model from 2024 to 2030, computed by an independent
-    Python reimplementation (<code>aiscen</code>) that reproduces the paper's Tables 3, 5 and 6 to
-    the printed precision, except two documented rounding-fork cells. The three named scenarios
-    sit at the corners of this grid and match their published values. One convention to note: the
-    gain <code>a</code> follows a straight line from the mid-2026 anchor common to all scenarios,
-    which is what the paper's own explorer does for off-scenario values, so grid corners land
-    within 0.03 points of the published table rather than exactly on it. Reinstatement runs over
-    six values here, three of them (0.75, 1.00 and 1.25) outside the range the paper uses; at the
-    two of those at or above 1, the labor share rises above its 60 percent starting point,
-    territory the paper's own scenarios never enter (at 0.75 it is still just below 60 percent).
-  </footer>
 </div>
 
 <script src="grid.js"></script>
