@@ -22,12 +22,23 @@ execute:
 ---
 
 ::: {.site-nav}
-Part of an independent reproduction of Korinek et al. (2026): [overview](index.html)
-&middot; [the deck](slides/slides.html) &middot; [the explorer](explorer/) &middot;
-[Open Reproduction Materials](https://github.com/fhoces/econ-scenarios-reproduction)
+Part of an independent reproduction of Korinek et al. (2026):
+[Open Output (the explorer)](explorer/) &middot; Open Analysis: Report (here) and
+[Slides](slides/slides.html) &middot;
+[Open Materials](https://github.com/fhoces/econ-scenarios-reproduction) &middot;
+[overview](index.html)
 :::
 
-## How to read this document
+## Introduction
+
+::: {.report-intro}
+![](assets/opa/opa-details.png){.layer-mark}
+An independent reproduction of
+[Economic Scenarios for Transformative AI](https://www.anthropic.com/institute/econ-scenarios),
+following the
+[Open Policy Analysis](https://tinyurl.com/1qypbihb) framework: this document and
+[the slide deck](slides/slides.html) are its **open analysis**.
+:::
 
 No replication package was published with the paper, so every number below is
 computed from the equations printed in it: Proposition 1 (p. 15), which is the closed
@@ -2184,7 +2195,9 @@ pandas, matplotlib and tabulate for its tables and figures. `README.md` records 
 places where the paper leaves a modelling choice implicit and how each was resolved.
 
 ::: {.site-nav}
-Part of an independent reproduction of Korinek et al. (2026): [overview](index.html)
-&middot; [the deck](slides/slides.html) &middot; [the explorer](explorer/) &middot;
-[Open Reproduction Materials](https://github.com/fhoces/econ-scenarios-reproduction)
+Part of an independent reproduction of Korinek et al. (2026):
+[Open Output (the explorer)](explorer/) &middot; Open Analysis: Report (here) and
+[Slides](slides/slides.html) &middot;
+[Open Materials](https://github.com/fhoces/econ-scenarios-reproduction) &middot;
+[overview](index.html)
 :::

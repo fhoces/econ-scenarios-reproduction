@@ -13,6 +13,94 @@ output:
       ratio: "16:9"
 ---
 
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  echo = TRUE, fig.align = "center",
+  fig.width = 10, fig.height = 4.5, dpi = 150,
+  message = FALSE, warning = FALSE
+)
+library(tidyverse)
+theme_set(theme_minimal(base_size = 14))
+
+# The model itself is the Python package in the parent directory; this deck reads the
+# CSVs it exports (`python3 run.py --csv slides/data`) so no number here is retyped.
+paths <- c("modest", "substantial", "extreme") |>
+  set_names() |>
+  map_dfr(~ read_csv(paste0("data/", .x, ".csv"), show_col_types = FALSE),
+          .id = "scenario") |>
+  mutate(scenario = factor(scenario, levels = c("modest", "substantial", "extreme")))
+
+# Everything in the CSVs is a log gap against the no-AI path; the paper reports
+# percent deviations, exp(x) - 1.
+pc  <- function(x) (exp(x) - 1) * 100
+r_bar <- 0.115; delta <- 0.05; s_L0 <- 0.60
+
+anchor <- paths |>
+  filter(abs(t - 2026.5) < 1e-8) |>
+  select(scenario, l_C_2026 = l_C)
+
+d <- paths |>
+  left_join(anchor, by = "scenario") |>
+  mutate(gdp        = pc(dlnY),
+         wage       = pc(dlnw_avg),
+         wage_C     = pc(dlnw_C_paid),
+         wage_N     = pc(dlnw_N),
+         capital    = pc(dlnK),
+         tfp        = pc(dln_tfp),
+         net_return = 100 * (r_bar * exp(dlnr) - delta),
+         lab_share  = 100 * s_L,
+         u_all      = 100 * u_rate,
+         u_C        = 100 * u_rate_C,
+         u_N        = 100 * u_rate_N,
+         cog_emp    = 100 * (l_C / l_C_2026 - 1))
+
+scen_cols <- c(modest = "#2a78d6", substantial = "#eb6834", extreme = "#1baf7a")
+
+end_label <- function(p, var, fmt = "%.1f") {
+  ends <- d |> filter(abs(t - 2030) < 1e-8)
+  p + geom_text(data = ends,
+                aes(x = t + 0.06, y = .data[[var]],
+                    label = sprintf(fmt, .data[[var]])),
+                hjust = 0, size = 3.4, show.legend = FALSE) +
+    scale_x_continuous(breaks = seq(2025, 2030, 1)) +
+    coord_cartesian(xlim = c(2025, 2030.9), clip = "off")
+}
+
+t3 <- read_csv("data/table3.csv", show_col_types = FALSE)
+
+# The exported tables carry the paper's row names. The deck renames the group on display
+# only; the CSVs and the Python package keep the paper's wording (see the terminology slide).
+relabel <- function(x) {
+  x |>
+    str_replace("Cognitive", "AI-sensitive") |>
+    str_replace("cognitive", "AI-sensitive")
+}
+```
+
+name: opa-frame
+class: center, middle, opa-slide
+
+# An Open Reproduction
+
+.opa-intro[
+An independent reproduction of
+[Economic Scenarios for Transformative AI](https://www.anthropic.com/institute/econ-scenarios),
+following the
+[Open Policy Analysis](https://tinyurl.com/1qypbihb) framework.
+]
+
+<img src="../assets/opa/opa-details.png" class="opa-mark" alt="">
+
+.opa-legend[
+**Open Output**: [the explorer](../explorer/), every combination of the seven inputs<br>
+**Open Analysis**: [the report](../repro.html), and this deck<br>
+**Open Materials**: [the repository](https://github.com/fhoces/econ-scenarios-reproduction),
+the model, its tests and every exported CSV
+]
+
+---
+
 ```{css, echo=FALSE}
 .remark-code, .remark-inline-code { font-size: 80%; }
 .remark-slide-content { padding: 1em 2em; }
@@ -119,88 +207,38 @@ a.reflink:hover { color: #1a237e; border-bottom-color: #1a237e; }
 }
 .site-nav a { color: #1a237e; text-decoration: none; }
 .site-nav a:hover { text-decoration: underline; }
-```
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(
-  echo = TRUE, fig.align = "center",
-  fig.width = 10, fig.height = 4.5, dpi = 150,
-  message = FALSE, warning = FALSE
-)
-library(tidyverse)
-theme_set(theme_minimal(base_size = 14))
-
-# The model itself is the Python package in the parent directory; this deck reads the
-# CSVs it exports (`python3 run.py --csv slides/data`) so no number here is retyped.
-paths <- c("modest", "substantial", "extreme") |>
-  set_names() |>
-  map_dfr(~ read_csv(paste0("data/", .x, ".csv"), show_col_types = FALSE),
-          .id = "scenario") |>
-  mutate(scenario = factor(scenario, levels = c("modest", "substantial", "extreme")))
-
-# Everything in the CSVs is a log gap against the no-AI path; the paper reports
-# percent deviations, exp(x) - 1.
-pc  <- function(x) (exp(x) - 1) * 100
-r_bar <- 0.115; delta <- 0.05; s_L0 <- 0.60
-
-anchor <- paths |>
-  filter(abs(t - 2026.5) < 1e-8) |>
-  select(scenario, l_C_2026 = l_C)
-
-d <- paths |>
-  left_join(anchor, by = "scenario") |>
-  mutate(gdp        = pc(dlnY),
-         wage       = pc(dlnw_avg),
-         wage_C     = pc(dlnw_C_paid),
-         wage_N     = pc(dlnw_N),
-         capital    = pc(dlnK),
-         tfp        = pc(dln_tfp),
-         net_return = 100 * (r_bar * exp(dlnr) - delta),
-         lab_share  = 100 * s_L,
-         u_all      = 100 * u_rate,
-         u_C        = 100 * u_rate_C,
-         u_N        = 100 * u_rate_N,
-         cog_emp    = 100 * (l_C / l_C_2026 - 1))
-
-scen_cols <- c(modest = "#2a78d6", substantial = "#eb6834", extreme = "#1baf7a")
-
-end_label <- function(p, var, fmt = "%.1f") {
-  ends <- d |> filter(abs(t - 2030) < 1e-8)
-  p + geom_text(data = ends,
-                aes(x = t + 0.06, y = .data[[var]],
-                    label = sprintf(fmt, .data[[var]])),
-                hjust = 0, size = 3.4, show.legend = FALSE) +
-    scale_x_continuous(breaks = seq(2025, 2030, 1)) +
-    coord_cartesian(xlim = c(2025, 2030.9), clip = "off")
-}
-
-t3 <- read_csv("data/table3.csv", show_col_types = FALSE)
-
-# The exported tables carry the paper's row names. The deck renames the group on display
-# only; the CSVs and the Python package keep the paper's wording (see the terminology slide).
-relabel <- function(x) {
-  x |>
-    str_replace("Cognitive", "AI-sensitive") |>
-    str_replace("cognitive", "AI-sensitive")
+/* The opening slide: what this reproduction is, and which OPA layer each artifact
+   is. The slide needs its own stacking context or .opa-mark's negative z-index
+   drops the figure behind the slide background. */
+.remark-slide-content.opa-slide { position: relative; z-index: 0; overflow: hidden; }
+.opa-intro { font-size: 92%; max-width: 30em; margin: 0 auto 1.1em; }
+.opa-legend { font-size: 85%; line-height: 1.75; max-width: 34em; margin: 0 auto;
+              text-align: left; }
+.opa-intro a, .opa-legend a { color: #1a237e; }
+.opa-mark {
+  position: absolute; top: 26px; right: 34px; height: 190px; width: auto;
+  opacity: 0.218; z-index: -1; pointer-events: none;
 }
 ```
 
 .site-nav[
 Part of an independent reproduction of Korinek et al. (2026):
-[overview](../index.html) &middot; [the report](../repro.html) &middot;
-[the explorer](../explorer/) &middot;
-[source on GitHub](https://github.com/fhoces/econ-scenarios-reproduction)
+[Open Output (the explorer)](../explorer/) &middot; Open Analysis:
+[Report](../repro.html) and Slides (here) &middot;
+[Open Materials](https://github.com/fhoces/econ-scenarios-reproduction) &middot;
+[overview](../index.html)
 ]
 
 # Deck Map
 
 <table style="width:100%; font-size:85%; border-collapse:collapse;">
 <tr style="background:#e8eaf6;"><th style="text-align:left; padding:6px;">Part</th><th style="text-align:left; padding:6px;">What it covers</th><th style="padding:6px;">Slides</th></tr>
-<tr><td style="padding:6px;"><b>1. The claim</b></td><td style="padding:6px;">What the paper asserts, and the seven inputs it rests on</td><td style="text-align:center;">3&ndash;17</td></tr>
-<tr><td style="padding:6px;"><b>2. The model</b></td><td style="padding:6px;">Task-based production, the assignment rule, prices and shares, TFP, the labor share, employment, ideas, unemployment: where every equation comes from</td><td style="text-align:center;">18&ndash;33</td></tr>
-<tr><td style="padding:6px;"><b>3. Solving the model for US inputs</b></td><td style="padding:6px;">Calibration, the steady state, all 44 equations and the order they run in, the root-finds</td><td style="text-align:center;">34&ndash;47</td></tr>
-<tr><td style="padding:6px;"><b>4. Results: some scenarios and the explorer</b></td><td style="padding:6px;">The three scenarios one at a time, robustness, the survey, what reproduces, and the whole grid</td><td style="text-align:center;">48&ndash;60</td></tr>
-<tr><td style="padding:6px;"><b>Backup</b></td><td style="padding:6px;">Derivations, month 0 step by step, the gain <i>a</i>, the slop extension</td><td style="text-align:center;">61&ndash;80</td></tr>
+<tr><td style="padding:6px;"><b>1. The claim</b></td><td style="padding:6px;">What the paper asserts, and the seven inputs it rests on</td><td style="text-align:center;">4&ndash;18</td></tr>
+<tr><td style="padding:6px;"><b>2. The model</b></td><td style="padding:6px;">Task-based production, the assignment rule, prices and shares, TFP, the labor share, employment, ideas, unemployment: where every equation comes from</td><td style="text-align:center;">19&ndash;34</td></tr>
+<tr><td style="padding:6px;"><b>3. Solving the model for US inputs</b></td><td style="padding:6px;">Calibration, the steady state, all 44 equations and the order they run in, the root-finds</td><td style="text-align:center;">35&ndash;48</td></tr>
+<tr><td style="padding:6px;"><b>4. Results: some scenarios and the explorer</b></td><td style="padding:6px;">The three scenarios one at a time, robustness, the survey, what reproduces, and the whole grid</td><td style="text-align:center;">49&ndash;61</td></tr>
+<tr><td style="padding:6px;"><b>Backup</b></td><td style="padding:6px;">Derivations, month 0 step by step, the gain <i>a</i>, the slop extension</td><td style="text-align:center;">62&ndash;81</td></tr>
 </table>
 
 .blue-box[

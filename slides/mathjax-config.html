@@ -13,11 +13,12 @@ MathJax.Hub.Config({
      link straight to <body>, outside every .remark-slide-container. It used to sit at
      a fixed viewport offset (top:8px/left:10px), which put it in the grey letterboxing
      outside the slide's own box whenever the browser window wasn't exactly the deck's
-     aspect ratio: remark scales every .remark-slide-scaler identically to fit the
-     current viewport (same transform on all 80 of them, since they share one ratio),
-     so this now reads that shared scaler's on-screen rect and offsets from IT instead,
-     landing the link inside the visible slide regardless of window size. Colors match
-     this deck's existing .nav-btn buttons. -->
+     aspect ratio: this reads the currently VISIBLE slide's own .remark-slide-scaler
+     rect and offsets from it instead, landing the link inside the slide regardless of
+     window size, and re-measures on resize, on remark's own show-slide events, and via
+     a MutationObserver on the slides area as a fallback in case a given browser/remark
+     version doesn't fire the events the same way. Colors match this deck's .nav-btn
+     buttons. -->
 <style>
   .site-footer-link {
     position: fixed;
@@ -41,7 +42,13 @@ document.addEventListener("DOMContentLoaded", function () {
   document.body.appendChild(a);
 
   function positionLink() {
-    var scaler = document.querySelector(".remark-slide-scaler");
+    // Read the VISIBLE slide's own scaler, not just the first one in the DOM: each
+    // of the 81 slides has its own .remark-slide-scaler, and while a fresh page load
+    // gives them all identical inline styles, there is no guarantee every hidden one
+    // stays in sync with every resize/fullscreen toggle. The visible one is always
+    // authoritative for what is actually on screen.
+    var visible = document.querySelector(".remark-slide-container.remark-visible .remark-slide-scaler");
+    var scaler = visible || document.querySelector(".remark-slide-scaler");
     if (!scaler) return;
     var rect = scaler.getBoundingClientRect();
     a.style.top = (rect.top + 8) + "px";
@@ -51,6 +58,15 @@ document.addEventListener("DOMContentLoaded", function () {
   window.addEventListener("resize", positionLink);
   if (window.slideshow && typeof window.slideshow.on === "function") {
     window.slideshow.on("afterShowSlide", positionLink);
+    window.slideshow.on("showSlide", positionLink);
+  }
+  // Belt and suspenders: watch the DOM directly for whichever slide remark marks
+  // visible, independent of which JS event API actually fires.
+  var slidesArea = document.querySelector(".remark-slides-area");
+  if (slidesArea && window.MutationObserver) {
+    new MutationObserver(positionLink).observe(slidesArea, {
+      attributes: true, attributeFilter: ["class", "style"], subtree: true
+    });
   }
 });
 </script>

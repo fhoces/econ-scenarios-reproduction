@@ -6,19 +6,25 @@ An independent, from-scratch implementation of the model in
 > "Economic Scenarios for Transformative AI", The Anthropic Institute Working Paper
 > No. 2026-02, September 2026.
 
-## Read it online
+Following the [Open Policy Analysis](https://tinyurl.com/1qypbihb) (OPA) framework, this
+repository is split into three components:
 
-All three artifacts are published from this repository with GitHub Pages:
+1. **Open Output**: [an interactive explorer](https://fhoces.github.io/econ-scenarios-reproduction/explorer/),
+   which recomputes all eleven outcome series live over every combination of the paper's
+   seven scenario dials.
+2. **Open Analysis**: [a full written reproduction](https://fhoces.github.io/econ-scenarios-reproduction/repro.html)
+   that walks every table and equation in the paper's own order, and
+   [a slide deck](https://fhoces.github.io/econ-scenarios-reproduction/slides/slides.html)
+   that teaches the same material step by step.
+3. **Open Materials**: this repository, which stores the `aiscen` model, its test suite,
+   and every exported CSV needed to replicate the analysis in full.
 
-| | |
-|---|---|
-| <https://fhoces.github.io/econ-scenarios-reproduction/> | landing page |
-| <https://fhoces.github.io/econ-scenarios-reproduction/slides/slides.html> | the slide deck |
-| <https://fhoces.github.io/econ-scenarios-reproduction/repro.html> | the full report |
-| <https://fhoces.github.io/econ-scenarios-reproduction/explorer/> | the scenario explorer |
+[The landing page](https://fhoces.github.io/econ-scenarios-reproduction/) links to all
+three. The deck pulls `remark.js` from a CDN, so it needs an internet connection to
+render; the report and the explorer are self-contained apart from web fonts.
 
-The deck pulls `remark.js` from a CDN, so it needs an internet connection to render; the
-report and the explorer are self-contained apart from web fonts.
+To learn more about the OPA framework and BITSS, its home at UC Berkeley,
+[click here](https://www.bitss.org/opa/).
 
 ### The paper itself is not in this repo
 

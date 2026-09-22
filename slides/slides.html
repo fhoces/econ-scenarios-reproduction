@@ -21,11 +21,12 @@
          link straight to <body>, outside every .remark-slide-container. It used to sit at
          a fixed viewport offset (top:8px/left:10px), which put it in the grey letterboxing
          outside the slide's own box whenever the browser window wasn't exactly the deck's
-         aspect ratio: remark scales every .remark-slide-scaler identically to fit the
-         current viewport (same transform on all 80 of them, since they share one ratio),
-         so this now reads that shared scaler's on-screen rect and offsets from IT instead,
-         landing the link inside the visible slide regardless of window size. Colors match
-         this deck's existing .nav-btn buttons. -->
+         aspect ratio: this reads the currently VISIBLE slide's own .remark-slide-scaler
+         rect and offsets from it instead, landing the link inside the slide regardless of
+         window size, and re-measures on resize, on remark's own show-slide events, and via
+         a MutationObserver on the slides area as a fallback in case a given browser/remark
+         version doesn't fire the events the same way. Colors match this deck's .nav-btn
+         buttons. -->
     <style>
       .site-footer-link {
         position: fixed;
@@ -49,7 +50,13 @@
       document.body.appendChild(a);
 
       function positionLink() {
-        var scaler = document.querySelector(".remark-slide-scaler");
+        // Read the VISIBLE slide's own scaler, not just the first one in the DOM: each
+        // of the 81 slides has its own .remark-slide-scaler, and while a fresh page load
+        // gives them all identical inline styles, there is no guarantee every hidden one
+        // stays in sync with every resize/fullscreen toggle. The visible one is always
+        // authoritative for what is actually on screen.
+        var visible = document.querySelector(".remark-slide-container.remark-visible .remark-slide-scaler");
+        var scaler = visible || document.querySelector(".remark-slide-scaler");
         if (!scaler) return;
         var rect = scaler.getBoundingClientRect();
         a.style.top = (rect.top + 8) + "px";
@@ -59,6 +66,15 @@
       window.addEventListener("resize", positionLink);
       if (window.slideshow && typeof window.slideshow.on === "function") {
         window.slideshow.on("afterShowSlide", positionLink);
+        window.slideshow.on("showSlide", positionLink);
+      }
+      // Belt and suspenders: watch the DOM directly for whichever slide remark marks
+      // visible, independent of which JS event API actually fires.
+      var slidesArea = document.querySelector(".remark-slides-area");
+      if (slidesArea && window.MutationObserver) {
+        new MutationObserver(positionLink).observe(slidesArea, {
+          attributes: true, attributeFilter: ["class", "style"], subtree: true
+        });
       }
     });
     </script>
@@ -76,6 +92,32 @@ class: center, middle, inverse, title-slide
 
 ---
 
+
+
+
+
+name: opa-frame
+class: center, middle, opa-slide
+
+# An Open Reproduction
+
+.opa-intro[
+An independent reproduction of
+[Economic Scenarios for Transformative AI](https://www.anthropic.com/institute/econ-scenarios),
+following the
+[Open Policy Analysis](https://tinyurl.com/1qypbihb) framework.
+]
+
+&lt;img src="../assets/opa/opa-details.png" class="opa-mark" alt=""&gt;
+
+.opa-legend[
+**Open Output**: [the explorer](../explorer/), every combination of the seven inputs&lt;br&gt;
+**Open Analysis**: [the report](../repro.html), and this deck&lt;br&gt;
+**Open Materials**: [the repository](https://github.com/fhoces/econ-scenarios-reproduction),
+the model, its tests and every exported CSV
+]
+
+---
 
 &lt;style type="text/css"&gt;
 .remark-code, .remark-inline-code { font-size: 80%; }
@@ -183,26 +225,38 @@ a.reflink:hover { color: #1a237e; border-bottom-color: #1a237e; }
 }
 .site-nav a { color: #1a237e; text-decoration: none; }
 .site-nav a:hover { text-decoration: underline; }
+
+/* The opening slide: what this reproduction is, and which OPA layer each artifact
+   is. The slide needs its own stacking context or .opa-mark's negative z-index
+   drops the figure behind the slide background. */
+.remark-slide-content.opa-slide { position: relative; z-index: 0; overflow: hidden; }
+.opa-intro { font-size: 92%; max-width: 30em; margin: 0 auto 1.1em; }
+.opa-legend { font-size: 85%; line-height: 1.75; max-width: 34em; margin: 0 auto;
+              text-align: left; }
+.opa-intro a, .opa-legend a { color: #1a237e; }
+.opa-mark {
+  position: absolute; top: 26px; right: 34px; height: 190px; width: auto;
+  opacity: 0.218; z-index: -1; pointer-events: none;
+}
 &lt;/style&gt;
-
-
 
 .site-nav[
 Part of an independent reproduction of Korinek et al. (2026):
-[overview](../index.html) &amp;middot; [the report](../repro.html) &amp;middot;
-[the explorer](../explorer/) &amp;middot;
-[source on GitHub](https://github.com/fhoces/econ-scenarios-reproduction)
+[Open Output (the explorer)](../explorer/) &amp;middot; Open Analysis:
+[Report](../repro.html) and Slides (here) &amp;middot;
+[Open Materials](https://github.com/fhoces/econ-scenarios-reproduction) &amp;middot;
+[overview](../index.html)
 ]
 
 # Deck Map
 
 &lt;table style="width:100%; font-size:85%; border-collapse:collapse;"&gt;
 &lt;tr style="background:#e8eaf6;"&gt;&lt;th style="text-align:left; padding:6px;"&gt;Part&lt;/th&gt;&lt;th style="text-align:left; padding:6px;"&gt;What it covers&lt;/th&gt;&lt;th style="padding:6px;"&gt;Slides&lt;/th&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;td style="padding:6px;"&gt;&lt;b&gt;1. The claim&lt;/b&gt;&lt;/td&gt;&lt;td style="padding:6px;"&gt;What the paper asserts, and the seven inputs it rests on&lt;/td&gt;&lt;td style="text-align:center;"&gt;3&amp;ndash;17&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;td style="padding:6px;"&gt;&lt;b&gt;2. The model&lt;/b&gt;&lt;/td&gt;&lt;td style="padding:6px;"&gt;Task-based production, the assignment rule, prices and shares, TFP, the labor share, employment, ideas, unemployment: where every equation comes from&lt;/td&gt;&lt;td style="text-align:center;"&gt;18&amp;ndash;33&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;td style="padding:6px;"&gt;&lt;b&gt;3. Solving the model for US inputs&lt;/b&gt;&lt;/td&gt;&lt;td style="padding:6px;"&gt;Calibration, the steady state, all 44 equations and the order they run in, the root-finds&lt;/td&gt;&lt;td style="text-align:center;"&gt;34&amp;ndash;47&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;td style="padding:6px;"&gt;&lt;b&gt;4. Results: some scenarios and the explorer&lt;/b&gt;&lt;/td&gt;&lt;td style="padding:6px;"&gt;The three scenarios one at a time, robustness, the survey, what reproduces, and the whole grid&lt;/td&gt;&lt;td style="text-align:center;"&gt;48&amp;ndash;60&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;td style="padding:6px;"&gt;&lt;b&gt;Backup&lt;/b&gt;&lt;/td&gt;&lt;td style="padding:6px;"&gt;Derivations, month 0 step by step, the gain &lt;i&gt;a&lt;/i&gt;, the slop extension&lt;/td&gt;&lt;td style="text-align:center;"&gt;61&amp;ndash;80&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td style="padding:6px;"&gt;&lt;b&gt;1. The claim&lt;/b&gt;&lt;/td&gt;&lt;td style="padding:6px;"&gt;What the paper asserts, and the seven inputs it rests on&lt;/td&gt;&lt;td style="text-align:center;"&gt;4&amp;ndash;18&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td style="padding:6px;"&gt;&lt;b&gt;2. The model&lt;/b&gt;&lt;/td&gt;&lt;td style="padding:6px;"&gt;Task-based production, the assignment rule, prices and shares, TFP, the labor share, employment, ideas, unemployment: where every equation comes from&lt;/td&gt;&lt;td style="text-align:center;"&gt;19&amp;ndash;34&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td style="padding:6px;"&gt;&lt;b&gt;3. Solving the model for US inputs&lt;/b&gt;&lt;/td&gt;&lt;td style="padding:6px;"&gt;Calibration, the steady state, all 44 equations and the order they run in, the root-finds&lt;/td&gt;&lt;td style="text-align:center;"&gt;35&amp;ndash;48&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td style="padding:6px;"&gt;&lt;b&gt;4. Results: some scenarios and the explorer&lt;/b&gt;&lt;/td&gt;&lt;td style="padding:6px;"&gt;The three scenarios one at a time, robustness, the survey, what reproduces, and the whole grid&lt;/td&gt;&lt;td style="text-align:center;"&gt;49&amp;ndash;61&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td style="padding:6px;"&gt;&lt;b&gt;Backup&lt;/b&gt;&lt;/td&gt;&lt;td style="padding:6px;"&gt;Derivations, month 0 step by step, the gain &lt;i&gt;a&lt;/i&gt;, the slop extension&lt;/td&gt;&lt;td style="text-align:center;"&gt;62&amp;ndash;81&lt;/td&gt;&lt;/tr&gt;
 &lt;/table&gt;
 
 .blue-box[

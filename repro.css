@@ -24,6 +24,25 @@ code.sourceCode { font-size: 0.8rem; }
 .site-nav a { color: #2a78d6; text-decoration: none; }
 .site-nav a:hover { text-decoration: underline; }
 
+/* The OPA layer this document is, set behind the opening sentence at the same
+   opacity the landing page's cards use. The block needs its own stacking context
+   or the negative z-index drops the figure behind the page background. */
+.report-intro {
+  position: relative;
+  z-index: 0;
+  margin-bottom: 1.8rem;
+}
+.report-intro .layer-mark {
+  position: absolute;
+  top: -6px;
+  right: 0;
+  height: 120px;
+  width: auto;
+  opacity: 0.218;
+  z-index: -1;
+  pointer-events: none;
+}
+
 /* Quarto emits these matplotlib figures without img-fluid, so nothing caps their
    width: a wide figure then overflows the text column on screen and is cropped by
    the print stylesheet. Cap them here. */
