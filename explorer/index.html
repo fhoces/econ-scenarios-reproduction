@@ -90,7 +90,16 @@
   .site-nav a:hover { text-decoration: underline; }
 
   /* ---- masthead ------------------------------------------------------- */
-  header { border-bottom: 1px solid var(--rule); padding-bottom: 20px; }
+  header {
+    border-bottom: 1px solid var(--rule); padding-bottom: 20px;
+    position: relative; z-index: 0; overflow: hidden;
+  }
+  /* The OPA layer this page is: sits behind the masthead text, so header needs
+     its own stacking context or the negative z-index falls behind the page. */
+  .header-layer {
+    position: absolute; top: 0; right: 0; height: 150px; width: auto;
+    opacity: 0.218; z-index: -1; pointer-events: none;
+  }
   h1 {
     font-family: var(--serif);
     font-weight: 600;
@@ -103,12 +112,13 @@
   .standfirst {
     font-family: var(--serif);
     color: var(--ink-2);
-    max-width: 62ch;
     margin: 0;
     font-size: 15.5px;
   }
   .standfirst + .standfirst { margin-top: 14px; }
   .standfirst em { color: var(--ink); font-style: italic; }
+  .standfirst a { color: var(--series-1); text-decoration: none; }
+  .standfirst a:hover { text-decoration: underline; }
 
   /* ---- identity strip -------------------------------------------------- */
   .identity {
@@ -385,7 +395,15 @@
     <a href="../index.html">overview</a>
   </p>
   <header>
+    <img class="header-layer" src="../assets/opa/opa-assumptions-solo.png" alt="" aria-hidden="true">
     <h1>AI Scenario Inputs</h1>
+    <p class="standfirst">
+      An independent reproduction of
+      <a href="https://www.anthropic.com/institute/econ-scenarios">Economic Scenarios for
+      Transformative AI</a>, organized as the three layers of
+      <a href="https://tinyurl.com/1qypbihb">Open Policy Analysis</a>: this page is its
+      <strong>open output</strong>.
+    </p>
     <p class="standfirst">
       Korinek, Jones, Sacher, Cotter and McCrory run their transformative-AI model at three
       settings and label them <em>modest</em>, <em>substantial</em> and <em>extreme</em>. But the
