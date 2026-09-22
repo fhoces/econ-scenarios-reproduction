@@ -12,9 +12,10 @@ __pycache__/
 # Two of them ARE committed, because GitHub Pages serves them directly and the site
 # is built by hand rather than in CI. Regenerate with:
 #   repro.html         QUARTO_PYTHON=/opt/anaconda3/bin/python3 quarto render repro.qmd   (~3.4 MB)
-#   explorer/grid.js   python3 slides/make_grid_app.py                                    (~2.8 MB)
+#   explorer/grid.js   python3 slides/make_grid_app.py                                    (~4.3 MB)
 #
-# Still ignored: the JSON twin of grid.js, which only the deck build reads.
+# Still ignored: the JSON twin of grid.js. Nothing on the site reads it; the same
+# exporter writes both, and tests/test_explorer_grid.py compares them when it is present.
 slides/data/grid_app.json
 repro.quarto_ipynb_2
 

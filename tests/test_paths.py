@@ -10,7 +10,7 @@ F = Fixed()
 
 
 def test_logistic_slopes_match_paper():
-    """p. 48: 'kappa_m = 0.33, kappa_d = 0.51' for the substantial scenario."""
+    """Table A.2, p. 45: 'kappa_m = 0.33, kappa_d = 0.51' for the substantial scenario."""
     p = Paths.build(F, SCENARIOS["substantial"])
     assert p.kappa_m == pytest.approx(0.33, abs=0.005)
     assert p.kappa_d == pytest.approx(0.51, abs=0.005)

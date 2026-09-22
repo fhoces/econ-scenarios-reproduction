@@ -61,7 +61,6 @@ def table3_column(res: simulate.Result, t: float = 2030.0) -> dict:
 
 def no_ai_column(f: Fixed, t: float = 2030.0) -> dict:
     """The 'No AI' column of Table 3."""
-    ss_pool_C = f.U_bar * 0.458      # not used; the steady state supplies the split
     from . import steady
     ss = steady.solve(f)
     return {

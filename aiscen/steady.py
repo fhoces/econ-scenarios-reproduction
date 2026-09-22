@@ -39,9 +39,6 @@ class SteadyState:
 
     mu_bar_used: float = 0.17
 
-    def u_rate_C(self) -> float:
-        raise NotImplementedError
-
 
 def effective_search(U_C: float, U_N: float, mu: float) -> tuple:
     """Equation (33): S_C = U_C + mu U_N, S_N = mu U_C + U_N."""

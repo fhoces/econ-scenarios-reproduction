@@ -2,11 +2,11 @@
 
 Reception of the paper: press, commentary, citations, and any revision of the artifact
 itself. This is not a tracker of whether the scenarios come true, and not a reading list
-of my own understanding, which lives in `understanding.md`.
+of my own understanding, which lives in a separate tracker kept out of this repository.
 
 Updated by hand. Say "check for new coverage" and I sweep, verify, and append; paste a
-link and I slot it in. `understanding.html` and `coverage.html` are regenerated from
-these two files by the project hook in `.claude/settings.json`.
+link and I slot it in. `coverage.html`, the version published with the site, is
+regenerated from this file by the project hook in `.claude/settings.json`.
 
 ## The artifact being tracked
 

@@ -1,4 +1,4 @@
-"""Root finding, kept dependency-free so the package needs only the stdlib+numpy."""
+"""Root finding, hand-rolled so the package needs nothing but the standard library."""
 
 
 def bisect(f, lo: float, hi: float, tol: float = 1e-14, maxiter: int = 200) -> float:

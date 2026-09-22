@@ -8,7 +8,7 @@ so each value can be checked against the source.
 This is an independent reimplementation; no code was released with the paper.
 """
 
-from dataclasses import dataclass, field, replace
+from dataclasses import dataclass, replace
 
 
 @dataclass(frozen=True)
@@ -46,6 +46,8 @@ class Fixed:
     mu_bar: float = 0.17        # search discount in normal times
     iota_match: float = 1.27    # matching curvature (den Haan et al. 2000)
     fill_bar: float = 0.65      # employment-weighted mean monthly filling rate
+    # Table 1 lists wage rigidity in panel C, with the disruptiveness inputs; it sits
+    # here with the other labor-market parameters because that is how the code uses it.
     xi: float = 0.50            # rigidity of the cognitive wage, per year (Table 1, panel C)
 
     # --- Numerical / convention switches (Appendix A, p. 40) ---
