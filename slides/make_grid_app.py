@@ -1,9 +1,11 @@
 """Export every cell of the 3^7 dial grid, with paths, for the static explorer page.
 
 Writes slides/data/grid_app.json: the seven dials and their levels, the 2030
-outcome snapshot for each of the 4374 combinations, and the monthly 2025-2030 paths
-for the GDP gap, the average wage gap, the cognitive unemployment rate, and the GDP
-growth rate.
+outcome snapshot (nine outcomes, including the GDP growth rate and the
+all-workers average wage) for each of the 4374 combinations, and the monthly
+2025-2030 paths for the GDP gap, the AI-sensitive wage gap, and the cognitive
+unemployment rate. GDP growth and the all-workers wage are snapshot-only (table
+rows in the explorer, not charts), so they have no monthly path.
 
 Cells are stored in itertools.product order, so the JS side finds a cell by the
 mixed-radix index
@@ -49,7 +51,7 @@ def main() -> None:
     years = T1 - fixed.t_anchor
     months = [T0 + k / 12.0 for k in range(int(round((T1 - T0) * 12)) + 1)]
 
-    snap, gdp_path, wage_path, u_path, growth_path = [], [], [], [], []
+    snap, gdp_path, wage_path, u_path = [], [], [], []
     t_start = time.perf_counter()
     for combo in itertools.product(*[range(len(lv)) for _, _, _, lv in DIALS]):
         v = {k: lv[i] for (k, _, _, lv), i in zip(DIALS, combo)}
@@ -60,23 +62,24 @@ def main() -> None:
         e = res.at(T1)
         snap.append([round(x, 2) for x in (
             100 * (math.exp(e.dlnY) - 1),        # GDP gap
-            100 * (math.exp(e.dlnw_avg) - 1),    # average wage gap
+            100 * (math.exp(e.dlnw_C_paid) - 1), # AI-sensitive wage gap (the charted wage)
             100 * (math.exp(e.dlnK) - 1),        # capital stock gap
             100 * (math.exp(e.dln_tfp) - 1),     # measured TFP gap
             100 * e.s_L,                         # labor share
             100 * e.u_rate_C,                    # cognitive unemployment
             100 * e.u_rate,                      # all-worker unemployment
+            # GDP growth, pct/yr: the no-AI trend (g + n, ideas growth plus
+            # labor-force growth) plus the trailing-twelve-month change in the
+            # log GDP gap. Same convention aiscen/report.py's table3_column()
+            # uses for the published "GDP growth, pct per year" row, reusing
+            # Result.growth() rather than inventing a new discretization.
+            # Snapshot-only (a table row, not a chart), so no monthly path.
+            100 * (fixed.g + fixed.n + res.growth("dlnY", T1)),
+            100 * (math.exp(e.dlnw_avg) - 1),    # average wage gap, all workers (table-only)
         )])
         gdp_path.append([round(100 * (math.exp(res.at(t).dlnY) - 1), 2) for t in months])
-        wage_path.append([round(100 * (math.exp(res.at(t).dlnw_avg) - 1), 2) for t in months])
+        wage_path.append([round(100 * (math.exp(res.at(t).dlnw_C_paid) - 1), 2) for t in months])
         u_path.append([round(100 * res.at(t).u_rate_C, 2) for t in months])
-        # GDP growth rate, pct per year: the no-AI trend (g + n, ideas growth plus
-        # labor-force growth) plus the trailing-twelve-month change in the log GDP
-        # gap. Same convention aiscen/report.py's table3_column() uses for the
-        # published "GDP growth, pct per year" row, reusing Result.growth() rather
-        # than inventing a new discretization.
-        growth_path.append([round(100 * (fixed.g + fixed.n + res.growth("dlnY", t)), 2)
-                             for t in months])
 
     out = {
         "t": [round(t, 4) for t in months],
@@ -84,14 +87,13 @@ def main() -> None:
                   for k, lab, desc, lv in DIALS],
         # Display labels only: the group the paper calls "cognitive" is relabelled
         # "AI-sensitive" wherever a reader sees it, as the deck does. Keys stay.
-        "outcomes": ["GDP vs no-AI", "Average wage vs no-AI", "Capital stock vs no-AI",
+        "outcomes": ["GDP vs no-AI", "AI-sensitive wage vs no-AI", "Capital stock vs no-AI",
                      "Measured TFP vs no-AI", "Labor share", "Unemployment, AI-sensitive",
-                     "Unemployment, all workers"],
-        "units": ["%", "%", "%", "%", "% of income", "%", "%"],
+                     "Unemployment, all workers", "GDP growth", "Average wage, all workers"],
+        "units": ["%", "%", "%", "%", "% of income", "%", "%", "% per year", "%"],
         "named": {name: [lv.index(v) for (_, _, _, lv), v in zip(DIALS, vals)]
                   for name, vals in NAMED.items()},
         "snap": snap, "gdp": gdp_path, "wage": wage_path, "u": u_path,
-        "gdp_growth": growth_path,
     }
     blob = json.dumps(out, separators=(",", ":"))
     p = pathlib.Path(__file__).parent / "data" / "grid_app.json"
