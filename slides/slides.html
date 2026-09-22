@@ -191,8 +191,8 @@ Part of an independent reproduction of Korinek et al. (2026):
 
 .blue-box[
 Every number in this deck comes from an independent Python reimplementation of the
-model, which reproduces the paper's Tables 3, 5 and 6 to the printed precision, except
-two documented rounding-fork cells. The deck reads that package's CSV output.
+model, which reproduces all 169 cells of the paper's Tables 3, 5 and 6 within tolerance,
+153 of them to the printed digit. The deck reads that package's CSV output.
 ]
 
 ---
@@ -377,7 +377,7 @@ name: inputs-main
 The first three set **how big** AI is. The last four set **how disruptive** a given
 size turns out to be. Two more are held fixed in all three scenarios: the elasticity of
 capital supply `\(\varepsilon = 3\)` and the wage-rigidity parameter `\(\xi = 0.5\)`, varied
-separately in robustness over `\(\{1, 3, 6, \infty\}\)` and `\(\{0, 0.5, 0.9\}\)`.
+separately in robustness over `\(\{1, 3, 6, \infty\}\)` and `\(\{0, 0.5, 0.75, 0.9\}\)`.
 
 .highlight-box[
 .small[
@@ -485,7 +485,7 @@ name: input-psi
 with AI or capital performs it outright (p. 11). So asking "what if AI mostly helps people
 rather than replacing them" means lowering `\(\psi\)`, not raising some other input. Across the
 full range from pure augmentation to pure automation, measured TFP moves only
-**3.03 to 3.11**, while the labor share moves **59.8 to 54.9** and AI-sensitive employment
+**3.02 to 3.09**, while the labor share moves **59.8 to 54.9** and AI-sensitive employment
 **−1.2% to −4.9%**. GDP does rise over that range (4.5 to 9.5), but through capital
 deepening, not productivity.
 ]
@@ -516,7 +516,7 @@ name: input-rho
 
 .highlight-box[
 .small[
-**Status:** the **least identified** of the seven, and it does more work than any other friction: moved alone it shifts 2030 AI-sensitive unemployment by 1.35 points across the paper's range, more if you allow full offset.
+**Status:** the **least identified** of the seven, and the second-strongest of the four frictions: moved alone it shifts 2030 AI-sensitive unemployment by 1.35 points across the paper's range, behind search efficiency `\(\mu\)` at 1.47 and ahead of `\(\psi\)` at 0.75. More if you allow full offset.
 ]
 ]
 
@@ -564,7 +564,7 @@ name: input-theta
 
 .highlight-box[
 .small[
-**Status:** baseline measured, scenario values assumed. It is the **weakest** of the seven: moved alone it shifts 2030 AI-sensitive unemployment by 0.66 points.
+**Status:** baseline measured, scenario values assumed. It is the **weakest of the four frictions**: moved alone it shifts 2030 AI-sensitive unemployment by 0.66 points. Of all seven inputs only the gain `\(a\)` moves it less, by 0.24.
 ]
 ]
 
@@ -2052,10 +2052,11 @@ filling rates 0.66 / 0.64, `\(\chi = 0.76\)`, the logistic slopes `\(\kappa_m = 
 `\(\kappa_d = 0.51\)`, and the worked example's exact TFP gain of 0.029.
 
 .highlight-box[
-One genuine discrepancy: the all-workers unemployment rate is 0.07 points low in the
-substantial scenario (modest and extreme are off by 0.04 points or less, and No-AI
-matches exactly), because Table 1 rounds the normal pool to 0.038 while the paper's own
-derivation uses 0.0384. At 0.0384 the row lands exactly.
+Two cells need the tolerance widened, both unemployment rates and both from one
+rounding: Table 1 puts the normal pool at 0.038 while the paper's own derivation uses
+0.0384. The all-workers rate is 0.07 points low in the substantial scenario, and the
+AI-sensitive rate 0.08 points low in the No-AI column. At 0.0384 the all-workers row
+lands exactly; the No-AI rate improves to 2.85 and still prints as 2.8 against 2.9.
 ]
 
 &lt;a href="#ubar-detail" class="nav-btn"&gt;the U-bar detail →&lt;/a&gt;
@@ -2098,9 +2099,9 @@ derivation uses 0.0384. At 0.0384 the row lands exactly.
 5. **The growth channel is small over five years**, by construction.
 
 .blue-box[
-The reproduction: `aiscen` Python package, 102 tests, reproduces Tables 3, 5 and 6 to
-the printed precision except two documented rounding-fork cells. Narrative walkthrough
-with every equation in `repro.qmd`.
+The reproduction: `aiscen` Python package, 113 tests, reproduces all 169 cells of
+Tables 3, 5 and 6 within tolerance, 153 of them to the printed digit. Narrative
+walkthrough with every equation in `repro.qmd`.
 ]
 
 ---
@@ -2762,7 +2763,7 @@ same cost for a worse product. And if errors propagate downstream, Hulten's theo
 ---
 name: ubar-detail
 
-# Backup: The One Number That Does Not Reproduce
+# Backup: The Two Cells That Do Not Reproduce
 
 Table 1 gives the normal search pool as `\(\bar U = 0.038\)`. But:
 
@@ -2771,8 +2772,16 @@ Table 1 gives the normal search pool as `\(\bar U = 0.038\)`. But:
 
 At `\(\bar U = 0.038\)` the reimplementation gives an all-workers unemployment rate 0.07
 points below the published figure in the substantial scenario (4.53 against 4.6; modest
-and extreme are off by 0.04 points or less, and No-AI matches exactly). At
-`\(\bar U = 0.0384\)` every affected cell lands exactly, and nothing else moves.
+and extreme are off by 0.04 points or less, and No-AI matches exactly), and an
+AI-sensitive rate 0.08 points below it in the No-AI column (2.82 against 2.9; the other
+three columns are off by 0.01 points or less). These two are the only cells in Tables 3,
+5 and 6 that need the test tolerance widened.
+
+At `\(\bar U = 0.0384\)` the all-workers row lands exactly, six further cells that had
+rounded to a different last digit fall into line, and nothing else moves. The AI-sensitive
+rate in the No-AI column is the near miss: it improves to 2.85, which still prints as 2.8
+rather than the paper's 2.9, so the pool accounts for the size of that gap without
+closing it.
 
 .blue-box[
 This is what a reproduction is for: not to catch an error, since the paper's own text
