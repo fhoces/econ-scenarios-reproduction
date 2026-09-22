@@ -2009,3 +2009,9 @@ python3 -m pytest -q          # the same checks as assertions, plus the ones not
 The package requires only the standard library; this document additionally uses
 pandas, matplotlib and tabulate for its tables and figures. `README.md` records the
 places where the paper leaves a modelling choice implicit and how each was resolved.
+
+::: {.site-nav}
+Part of an independent reproduction of Korinek et al. (2026): [overview](index.html)
+&middot; [the deck](slides/slides.html) &middot; [the explorer](explorer/) &middot;
+[source on GitHub](https://github.com/fhoces/econ-scenarios-reproduction)
+:::
