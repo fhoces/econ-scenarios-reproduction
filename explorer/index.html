@@ -412,12 +412,16 @@
 
       <div class="note">
         Every cell is a full monthly solve of the model from 2024 to 2030, computed by an independent
-        Python reimplementation (<code>aiscen</code>) that reproduces the paper's Tables 3, 5 and 6 to
-        the printed precision, except two documented rounding-fork cells. The three named scenarios
-        sit at the corners of this grid and match their published values. One convention to note: the
+        Python reimplementation (<code>aiscen</code>) that reproduces all 169 cells of the paper's
+        Tables 3, 5 and 6 within the test suite's tolerance, 153 of them to the printed digit; the
+        sixteen that round to a different last digit are listed cell by cell in the repository README.
+        The three named scenarios sit at the corners of this grid. One convention to note: the
         gain <code>a</code> follows a straight line from the mid-2026 anchor common to all scenarios,
         which is what the paper's own explorer does for off-scenario values, so grid corners land
-        within 0.03 points of the published table rather than exactly on it. Reinstatement runs over
+        within 0.03 points of the published 2030 levels rather than exactly on them. GDP growth is
+        the exception, because it is a change over the preceding twelve months rather than a 2030
+        level and so depends on the whole path: at the extreme corner it reads 15.67 here against
+        that scenario's own 15.46 and the paper's 15.4. Reinstatement runs over
         six values here, three of them (0.75, 1.00 and 1.25) outside the range the paper uses; at the
         two of those at or above 1, the labor share rises above its 60 percent starting point,
         territory the paper's own scenarios never enter (at 0.75 it is still just below 60 percent).
@@ -502,7 +506,8 @@
     }
     return out;
   }
-  // Same idea, for the cell with the largest average-wage gap (snap index 1).
+  // Same idea, for the cell with the largest AI-sensitive wage gap (snap index 1;
+  // the all-workers average wage is index 8, and is deliberately not what this ranks).
   var bestWageIdx = 0;
   for (var cw = 1; cw < G.snap.length; cw++) if (G.snap[cw][1] > G.snap[bestWageIdx][1]) bestWageIdx = cw;
   function bestWageLevels() {
@@ -560,7 +565,7 @@
       body: "Of AI use, the share that replaces the worker on that instance rather than assisting " +
             "them. This is the input that separates productivity from distribution. Moving it " +
             "across its range from the substantial setting takes the labor share from 57.3 to " +
-            "55.4 percent while measured TFP moves only from 3.06 to 3.09.",
+            "55.4 percent while measured TFP moves only from 3.07 to 3.10.",
       levels: "0.50 / 0.75 / 0.90 of AI use is automation",
       source: "Table 1, panel C. Survey median 0.47, which is the modest scenario's value."
     },
@@ -571,7 +576,8 @@
             "The new tasks go to the AI-sensitive occupations and enter at the same unit cost as " +
             "existing labor tasks, so they offset displacement one for one in the affected wage bill.",
       levels: "1.25 / 1.00 / 0.75 / 0.50 / 0.25 / 0.00. Alone, this input moves 2030 AI-sensitive " +
-              "unemployment by 2.65 points, more than any other input here",
+              "unemployment by 2.65 points over the six values offered here, a shade more than any " +
+              "other input on this page; over the paper's own three levels it moves it by 1.35",
       source: "Table 1, panel C uses only 0.50 / 0.25 / 0.00. Everything above 0.50 is outside " +
               "the paper's range, so read it as an extension rather than a result: at and above " +
               "1 the labor share rises instead of falling."
@@ -584,7 +590,7 @@
             "extreme setting and put this back to 0.17, and you get the highest-GDP cell in the " +
             "entire grid.",
       levels: "0.17 / 0.08 / 0.04. Alone, this input moves 2030 AI-sensitive unemployment by 1.47 " +
-              "points, the widest of the four frictions",
+              "points over the paper's three levels, the widest of the four frictions",
       source: "Table 1, panel C. The survey asked how long re-employment would take against a " +
               "three-month normal; the median answer, about eight months, implies 0.064."
     },
