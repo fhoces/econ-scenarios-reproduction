@@ -20,6 +20,8 @@
     --rule-2:     #eef1f5;
     --series-1:   #2a78d6;
     --series-2:   #eb6834;
+    --series-3:   #0d9e6e;
+    --series-4:   #8b5cf6;
     --ref:        #a8b2bb;
     --chip:       #f1f4f7;
     --chip-on:    #101519;
@@ -39,6 +41,8 @@
       --rule-2:     #1f242a;
       --series-1:   #3987e5;
       --series-2:   #d95926;
+      --series-3:   #0d9e6e;
+      --series-4:   #8b5cf6;
       --ref:        #525c66;
       --chip:       #232930;
       --chip-on:    #eef1f4;
@@ -55,6 +59,8 @@
     --rule-2:     #1f242a;
     --series-1:   #3987e5;
     --series-2:   #d95926;
+    --series-3:   #0d9e6e;
+    --series-4:   #8b5cf6;
     --ref:        #525c66;
     --chip:       #232930;
     --chip-on:    #eef1f4;
@@ -315,6 +321,8 @@
   .swatch { width: 14px; height: 2px; border-radius: 1px; display: inline-block; }
   .sw-1 { background: var(--series-1); }
   .sw-2 { background: var(--series-2); }
+  .sw-3 { background: var(--series-3); }
+  .sw-4 { background: var(--series-4); }
   .sw-ref { background: var(--ref); }
 
   .plot { position: relative; }
@@ -325,8 +333,12 @@
   .ref-text { font-family: var(--mono); font-size: 8.5px; fill: var(--ink-3); }
   .main-1 { fill: none; stroke: var(--series-1); stroke-width: 2; stroke-linejoin: round; }
   .main-2 { fill: none; stroke: var(--series-2); stroke-width: 2; stroke-linejoin: round; }
+  .main-3 { fill: none; stroke: var(--series-3); stroke-width: 2; stroke-linejoin: round; }
+  .main-4 { fill: none; stroke: var(--series-4); stroke-width: 2; stroke-linejoin: round; }
   .dot-1 { fill: var(--series-1); }
   .dot-2 { fill: var(--series-2); }
+  .dot-3 { fill: var(--series-3); }
+  .dot-4 { fill: var(--series-4); }
   .end-text {
     font-family: var(--mono);
     font-size: 11px;
@@ -421,6 +433,7 @@
         <button type="button" data-preset="substantial">Substantial</button>
         <button type="button" data-preset="extreme">Extreme</button>
         <button type="button" data-preset="best">Highest GDP cell</button>
+        <button type="button" data-preset="best-wage">Highest wage growth</button>
       </div>
     </section>
 
@@ -444,6 +457,22 @@
             <span><i class="swatch sw-ref"></i>M / S / E scenarios</span>
           </div>
           <div class="plot" id="plot-u"></div>
+        </figure>
+        <figure>
+          <figcaption>Average wage, percent above the no-AI path</figcaption>
+          <div class="legend">
+            <span><i class="swatch sw-3"></i>this setting</span>
+            <span><i class="swatch sw-ref"></i>M / S / E scenarios</span>
+          </div>
+          <div class="plot" id="plot-wage"></div>
+        </figure>
+        <figure>
+          <figcaption>GDP growth rate, percent per year</figcaption>
+          <div class="legend">
+            <span><i class="swatch sw-4"></i>this setting</span>
+            <span><i class="swatch sw-ref"></i>M / S / E scenarios</span>
+          </div>
+          <div class="plot" id="plot-gdpgrowth"></div>
         </figure>
       </div>
 
@@ -503,6 +532,17 @@
   for (var c = 1; c < G.snap.length; c++) if (G.snap[c][0] > G.snap[bestIdx][0]) bestIdx = c;
   function bestLevels() {
     var out = [], n = bestIdx;
+    for (var k = SIZES.length - 1; k >= 0; k--) {
+      out[k] = n % SIZES[k];
+      n = Math.floor(n / SIZES[k]);
+    }
+    return out;
+  }
+  // Same idea, for the cell with the largest average-wage gap (snap index 1).
+  var bestWageIdx = 0;
+  for (var cw = 1; cw < G.snap.length; cw++) if (G.snap[cw][1] > G.snap[bestWageIdx][1]) bestWageIdx = cw;
+  function bestWageLevels() {
+    var out = [], n = bestWageIdx;
     for (var k = SIZES.length - 1; k >= 0; k--) {
       out[k] = n % SIZES[k];
       n = Math.floor(n / SIZES[k]);
@@ -693,7 +733,9 @@
   document.querySelectorAll("[data-preset]").forEach(function (b) {
     b.addEventListener("click", function () {
       var p = b.getAttribute("data-preset");
-      state = (p === "best" ? bestLevels() : G.named[p].slice());
+      state = p === "best" ? bestLevels()
+        : p === "best-wage" ? bestWageLevels()
+        : G.named[p].slice();
       render();
     });
   });
@@ -716,13 +758,22 @@
     }
     return 10 * mag;
   }
+  // GDP, unemployment and GDP growth never go negative across the grid, so this
+  // returns exactly 0 for them (unchanged behavior); the wage gap does go
+  // negative (inelastic-capital cells push it below the no-AI path), so this
+  // gives that chart a real floor instead of clipping negative values off the
+  // bottom of a lo=0 plot.
+  function niceMin(v) {
+    if (v >= 0) return 0;
+    return -niceMax(-v);
+  }
 
   function drawChart(host, series, refKeys, cls, dotCls) {
     host.textContent = "";
     var t = G.t;
     var all = series.slice();
     refKeys.forEach(function (r) { all = all.concat(r.values); });
-    var lo = 0, hi = niceMax(Math.max.apply(null, all));
+    var lo = niceMin(Math.min.apply(null, all)), hi = niceMax(Math.max.apply(null, all));
 
     var x = function (i) { return L + (W - L - R) * (i / (t.length - 1)); };
     var y = function (v) { return H - B - (H - B - T) * ((v - lo) / (hi - lo)); };
@@ -817,7 +868,9 @@
     for (var k in namedIdx) if (namedIdx[k] === i) name = k;
     document.getElementById("cell-name").textContent =
       name ? "This is the " + name + " scenario" :
-      (i === bestIdx ? "The highest-GDP cell in the grid" : "A mixed setting, not one of the three scenarios");
+      i === bestIdx ? "The highest-GDP cell in the grid" :
+      i === bestWageIdx ? "The highest-wage-growth cell in the grid" :
+      "A mixed setting, not one of the three scenarios";
     document.getElementById("cell-meta").textContent =
       "cell " + (i + 1) + " of " + G.snap.length +
       "   ·   GDP at the " + ordinal(percentile(snap[0])) + " percentile of the grid";
@@ -853,9 +906,20 @@
     drawChart(document.getElementById("plot-u"), G.u[i],
       refs.map(function (r) { return { letter: r.letter, values: G.u[namedIdx[r.key]] }; }),
       "main-2", "dot-2");
+    drawChart(document.getElementById("plot-wage"), G.wage[i],
+      refs.map(function (r) { return { letter: r.letter, values: G.wage[namedIdx[r.key]] }; }),
+      "main-3", "dot-3");
+    drawChart(document.getElementById("plot-gdpgrowth"), G.gdp_growth[i],
+      refs.map(function (r) { return { letter: r.letter, values: G.gdp_growth[namedIdx[r.key]] }; }),
+      "main-4", "dot-4");
 
     tbody.textContent = "";
-    G.outcomes.forEach(function (label, oi) {
+    // GDP (0), average wage (1) and AI-sensitive unemployment (5) each have their
+    // own chart above now, so the table only needs the outcomes that don't:
+    // capital stock, TFP, labor share, all-workers unemployment.
+    var TABLE_OUTCOMES = [2, 3, 4, 6];
+    TABLE_OUTCOMES.forEach(function (oi) {
+      var label = G.outcomes[oi];
       var tr = document.createElement("tr");
       var cells = [label, snap[oi].toFixed(1),
         G.snap[namedIdx.modest][oi].toFixed(1),
