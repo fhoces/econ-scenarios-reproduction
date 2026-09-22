@@ -2603,18 +2603,21 @@ height: auto;
 Y_t = \Big[ \sum_i \omega_i^{1/\sigma}\, y_{i,t}^{(\sigma-1)/\sigma} \Big]^{\sigma/(\sigma-1)}
 \tag{1}
 \]</span></p>
-<div class="callout callout-style-simple callout-note callout-titled" title="Refresher: what (1) is doing, and why the elasticity is the whole story">
-<div class="callout-header d-flex align-content-center">
+<div class="callout callout-style-simple callout-note callout-titled" title="Refresher: what (1) is doing, and why the elasticity is the whole story (click to expand)">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Refresher: what (1) is doing, and why the elasticity is the whole story
+<span class="screen-reader-only">Note</span>Refresher: what (1) is doing, and why the elasticity is the whole story (click to expand)
 </div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>This is the CES function from first-year graduate macro, with the inputs reinterpreted. The weights <span class="math inline">\(\omega_i\)</span> are base-period expenditure shares and sum to one, and <span class="math inline">\(\sigma\)</span> is the elasticity of substitution between any two instances, whether they belong to the same task or different ones.</p>
 <p>The single fact to carry forward is that <span class="math inline">\(\sigma =\)</span> 0.5 is <strong>below one</strong>, so instances are <em>gross complements</em>: the economy needs some of everything, and whatever stays expensive becomes the bottleneck. In the Cobb-Douglas case <span class="math inline">\(\sigma = 1\)</span> expenditure shares are constant and nothing interesting happens to the labor share. Below one, a task whose cost <em>falls</em> sees its expenditure share <em>fall</em>, because quantity demanded rises less than proportionally to the price cut. That one inequality drives most of the paper’s distributional results.</p>
+</div>
 </div>
 </div>
 <p>Each instance can be produced by a worker or by a machine, and within an instance the two are perfect substitutes:</p>
@@ -2626,19 +2629,22 @@ y_{i,t} = A_t\, \alpha_{L,i,t}\, \ell_{i,t} + \alpha_{K,i,t}\, k_{i,t}
 p_{i,t} = c_{i,t} = \min\Big\{ \frac{w_t}{A_t \alpha_{L,i,t}},\ \frac{r_t}{\alpha_{K,i,t}} \Big\}
 \tag{3}
 \]</span></p>
-<div class="callout callout-style-simple callout-note callout-titled" title="Refresher: perfect substitutes inside a task, complements across tasks">
-<div class="callout-header d-flex align-content-center">
+<div class="callout callout-style-simple callout-note callout-titled" title="Refresher: perfect substitutes inside a task, complements across tasks (click to expand)">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Refresher: perfect substitutes inside a task, complements across tasks
+<span class="screen-reader-only">Note</span>Refresher: perfect substitutes inside a task, complements across tasks (click to expand)
 </div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p><a href="#eq-2">Equation (2)</a> says one contract review is one contract review, whoever does it: a worker delivering <span class="math inline">\(A_t \alpha_L\)</span> units and a machine delivering <span class="math inline">\(\alpha_K\)</span> units are interchangeable <em>for that instance</em>. <span class="math inline">\(A_t\)</span> is the stock of ideas and augments labor only.</p>
 <p>Competition then prices each instance at unit cost, and cost minimization assigns it to whichever factor is cheaper, which is <a href="#eq-3">Equation (3)</a>. Rank instances by capital’s comparative advantage <span class="math inline">\(\alpha_{K,i}/\alpha_{L,i}\)</span> and the assignment is a <strong>threshold rule</strong>: everything above the cutoff is done by machines, everything below by people, and the cutoff moves with the factor price ratio <span class="math inline">\(r_t/w_t\)</span>. This is the task-based setup of Zeira (1998) and Acemoglu and Restrepo (2018), and it is where the model departs from the aggregate production function of undergraduate macro: automation is not a shift in an exponent, it is a set of tasks changing hands.</p>
 <p>In this paper “automation” means AI raises <span class="math inline">\(\alpha_{K,i}\)</span> on an instance far enough that capital takes it over at the pre-AI rental rate; “augmentation” means AI raises <span class="math inline">\(\alpha_{L,i}\)</span> so the worker keeps the instance and does it faster. Both cut the instance’s unit cost by the same <span class="math inline">\(a_{i,t}\)</span> log points. What differs is who is holding it afterwards, which is why <span class="math inline">\(\psi_t\)</span> moves the labor share without moving TFP.</p>
+</div>
 </div>
 </div>
 <p><span id="eq-4"></span> <span class="math display">\[
@@ -2647,19 +2653,22 @@ s_{i,t} \equiv \frac{p_{i,t} y_{i,t}}{P_t Y_t} = \omega_i \Big(\frac{c_{i,t}}{P_
 P_t = \Big[\sum_j \omega_j c_{j,t}^{1-\sigma}\Big]^{1/(1-\sigma)} \equiv 1
 \tag{4}
 \]</span></p>
-<div class="callout callout-style-simple callout-note callout-titled" title="Refresher: deriving the expenditure share, and the sign that surprises people">
-<div class="callout-header d-flex align-content-center">
+<div class="callout callout-style-simple callout-note callout-titled" title="Refresher: deriving the expenditure share, and the sign that surprises people (click to expand)">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Refresher: deriving the expenditure share, and the sign that surprises people
+<span class="screen-reader-only">Note</span>Refresher: deriving the expenditure share, and the sign that surprises people (click to expand)
 </div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Two steps, both standard. Cost minimization on (1) gives the CES demand curve <span class="math inline">\(y_{i} = \omega_i (c_{i}/P)^{-\sigma} Y\)</span>. Multiply by the price <span class="math inline">\(c_i\)</span> and divide by <span class="math inline">\(PY\)</span> to turn a quantity into an expenditure share, and the exponent goes from <span class="math inline">\(-\sigma\)</span> to <span class="math inline">\(1-\sigma\)</span>: the price enters once through quantity demanded and once through revenue per unit.</p>
 <p>The sign is what trips people up. With <span class="math inline">\(\sigma &lt; 1\)</span> the exponent <span class="math inline">\(1 - \sigma\)</span> is positive, so <strong>a cheaper instance takes a smaller share of spending</strong>. Concretely, at <span class="math inline">\(\sigma = 0.5\)</span> an instance whose unit cost falls by 0.45 log points, a factor of <span class="math inline">\(e^{-0.45} =\)</span> 0.64, has its expenditure share multiplied by 0.80: down about a fifth, even though more of it is produced. Set <span class="math inline">\(\sigma &gt; 1\)</span> and every result below flips sign.</p>
 <p>The normalization <span class="math inline">\(P_t \equiv 1\)</span> is not cosmetic. Since the price index is a weighted average of unit costs, holding it at one while AI cuts some costs <em>forces</em> the remaining prices, the wage and the rental rate, to rise. That is the mechanical channel through which productivity gains become factor income.</p>
+</div>
 </div>
 </div>
 <p><span id="eq-5"></span> <span class="math display">\[
@@ -2668,36 +2677,42 @@ s_{L,t} = \sum_{i \in \mathcal{L}_t} s_{i,t} = \frac{w_t L_t}{P_t Y_t},
 \Delta \ln w_t = \Delta \ln (Y_t / L_t) + \Delta \ln s_{L,t}
 \tag{5}
 \]</span></p>
-<div class="callout callout-style-simple callout-note callout-titled" title="Refresher: the wage identity is an accounting identity, and it does a lot of work">
-<div class="callout-header d-flex align-content-center">
+<div class="callout callout-style-simple callout-note callout-titled" title="Refresher: the wage identity is an accounting identity, and it does a lot of work (click to expand)">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Refresher: the wage identity is an accounting identity, and it does a lot of work
+<span class="screen-reader-only">Note</span>Refresher: the wage identity is an accounting identity, and it does a lot of work (click to expand)
 </div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>The labor share is the sum of the expenditure shares of the instances labor still performs, which by definition equals the wage bill over GDP. Take logs of <span class="math inline">\(s_L = wL/(PY)\)</span> and rearrange: <span class="math inline">\(\ln w = \ln(Y/L) + \ln s_L\)</span>. Nothing behavioural has been assumed, so it holds exactly at every date.</p>
 <p>Its use is that <strong>any two of the three pin the third</strong>. The paper’s headline that wages rise much less than GDP is the same statement as the labor share falling. Check it in the extreme scenario at 2030: output per worker is 36.5 log points above the no-AI path, the labor share change is -29.8 log points, and they sum to 6.7, the wage gap.</p>
+</div>
 </div>
 </div>
 <p><span id="eq-6"></span> <span class="math display">\[
 \Delta \ln K_t = \varepsilon\, \Delta \ln r_t
 \tag{6}
 \]</span></p>
-<div class="callout callout-style-simple callout-note callout-titled" title="Refresher: why capital supply is a schedule rather than an Euler equation">
-<div class="callout-header d-flex align-content-center">
+<div class="callout callout-style-simple callout-note callout-titled" title="Refresher: why capital supply is a schedule rather than an Euler equation (click to expand)">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Refresher: why capital supply is a schedule rather than an Euler equation
+<span class="screen-reader-only">Note</span>Refresher: why capital supply is a schedule rather than an Euler equation (click to expand)
 </div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Rather than solve a household savings problem, the paper posits an upward-sloping supply curve: capital is <span class="math inline">\(\varepsilon\)</span> percent higher for every percent the rental rate exceeds its no-AI level <span class="math inline">\(\bar r\)</span>. It is the reduced form of Moll, Rachel and Restrepo (2022), whose households hold more wealth when the return is higher.</p>
 <p>The two limits are the intuition. At <span class="math inline">\(\varepsilon = 0\)</span> the capital stock cannot respond within the horizon, so any extra demand for machines shows up entirely in the rental rate. At <span class="math inline">\(\varepsilon = \infty\)</span> the rental rate is pegged at <span class="math inline">\(\bar r\)</span>, the small-open-economy case, and any amount of capital arrives at an unchanged return; then the whole productivity gain goes to labor, which is the Caselli and Manning (2019) result. The baseline <span class="math inline">\(\varepsilon =\)</span> 3 sits between them. It comes from converting Moll et al.’s semi-elasticity of 50 in the <em>net</em> return: <span class="math inline">\(50 \bar r =\)</span> 6 in log-rental units (footnote 1, p. 9), halved because their economy takes decades to get there. Section 4.5 reruns everything at <span class="math inline">\(\varepsilon = 1, 3, 6, \infty\)</span>, and this is the single parameter that decides whether the average wage rises or falls.</p>
+</div>
 </div>
 </div>
 <p>Tasks are gross complements at <span class="math inline">\(\sigma =\)</span> 0.5, labor earns 60 percent of income before AI, and the capital supply schedule (6) has elasticity <span class="math inline">\(\varepsilon =\)</span> 3.</p>
@@ -2916,15 +2931,17 @@ a_t = a_0 + g_a (t - t_0)
 \frac{m_{2030}}{\bar m - m_{2030}} \Big)
 \tag{8&#39;}
 \]</span></p>
-<div class="callout callout-style-simple callout-note callout-titled" title="Refresher: why a logistic, and where (8&#39;) comes from in one line">
-<div class="callout-header d-flex align-content-center">
+<div class="callout callout-style-simple callout-note callout-titled" title="Refresher: why a logistic, and where (8&#39;) comes from in one line (click to expand)">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Refresher: why a logistic, and where (8’) comes from in one line
+<span class="screen-reader-only">Note</span>Refresher: why a logistic, and where (8’) comes from in one line (click to expand)
 </div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Technology diffusion is S-shaped in the historical record (Griliches on hybrid corn, David on electricity), so reach and use follow logistics while the productivity gain per instance is allowed to drift linearly.</p>
 <p>Equation (8’) looks worse than it is. A logistic is exactly the curve whose <strong>log odds are linear in time</strong>: rearranging (8) gives <span class="math inline">\(\ln\!\big(m_t / (\bar m - m_t)\big) = \kappa_m (t - t_m)\)</span>. So the slope is just the change in log odds between the two dates the paper pins down, divided by the 3.5 years between them,</p>
@@ -2933,6 +2950,7 @@ a_t = a_0 + g_a (t - t_0)
 - \ln \frac{m_{2026}}{\bar m - m_{2026}} \Big],
 \]</span></p>
 <p>which is (8’) with the two logs combined. The ceiling <span class="math inline">\(\bar m = s_{C,t0}/s_{L,t0} =\)</span> 0.624 is all cognitive work: in the long run AI reaches all of it, and the scenarios differ only in how much it reaches by 2030. Since all three share the mid-2026 anchor, the scenarios are a fan opening from a single point, which is why the paper stresses that almost all divergence happens after 2027.</p>
+</div>
 </div>
 </div>
 <p>For the substantial scenario the paper states those slopes as <span class="math inline">\(\kappa_m = 0.33\)</span> and <span class="math inline">\(\kappa_d = 0.51\)</span> (p. 48); here they are 0.33 and 0.51. Because the paths start near zero, the largest GDP gap the AI objects imply at the 2024 base period is 0.11 percent, matching the “at most a quarter of a percent” of Appendix A.</p>
@@ -2983,15 +3001,17 @@ Figure 1: The exogenous paths behind the paper’s Figures 2 to 4: the share of
 = s_{L,t0}\, m_t d_t a_t
 \tag{9}
 \]</span></p>
-<div class="callout callout-style-simple callout-note callout-titled" title="Refresher: Hulten&#39;s theorem, Domar weights, and why the labor share shows up">
-<div class="callout-header d-flex align-content-center">
+<div class="callout callout-style-simple callout-note callout-titled" title="Refresher: Hulten&#39;s theorem, Domar weights, and why the labor share shows up (click to expand)">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Refresher: Hulten’s theorem, Domar weights, and why the labor share shows up
+<span class="screen-reader-only">Note</span>Refresher: Hulten’s theorem, Domar weights, and why the labor share shows up (click to expand)
 </div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Hulten (1978) says that to a first order, the aggregate productivity gain is the sum of the microeconomic cost reductions, each weighted by its <strong>Domar weight</strong>: the producer’s sales divided by GDP. The useful part is that you do not need to know how the production network is wired, only how big each piece is and how much cheaper it got.</p>
 <p>Here each task instance sells into final output, so its Domar weight is just its expenditure share <span class="math inline">\(\omega_i\)</span>, and the cost decline is <span class="math inline">\(a_{i,t}\)</span> on the fraction <span class="math inline">\(d_{i,t}\)</span> of instances that use AI. Hence the first expression.</p>
@@ -2999,19 +3019,22 @@ Figure 1: The exogenous paths behind the paper’s Figures 2 to 4: the share of
 <p>Notice what is <em>absent</em>: the automation share <span class="math inline">\(\psi_t\)</span>. For aggregate productivity it is irrelevant whether the cheaper instance ends up in a machine’s hands or a worker’s, because the unit cost falls by <span class="math inline">\(a_{i,t}\)</span> either way. <span class="math inline">\(\psi_t\)</span> matters enormously for the <em>distribution</em> of the gain, and not at all for its size.</p>
 </div>
 </div>
+</div>
 <p><span id="eq-10"></span> <span class="math display">\[
 s_{L,t0}\, \Delta \ln w_t + s_{K,t0}\, \Delta \ln r_t \approx s_{L,t0}\, m_t d_t a_t
 \tag{10}
 \]</span></p>
-<div class="callout callout-style-simple callout-note callout-titled" title="Refresher: the factor-price frontier, or the Solow residual read backwards">
-<div class="callout-header d-flex align-content-center">
+<div class="callout callout-style-simple callout-note callout-titled" title="Refresher: the factor-price frontier, or the Solow residual read backwards (click to expand)">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Refresher: the factor-price frontier, or the Solow residual read backwards
+<span class="screen-reader-only">Note</span>Refresher: the factor-price frontier, or the Solow residual read backwards (click to expand)
 </div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
+<div id="callout-8" class="callout-8-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>The Solow residual you computed in graduate macro as <span class="math inline">\(d\ln \mathrm{TFP} = d\ln Y - s_L d\ln L - s_K d\ln K\)</span> has a <strong>dual</strong>: under constant returns and competitive pricing, factor payments exhaust output, and substituting the first-order conditions turns the same object into the share-weighted growth of factor <em>prices</em>,</p>
 <p><span class="math display">\[
@@ -3019,6 +3042,7 @@ d\ln \mathrm{TFP}_t = s_{L,t}\, d\ln w_t + s_{K,t}\, d\ln r_t .
 \]</span></p>
 <p>Read from left to right it is a measurement identity. Read from right to left, as the paper does, it is a <strong>budget constraint on the gains</strong>: whatever productivity AI creates has to leave the model as higher wages or a higher return, in some combination, because there is nowhere else for it to go.</p>
 <p>That yields the paper’s cleanest piece of intuition. If capital is elastic enough that the rental rate does not move, labor gets the entire gain and <span class="math inline">\(\Delta \ln w \approx m d a\)</span>. Every percent the rental rate does rise costs the wage <span class="math inline">\(s_{K,t0}/s_{L,t0} =\)</span> 0.67 percent. The wage can even fall below its no-AI path, which happens exactly when <span class="math inline">\(s_{K,t0} \Delta \ln r_t &gt; s_{L,t0} m_t d_t a_t\)</span>: capital’s claim exceeds the gain being distributed.</p>
+</div>
 </div>
 </div>
 <p>The paper illustrates the mechanics with the substantial scenario’s 2030 values, <span class="math inline">\(m = 0.30\)</span>, <span class="math inline">\(d = 0.40\)</span>, <span class="math inline">\(a = 0.45\)</span> (pp. 12-13). That passage, reproduced:</p>
@@ -3124,20 +3148,23 @@ d\ln \mathrm{TFP}_t = s_{L,t}\, d\ln w_t + s_{K,t}\, d\ln r_t .
 \end{aligned}
 \tag{11}
 \]</span></p>
-<div class="callout callout-style-simple callout-note callout-titled" title="Refresher: reading (11) line by line">
-<div class="callout-header d-flex align-content-center">
+<div class="callout callout-style-simple callout-note callout-titled" title="Refresher: reading (11) line by line (click to expand)">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Refresher: reading (11) line by line
+<span class="screen-reader-only">Note</span>Refresher: reading (11) line by line (click to expand)
 </div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
+<div id="callout-9" class="callout-9-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p><strong>The wage line</strong> is just the frontier (10) rearranged: labor gets the productivity gain less whatever the rental rate takes. Note what is <em>not</em> there: net displacement <span class="math inline">\((1-\rho)\psi m d\)</span> does not appear. At a fixed rental rate the wage tracks productivity, not the number of tasks labor lost. Displacement reaches the wage only indirectly, by pushing up the rental rate.</p>
 <p><strong>The rental line</strong> is a supply-equals-demand solution. The bracket is the extra capital AI calls for at an unchanged rental price, from two sources: capital keeps pace with the output the gains themselves create (<span class="math inline">\(m d a\)</span>), and each automated instance moves its wage bill onto capital (<span class="math inline">\(\psi m d / s_{K,t0}\)</span>, adjusted for reinstatement <span class="math inline">\(\rho\)</span> and for the substitution the cost saving sends back toward labor). The denominator is the pair of elasticities that reconcile it: supply rises with the rental rate at <span class="math inline">\(\varepsilon\)</span>, demand falls at <span class="math inline">\(\sigma/s_{L,t0}\)</span>.</p>
 <p><strong>The labor-share line</strong> has the three channels the paper names. Automation moves the <em>entire</em> wage bill of an instance to capital however small the cost saving, which is <span class="math inline">\(-(1-\rho)\psi m d\)</span> net of reinstated tasks. Then, because the instances labor keeps did not get cheaper while the automated ones did, labor’s instances become the expensive ones, and with <span class="math inline">\(\sigma &lt; 1\)</span> spending tilts <em>toward</em> what is expensive: that adds back <span class="math inline">\((1-\sigma)\psi m d a\)</span>. Finally the same complementarity works against labor when capital itself gets dearer.</p>
 <p><strong>The output line</strong> is then the wage line minus the labor-share line, which is just identity (5) again.</p>
+</div>
 </div>
 </div>
 <p>The same algebra answers a question worth asking directly: when does AI leave workers worse off than no AI at all? Substituting the first line into the second, the wage rises if and only if</p>
@@ -3146,18 +3173,21 @@ d\ln \mathrm{TFP}_t = s_{L,t}\, d\ln w_t + s_{K,t}\, d\ln r_t .
 \Big[ s_{K,t0} - \sigma + \psi_t \Big( \frac{1-\rho}{a_t} - (1-\sigma) \Big) \Big]
 \tag{12}
 \]</span></p>
-<div class="callout callout-style-simple callout-note callout-titled" title="Refresher: what (12) says, and how far to trust it">
-<div class="callout-header d-flex align-content-center">
+<div class="callout callout-style-simple callout-note callout-titled" title="Refresher: what (12) says, and how far to trust it (click to expand)">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Refresher: what (12) says, and how far to trust it
+<span class="screen-reader-only">Note</span>Refresher: what (12) says, and how far to trust it (click to expand)
 </div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
+<div id="callout-10" class="callout-10-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>The threshold rises with the automation share <span class="math inline">\(\psi\)</span> and with <span class="math inline">\((1-\rho)/a\)</span>, the displacement per unit of cost saving. That ratio is the formal version of Acemoglu and Restrepo’s “<strong>so-so automation</strong>”: technology that takes tasks away from labor while saving very little on each. When the saving per automated task is small, capital’s claim on output is large relative to the gain available to distribute, so the rental rate has to rise a lot to justify the transfer, and the wage ends up below its no-AI path.</p>
 <p>Since <span class="math inline">\(\varepsilon^*\)</span> is a first-order object, it is worth checking against the exact model, which the chunk below does by finding the elasticity at which the simulated 2030 average wage actually crosses zero.</p>
+</div>
 </div>
 </div>
 <div id="cell-eps-star" class="cell" data-execution_count="6">
@@ -3407,20 +3437,23 @@ d\ln \mathrm{TFP}_t = s_{L,t}\, d\ln w_t + s_{K,t}\, d\ln r_t .
 = \frac{s_{N,t0}}{s_{C,t0}} \cdot \frac{\ell^*_{N,t} - \ell_{N,t0}}{\ell_{N,t0}}
 \tag{13}
 \]</span></p>
-<div class="callout callout-style-simple callout-note callout-titled" title="Refresher: the trick in (13) is to look at the group AI does not touch">
-<div class="callout-header d-flex align-content-center">
+<div class="callout callout-style-simple callout-note callout-titled" title="Refresher: the trick in (13) is to look at the group AI does not touch (click to expand)">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Refresher: the trick in (13) is to look at the group AI does not touch
+<span class="screen-reader-only">Note</span>Refresher: the trick in (13) is to look at the group AI does not touch (click to expand)
 </div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
+<div id="callout-11" class="callout-11-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>The appealing move here is to solve for the group that is <em>unaffected</em>. AI does nothing to the productivity of nursing or electrical work, so the cost of those tasks depends only on the wage, and demand for that labor is an ordinary CES demand curve for a good priced at <span class="math inline">\(w_t\)</span>: it rises one for one with output and falls with its own price at elasticity <span class="math inline">\(\sigma\)</span>. That is the first equation, derived in two lines from <span class="math inline">\(\ell_N = s_N Y / w\)</span> with <span class="math inline">\(\Delta \ln s_N = (1-\sigma)\Delta \ln w\)</span>.</p>
 <p>The second equation is pure adding up. The labor force is fixed, so every worker the “all other” group gains is one the cognitive group loses. Converting a proportional change in one group into a proportional change in the other requires the size ratio <span class="math inline">\(s_{N,t0}/s_{C,t0} =\)</span> 0.60, which is below one because cognitive occupations are the larger group. So cognitive employment falls proportionally by less than all-other employment rises, and, since output rises by more still, by much less than GDP.</p>
 <p>One wrinkle, worth flagging because it is the kind of thing that silently breaks a reimplementation. Once the ideas stock is endogenous, (13) as printed acquires a spurious term: <span class="math inline">\(A_t\)</span> raises the wage and output one for one, so <span class="math inline">\(\Delta \ln(Y/L) - \sigma \Delta \ln w\)</span> picks up an extra <span class="math inline">\((1-\sigma)\Delta \ln A_t\)</span> that does not belong. Deriving <span class="math inline">\(\ell_N = s_N Y / w\)</span> from scratch with <span class="math inline">\(A_t\)</span> present gives <span class="math inline">\(\Delta \ln \ell_N = \Delta \ln Y - \sigma \Delta \ln w -
 (1-\sigma)\Delta \ln A\)</span>, and the exact row the simulation actually uses, Equation (15) below, has no ideas term at all. This code uses (15).</p>
+</div>
 </div>
 </div>
 <p>Proposition 1 collects the exact solution, replacing every <span class="math inline">\(\approx\)</span> above with an equality:</p>
@@ -3475,18 +3508,21 @@ s_{L,t} = 1 - \underbrace{\Big[ s_{K,t0} + s_{L,t0}\, \psi_t m_t d_t
 + \underbrace{(1-\sigma)(1-\psi_t) m_t d_t a_t}_{\text{labor released by the gains}}
 \tag{19}
 \]</span></p>
-<div class="callout callout-style-simple callout-note callout-titled" title="Refresher: two different reasons a cognitive job disappears">
-<div class="callout-header d-flex align-content-center">
+<div class="callout callout-style-simple callout-note callout-titled" title="Refresher: two different reasons a cognitive job disappears (click to expand)">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-13-contents" aria-controls="callout-13" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Refresher: two different reasons a cognitive job disappears
+<span class="screen-reader-only">Note</span>Refresher: two different reasons a cognitive job disappears (click to expand)
 </div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
+<div id="callout-13" class="callout-13-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>The first term is tasks changing hands: automation moves them to capital, and reinstatement gives a fraction <span class="math inline">\(\rho\)</span> back.</p>
 <p>The second is subtler and easy to miss. Even a task that stays entirely with workers sheds labor if AI makes it faster: each augmented instance needs <span class="math inline">\(a_t\)</span> log points less time. But because tasks are gross complements, the cheaper task is also demanded more, by <span class="math inline">\(\sigma a_t\)</span>, so only the fraction <span class="math inline">\(1 - \sigma\)</span> of the saved time is actually released. At <span class="math inline">\(\sigma =\)</span> 0.5, half of every efficiency gain is spent on doing more of the same task and half shows up as labor no longer needed there. Set <span class="math inline">\(\sigma = 1\)</span> and this channel vanishes entirely.</p>
+</div>
 </div>
 </div>
 <p>Target employment in the unaffected group follows from <a href="#eq-15">Equation (15)</a> and the cognitive target from the adding-up rule (13). Since <span class="math inline">\(s_{N} / s_{C}\)</span> is 0.60, below one, cognitive employment falls proportionally by less than all-other employment rises, and therefore by less than output rises.</p>
@@ -3577,20 +3613,23 @@ g_{A,t} = \nu R_t^{\lambda} A_t^{\phi_R - 1}
 Y_t = C_t + I_t + R_t, \quad R_t = \iota_{R,t} Y_t
 \tag{21}
 \]</span></p>
-<div class="callout callout-style-simple callout-note callout-titled" title="Refresher: semi-endogenous growth, and what the two exponents mean">
-<div class="callout-header d-flex align-content-center">
+<div class="callout callout-style-simple callout-note callout-titled" title="Refresher: semi-endogenous growth, and what the two exponents mean (click to expand)">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-14-contents" aria-controls="callout-14" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Refresher: semi-endogenous growth, and what the two exponents mean
+<span class="screen-reader-only">Note</span>Refresher: semi-endogenous growth, and what the two exponents mean (click to expand)
 </div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
+<div id="callout-14" class="callout-14-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>This is the Romer (1990) idea-production function with the Jones (1995) correction, and the two exponents are the whole content.</p>
 <p><span class="math inline">\(\lambda \le 1\)</span> governs returns to <em>research input</em>: below one, doubling the research effort less than doubles the flow of new ideas, because researchers duplicate each other. The paper sets <span class="math inline">\(\lambda =\)</span> 1, no duplication.</p>
 <p><span class="math inline">\(\phi_R &lt; 1\)</span> is <strong>fishing out</strong>: the more ideas already found, the harder the next one is. This is the parameter that decides what kind of growth model you are in. At <span class="math inline">\(\phi_R = 1\)</span> a constant research effort sustains constant growth forever, which is fully endogenous growth, and policy that permanently raises research permanently raises the growth rate. At <span class="math inline">\(\phi_R &lt; 1\)</span>, holding growth constant requires research input to <em>grow</em>, and a one-off increase in research raises the <em>level</em> of the idea stock but not its long-run growth rate. That is the semi-endogenous world, and it is why AI shows up here as a level effect that fades from the growth rate.</p>
 <p><a href="#eq-21">Equation (21)</a> is the “lab equipment” specification of Rivera-Batiz and Romer (1991): research uses final output rather than a separate stock of scientists. That choice is what makes the AI channel mechanical. AI raises <span class="math inline">\(Y\)</span>, the research budget is a fixed share of <span class="math inline">\(Y\)</span>, so the research budget rises without anyone deciding anything.</p>
+</div>
 </div>
 </div>
 <p><span id="eq-22"></span> <span class="math display">\[
@@ -3610,19 +3649,22 @@ Y_t = C_t + I_t + R_t, \quad R_t = \iota_{R,t} Y_t
 + (1-\phi_R)\, g \int_{t_0}^{t} e^{-(1-\phi_R) g (t-s)} e^{\lambda \Delta \ln R_s}\, ds \Big]
 \tag{43}
 \]</span></p>
-<div class="callout callout-style-simple callout-note callout-titled" title="Refresher: why a big GDP gap makes such a small growth gap">
-<div class="callout-header d-flex align-content-center">
+<div class="callout callout-style-simple callout-note callout-titled" title="Refresher: why a big GDP gap makes such a small growth gap (click to expand)">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-15-contents" aria-controls="callout-15" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Refresher: why a big GDP gap makes such a small growth gap
+<span class="screen-reader-only">Note</span>Refresher: why a big GDP gap makes such a small growth gap (click to expand)
 </div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
+<div id="callout-15" class="callout-15-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p><a href="#eq-22">Equation (22)</a> is where the research share cancels. Both the AI and the no-AI path spend the same fraction <span class="math inline">\(\iota_{R,t}\)</span> of GDP on research, so in the <em>gap</em> between them only the GDP gap survives.</p>
 <p><a href="#eq-42">Equation (42)</a> is (20) log-differenced against the no-AI path, and the thing to notice is the leading <span class="math inline">\(g\)</span>. The bracket is a proportional gap in the growth <em>rate</em>, and that rate is only 1.67 percent a year to begin with. So a 5 percent GDP gap does not add 5 points to growth; it adds roughly 5 percent <em>of</em> 1.67 percent, which is under a tenth of a point. The subtracted term <span class="math inline">\((1-\phi_R)\Delta \ln A_t\)</span> is the drag: as the AI path accumulates ideas, the fishing out that (20) already contains makes the next ones harder, so the growth gap erodes as the level gap builds.</p>
 <p>In the extreme scenario this channel moves idea growth from 1.67 to 2.03 percent a year, and the ideas stock ends 0.61 percent above the no-AI path after six years. Compare that with the level channel of Section 2.1, worth 32.4 percent of GDP. Over a five-year horizon the innovation block is a rounding error; over fifty years it would not be.</p>
+</div>
 </div>
 </div>
 <p><span id="eq-24"></span> <span class="math display">\[
@@ -3635,15 +3677,17 @@ Y_t = C_t + I_t + R_t, \quad R_t = \iota_{R,t} Y_t
 1 - \phi_R = s_{L,t0}(1 - \phi) + \lambda
 \tag{40}
 \]</span></p>
-<div class="callout callout-style-simple callout-note callout-titled" title="Refresher: deriving gamma, and the two unit conversions behind 2.86">
-<div class="callout-header d-flex align-content-center">
+<div class="callout callout-style-simple callout-note callout-titled" title="Refresher: deriving gamma, and the two unit conversions behind 2.86 (click to expand)">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-16-contents" aria-controls="callout-16" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Refresher: deriving gamma, and the two unit conversions behind 2.86
+<span class="screen-reader-only">Note</span>Refresher: deriving gamma, and the two unit conversions behind 2.86 (click to expand)
 </div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
+<div id="callout-16" class="callout-16-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>For <span class="math inline">\(\gamma\)</span>, set <span class="math inline">\(g_{A,t} = g\)</span> in (20) and solve for the stock: <span class="math inline">\(A^* = (\nu R^{\lambda}/g)^{1/(1-\phi_R)}\)</span>, so <span class="math inline">\(A^* \propto R^{\lambda/(1-\phi_R)}\)</span>. The elasticity of the long-run <em>level</em> of ideas to a permanent research uplift is therefore <span class="math inline">\(\gamma = \lambda/(1-\phi_R) =\)</span> 0.35. A permanent 1 percent more research eventually buys 0.35 percent more ideas, and “eventually” means decades.</p>
 <p><a href="#eq-40">Equation (40)</a> is the bridge from Bloom et al. (2020), who estimate fishing out of <span class="math inline">\(1 - \phi = 3.1\)</span>, to the <span class="math inline">\(2.86\)</span> this model needs. Two conversions, each worth following slowly because they are pure bookkeeping and easy to get backwards:</p>
@@ -3657,6 +3701,7 @@ g_\iota = g_R - (g + n) = \frac{(1-\phi_R)\,g}{\lambda} - (g + n)
 \tag{41}
 \]</span></p>
 <p>which is 2.8 percent a year.</p>
+</div>
 </div>
 </div>
 <p>A permanent one percent uplift in research input raises the ideas stock by <span class="math inline">\(\gamma = \lambda / (1 - \phi_R)\)</span>, which is 1 / 2.86 = 0.35 percent, in the long run (Equation 24). Holding idea growth at <span class="math inline">\(g\)</span> requires research input to grow at 4.8 percent a year against GDP growth of 2 percent, so the research share rises at 2.8 percent a year, from 3.5 percent of GDP in 2024 to 4.1 percent in 2030 (Appendix C.2).</p>
@@ -3745,19 +3790,22 @@ g_{\mathrm{TFP},t} = s_{L,t} g_{w,t} + s_{K,t} g_{r,t}
 e^{-(1-\sigma)\Delta \ln A_t} \Big]
 \tag{45}
 \]</span></p>
-<div class="callout callout-style-simple callout-note callout-titled" title="Refresher: three ways to write the same residual, and why the paper uses the third">
-<div class="callout-header d-flex align-content-center">
+<div class="callout callout-style-simple callout-note callout-titled" title="Refresher: three ways to write the same residual, and why the paper uses the third (click to expand)">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-17-contents" aria-controls="callout-17" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Refresher: three ways to write the same residual, and why the paper uses the third
+<span class="screen-reader-only">Note</span>Refresher: three ways to write the same residual, and why the paper uses the third (click to expand)
 </div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
+<div id="callout-17" class="callout-17-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p><a href="#eq-25">Equation (25)</a> is the dual from Section 2.1.3 again. <a href="#eq-26">Equation (26)</a> is its first-order solution: both channels enter with the labor share as their Domar weight, because the ideas stock lowers the cost of every labor instance and the level channel lowers the cost of the affected ones.</p>
 <p><a href="#eq-45">Equation (45)</a> is what the simulation actually evaluates. It is the CES price index of <a href="#eq-4">Equation (4)</a> rebuilt at <em>base-period</em> factor prices: hold <span class="math inline">\(w\)</span> and <span class="math inline">\(r\)</span> at their no-AI values, let only the technology change, and ask how much cheaper the basket of tasks becomes. The <span class="math inline">\(-\frac{1}{1-\sigma}\ln[\cdot]\)</span> out front is just inverting the CES aggregator. Inside, <span class="math inline">\(m_t d_t (1 - e^{-(1-\sigma)a_t})\)</span> is the share of the economy’s cost the AI gains remove, and <span class="math inline">\(e^{-(1-\sigma)\Delta \ln A_t}\)</span> scales every labor instance for the ideas stock.</p>
 <p>The three agree to first order and diverge beyond it, because (45) is a base-weighted index while (25) chains its weights month by month. The verification section below quantifies that wedge: it is 0.001 percentage points in the modest scenario and grows with the size of the shock, exactly as an index-number problem should.</p>
+</div>
 </div>
 </div>
 </section>
@@ -3789,21 +3837,24 @@ D_{C,t} = \max\{0, E_t - q_{C,t}\ell_{C,t}\},
 \qquad E_t = \max\{0, \ell_{C,t} - \ell^d_{C,t}\}
 \tag{31}
 \]</span></p>
-<div class="callout callout-style-simple callout-note callout-titled" title="Refresher: how a falling target turns into layoffs">
-<div class="callout-header d-flex align-content-center">
+<div class="callout callout-style-simple callout-note callout-titled" title="Refresher: how a falling target turns into layoffs (click to expand)">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-18-contents" aria-controls="callout-18" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Refresher: how a falling target turns into layoffs
+<span class="screen-reader-only">Note</span>Refresher: how a falling target turns into layoffs (click to expand)
 </div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
+<div id="callout-18" class="callout-18-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p><strong>(27) Quits.</strong> Workers quit at a base rate plus a part that moves with how good prospects look, proxied by last month’s job-finding rate relative to normal. In normal times <span class="math inline">\(f = \bar f\)</span> and the quit rate is just <span class="math inline">\(\bar q_o\)</span>. The paper splits it 45/55 using the JOLTS-to-CPS elasticity. This is a small piece of realism, not a driver: quits matter because they let a shrinking group shed workers without laying anyone off.</p>
 <p><strong>(28) The gaps.</strong> Each month firms compare where they are with next month’s target from <a href="#eq-13">Equation (13)</a>. On these scenario paths the cognitive group is always above its target (an <em>overhang</em>, <span class="math inline">\(G_C\)</span>) and the other group always below (a <em>shortfall</em>, <span class="math inline">\(B_N\)</span>), so the two are tracked separately and the maxima never bind on the other side.</p>
 <p><strong>(29) The attached force.</strong> A cognitive worker laid off last month is still a cognitive worker looking for cognitive work, so the group’s effective labor force is its employment plus its own unemployed <em>in excess of the normal pool</em>. This is the quantity the group’s wage has to clear.</p>
 <p><strong>(30) The rigid wage, in the Blanchard and Galí (2007) form.</strong> In logs this is partial adjustment: the gap between the wage actually paid and the wage that would clear the group closes by a fraction <span class="math inline">\(1 - \xi\)</span> each year, <span class="math inline">\(\xi^{1/12}\)</span> each month. Two details are easy to misread. First, what is rigid is the cognitive <strong>discount to the common wage</strong>, <span class="math inline">\(\ln(w_{C,t}/w_t)\)</span>, not the wage level, so the cognitive wage still inherits economy-wide productivity growth. Second, <span class="math inline">\(\xi\)</span> is a persistence, so higher means <em>more</em> rigid: at <span class="math inline">\(\xi = 0\)</span> the group clears every month, and as <span class="math inline">\(\xi \to 1\)</span> the cognitive wage never separates from the common wage at all. The baseline <span class="math inline">\(\xi =\)</span> 0.5 is a half-life of one year.</p>
 <p><strong>(31) Layoffs.</strong> Here is the piece that a pure Mortensen-Pissarides model does not have. With the wage stuck above its clearing level, firms want fewer cognitive workers than are attached to the group. Employment is predetermined within the month, so they get there by separating: quits from surplus positions go unreplaced, and layoffs <span class="math inline">\(D_{C,t}\)</span> remove the rest. This is <strong>job rationing</strong> in the sense of Michaillat (2012): the unemployment is not only frictional, some of it exists because the wage is too high and the jobs simply are not offered. It is also the mechanism behind the Table 6 trade-off: rigid wages convert the shock into unemployment, flexible wages convert it into wage declines.</p>
+</div>
 </div>
 </div>
 <p><span id="eq-32"></span> <span class="math display">\[
@@ -3831,20 +3882,23 @@ f_{C,t} = \frac{H_{C,t}}{S_{C,t}} + \mu \frac{H_{N,t}}{S_{N,t}},
 f_{N,t} = \mu \frac{H_{C,t}}{S_{C,t}} + \frac{H_{N,t}}{S_{N,t}}
 \tag{35}
 \]</span></p>
-<div class="callout callout-style-simple callout-note callout-titled" title="Refresher: vacancies, the matching function, and the cross-occupation discount">
-<div class="callout-header d-flex align-content-center">
+<div class="callout callout-style-simple callout-note callout-titled" title="Refresher: vacancies, the matching function, and the cross-occupation discount (click to expand)">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-19-contents" aria-controls="callout-19" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Refresher: vacancies, the matching function, and the cross-occupation discount
+<span class="screen-reader-only">Note</span>Refresher: vacancies, the matching function, and the cross-occupation discount (click to expand)
 </div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
+<div id="callout-19" class="callout-19-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p><strong>(32) Postings.</strong> Firms post to replace quits and to close a fraction <span class="math inline">\(\theta_H\)</span> of their shortfall. The division by the normal filling rate <span class="math inline">\(\bar \pi_o\)</span> is a unit conversion that is easy to skip past: a firm that wants ten hires this month must post more than ten vacancies, because only <span class="math inline">\(\bar\pi_o \approx\)</span> 0.65 of postings fill within the month. <span class="math inline">\(\theta_H\)</span> is the recruiting-and-training speed limit: at <span class="math inline">\(\theta_H = 1\)</span> the expanding group posts its entire shortfall at once, at 0.10 it closes a tenth of the gap per month.</p>
 <p><strong>(33) Effective search, and where occupational specificity lives.</strong> A worker supplies one unit of search in their own group and only <span class="math inline">\(\mu \le 1\)</span> units in the other. This one parameter carries all of the occupational human capital in the model: a laid-off software engineer is not instantly a nurse (Kambourov and Manovskii, 2009). Normal times give <span class="math inline">\(\bar\mu =\)</span> 0.17, estimated from CPS switching, and the disruptive scenarios lower it to 0.08 and 0.04 on the reasoning that crossing is harder when a whole occupation tries at once.</p>
 <p><strong>(34) The matching function.</strong> The workhorse Cobb-Douglas matching function <span class="math inline">\(H = \chi S^{\alpha} v^{1-\alpha}\)</span> has a defect that matters here: for extreme ratios of searchers to vacancies it can return more hires than there are searchers or vacancies, so it has to be capped, and the cap puts kinks in simulated paths. The den Haan, Ramey and Watson (2000) form used here is a CES-style aggregator that satisfies <span class="math inline">\(H \le \min\{S, v\}\)</span> automatically, with <span class="math inline">\(\iota =\)</span> 1.27 controlling the curvature and <span class="math inline">\(\iota \to \infty\)</span> giving exactly <span class="math inline">\(\chi \min\{S, v\}\)</span>. It has constant returns, so the filling rate depends only on <strong>tightness</strong> <span class="math inline">\(\theta = v/S\)</span>, the standard result. This matters in the extreme scenario precisely because the ratios do get extreme.</p>
 <p><strong>(35) Finding rates.</strong> A group hires <span class="math inline">\(H_j/S_j\)</span> per unit of effective search directed at it, and a worker supplies 1 unit at home and <span class="math inline">\(\mu\)</span> away, so their finding rate is the weighted sum. This is why a displaced cognitive worker’s prospects depend on how hard the <em>other</em> group is hiring, and why <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\theta_H\)</span> are the two parameters that decide how much unemployment a given amount of reallocation causes.</p>
+</div>
 </div>
 </div>
 <p><span id="eq-36"></span> <span class="math display">\[
@@ -3863,19 +3917,22 @@ U_{o,t+1} = U_{o,t} + q_{o,t}\ell_{o,t} + D_{o,t} - f_{o,t}U_{o,t}
 \bar \pi_o = \chi \Big[ 1 - \Big(\frac{\bar H_o}{\chi \bar S_o}\Big)^{\iota}\Big]^{1/\iota}
 \tag{38}
 \]</span></p>
-<div class="callout callout-style-simple callout-note callout-titled" title="Refresher: the stocks, and what pins down the steady state">
-<div class="callout-header d-flex align-content-center">
+<div class="callout callout-style-simple callout-note callout-titled" title="Refresher: the stocks, and what pins down the steady state (click to expand)">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-20-contents" aria-controls="callout-20" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Refresher: the stocks, and what pins down the steady state
+<span class="screen-reader-only">Note</span>Refresher: the stocks, and what pins down the steady state (click to expand)
 </div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
+<div id="callout-20" class="callout-20-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p><strong>(36) and (37)</strong> are bookkeeping: employment loses quits and layoffs and gains hires; the pool gains the separations and loses the job-finders. Every separation enters the pool and every hire leaves it, so <span class="math inline">\(\ell_C + \ell_N + U_C + U_N\)</span> is constant. The verification section checks that this holds to machine precision, which is a genuine test of the code rather than of the model.</p>
 <p><strong>(38)</strong> solves for the labor market before AI arrives, and it is worth seeing what does the pinning. Hiring replaces quits, so <span class="math inline">\(\bar H_o = \bar q_o \ell_{o,t0}\)</span>. Each origin’s pool is then whatever makes its inflow equal its outflow, <span class="math inline">\(\bar f_o \bar U_o = \bar H_o\)</span>, with the finding rates themselves depending on the pools through effective search: one equation in the split of the pool, plus adding up. Inverting the matching function at that point gives the normal filling rates that the posting rule (32) needs, and the one free parameter <span class="math inline">\(\chi\)</span> is set so the employment-weighted mean filling rate matches the JOLTS-based 0.65.</p>
 <p>Nothing in this block is fitted to anything about AI, so the numbers it produces are a clean test of the transcription. The steady state reproduces the paper’s reported filling rates of 0.66 and 0.63, matching efficiency 0.76, aggregate finding rate 0.23, and the calibration target that one job-finder in seven changes group, here 0.144.</p>
+</div>
 </div>
 </div>
 <p>Finally, the model has to report GDP, wages and the labor share at the employment the flow block actually delivers, which is not the frictionless allocation of Proposition 1. That is the system (39):</p>
@@ -3892,19 +3949,22 @@ e^{\Delta \ln (Y_t/\bar L) - \sigma \Delta \ln w_{C,t}},
 \end{aligned}
 \tag{39}
 \]</span></p>
-<div class="callout callout-style-simple callout-note callout-titled" title="Refresher: reading prices off quantities, and why that is legitimate">
-<div class="callout-header d-flex align-content-center">
+<div class="callout callout-style-simple callout-note callout-titled" title="Refresher: reading prices off quantities, and why that is legitimate (click to expand)">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-21-contents" aria-controls="callout-21" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Refresher: reading prices off quantities, and why that is legitimate
+<span class="screen-reader-only">Note</span>Refresher: reading prices off quantities, and why that is legitimate (click to expand)
 </div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
+<div id="callout-21" class="callout-21-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>The first row is the price index of <a href="#eq-4">Equation (4)</a> with the tasks grouped three ways: surviving cognitive instances, all-other instances, and capital’s instances. <span class="math inline">\(\Lambda_{C,t}\)</span> is the surviving cognitive mass, the same bracket as <a href="#eq-15">Equation (15)</a> subtracted from the group’s base share. The next two rows are the CES labor demands of <a href="#eq-13">Equation (13)</a>, one per group. The last is the capital supply schedule.</p>
 <p>The logic runs backwards from the usual direction. Ordinarily you would set prices and solve for quantities. Here employment is a <em>state variable</em> handed over by the flow block, so the system is inverted: find the prices at which the observed <span class="math inline">\((\ell_{C,t}, \ell_{N,t})\)</span> is exactly what firms want to hire, and GDP follows. That is a legitimate primal-dual inversion, and it has a useful consequence for solving it: the capital row can be substituted out in closed form, leaving one monotone equation in <span class="math inline">\(\Delta \ln r_t\)</span>, which is why a bisection is all the code needs. When the cognitive wage is rationed the price the system returns is the marginal product rather than the wage paid, and the difference is cognitive firms’ profit, which the paper bounds at half a percent of GDP.</p>
 <p>The check that this reading is right: evaluated at the <em>targets</em> rather than at realized employment, the system must collapse back to Proposition 1, with both group wages equal to the common wage. It does, to machine precision, in every scenario and with or without an ideas gap; the verification section below reports the largest violation across all the variables.</p>
+</div>
 </div>
 </div>
 <p>The flow block starts from the steady state of <a href="#eq-38">Equation (38)</a>, evaluated at the normal-times search discount in every scenario. Nothing in it is fitted to the AI paths, so it is an independent check on the transcription: the paper reports filling rates of 0.66 and 0.64, a matching efficiency of 0.76, an aggregate finding rate of 0.23 a month, and a pool splitting into 1.76 and 2.08 percent of the labor force.</p>
@@ -6169,7 +6229,7 @@ Figure 4: The labor market in the three scenarios, 2025-2030, reproducing the p
 <span id="cb28-225"><a href="#cb28-225" aria-hidden="true" tabindex="-1"></a>\tag{1}</span>
 <span id="cb28-226"><a href="#cb28-226" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb28-227"><a href="#cb28-227" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-228"><a href="#cb28-228" aria-hidden="true" tabindex="-1"></a>::: {.callout-note appearance=&quot;simple&quot; title=&quot;Refresher: what (1) is doing, and why the elasticity is the whole story&quot;}</span>
+<span id="cb28-228"><a href="#cb28-228" aria-hidden="true" tabindex="-1"></a>::: {.callout-note appearance=&quot;simple&quot; collapse=&quot;true&quot; title=&quot;Refresher: what (1) is doing, and why the elasticity is the whole story (click to expand)&quot;}</span>
 <span id="cb28-229"><a href="#cb28-229" aria-hidden="true" tabindex="-1"></a>This is the CES function from first-year graduate macro, with the inputs</span>
 <span id="cb28-230"><a href="#cb28-230" aria-hidden="true" tabindex="-1"></a>reinterpreted. The weights $\omega_i$ are base-period expenditure shares and sum to</span>
 <span id="cb28-231"><a href="#cb28-231" aria-hidden="true" tabindex="-1"></a>one, and $\sigma$ is the elasticity of substitution between any two instances,</span>
@@ -6200,7 +6260,7 @@ Figure 4: The labor market in the three scenarios, 2025-2030, reproducing the p
 <span id="cb28-256"><a href="#cb28-256" aria-hidden="true" tabindex="-1"></a>\tag{3}</span>
 <span id="cb28-257"><a href="#cb28-257" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb28-258"><a href="#cb28-258" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-259"><a href="#cb28-259" aria-hidden="true" tabindex="-1"></a>::: {.callout-note appearance=&quot;simple&quot; title=&quot;Refresher: perfect substitutes inside a task, complements across tasks&quot;}</span>
+<span id="cb28-259"><a href="#cb28-259" aria-hidden="true" tabindex="-1"></a>::: {.callout-note appearance=&quot;simple&quot; collapse=&quot;true&quot; title=&quot;Refresher: perfect substitutes inside a task, complements across tasks (click to expand)&quot;}</span>
 <span id="cb28-260"><a href="#cb28-260" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Equation (2)</span><span class="co">](#eq-2)</span> says one contract review is one contract review, whoever does it: a</span>
 <span id="cb28-261"><a href="#cb28-261" aria-hidden="true" tabindex="-1"></a>worker delivering $A_t \alpha_L$ units and a machine delivering $\alpha_K$ units are</span>
 <span id="cb28-262"><a href="#cb28-262" aria-hidden="true" tabindex="-1"></a>interchangeable *for that instance*. $A_t$ is the stock of ideas and augments labor</span>
@@ -6230,7 +6290,7 @@ Figure 4: The labor market in the three scenarios, 2025-2030, reproducing the p
 <span id="cb28-286"><a href="#cb28-286" aria-hidden="true" tabindex="-1"></a>\tag{4}</span>
 <span id="cb28-287"><a href="#cb28-287" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb28-288"><a href="#cb28-288" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-289"><a href="#cb28-289" aria-hidden="true" tabindex="-1"></a>::: {.callout-note appearance=&quot;simple&quot; title=&quot;Refresher: deriving the expenditure share, and the sign that surprises people&quot;}</span>
+<span id="cb28-289"><a href="#cb28-289" aria-hidden="true" tabindex="-1"></a>::: {.callout-note appearance=&quot;simple&quot; collapse=&quot;true&quot; title=&quot;Refresher: deriving the expenditure share, and the sign that surprises people (click to expand)&quot;}</span>
 <span id="cb28-290"><a href="#cb28-290" aria-hidden="true" tabindex="-1"></a>Two steps, both standard. Cost minimization on (1) gives the CES demand curve</span>
 <span id="cb28-291"><a href="#cb28-291" aria-hidden="true" tabindex="-1"></a>$y_{i} = \omega_i (c_{i}/P)^{-\sigma} Y$. Multiply by the price $c_i$ and divide by</span>
 <span id="cb28-292"><a href="#cb28-292" aria-hidden="true" tabindex="-1"></a>$PY$ to turn a quantity into an expenditure share, and the exponent goes from</span>
@@ -6258,7 +6318,7 @@ Figure 4: The labor market in the three scenarios, 2025-2030, reproducing the p
 <span id="cb28-314"><a href="#cb28-314" aria-hidden="true" tabindex="-1"></a>\tag{5}</span>
 <span id="cb28-315"><a href="#cb28-315" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb28-316"><a href="#cb28-316" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-317"><a href="#cb28-317" aria-hidden="true" tabindex="-1"></a>::: {.callout-note appearance=&quot;simple&quot; title=&quot;Refresher: the wage identity is an accounting identity, and it does a lot of work&quot;}</span>
+<span id="cb28-317"><a href="#cb28-317" aria-hidden="true" tabindex="-1"></a>::: {.callout-note appearance=&quot;simple&quot; collapse=&quot;true&quot; title=&quot;Refresher: the wage identity is an accounting identity, and it does a lot of work (click to expand)&quot;}</span>
 <span id="cb28-318"><a href="#cb28-318" aria-hidden="true" tabindex="-1"></a>The labor share is the sum of the expenditure shares of the instances labor still</span>
 <span id="cb28-319"><a href="#cb28-319" aria-hidden="true" tabindex="-1"></a>performs, which by definition equals the wage bill over GDP. Take logs of</span>
 <span id="cb28-320"><a href="#cb28-320" aria-hidden="true" tabindex="-1"></a>$s_L = wL/(PY)$ and rearrange: $\ln w = \ln(Y/L) + \ln s_L$. Nothing behavioural has</span>
@@ -6281,7 +6341,7 @@ Figure 4: The labor market in the three scenarios, 2025-2030, reproducing the p
 <span id="cb28-337"><a href="#cb28-337" aria-hidden="true" tabindex="-1"></a>\tag{6}</span>
 <span id="cb28-338"><a href="#cb28-338" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb28-339"><a href="#cb28-339" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-340"><a href="#cb28-340" aria-hidden="true" tabindex="-1"></a>::: {.callout-note appearance=&quot;simple&quot; title=&quot;Refresher: why capital supply is a schedule rather than an Euler equation&quot;}</span>
+<span id="cb28-340"><a href="#cb28-340" aria-hidden="true" tabindex="-1"></a>::: {.callout-note appearance=&quot;simple&quot; collapse=&quot;true&quot; title=&quot;Refresher: why capital supply is a schedule rather than an Euler equation (click to expand)&quot;}</span>
 <span id="cb28-341"><a href="#cb28-341" aria-hidden="true" tabindex="-1"></a>Rather than solve a household savings problem, the paper posits an upward-sloping</span>
 <span id="cb28-342"><a href="#cb28-342" aria-hidden="true" tabindex="-1"></a>supply curve: capital is $\varepsilon$ percent higher for every percent the rental</span>
 <span id="cb28-343"><a href="#cb28-343" aria-hidden="true" tabindex="-1"></a>rate exceeds its no-AI level $\bar r$. It is the reduced form of Moll, Rachel and</span>
@@ -6376,7 +6436,7 @@ Figure 4: The labor market in the three scenarios, 2025-2030, reproducing the p
 <span id="cb28-436"><a href="#cb28-436" aria-hidden="true" tabindex="-1"></a>\tag{8&#39;}</span>
 <span id="cb28-437"><a href="#cb28-437" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb28-438"><a href="#cb28-438" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-439"><a href="#cb28-439" aria-hidden="true" tabindex="-1"></a>::: {.callout-note appearance=&quot;simple&quot; title=&quot;Refresher: why a logistic, and where (8&#39;) comes from in one line&quot;}</span>
+<span id="cb28-439"><a href="#cb28-439" aria-hidden="true" tabindex="-1"></a>::: {.callout-note appearance=&quot;simple&quot; collapse=&quot;true&quot; title=&quot;Refresher: why a logistic, and where (8&#39;) comes from in one line (click to expand)&quot;}</span>
 <span id="cb28-440"><a href="#cb28-440" aria-hidden="true" tabindex="-1"></a>Technology diffusion is S-shaped in the historical record (Griliches on hybrid corn,</span>
 <span id="cb28-441"><a href="#cb28-441" aria-hidden="true" tabindex="-1"></a>David on electricity), so reach and use follow logistics while the productivity gain</span>
 <span id="cb28-442"><a href="#cb28-442" aria-hidden="true" tabindex="-1"></a>per instance is allowed to drift linearly.</span>
@@ -6452,7 +6512,7 @@ Figure 4: The labor market in the three scenarios, 2025-2030, reproducing the p
 <span id="cb28-514"><a href="#cb28-514" aria-hidden="true" tabindex="-1"></a>\tag{9}</span>
 <span id="cb28-515"><a href="#cb28-515" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb28-516"><a href="#cb28-516" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-517"><a href="#cb28-517" aria-hidden="true" tabindex="-1"></a>::: {.callout-note appearance=&quot;simple&quot; title=&quot;Refresher: Hulten&#39;s theorem, Domar weights, and why the labor share shows up&quot;}</span>
+<span id="cb28-517"><a href="#cb28-517" aria-hidden="true" tabindex="-1"></a>::: {.callout-note appearance=&quot;simple&quot; collapse=&quot;true&quot; title=&quot;Refresher: Hulten&#39;s theorem, Domar weights, and why the labor share shows up (click to expand)&quot;}</span>
 <span id="cb28-518"><a href="#cb28-518" aria-hidden="true" tabindex="-1"></a>Hulten (1978) says that to a first order, the aggregate productivity gain is the sum</span>
 <span id="cb28-519"><a href="#cb28-519" aria-hidden="true" tabindex="-1"></a>of the microeconomic cost reductions, each weighted by its **Domar weight**: the</span>
 <span id="cb28-520"><a href="#cb28-520" aria-hidden="true" tabindex="-1"></a>producer&#39;s sales divided by GDP. The useful part is that you do not need to know how</span>
@@ -6482,7 +6542,7 @@ Figure 4: The labor market in the three scenarios, 2025-2030, reproducing the p
 <span id="cb28-544"><a href="#cb28-544" aria-hidden="true" tabindex="-1"></a>\tag{10}</span>
 <span id="cb28-545"><a href="#cb28-545" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb28-546"><a href="#cb28-546" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-547"><a href="#cb28-547" aria-hidden="true" tabindex="-1"></a>::: {.callout-note appearance=&quot;simple&quot; title=&quot;Refresher: the factor-price frontier, or the Solow residual read backwards&quot;}</span>
+<span id="cb28-547"><a href="#cb28-547" aria-hidden="true" tabindex="-1"></a>::: {.callout-note appearance=&quot;simple&quot; collapse=&quot;true&quot; title=&quot;Refresher: the factor-price frontier, or the Solow residual read backwards (click to expand)&quot;}</span>
 <span id="cb28-548"><a href="#cb28-548" aria-hidden="true" tabindex="-1"></a>The Solow residual you computed in graduate macro as</span>
 <span id="cb28-549"><a href="#cb28-549" aria-hidden="true" tabindex="-1"></a>$d\ln \mathrm{TFP} = d\ln Y - s_L d\ln L - s_K d\ln K$ has a **dual**: under constant</span>
 <span id="cb28-550"><a href="#cb28-550" aria-hidden="true" tabindex="-1"></a>returns and competitive pricing, factor payments exhaust output, and substituting the</span>
@@ -6564,7 +6624,7 @@ Figure 4: The labor market in the three scenarios, 2025-2030, reproducing the p
 <span id="cb28-628"><a href="#cb28-628" aria-hidden="true" tabindex="-1"></a>\tag{11}</span>
 <span id="cb28-629"><a href="#cb28-629" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb28-630"><a href="#cb28-630" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-631"><a href="#cb28-631" aria-hidden="true" tabindex="-1"></a>::: {.callout-note appearance=&quot;simple&quot; title=&quot;Refresher: reading (11) line by line&quot;}</span>
+<span id="cb28-631"><a href="#cb28-631" aria-hidden="true" tabindex="-1"></a>::: {.callout-note appearance=&quot;simple&quot; collapse=&quot;true&quot; title=&quot;Refresher: reading (11) line by line (click to expand)&quot;}</span>
 <span id="cb28-632"><a href="#cb28-632" aria-hidden="true" tabindex="-1"></a>**The wage line** is just the frontier (10) rearranged: labor gets the productivity</span>
 <span id="cb28-633"><a href="#cb28-633" aria-hidden="true" tabindex="-1"></a>gain less whatever the rental rate takes. Note what is *not* there: net displacement</span>
 <span id="cb28-634"><a href="#cb28-634" aria-hidden="true" tabindex="-1"></a>$(1-\rho)\psi m d$ does not appear. At a fixed rental rate the wage tracks</span>
@@ -6602,7 +6662,7 @@ Figure 4: The labor market in the three scenarios, 2025-2030, reproducing the p
 <span id="cb28-666"><a href="#cb28-666" aria-hidden="true" tabindex="-1"></a>\tag{12}</span>
 <span id="cb28-667"><a href="#cb28-667" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb28-668"><a href="#cb28-668" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-669"><a href="#cb28-669" aria-hidden="true" tabindex="-1"></a>::: {.callout-note appearance=&quot;simple&quot; title=&quot;Refresher: what (12) says, and how far to trust it&quot;}</span>
+<span id="cb28-669"><a href="#cb28-669" aria-hidden="true" tabindex="-1"></a>::: {.callout-note appearance=&quot;simple&quot; collapse=&quot;true&quot; title=&quot;Refresher: what (12) says, and how far to trust it (click to expand)&quot;}</span>
 <span id="cb28-670"><a href="#cb28-670" aria-hidden="true" tabindex="-1"></a>The threshold rises with the automation share $\psi$ and with $(1-\rho)/a$, the</span>
 <span id="cb28-671"><a href="#cb28-671" aria-hidden="true" tabindex="-1"></a>displacement per unit of cost saving. That ratio is the formal version of Acemoglu and</span>
 <span id="cb28-672"><a href="#cb28-672" aria-hidden="true" tabindex="-1"></a>Restrepo&#39;s &quot;**so-so automation**&quot;: technology that takes tasks away from labor while</span>
@@ -6691,7 +6751,7 @@ Figure 4: The labor market in the three scenarios, 2025-2030, reproducing the p
 <span id="cb28-759"><a href="#cb28-759" aria-hidden="true" tabindex="-1"></a>\tag{13}</span>
 <span id="cb28-760"><a href="#cb28-760" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb28-761"><a href="#cb28-761" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-762"><a href="#cb28-762" aria-hidden="true" tabindex="-1"></a>::: {.callout-note appearance=&quot;simple&quot; title=&quot;Refresher: the trick in (13) is to look at the group AI does not touch&quot;}</span>
+<span id="cb28-762"><a href="#cb28-762" aria-hidden="true" tabindex="-1"></a>::: {.callout-note appearance=&quot;simple&quot; collapse=&quot;true&quot; title=&quot;Refresher: the trick in (13) is to look at the group AI does not touch (click to expand)&quot;}</span>
 <span id="cb28-763"><a href="#cb28-763" aria-hidden="true" tabindex="-1"></a>The appealing move here is to solve for the group that is *unaffected*. AI does</span>
 <span id="cb28-764"><a href="#cb28-764" aria-hidden="true" tabindex="-1"></a>nothing to the productivity of nursing or electrical work, so the cost of those tasks</span>
 <span id="cb28-765"><a href="#cb28-765" aria-hidden="true" tabindex="-1"></a>depends only on the wage, and demand for that labor is an ordinary CES demand curve</span>
@@ -6806,7 +6866,7 @@ Figure 4: The labor market in the three scenarios, 2025-2030, reproducing the p
 <span id="cb28-874"><a href="#cb28-874" aria-hidden="true" tabindex="-1"></a>\tag{19}</span>
 <span id="cb28-875"><a href="#cb28-875" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb28-876"><a href="#cb28-876" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-877"><a href="#cb28-877" aria-hidden="true" tabindex="-1"></a>::: {.callout-note appearance=&quot;simple&quot; title=&quot;Refresher: two different reasons a cognitive job disappears&quot;}</span>
+<span id="cb28-877"><a href="#cb28-877" aria-hidden="true" tabindex="-1"></a>::: {.callout-note appearance=&quot;simple&quot; collapse=&quot;true&quot; title=&quot;Refresher: two different reasons a cognitive job disappears (click to expand)&quot;}</span>
 <span id="cb28-878"><a href="#cb28-878" aria-hidden="true" tabindex="-1"></a>The first term is tasks changing hands: automation moves them to capital, and</span>
 <span id="cb28-879"><a href="#cb28-879" aria-hidden="true" tabindex="-1"></a>reinstatement gives a fraction $\rho$ back.</span>
 <span id="cb28-880"><a href="#cb28-880" aria-hidden="true" tabindex="-1"></a></span>
@@ -6864,7 +6924,7 @@ Figure 4: The labor market in the three scenarios, 2025-2030, reproducing the p
 <span id="cb28-934"><a href="#cb28-934" aria-hidden="true" tabindex="-1"></a>\tag{21}</span>
 <span id="cb28-935"><a href="#cb28-935" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb28-936"><a href="#cb28-936" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-937"><a href="#cb28-937" aria-hidden="true" tabindex="-1"></a>::: {.callout-note appearance=&quot;simple&quot; title=&quot;Refresher: semi-endogenous growth, and what the two exponents mean&quot;}</span>
+<span id="cb28-937"><a href="#cb28-937" aria-hidden="true" tabindex="-1"></a>::: {.callout-note appearance=&quot;simple&quot; collapse=&quot;true&quot; title=&quot;Refresher: semi-endogenous growth, and what the two exponents mean (click to expand)&quot;}</span>
 <span id="cb28-938"><a href="#cb28-938" aria-hidden="true" tabindex="-1"></a>This is the Romer (1990) idea-production function with the Jones (1995) correction,</span>
 <span id="cb28-939"><a href="#cb28-939" aria-hidden="true" tabindex="-1"></a>and the two exponents are the whole content.</span>
 <span id="cb28-940"><a href="#cb28-940" aria-hidden="true" tabindex="-1"></a></span>
@@ -6915,7 +6975,7 @@ Figure 4: The labor market in the three scenarios, 2025-2030, reproducing the p
 <span id="cb28-985"><a href="#cb28-985" aria-hidden="true" tabindex="-1"></a>\tag{43}</span>
 <span id="cb28-986"><a href="#cb28-986" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb28-987"><a href="#cb28-987" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-988"><a href="#cb28-988" aria-hidden="true" tabindex="-1"></a>::: {.callout-note appearance=&quot;simple&quot; title=&quot;Refresher: why a big GDP gap makes such a small growth gap&quot;}</span>
+<span id="cb28-988"><a href="#cb28-988" aria-hidden="true" tabindex="-1"></a>::: {.callout-note appearance=&quot;simple&quot; collapse=&quot;true&quot; title=&quot;Refresher: why a big GDP gap makes such a small growth gap (click to expand)&quot;}</span>
 <span id="cb28-989"><a href="#cb28-989" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Equation (22)</span><span class="co">](#eq-22)</span> is where the research share cancels. Both the AI and the no-AI path</span>
 <span id="cb28-990"><a href="#cb28-990" aria-hidden="true" tabindex="-1"></a>spend the same fraction $\iota_{R,t}$ of GDP on research, so in the *gap* between them</span>
 <span id="cb28-991"><a href="#cb28-991" aria-hidden="true" tabindex="-1"></a>only the GDP gap survives.</span>
@@ -6951,7 +7011,7 @@ Figure 4: The labor market in the three scenarios, 2025-2030, reproducing the p
 <span id="cb28-1021"><a href="#cb28-1021" aria-hidden="true" tabindex="-1"></a>\tag{40}</span>
 <span id="cb28-1022"><a href="#cb28-1022" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb28-1023"><a href="#cb28-1023" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-1024"><a href="#cb28-1024" aria-hidden="true" tabindex="-1"></a>::: {.callout-note appearance=&quot;simple&quot; title=&quot;Refresher: deriving gamma, and the two unit conversions behind 2.86&quot;}</span>
+<span id="cb28-1024"><a href="#cb28-1024" aria-hidden="true" tabindex="-1"></a>::: {.callout-note appearance=&quot;simple&quot; collapse=&quot;true&quot; title=&quot;Refresher: deriving gamma, and the two unit conversions behind 2.86 (click to expand)&quot;}</span>
 <span id="cb28-1025"><a href="#cb28-1025" aria-hidden="true" tabindex="-1"></a>For $\gamma$, set $g_{A,t} = g$ in (20) and solve for the stock:</span>
 <span id="cb28-1026"><a href="#cb28-1026" aria-hidden="true" tabindex="-1"></a>$A^* = (\nu R^{\lambda}/g)^{1/(1-\phi_R)}$, so $A^* \propto R^{\lambda/(1-\phi_R)}$.</span>
 <span id="cb28-1027"><a href="#cb28-1027" aria-hidden="true" tabindex="-1"></a>The elasticity of the long-run *level* of ideas to a permanent research uplift is</span>
@@ -7049,7 +7109,7 @@ Figure 4: The labor market in the three scenarios, 2025-2030, reproducing the p
 <span id="cb28-1121"><a href="#cb28-1121" aria-hidden="true" tabindex="-1"></a>\tag{45}</span>
 <span id="cb28-1122"><a href="#cb28-1122" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb28-1123"><a href="#cb28-1123" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-1124"><a href="#cb28-1124" aria-hidden="true" tabindex="-1"></a>::: {.callout-note appearance=&quot;simple&quot; title=&quot;Refresher: three ways to write the same residual, and why the paper uses the third&quot;}</span>
+<span id="cb28-1124"><a href="#cb28-1124" aria-hidden="true" tabindex="-1"></a>::: {.callout-note appearance=&quot;simple&quot; collapse=&quot;true&quot; title=&quot;Refresher: three ways to write the same residual, and why the paper uses the third (click to expand)&quot;}</span>
 <span id="cb28-1125"><a href="#cb28-1125" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Equation (25)</span><span class="co">](#eq-25)</span> is the dual from Section 2.1.3 again. <span class="co">[</span><span class="ot">Equation (26)</span><span class="co">](#eq-26)</span> is its first-order</span>
 <span id="cb28-1126"><a href="#cb28-1126" aria-hidden="true" tabindex="-1"></a>solution: both channels enter with the labor share as their Domar weight, because the</span>
 <span id="cb28-1127"><a href="#cb28-1127" aria-hidden="true" tabindex="-1"></a>ideas stock lowers the cost of every labor instance and the level channel lowers the</span>
@@ -7110,7 +7170,7 @@ Figure 4: The labor market in the three scenarios, 2025-2030, reproducing the p
 <span id="cb28-1182"><a href="#cb28-1182" aria-hidden="true" tabindex="-1"></a>\tag{31}</span>
 <span id="cb28-1183"><a href="#cb28-1183" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb28-1184"><a href="#cb28-1184" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-1185"><a href="#cb28-1185" aria-hidden="true" tabindex="-1"></a>::: {.callout-note appearance=&quot;simple&quot; title=&quot;Refresher: how a falling target turns into layoffs&quot;}</span>
+<span id="cb28-1185"><a href="#cb28-1185" aria-hidden="true" tabindex="-1"></a>::: {.callout-note appearance=&quot;simple&quot; collapse=&quot;true&quot; title=&quot;Refresher: how a falling target turns into layoffs (click to expand)&quot;}</span>
 <span id="cb28-1186"><a href="#cb28-1186" aria-hidden="true" tabindex="-1"></a>**(27) Quits.** Workers quit at a base rate plus a part that moves with how good</span>
 <span id="cb28-1187"><a href="#cb28-1187" aria-hidden="true" tabindex="-1"></a>prospects look, proxied by last month&#39;s job-finding rate relative to normal. In normal</span>
 <span id="cb28-1188"><a href="#cb28-1188" aria-hidden="true" tabindex="-1"></a>times $f = \bar f$ and the quit rate is just $\bar q_o$. The paper splits it</span>
@@ -7183,7 +7243,7 @@ Figure 4: The labor market in the three scenarios, 2025-2030, reproducing the p
 <span id="cb28-1255"><a href="#cb28-1255" aria-hidden="true" tabindex="-1"></a>\tag{35}</span>
 <span id="cb28-1256"><a href="#cb28-1256" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb28-1257"><a href="#cb28-1257" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-1258"><a href="#cb28-1258" aria-hidden="true" tabindex="-1"></a>::: {.callout-note appearance=&quot;simple&quot; title=&quot;Refresher: vacancies, the matching function, and the cross-occupation discount&quot;}</span>
+<span id="cb28-1258"><a href="#cb28-1258" aria-hidden="true" tabindex="-1"></a>::: {.callout-note appearance=&quot;simple&quot; collapse=&quot;true&quot; title=&quot;Refresher: vacancies, the matching function, and the cross-occupation discount (click to expand)&quot;}</span>
 <span id="cb28-1259"><a href="#cb28-1259" aria-hidden="true" tabindex="-1"></a>**(32) Postings.** Firms post to replace quits and to close a fraction $\theta_H$ of</span>
 <span id="cb28-1260"><a href="#cb28-1260" aria-hidden="true" tabindex="-1"></a>their shortfall. The division by the normal filling rate $\bar \pi_o$ is a unit</span>
 <span id="cb28-1261"><a href="#cb28-1261" aria-hidden="true" tabindex="-1"></a>conversion that is easy to skip past: a firm that wants ten hires this month must post</span>
@@ -7243,7 +7303,7 @@ Figure 4: The labor market in the three scenarios, 2025-2030, reproducing the p
 <span id="cb28-1315"><a href="#cb28-1315" aria-hidden="true" tabindex="-1"></a>\tag{38}</span>
 <span id="cb28-1316"><a href="#cb28-1316" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb28-1317"><a href="#cb28-1317" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-1318"><a href="#cb28-1318" aria-hidden="true" tabindex="-1"></a>::: {.callout-note appearance=&quot;simple&quot; title=&quot;Refresher: the stocks, and what pins down the steady state&quot;}</span>
+<span id="cb28-1318"><a href="#cb28-1318" aria-hidden="true" tabindex="-1"></a>::: {.callout-note appearance=&quot;simple&quot; collapse=&quot;true&quot; title=&quot;Refresher: the stocks, and what pins down the steady state (click to expand)&quot;}</span>
 <span id="cb28-1319"><a href="#cb28-1319" aria-hidden="true" tabindex="-1"></a>**(36) and (37)** are bookkeeping: employment loses quits and layoffs and gains hires;</span>
 <span id="cb28-1320"><a href="#cb28-1320" aria-hidden="true" tabindex="-1"></a>the pool gains the separations and loses the job-finders. Every separation enters the</span>
 <span id="cb28-1321"><a href="#cb28-1321" aria-hidden="true" tabindex="-1"></a>pool and every hire leaves it, so</span>
@@ -7288,7 +7348,7 @@ Figure 4: The labor market in the three scenarios, 2025-2030, reproducing the p
 <span id="cb28-1360"><a href="#cb28-1360" aria-hidden="true" tabindex="-1"></a>\tag{39}</span>
 <span id="cb28-1361"><a href="#cb28-1361" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb28-1362"><a href="#cb28-1362" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-1363"><a href="#cb28-1363" aria-hidden="true" tabindex="-1"></a>::: {.callout-note appearance=&quot;simple&quot; title=&quot;Refresher: reading prices off quantities, and why that is legitimate&quot;}</span>
+<span id="cb28-1363"><a href="#cb28-1363" aria-hidden="true" tabindex="-1"></a>::: {.callout-note appearance=&quot;simple&quot; collapse=&quot;true&quot; title=&quot;Refresher: reading prices off quantities, and why that is legitimate (click to expand)&quot;}</span>
 <span id="cb28-1364"><a href="#cb28-1364" aria-hidden="true" tabindex="-1"></a>The first row is the price index of <span class="co">[</span><span class="ot">Equation (4)</span><span class="co">](#eq-4)</span> with the tasks grouped three ways:</span>
 <span id="cb28-1365"><a href="#cb28-1365" aria-hidden="true" tabindex="-1"></a>surviving cognitive instances, all-other instances, and capital&#39;s instances.</span>
 <span id="cb28-1366"><a href="#cb28-1366" aria-hidden="true" tabindex="-1"></a>$\Lambda_{C,t}$ is the surviving cognitive mass, the same bracket as <span class="co">[</span><span class="ot">Equation (15)</span><span class="co">](#eq-15)</span></span>

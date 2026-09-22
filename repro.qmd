@@ -223,7 +223,7 @@ Y_t = \Big[ \sum_i \omega_i^{1/\sigma}\, y_{i,t}^{(\sigma-1)/\sigma} \Big]^{\sig
 \tag{1}
 $$
 
-::: {.callout-note appearance="simple" title="Refresher: what (1) is doing, and why the elasticity is the whole story"}
+::: {.callout-note appearance="simple" collapse="true" title="Refresher: what (1) is doing, and why the elasticity is the whole story (click to expand)"}
 This is the CES function from first-year graduate macro, with the inputs
 reinterpreted. The weights $\omega_i$ are base-period expenditure shares and sum to
 one, and $\sigma$ is the elasticity of substitution between any two instances,
@@ -254,7 +254,7 @@ p_{i,t} = c_{i,t} = \min\Big\{ \frac{w_t}{A_t \alpha_{L,i,t}},\ \frac{r_t}{\alph
 \tag{3}
 $$
 
-::: {.callout-note appearance="simple" title="Refresher: perfect substitutes inside a task, complements across tasks"}
+::: {.callout-note appearance="simple" collapse="true" title="Refresher: perfect substitutes inside a task, complements across tasks (click to expand)"}
 [Equation (2)](#eq-2) says one contract review is one contract review, whoever does it: a
 worker delivering $A_t \alpha_L$ units and a machine delivering $\alpha_K$ units are
 interchangeable *for that instance*. $A_t$ is the stock of ideas and augments labor
@@ -284,7 +284,7 @@ P_t = \Big[\sum_j \omega_j c_{j,t}^{1-\sigma}\Big]^{1/(1-\sigma)} \equiv 1
 \tag{4}
 $$
 
-::: {.callout-note appearance="simple" title="Refresher: deriving the expenditure share, and the sign that surprises people"}
+::: {.callout-note appearance="simple" collapse="true" title="Refresher: deriving the expenditure share, and the sign that surprises people (click to expand)"}
 Two steps, both standard. Cost minimization on (1) gives the CES demand curve
 $y_{i} = \omega_i (c_{i}/P)^{-\sigma} Y$. Multiply by the price $c_i$ and divide by
 $PY$ to turn a quantity into an expenditure share, and the exponent goes from
@@ -312,7 +312,7 @@ s_{L,t} = \sum_{i \in \mathcal{L}_t} s_{i,t} = \frac{w_t L_t}{P_t Y_t},
 \tag{5}
 $$
 
-::: {.callout-note appearance="simple" title="Refresher: the wage identity is an accounting identity, and it does a lot of work"}
+::: {.callout-note appearance="simple" collapse="true" title="Refresher: the wage identity is an accounting identity, and it does a lot of work (click to expand)"}
 The labor share is the sum of the expenditure shares of the instances labor still
 performs, which by definition equals the wage bill over GDP. Take logs of
 $s_L = wL/(PY)$ and rearrange: $\ln w = \ln(Y/L) + \ln s_L$. Nothing behavioural has
@@ -335,7 +335,7 @@ $$
 \tag{6}
 $$
 
-::: {.callout-note appearance="simple" title="Refresher: why capital supply is a schedule rather than an Euler equation"}
+::: {.callout-note appearance="simple" collapse="true" title="Refresher: why capital supply is a schedule rather than an Euler equation (click to expand)"}
 Rather than solve a household savings problem, the paper posits an upward-sloping
 supply curve: capital is $\varepsilon$ percent higher for every percent the rental
 rate exceeds its no-AI level $\bar r$. It is the reduced form of Moll, Rachel and
@@ -430,7 +430,7 @@ $$
 \tag{8'}
 $$
 
-::: {.callout-note appearance="simple" title="Refresher: why a logistic, and where (8') comes from in one line"}
+::: {.callout-note appearance="simple" collapse="true" title="Refresher: why a logistic, and where (8') comes from in one line (click to expand)"}
 Technology diffusion is S-shaped in the historical record (Griliches on hybrid corn,
 David on electricity), so reach and use follow logistics while the productivity gain
 per instance is allowed to drift linearly.
@@ -506,7 +506,7 @@ $$
 \tag{9}
 $$
 
-::: {.callout-note appearance="simple" title="Refresher: Hulten's theorem, Domar weights, and why the labor share shows up"}
+::: {.callout-note appearance="simple" collapse="true" title="Refresher: Hulten's theorem, Domar weights, and why the labor share shows up (click to expand)"}
 Hulten (1978) says that to a first order, the aggregate productivity gain is the sum
 of the microeconomic cost reductions, each weighted by its **Domar weight**: the
 producer's sales divided by GDP. The useful part is that you do not need to know how
@@ -536,7 +536,7 @@ s_{L,t0}\, \Delta \ln w_t + s_{K,t0}\, \Delta \ln r_t \approx s_{L,t0}\, m_t d_t
 \tag{10}
 $$
 
-::: {.callout-note appearance="simple" title="Refresher: the factor-price frontier, or the Solow residual read backwards"}
+::: {.callout-note appearance="simple" collapse="true" title="Refresher: the factor-price frontier, or the Solow residual read backwards (click to expand)"}
 The Solow residual you computed in graduate macro as
 $d\ln \mathrm{TFP} = d\ln Y - s_L d\ln L - s_K d\ln K$ has a **dual**: under constant
 returns and competitive pricing, factor payments exhaust output, and substituting the
@@ -618,7 +618,7 @@ $$
 \tag{11}
 $$
 
-::: {.callout-note appearance="simple" title="Refresher: reading (11) line by line"}
+::: {.callout-note appearance="simple" collapse="true" title="Refresher: reading (11) line by line (click to expand)"}
 **The wage line** is just the frontier (10) rearranged: labor gets the productivity
 gain less whatever the rental rate takes. Note what is *not* there: net displacement
 $(1-\rho)\psi m d$ does not appear. At a fixed rental rate the wage tracks
@@ -656,7 +656,7 @@ $$
 \tag{12}
 $$
 
-::: {.callout-note appearance="simple" title="Refresher: what (12) says, and how far to trust it"}
+::: {.callout-note appearance="simple" collapse="true" title="Refresher: what (12) says, and how far to trust it (click to expand)"}
 The threshold rises with the automation share $\psi$ and with $(1-\rho)/a$, the
 displacement per unit of cost saving. That ratio is the formal version of Acemoglu and
 Restrepo's "**so-so automation**": technology that takes tasks away from labor while
@@ -745,7 +745,7 @@ $$
 \tag{13}
 $$
 
-::: {.callout-note appearance="simple" title="Refresher: the trick in (13) is to look at the group AI does not touch"}
+::: {.callout-note appearance="simple" collapse="true" title="Refresher: the trick in (13) is to look at the group AI does not touch (click to expand)"}
 The appealing move here is to solve for the group that is *unaffected*. AI does
 nothing to the productivity of nursing or electrical work, so the cost of those tasks
 depends only on the wage, and demand for that labor is an ordinary CES demand curve
@@ -860,7 +860,7 @@ $$
 \tag{19}
 $$
 
-::: {.callout-note appearance="simple" title="Refresher: two different reasons a cognitive job disappears"}
+::: {.callout-note appearance="simple" collapse="true" title="Refresher: two different reasons a cognitive job disappears (click to expand)"}
 The first term is tasks changing hands: automation moves them to capital, and
 reinstatement gives a fraction $\rho$ back.
 
@@ -918,7 +918,7 @@ Y_t = C_t + I_t + R_t, \quad R_t = \iota_{R,t} Y_t
 \tag{21}
 $$
 
-::: {.callout-note appearance="simple" title="Refresher: semi-endogenous growth, and what the two exponents mean"}
+::: {.callout-note appearance="simple" collapse="true" title="Refresher: semi-endogenous growth, and what the two exponents mean (click to expand)"}
 This is the Romer (1990) idea-production function with the Jones (1995) correction,
 and the two exponents are the whole content.
 
@@ -969,7 +969,7 @@ $$
 \tag{43}
 $$
 
-::: {.callout-note appearance="simple" title="Refresher: why a big GDP gap makes such a small growth gap"}
+::: {.callout-note appearance="simple" collapse="true" title="Refresher: why a big GDP gap makes such a small growth gap (click to expand)"}
 [Equation (22)](#eq-22) is where the research share cancels. Both the AI and the no-AI path
 spend the same fraction $\iota_{R,t}$ of GDP on research, so in the *gap* between them
 only the GDP gap survives.
@@ -1005,7 +1005,7 @@ $$
 \tag{40}
 $$
 
-::: {.callout-note appearance="simple" title="Refresher: deriving gamma, and the two unit conversions behind 2.86"}
+::: {.callout-note appearance="simple" collapse="true" title="Refresher: deriving gamma, and the two unit conversions behind 2.86 (click to expand)"}
 For $\gamma$, set $g_{A,t} = g$ in (20) and solve for the stock:
 $A^* = (\nu R^{\lambda}/g)^{1/(1-\phi_R)}$, so $A^* \propto R^{\lambda/(1-\phi_R)}$.
 The elasticity of the long-run *level* of ideas to a permanent research uplift is
@@ -1103,7 +1103,7 @@ e^{-(1-\sigma)\Delta \ln A_t} \Big]
 \tag{45}
 $$
 
-::: {.callout-note appearance="simple" title="Refresher: three ways to write the same residual, and why the paper uses the third"}
+::: {.callout-note appearance="simple" collapse="true" title="Refresher: three ways to write the same residual, and why the paper uses the third (click to expand)"}
 [Equation (25)](#eq-25) is the dual from Section 2.1.3 again. [Equation (26)](#eq-26) is its first-order
 solution: both channels enter with the labor share as their Domar weight, because the
 ideas stock lowers the cost of every labor instance and the level channel lowers the
@@ -1164,7 +1164,7 @@ D_{C,t} = \max\{0, E_t - q_{C,t}\ell_{C,t}\},
 \tag{31}
 $$
 
-::: {.callout-note appearance="simple" title="Refresher: how a falling target turns into layoffs"}
+::: {.callout-note appearance="simple" collapse="true" title="Refresher: how a falling target turns into layoffs (click to expand)"}
 **(27) Quits.** Workers quit at a base rate plus a part that moves with how good
 prospects look, proxied by last month's job-finding rate relative to normal. In normal
 times $f = \bar f$ and the quit rate is just $\bar q_o$. The paper splits it
@@ -1237,7 +1237,7 @@ f_{N,t} = \mu \frac{H_{C,t}}{S_{C,t}} + \frac{H_{N,t}}{S_{N,t}}
 \tag{35}
 $$
 
-::: {.callout-note appearance="simple" title="Refresher: vacancies, the matching function, and the cross-occupation discount"}
+::: {.callout-note appearance="simple" collapse="true" title="Refresher: vacancies, the matching function, and the cross-occupation discount (click to expand)"}
 **(32) Postings.** Firms post to replace quits and to close a fraction $\theta_H$ of
 their shortfall. The division by the normal filling rate $\bar \pi_o$ is a unit
 conversion that is easy to skip past: a firm that wants ten hires this month must post
@@ -1297,7 +1297,7 @@ $$
 \tag{38}
 $$
 
-::: {.callout-note appearance="simple" title="Refresher: the stocks, and what pins down the steady state"}
+::: {.callout-note appearance="simple" collapse="true" title="Refresher: the stocks, and what pins down the steady state (click to expand)"}
 **(36) and (37)** are bookkeeping: employment loses quits and layoffs and gains hires;
 the pool gains the separations and loses the job-finders. Every separation enters the
 pool and every hire leaves it, so
@@ -1342,7 +1342,7 @@ e^{\Delta \ln (Y_t/\bar L) - \sigma \Delta \ln w_{C,t}},
 \tag{39}
 $$
 
-::: {.callout-note appearance="simple" title="Refresher: reading prices off quantities, and why that is legitimate"}
+::: {.callout-note appearance="simple" collapse="true" title="Refresher: reading prices off quantities, and why that is legitimate (click to expand)"}
 The first row is the price index of [Equation (4)](#eq-4) with the tasks grouped three ways:
 surviving cognitive instances, all-other instances, and capital's instances.
 $\Lambda_{C,t}$ is the surviving cognitive mass, the same bracket as [Equation (15)](#eq-15)
