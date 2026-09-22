@@ -1,6 +1,6 @@
 ---
 title: "Economic Scenarios for Transformative AI"
-subtitle: "An independent reproduction of Korinek, Jones, Sacher, Cotter and McCrory (2026), The Anthropic Institute Working Paper No. 2026-02"
+subtitle: "An independent reproduction of Korinek, Jones, Sacher, Cotter and McCrory (2026), [The Anthropic Institute Working Paper No. 2026-02](https://www.anthropic.com/institute/econ-scenarios)"
 date: today
 format:
   html:

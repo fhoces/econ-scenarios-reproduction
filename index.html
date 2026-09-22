@@ -80,6 +80,7 @@
     display: block; padding: 20px 22px; border: 1px solid var(--rule);
     border-radius: 10px; background: var(--panel); color: inherit;
     text-decoration: none; transition: border-color .15s, transform .15s;
+    position: relative; z-index: 0; overflow: hidden;
   }
   .card.wide { grid-column: 1 / -1; }
   .card:hover, .card:focus-visible {
@@ -95,19 +96,16 @@
   }
   .card p { color: var(--ink-2); font-size: 15px; margin: 0; }
 
-  .card-row { display: flex; align-items: center; gap: 16px; }
-  .card-text { flex: 1 1 auto; min-width: 0; }
   .card-icon-box {
-    flex: 0 0 auto; width: 90px; height: 60px; position: relative;
-    display: flex; align-items: center; justify-content: flex-start;
+    position: absolute; top: 14px; right: 14px; height: 110px; width: 130px;
+    z-index: -1; pointer-events: none;
   }
-  .card-icon-box img { height: 60px; width: auto; opacity: 0.14; display: block; }
-  .card-icon-box.stacked img { position: absolute; left: 0; top: 50%; transform: translateY(-50%); }
+  .card-icon-box img {
+    position: absolute; top: 0; right: 0; height: 110px; width: auto; opacity: 0.218;
+  }
 
   @media (max-width: 560px) {
     .cards { grid-template-columns: 1fr; }
-    .card-row { flex-direction: column; align-items: flex-start; }
-    .card-icon-box { width: auto; margin-top: 6px; }
   }
 
   .note {
@@ -143,10 +141,12 @@
   <h1>Economic Scenarios for Transformative AI</h1>
   <p class="byline">
     A from-scratch reimplementation of Korinek, Jones, Sacher, Cotter and McCrory (2026),
-    <cite>Economic Scenarios for Transformative AI</cite>, The Anthropic Institute Working
-    Paper No. 2026-02. Written entirely from the equations printed in the paper: no
-    replication package was published with it. Organized as the four layers of Open Policy
-    Analysis (OPA): <strong>output</strong>, <strong>assumptions</strong>,
+    <cite><a href="https://www.anthropic.com/institute/econ-scenarios">Economic Scenarios
+    for Transformative AI</a></cite>, The Anthropic Institute Working Paper No. 2026-02.
+    Written entirely from the equations printed in the paper: no replication package was
+    published with it. Organized as the four layers of
+    <a href="https://tinyurl.com/1qypbihb">Open
+    Policy Analysis</a> (OPA): <strong>output</strong>, <strong>assumptions</strong>,
     <strong>details</strong> and <strong>materials</strong>, so what the paper
     concludes, what it assumes, how it gets there, and what to run yourself stay in
     separate, checkable places.
@@ -169,8 +169,8 @@
            range the paper uses, and eleven outcome series recomputed as you move them.</p>
       </div>
       <div class="card-icon-box stacked" aria-hidden="true">
-        <img src="assets/opa/opa-output.png" alt="">
-        <img src="assets/opa/opa-assumptions.png" alt="">
+        <img src="assets/opa/opa-assumptions-solo.png" alt="">
+        <img src="assets/opa/opa-output-solo.png" alt="">
       </div>
     </div>
   </a>
@@ -195,8 +195,9 @@
     <div class="card-row">
       <div class="card-text">
         <span class="kicker">Slide deck</span>
-        <h3>The paper in four parts &rarr;</h3>
-        <p>The claim, the theory, the machinery and the results, walked equation by
+        <h3>Teaching materials &rarr;</h3>
+        <p>A slide deck designed to teach the paper's main components, to yourself or to
+           others: the claim, the theory, the machinery and the results, walked equation by
            equation. Cross-linked into the report for the equations it walks through in
            detail.</p>
       </div>
