@@ -2036,8 +2036,9 @@ filling rates 0.66 / 0.64, $\chi = 0.76$, the logistic slopes $\kappa_m = 0.33$ 
 $\kappa_d = 0.51$, and the worked example's exact TFP gain of 0.029.
 
 .highlight-box[
-One genuine discrepancy: the all-workers unemployment rate is 0.07 points low
-everywhere, because Table 1 rounds the normal pool to 0.038 while the paper's own
+One genuine discrepancy: the all-workers unemployment rate is 0.07 points low in the
+substantial scenario (modest and extreme are off by 0.04 points or less, and No-AI
+matches exactly), because Table 1 rounds the normal pool to 0.038 while the paper's own
 derivation uses 0.0384. At 0.0384 the row lands exactly.
 ]
 
@@ -2695,7 +2696,8 @@ Table 1 gives the normal search pool as $\bar U = 0.038$. But:
 - the reported pool split, 1.76 and 2.08 percent of the labor force, sums to 3.84%
 
 At $\bar U = 0.038$ the reimplementation gives an all-workers unemployment rate 0.07
-points below every published figure (4.53 against 4.6 in the substantial scenario). At
+points below the published figure in the substantial scenario (4.53 against 4.6; modest
+and extreme are off by 0.04 points or less, and No-AI matches exactly). At
 $\bar U = 0.0384$ every affected cell lands exactly, and nothing else moves.
 
 .blue-box[
