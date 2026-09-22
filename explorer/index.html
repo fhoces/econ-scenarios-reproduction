@@ -856,12 +856,14 @@
 
     tbody.textContent = "";
     // The table is the only numeric readout now (no always-visible outcomes
-    // list): GDP growth, capital stock, TFP, labor share, unemployment by
-    // group, and wages by group. Plain GDP (0) is chart-only, since it has no
-    // group split to tabulate; AI-sensitive unemployment (5) and AI-sensitive
-    // wage (1) are charted too but still belong here, so the AI-sensitive and
-    // all-workers figures for each sit side by side for direct comparison.
-    var TABLE_OUTCOMES = [7, 2, 3, 4, 5, 6, 1, 8];
+    // list): GDP growth, capital stock, TFP, labor share, then unemployment
+    // and wages each broken into all three groupings (AI-sensitive, the rest
+    // of the workforce, and the all-workers/all-other-weighted aggregate), so
+    // each metric's three rows sit together for direct comparison. Plain GDP
+    // (0) is chart-only, since it has no group split to tabulate; AI-sensitive
+    // unemployment (5) and AI-sensitive wage (1) are charted too but still
+    // belong here alongside their all-other and all-workers counterparts.
+    var TABLE_OUTCOMES = [7, 2, 3, 4, 5, 9, 6, 1, 10, 8];
     TABLE_OUTCOMES.forEach(function (oi) {
       var label = G.outcomes[oi];
       var tr = document.createElement("tr");

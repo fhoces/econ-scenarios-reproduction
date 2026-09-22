@@ -1,11 +1,12 @@
 """Export every cell of the 3^7 dial grid, with paths, for the static explorer page.
 
 Writes slides/data/grid_app.json: the seven dials and their levels, the 2030
-outcome snapshot (nine outcomes, including the GDP growth rate and the
-all-workers average wage) for each of the 4374 combinations, and the monthly
-2025-2030 paths for the GDP gap, the AI-sensitive wage gap, and the cognitive
-unemployment rate. GDP growth and the all-workers wage are snapshot-only (table
-rows in the explorer, not charts), so they have no monthly path.
+outcome snapshot (eleven outcomes: GDP, wages and unemployment broken out by
+AI-sensitive / all-other / all-workers, plus capital, TFP, labor share and GDP
+growth) for each of the 4374 combinations, and the monthly 2025-2030 paths for
+the GDP gap, the AI-sensitive wage gap, and the cognitive unemployment rate.
+Everything but those three charted series is snapshot-only (a table row in the
+explorer, not a chart), so it has no monthly path.
 
 Cells are stored in itertools.product order, so the JS side finds a cell by the
 mixed-radix index
@@ -76,6 +77,8 @@ def main() -> None:
             # Snapshot-only (a table row, not a chart), so no monthly path.
             100 * (fixed.g + fixed.n + res.growth("dlnY", T1)),
             100 * (math.exp(e.dlnw_avg) - 1),    # average wage gap, all workers (table-only)
+            100 * e.u_rate_N,                    # all-other-occupation unemployment (table-only)
+            100 * (math.exp(e.dlnw_N) - 1),       # all-other wage gap (table-only)
         )])
         gdp_path.append([round(100 * (math.exp(res.at(t).dlnY) - 1), 2) for t in months])
         wage_path.append([round(100 * (math.exp(res.at(t).dlnw_C_paid) - 1), 2) for t in months])
@@ -89,8 +92,9 @@ def main() -> None:
         # "AI-sensitive" wherever a reader sees it, as the deck does. Keys stay.
         "outcomes": ["GDP vs no-AI", "AI-sensitive wage vs no-AI", "Capital stock vs no-AI",
                      "Measured TFP vs no-AI", "Labor share", "Unemployment, AI-sensitive",
-                     "Unemployment, all workers", "GDP growth", "Average wage, all workers"],
-        "units": ["%", "%", "%", "%", "% of income", "%", "%", "% per year", "%"],
+                     "Unemployment, all workers", "GDP growth", "Average wage, all workers",
+                     "Unemployment, all-other occupations", "All-other wage vs no-AI"],
+        "units": ["%", "%", "%", "%", "% of income", "%", "%", "% per year", "%", "%", "%"],
         "named": {name: [lv.index(v) for (_, _, _, lv), v in zip(DIALS, vals)]
                   for name, vals in NAMED.items()},
         "snap": snap, "gdp": gdp_path, "wage": wage_path, "u": u_path,
