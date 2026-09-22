@@ -2443,7 +2443,7 @@ height: auto;
 
 
 <div class="site-nav">
-<p>Part of an independent reproduction of Korinek et al. (2026): <a href="index.html">overview</a> · <a href="slides/slides.html">the deck</a> · <a href="explorer/">the explorer</a> · <a href="https://github.com/fhoces/econ-scenarios-reproduction">source on GitHub</a></p>
+<p>Part of an independent reproduction of Korinek et al. (2026): <a href="index.html">overview</a> · <a href="slides/slides.html">the deck</a> · <a href="explorer/">the explorer</a> · <a href="https://github.com/fhoces/econ-scenarios-reproduction">Open Reproduction Materials</a></p>
 </div>
 <section id="how-to-read-this-document" class="level2">
 <h2 class="anchored" data-anchor-id="how-to-read-this-document">How to read this document</h2>
@@ -2748,7 +2748,7 @@ s_{L,t} = \sum_{i \in \mathcal{L}_t} s_{i,t} = \frac{w_t L_t}{P_t Y_t},
 <span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>                   <span class="st">&quot;this reproduction&quot;</span>: [<span class="ss">f&quot;</span><span class="sc">{</span>r[<span class="dv">1</span>]<span class="sc">:.4g}</span><span class="ss">&quot;</span> <span class="cf">for</span> r <span class="kw">in</span> base],</span>
 <span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>                   <span class="st">&quot;paper&quot;</span>: [r[<span class="dv">2</span>] <span class="cf">for</span> r <span class="kw">in</span> base]}))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
-<div id="factors" class="cell-output cell-output-display cell-output-markdown" data-execution_count="2">
+<div id="factors" class="cell-output cell-output-display cell-output-markdown" data-execution_count="56">
 <table class="caption-top table table-sm table-striped small">
 <colgroup>
 <col style="width: 62%">
@@ -2848,7 +2848,7 @@ s_{L,t} = \sum_{i \in \mathcal{L}_t} s_{i,t} = \frac{w_t L_t}{P_t Y_t},
 <span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>    })</span>
 <span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>show(pd.DataFrame(rows), floatfmt<span class="op">=</span><span class="st">&quot;.3f&quot;</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
-<div id="paths-table" class="cell-output cell-output-display cell-output-markdown" data-execution_count="3">
+<div id="paths-table" class="cell-output cell-output-display cell-output-markdown" data-execution_count="57">
 <table class="caption-top table table-sm table-striped small">
 <colgroup>
 <col style="width: 11%">
@@ -3075,7 +3075,7 @@ d\ln \mathrm{TFP}_t = s_{L,t}\, d\ln w_t + s_{K,t}\, d\ln r_t .
 <span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>                   <span class="st">&quot;this reproduction&quot;</span>: [<span class="ss">f&quot;</span><span class="sc">{</span>r[<span class="dv">1</span>]<span class="sc">:.4f}</span><span class="ss">&quot;</span> <span class="cf">for</span> r <span class="kw">in</span> worked],</span>
 <span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>                   <span class="st">&quot;paper&quot;</span>: [r[<span class="dv">2</span>] <span class="cf">for</span> r <span class="kw">in</span> worked]}))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
-<div id="worked" class="cell-output cell-output-display cell-output-markdown" data-execution_count="5">
+<div id="worked" class="cell-output cell-output-display cell-output-markdown" data-execution_count="59">
 <table class="caption-top table table-sm table-striped small">
 <colgroup>
 <col style="width: 64%">
@@ -3225,7 +3225,7 @@ d\ln \mathrm{TFP}_t = s_{L,t}\, d\ln w_t + s_{K,t}\, d\ln r_t .
 <span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>                 <span class="st">&quot;wage at eps = 1, pct&quot;</span>: wage_gap(<span class="fl">1.0</span>)})</span>
 <span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>show(pd.DataFrame(rows), floatfmt<span class="op">=</span><span class="st">&quot;.2f&quot;</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
-<div id="eps-star" class="cell-output cell-output-display cell-output-markdown" data-execution_count="6">
+<div id="eps-star" class="cell-output cell-output-display cell-output-markdown" data-execution_count="60">
 <table class="caption-top table table-sm table-striped small">
 <colgroup>
 <col style="width: 16%">
@@ -3281,7 +3281,7 @@ d\ln \mathrm{TFP}_t = s_{L,t}\, d\ln w_t + s_{K,t}\, d\ln r_t .
 <span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>fo_df <span class="op">=</span> pd.DataFrame(rows)</span>
 <span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>show(fo_df, floatfmt<span class="op">=</span>(<span class="st">&quot;.0f&quot;</span>, <span class="st">&quot;&quot;</span>, <span class="st">&quot;&quot;</span>, <span class="st">&quot;.4f&quot;</span>, <span class="st">&quot;.4f&quot;</span>, <span class="st">&quot;.1f&quot;</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
-<div id="firstorder" class="cell-output cell-output-display cell-output-markdown" data-execution_count="7">
+<div id="firstorder" class="cell-output cell-output-display cell-output-markdown" data-execution_count="61">
 <table class="caption-top table table-sm table-striped small">
 <colgroup>
 <col style="width: 15%">
@@ -3549,7 +3549,7 @@ s_{L,t} = 1 - \underbrace{\Big[ s_{K,t0} + s_{L,t0}\, \psi_t m_t d_t
 <span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>    })</span>
 <span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>show(pd.DataFrame(rows), floatfmt<span class="op">=</span><span class="st">&quot;.4f&quot;</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
-<div id="targets" class="cell-output cell-output-display cell-output-markdown" data-execution_count="8">
+<div id="targets" class="cell-output cell-output-display cell-output-markdown" data-execution_count="62">
 <table class="caption-top table table-sm table-striped small">
 <colgroup>
 <col style="width: 7%">
@@ -3727,7 +3727,7 @@ g_\iota = g_R - (g + n) = \frac{(1-\phi_R)\,g}{\lambda} - (g + n)
 <span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>    })</span>
 <span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>show(pd.DataFrame(rows), floatfmt<span class="op">=</span><span class="st">&quot;.5f&quot;</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
-<div id="ideas" class="cell-output cell-output-display cell-output-markdown" data-execution_count="9">
+<div id="ideas" class="cell-output cell-output-display cell-output-markdown" data-execution_count="63">
 <table class="caption-top table table-sm table-striped small">
 <colgroup>
 <col style="width: 7%">
@@ -3998,7 +3998,7 @@ e^{\Delta \ln (Y_t/\bar L) - \sigma \Delta \ln w_{C,t}},
 <span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>                   <span class="st">&quot;this reproduction&quot;</span>: [<span class="ss">f&quot;</span><span class="sc">{</span>r[<span class="dv">1</span>]<span class="sc">:.4g}</span><span class="ss">&quot;</span> <span class="cf">for</span> r <span class="kw">in</span> rows],</span>
 <span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a>                   <span class="st">&quot;paper&quot;</span>: [r[<span class="dv">2</span>] <span class="cf">for</span> r <span class="kw">in</span> rows]}))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
-<div id="steady-state" class="cell-output cell-output-display cell-output-markdown" data-execution_count="10">
+<div id="steady-state" class="cell-output cell-output-display cell-output-markdown" data-execution_count="64">
 <table class="caption-top table table-sm table-striped small">
 <colgroup>
 <col style="width: 53%">
@@ -4135,7 +4135,7 @@ e^{\Delta \ln (Y_t/\bar L) - \sigma \Delta \ln w_{C,t}},
 <span id="cb11-42"><a href="#cb11-42" aria-hidden="true" tabindex="-1"></a>    t1df[c] <span class="op">=</span> t1df[c].<span class="bu">map</span>(<span class="kw">lambda</span> x: <span class="st">&quot;&quot;</span> <span class="cf">if</span> pd.isna(x) <span class="cf">else</span> <span class="ss">f&quot;</span><span class="sc">{</span>x<span class="sc">:.4g}</span><span class="ss">&quot;</span>)</span>
 <span id="cb11-43"><a href="#cb11-43" aria-hidden="true" tabindex="-1"></a>show(t1df)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
-<div id="table1" class="cell-output cell-output-display cell-output-markdown" data-execution_count="11">
+<div id="table1" class="cell-output cell-output-display cell-output-markdown" data-execution_count="65">
 <table class="caption-top table table-sm table-striped small">
 <colgroup>
 <col style="width: 9%">
@@ -4479,7 +4479,7 @@ e^{\Delta \ln (Y_t/\bar L) - \sigma \Delta \ln w_{C,t}},
 <span id="cb12-102"><a href="#cb12-102" aria-hidden="true" tabindex="-1"></a>                                     <span class="st">&quot;origin&quot;</span>, <span class="st">&quot;basis&quot;</span>])</span>
 <span id="cb12-103"><a href="#cb12-103" aria-hidden="true" tabindex="-1"></a>show(odf)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
-<div id="origins" class="cell-output cell-output-display cell-output-markdown" data-execution_count="12">
+<div id="origins" class="cell-output cell-output-display cell-output-markdown" data-execution_count="66">
 <table class="caption-top table table-sm table-striped small">
 <colgroup>
 <col style="width: 9%">
@@ -4729,7 +4729,7 @@ e^{\Delta \ln (Y_t/\bar L) - \sigma \Delta \ln w_{C,t}},
 <span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>          .rename_axis(<span class="st">&quot;origin&quot;</span>).reset_index(name<span class="op">=</span><span class="st">&quot;rows&quot;</span>))</span>
 <span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>show(counts)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
-<div id="origins-count" class="cell-output cell-output-display cell-output-markdown" data-execution_count="13">
+<div id="origins-count" class="cell-output cell-output-display cell-output-markdown" data-execution_count="67">
 <table class="caption-top table table-sm table-striped small">
 <thead>
 <tr class="header">
@@ -4791,7 +4791,7 @@ e^{\Delta \ln (Y_t/\bar L) - \sigma \Delta \ln w_{C,t}},
 <span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a>t3_df <span class="op">=</span> pd.DataFrame(rows)</span>
 <span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a>show(t3_df, floatfmt<span class="op">=</span><span class="st">&quot;.3f&quot;</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
-<div id="table3" class="cell-output cell-output-display cell-output-markdown" data-execution_count="14">
+<div id="table3" class="cell-output cell-output-display cell-output-markdown" data-execution_count="68">
 <table class="caption-top table table-sm table-striped small">
 <colgroup>
 <col style="width: 33%">
@@ -5190,7 +5190,7 @@ Figure 4: The labor market in the three scenarios, 2025-2030, reproducing the p
 </tbody>
 </table>
 </div>
-<div id="survey-2" class="cell-output cell-output-display cell-output-markdown" data-execution_count="19">
+<div id="survey-2" class="cell-output cell-output-display cell-output-markdown" data-execution_count="73">
 <table class="caption-top table table-sm table-striped small">
 <colgroup>
 <col style="width: 33%">
@@ -5308,7 +5308,7 @@ Figure 4: The labor market in the three scenarios, 2025-2030, reproducing the p
 <span id="cb20-21"><a href="#cb20-21" aria-hidden="true" tabindex="-1"></a>    t5[label] <span class="op">=</span> [<span class="ss">f&quot;</span><span class="sc">{</span>col[r]<span class="sc">:,.2f}</span><span class="ss">  (</span><span class="sc">{</span>w<span class="sc">:,.1f}</span><span class="ss">)&quot;</span> <span class="cf">for</span> r, w <span class="kw">in</span> <span class="bu">zip</span>(TABLE5_ROWS, want)]</span>
 <span id="cb20-22"><a href="#cb20-22" aria-hidden="true" tabindex="-1"></a>show(pd.DataFrame({<span class="st">&quot;row&quot;</span>: TABLE5_ROWS, <span class="op">**</span>t5}))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
-<div id="table5" class="cell-output cell-output-display cell-output-markdown" data-execution_count="20">
+<div id="table5" class="cell-output cell-output-display cell-output-markdown" data-execution_count="74">
 <table class="caption-top table table-sm table-striped small">
 <colgroup>
 <col style="width: 22%">
@@ -5425,7 +5425,7 @@ Figure 4: The labor market in the three scenarios, 2025-2030, reproducing the p
 <span id="cb21-22"><a href="#cb21-22" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> r, w <span class="kw">in</span> <span class="bu">zip</span>(TABLE6_ROWS, want)]</span>
 <span id="cb21-23"><a href="#cb21-23" aria-hidden="true" tabindex="-1"></a>show(pd.DataFrame({<span class="st">&quot;row&quot;</span>: TABLE6_ROWS, <span class="op">**</span>t6}))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
-<div id="table6" class="cell-output cell-output-display cell-output-markdown" data-execution_count="21">
+<div id="table6" class="cell-output cell-output-display cell-output-markdown" data-execution_count="75">
 <table class="caption-top table table-sm table-striped small">
 <colgroup>
 <col style="width: 26%">
@@ -5541,7 +5541,7 @@ Figure 4: The labor market in the three scenarios, 2025-2030, reproducing the p
 <span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>show(pd.DataFrame(rows)[[<span class="st">&quot;a_2030&quot;</span>, <span class="st">&quot;displacement&quot;</span>, <span class="st">&quot;weak-link cushion&quot;</span>, <span class="st">&quot;ratio&quot;</span>]],</span>
 <span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>     floatfmt<span class="op">=</span>(<span class="st">&quot;.3f&quot;</span>, <span class="st">&quot;.3f&quot;</span>, <span class="st">&quot;.4f&quot;</span>, <span class="st">&quot;.4f&quot;</span>, <span class="st">&quot;.1f&quot;</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
-<div id="slop-decomposition" class="cell-output cell-output-display cell-output-markdown" data-execution_count="22">
+<div id="slop-decomposition" class="cell-output cell-output-display cell-output-markdown" data-execution_count="76">
 <table class="caption-top table table-sm table-striped small">
 <thead>
 <tr class="header">
@@ -5584,7 +5584,7 @@ Figure 4: The labor market in the three scenarios, 2025-2030, reproducing the p
 <span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>disp[<span class="st">&quot;eps_star&quot;</span>] <span class="op">=</span> disp[<span class="st">&quot;eps_star&quot;</span>].<span class="bu">map</span>(<span class="kw">lambda</span> x: <span class="st">&quot;inf&quot;</span> <span class="cf">if</span> <span class="kw">not</span> np.isfinite(x) <span class="cf">else</span> <span class="ss">f&quot;</span><span class="sc">{</span>x<span class="sc">:.2f}</span><span class="ss">&quot;</span>)</span>
 <span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>show(disp, floatfmt<span class="op">=</span><span class="st">&quot;.2f&quot;</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
-<div id="slop-cases" class="cell-output cell-output-display cell-output-markdown" data-execution_count="23">
+<div id="slop-cases" class="cell-output cell-output-display cell-output-markdown" data-execution_count="77">
 <table class="caption-top table table-sm table-striped small">
 <colgroup>
 <col style="width: 15%">
@@ -5763,7 +5763,7 @@ Figure 4: The labor market in the three scenarios, 2025-2030, reproducing the p
 <span id="cb26-31"><a href="#cb26-31" aria-hidden="true" tabindex="-1"></a>            <span class="st">&quot;where&quot;</span>])</span>
 <span id="cb26-32"><a href="#cb26-32" aria-hidden="true" tabindex="-1"></a>show(summary, floatfmt<span class="op">=</span><span class="st">&quot;.3f&quot;</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
-<div id="verify" class="cell-output cell-output-display cell-output-markdown" data-execution_count="25">
+<div id="verify" class="cell-output cell-output-display cell-output-markdown" data-execution_count="79">
 <table class="caption-top table table-sm table-striped small">
 <colgroup>
 <col style="width: 34%">
@@ -5843,7 +5843,7 @@ Figure 4: The labor market in the three scenarios, 2025-2030, reproducing the p
 <span id="cb27-34"><a href="#cb27-34" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb27-35"><a href="#cb27-35" aria-hidden="true" tabindex="-1"></a>show(pd.DataFrame(checks, columns<span class="op">=</span>[<span class="st">&quot;identity&quot;</span>, <span class="st">&quot;largest violation&quot;</span>, <span class="st">&quot;expected&quot;</span>]))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
-<div id="identities" class="cell-output cell-output-display cell-output-markdown" data-execution_count="26">
+<div id="identities" class="cell-output cell-output-display cell-output-markdown" data-execution_count="80">
 <table class="caption-top table table-sm table-striped small">
 <colgroup>
 <col style="width: 54%">
@@ -5907,7 +5907,7 @@ Figure 4: The labor market in the three scenarios, 2025-2030, reproducing the p
 <span id="cb28-19"><a href="#cb28-19" aria-hidden="true" tabindex="-1"></a>                 <span class="st">&quot;wedge, pct of the gap&quot;</span>: <span class="dv">100</span> <span class="op">*</span> <span class="bu">abs</span>(tfp <span class="op">-</span> dual) <span class="op">/</span> tfp})</span>
 <span id="cb28-20"><a href="#cb28-20" aria-hidden="true" tabindex="-1"></a>show(pd.DataFrame(rows), floatfmt<span class="op">=</span><span class="st">&quot;.3f&quot;</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
-<div id="dual" class="cell-output cell-output-display cell-output-markdown" data-execution_count="27">
+<div id="dual" class="cell-output cell-output-display cell-output-markdown" data-execution_count="81">
 <table class="caption-top table table-sm table-striped small">
 <colgroup>
 <col style="width: 14%">
@@ -5953,7 +5953,7 @@ Figure 4: The labor market in the three scenarios, 2025-2030, reproducing the p
 <span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="ex">python3</span> <span class="at">-m</span> pytest <span class="at">-q</span>          <span class="co"># the same checks as assertions, plus the ones not shown here</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>The package requires only the standard library; this document additionally uses pandas, matplotlib and tabulate for its tables and figures. <code>README.md</code> records the places where the paper leaves a modelling choice implicit and how each was resolved.</p>
 <div class="site-nav">
-<p>Part of an independent reproduction of Korinek et al. (2026): <a href="index.html">overview</a> · <a href="slides/slides.html">the deck</a> · <a href="explorer/">the explorer</a> · <a href="https://github.com/fhoces/econ-scenarios-reproduction">source on GitHub</a></p>
+<p>Part of an independent reproduction of Korinek et al. (2026): <a href="index.html">overview</a> · <a href="slides/slides.html">the deck</a> · <a href="explorer/">the explorer</a> · <a href="https://github.com/fhoces/econ-scenarios-reproduction">Open Reproduction Materials</a></p>
 </div>
 <!-- -->
 
@@ -6438,7 +6438,7 @@ Figure 4: The labor market in the three scenarios, 2025-2030, reproducing the p
 <span id="cb30-24"><a href="#cb30-24" aria-hidden="true" tabindex="-1"></a>::: {.site-nav}</span>
 <span id="cb30-25"><a href="#cb30-25" aria-hidden="true" tabindex="-1"></a>Part of an independent reproduction of Korinek et al. (2026): <span class="co">[</span><span class="ot">overview</span><span class="co">](index.html)</span></span>
 <span id="cb30-26"><a href="#cb30-26" aria-hidden="true" tabindex="-1"></a><span class="dv">&amp;middot;</span> <span class="co">[</span><span class="ot">the deck</span><span class="co">](slides/slides.html)</span> <span class="dv">&amp;middot;</span> <span class="co">[</span><span class="ot">the explorer</span><span class="co">](explorer/)</span> <span class="dv">&amp;middot;</span></span>
-<span id="cb30-27"><a href="#cb30-27" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">source on GitHub</span><span class="co">](https://github.com/fhoces/econ-scenarios-reproduction)</span></span>
+<span id="cb30-27"><a href="#cb30-27" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Open Reproduction Materials</span><span class="co">](https://github.com/fhoces/econ-scenarios-reproduction)</span></span>
 <span id="cb30-28"><a href="#cb30-28" aria-hidden="true" tabindex="-1"></a>:::</span>
 <span id="cb30-29"><a href="#cb30-29" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb30-30"><a href="#cb30-30" aria-hidden="true" tabindex="-1"></a><span class="fu">## How to read this document</span></span>
@@ -8600,7 +8600,7 @@ Figure 4: The labor market in the three scenarios, 2025-2030, reproducing the p
 <span id="cb30-2240"><a href="#cb30-2240" aria-hidden="true" tabindex="-1"></a>::: {.site-nav}</span>
 <span id="cb30-2241"><a href="#cb30-2241" aria-hidden="true" tabindex="-1"></a>Part of an independent reproduction of Korinek et al. (2026): <span class="co">[</span><span class="ot">overview</span><span class="co">](index.html)</span></span>
 <span id="cb30-2242"><a href="#cb30-2242" aria-hidden="true" tabindex="-1"></a><span class="dv">&amp;middot;</span> <span class="co">[</span><span class="ot">the deck</span><span class="co">](slides/slides.html)</span> <span class="dv">&amp;middot;</span> <span class="co">[</span><span class="ot">the explorer</span><span class="co">](explorer/)</span> <span class="dv">&amp;middot;</span></span>
-<span id="cb30-2243"><a href="#cb30-2243" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">source on GitHub</span><span class="co">](https://github.com/fhoces/econ-scenarios-reproduction)</span></span>
+<span id="cb30-2243"><a href="#cb30-2243" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Open Reproduction Materials</span><span class="co">](https://github.com/fhoces/econ-scenarios-reproduction)</span></span>
 <span id="cb30-2244"><a href="#cb30-2244" aria-hidden="true" tabindex="-1"></a>:::</span>
 </code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal><i class="bi"></i></button></div>
 </div></div></div></div></div>

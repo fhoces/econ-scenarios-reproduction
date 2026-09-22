@@ -6,6 +6,7 @@ __pycache__/
 # Quarto intermediates
 *.quarto_ipynb
 /.quarto/
+/repro_files/
 
 # Large regenerable build products.
 #

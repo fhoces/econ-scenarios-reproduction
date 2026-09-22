@@ -24,7 +24,7 @@ execute:
 ::: {.site-nav}
 Part of an independent reproduction of Korinek et al. (2026): [overview](index.html)
 &middot; [the deck](slides/slides.html) &middot; [the explorer](explorer/) &middot;
-[source on GitHub](https://github.com/fhoces/econ-scenarios-reproduction)
+[Open Reproduction Materials](https://github.com/fhoces/econ-scenarios-reproduction)
 :::
 
 ## How to read this document
@@ -2186,5 +2186,5 @@ places where the paper leaves a modelling choice implicit and how each was resol
 ::: {.site-nav}
 Part of an independent reproduction of Korinek et al. (2026): [overview](index.html)
 &middot; [the deck](slides/slides.html) &middot; [the explorer](explorer/) &middot;
-[source on GitHub](https://github.com/fhoces/econ-scenarios-reproduction)
+[Open Reproduction Materials](https://github.com/fhoces/econ-scenarios-reproduction)
 :::
