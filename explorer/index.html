@@ -107,6 +107,7 @@
     margin: 0;
     font-size: 15.5px;
   }
+  .standfirst + .standfirst { margin-top: 14px; }
   .standfirst em { color: var(--ink); font-style: italic; }
 
   /* ---- identity strip -------------------------------------------------- */
@@ -351,6 +352,8 @@
     font-variant-numeric: tabular-nums;
   }
   th:first-child, td:first-child { text-align: left; font-family: var(--sans); }
+  caption.tcap { caption-side: top; text-align: left; font-size: 12px; color: var(--ink-3);
+                 padding-bottom: 8px; max-width: 60ch; }
   th { color: var(--ink-3); font-weight: 500; }
 
   .note {
@@ -391,6 +394,15 @@
       precomputed, so the 2030 outcomes appear as you click. Reinstatement is carried on a finer
       grid than the paper's, including values at and above one.
     </p>
+    <p class="standfirst">
+      Two things to hold onto while reading the numbers. <strong>Every figure on this page is a
+      gap against the same US economy without AI</strong>, which grows at its ordinary 2 percent
+      a year: "+8.3 percent" means 8.3 percent above that path, never a forecast of growth or of
+      the level. And <strong>the model splits the workforce in two</strong>: the AI-sensitive
+      occupations, whose tasks AI is assumed to touch, and all other occupations. (The paper
+      calls the first group "cognitive"; this reproduction does not, because the label implies
+      the nurse and the electrician are not thinking.)
+    </p>
   </header>
 
   <div class="identity">
@@ -407,7 +419,7 @@
         <button type="button" data-preset="substantial">Substantial</button>
         <button type="button" data-preset="extreme">Extreme</button>
         <button type="button" data-preset="best">Highest GDP cell</button>
-        <button type="button" data-preset="best-wage">Highest wage growth</button>
+        <button type="button" data-preset="best-wage">Best AI-sensitive wage</button>
       </div>
 
       <div class="note">
@@ -461,6 +473,9 @@
         <summary>Show the numbers as a table</summary>
         <div class="table-scroll">
           <table id="cmp">
+            <caption class="tcap">The three right-hand columns are the paper's own scenarios, so they
+              do not move as you click. They are there to place whatever setting you have chosen
+              against the three the paper reports.</caption>
             <thead>
               <tr><th>Outcome in 2030</th><th>This setting</th><th>Modest</th><th>Substantial</th><th>Extreme</th></tr>
             </thead>
@@ -871,7 +886,10 @@
     // belong here alongside their all-other and all-workers counterparts.
     var TABLE_OUTCOMES = [7, 2, 3, 4, 5, 9, 6, 1, 10, 8];
     TABLE_OUTCOMES.forEach(function (oi) {
-      var label = G.outcomes[oi];
+      // G.units ships beside G.outcomes precisely so the table can say what each row
+      // is measured in: most are percent gaps, but the labor share is a share of income
+      // and GDP growth is a rate per year, and those two are easy to misread as gaps.
+      var label = G.outcomes[oi] + " (" + G.units[oi] + ")";
       var tr = document.createElement("tr");
       var cells = [label, snap[oi].toFixed(1),
         G.snap[namedIdx.modest][oi].toFixed(1),
