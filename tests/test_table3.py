@@ -9,7 +9,8 @@ from aiscen.report import PUBLISHED, ROW_ORDER, build_table3
 
 # Two cells sit just outside a 0.05 tolerance because of the normal-pool rounding:
 # Table 1 gives U_bar = 0.038 while the quit-rate derivation on p. 26 uses 3.84 pct.
-# At U_bar = 0.0384 both land on the published figure (see test_pool_rounding below).
+# At U_bar = 0.0384 the all-workers cell lands on the published figure and the
+# cognitive one closes most of the way (see test_pool_rounding below).
 WIDE = {
     ("Unemployment rate, cognitive, pct", 0): 0.09,
     ("Unemployment rate, all workers, pct", 2): 0.09,
@@ -34,8 +35,12 @@ def test_table3_row(row):
 
 def test_pool_rounding_explains_the_two_wide_cells():
     """At U_bar = 0.0384 (the value the p. 26 derivation uses) the pool split is the
-    paper's 1.76 / 2.08 and the all-workers row lands on the published 4.6. The
-    cognitive-origin rate is then 2.85 pct, which the paper prints as 2.9."""
+    paper's 1.76 / 2.08 and the all-workers row lands on the published 4.6.
+
+    The cognitive-origin rate only closes most of the gap: 2.848 pct against a printed
+    2.9, so it still rounds to 2.8. The pool accounts for the size of that cell's gap
+    without closing it; tests/test_printed_precision.py holds that distinction.
+    """
     f = Fixed(U_bar=0.0384)
     t3 = build_table3(f)
     from aiscen import steady
