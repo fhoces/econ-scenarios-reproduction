@@ -1,13 +1,14 @@
 # Reimplementation: "Economic Scenarios for Transformative AI"
 
+<img src="assets/opa/opa-materials.png" align="right" width="130" alt="The materials layer of the Open Policy Analysis stack">
+
 An independent, from-scratch implementation of the model in
 
 > Korinek, Anton, Charles I. Jones, Szymon Sacher, Tess Cotter and Peter McCrory (2026),
 > "Economic Scenarios for Transformative AI", The Anthropic Institute Working Paper
 > No. 2026-02, September 2026.
 
-Following the [Open Policy Analysis](https://tinyurl.com/1qypbihb) (OPA) framework, this
-repository is split into three components:
+Following the [Open Policy Analysis](https://tinyurl.com/1qypbihb) (OPA) framework:
 
 1. **Open Output**: [an interactive explorer](https://fhoces.github.io/econ-scenarios-reproduction/explorer/),
    which recomputes all eleven outcome series live over every combination of the paper's

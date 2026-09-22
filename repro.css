@@ -24,23 +24,19 @@ code.sourceCode { font-size: 0.8rem; }
 .site-nav a { color: #2a78d6; text-decoration: none; }
 .site-nav a:hover { text-decoration: underline; }
 
-/* The OPA layer this document is, set behind the opening sentence at the same
-   opacity the landing page's cards use. The block needs its own stacking context
-   or the negative z-index drops the figure behind the page background. */
-.report-intro {
-  position: relative;
-  z-index: 0;
-  margin-bottom: 1.8rem;
+/* The full OPA stack, floated beside the opening paragraph and its three-item
+   legend of which artifact is which layer. */
+.report-intro { margin-bottom: 1.8rem; overflow: hidden; }
+.report-intro .opa-figure {
+  float: right;
+  width: 150px;
+  height: auto;
+  margin: 0 0 12px 20px;
 }
-.report-intro .layer-mark {
-  position: absolute;
-  top: -6px;
-  right: 0;
-  height: 120px;
-  width: auto;
-  opacity: 0.218;
-  z-index: -1;
-  pointer-events: none;
+.report-intro ul { margin: 0.6rem 0 0; padding-left: 1.2rem; }
+.report-intro li { margin-bottom: 0.25rem; }
+@media (max-width: 520px) {
+  .report-intro .opa-figure { float: none; display: block; margin: 0 auto 12px; }
 }
 
 /* Quarto emits these matplotlib figures without img-fluid, so nothing caps their

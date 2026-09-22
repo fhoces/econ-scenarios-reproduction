@@ -71,7 +71,16 @@
     font-size: 15px;
     line-height: 1.55;
     -webkit-font-smoothing: antialiased;
+    /* The dial tooltips (.pop) sit off to the side with visibility:hidden rather
+       than display:none, so their fade-in transition still works, but that means
+       they keep a real, laid-out box even while hidden and can push past the
+       viewport edge on a narrow screen, near dials that aren't flush with the
+       page's own left margin. Clip rather than hide, so it never establishes a
+       new scroll container (unlike overflow-x:hidden). Needed on html too:
+       clipping body alone still left document.documentElement.scrollWidth wide. */
+    overflow-x: clip;
   }
+  html { overflow-x: clip; }
   .wrap {
     max-width: 1180px;
     margin: 0 auto;
@@ -353,6 +362,11 @@
   summary { cursor: pointer; font-size: 13px; color: var(--ink-2); }
   summary:focus-visible { outline: 2px solid var(--series-1); outline-offset: 2px; }
   .table-scroll { overflow-x: auto; margin-top: 12px; }
+  /* Belt and suspenders: some Chrome builds were seen NOT applying the UA stylesheet's
+     details:not([open]) > *:not(summary){display:none} rule to this div (its child
+     table still measured a real width with the box collapsed), which let the closed
+     table push the page wider than the viewport. Force it explicitly. */
+  details:not([open]) .table-scroll { display: none; }
   table { border-collapse: collapse; font-size: 12.5px; min-width: 420px; }
   th, td {
     text-align: right;

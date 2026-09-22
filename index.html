@@ -128,6 +128,11 @@
   .note strong { color: var(--ink); font-weight: 600; }
 
   table { border-collapse: collapse; width: 100%; font-size: 15px; margin: 4px 0 0; }
+  /* table-layout:auto still lets a table grow past width:100% when its content's
+     min-content width (an unbreakable header word like "Substantial") exceeds the
+     container at narrow viewports. Scroll the table itself rather than the page. */
+  .table-scroll { overflow-x: auto; margin: 4px 0 0; }
+  .table-scroll table { margin: 0; }
   th, td { text-align: left; padding: 8px 12px 8px 0; border-bottom: 1px solid var(--rule); }
   th { font-size: 12px; font-family: var(--mono); letter-spacing: 0.06em;
        text-transform: uppercase; color: var(--ink-3); font-weight: 500; }
@@ -156,10 +161,9 @@
     <cite><a href="https://www.anthropic.com/institute/econ-scenarios">Economic Scenarios
     for Transformative AI</a></cite>, The Anthropic Institute Working Paper No. 2026-02.
     Written entirely from the equations printed in the paper: no replication package was
-    published with it. Following the
+    published with it. This site follows the
     <a href="https://tinyurl.com/1qypbihb">Open
-    Policy Analysis</a> (OPA) framework, it is split into <strong>output</strong>,
-    <strong>analysis</strong> and <strong>materials</strong>, so what the paper
+    Policy Analysis</a> (OPA) framework, so what the paper
     concludes, how it gets there, and what to run yourself stay in separate,
     checkable places.
   </p>
@@ -239,6 +243,7 @@
    split in two, the AI-sensitive occupations whose tasks AI is assumed to touch and all
    other occupations.</p>
 
+<div class="table-scroll">
 <table class="scen">
   <thead><tr><th>In 2030</th><th>No AI</th><th>Modest</th><th>Substantial</th><th>Extreme</th></tr></thead>
   <tbody>
@@ -248,6 +253,7 @@
     <tr><td>Labor share, pct of income</td><td>60.0</td><td>59.4</td><td>56.1</td><td>45.2</td></tr>
   </tbody>
 </table>
+</div>
 
 <p style="margin-top:14px;">Those are the paper's numbers, from its Table 3. This
    reproduction recomputes every one of them from the printed equations, and the four rows
@@ -257,6 +263,7 @@
 
 <h2>What reproduces</h2>
 
+<div class="table-scroll">
 <table>
   <thead><tr><th>Published table</th><th>Result</th></tr></thead>
   <tbody>
@@ -273,6 +280,7 @@
             to a different printed digit</td></tr>
   </tbody>
 </table>
+</div>
 
 <p style="margin-top:14px;"><strong>"Within test tolerance"</strong> means the reproduced
 value sits within 0.05 percentage points of the published one for Table 3, widened to 0.10

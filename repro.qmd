@@ -32,12 +32,16 @@ Part of an independent reproduction of Korinek et al. (2026):
 ## Introduction
 
 ::: {.report-intro}
-![](assets/opa/opa-details.png){.layer-mark}
+![](assets/opa/opa-details.png){.opa-figure}
+
 An independent reproduction of
 [Economic Scenarios for Transformative AI](https://www.anthropic.com/institute/econ-scenarios),
-following the
-[Open Policy Analysis](https://tinyurl.com/1qypbihb) framework: this document and
-[the slide deck](slides/slides.html) are its **open analysis**.
+following the [Open Policy Analysis](https://tinyurl.com/1qypbihb) framework:
+
+- **Open Output**: [the explorer](explorer/), every combination of the seven inputs
+- **Open Analysis**: this document, and [the slide deck](slides/slides.html)
+- **Open Materials**: [the repository](https://github.com/fhoces/econ-scenarios-reproduction),
+  the model, its tests and every exported CSV
 :::
 
 No replication package was published with the paper, so every number below is
