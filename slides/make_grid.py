@@ -25,9 +25,18 @@ LEVELS = {
 NAMES = ("modest", "substantial", "extreme")
 
 
+
+def gain_path(a_2030: float, anchor: float, years: float) -> tuple:
+    """(a_anchor, g_a) for a custom 2030 gain, following the paper's own explorer: above
+    the 0.35 anchor the gain rises linearly from it; at or below the anchor it is held
+    flat at the chosen value rather than sloping down to it."""
+    if a_2030 <= anchor:
+        return a_2030, 0.0
+    return anchor, (a_2030 - anchor) / years
+
 def main() -> None:
     fixed = Fixed()
-    anchor = SUBSTANTIAL.a_anchor          # a_t is linear from a common 2026 anchor
+    anchor = SUBSTANTIAL.a_anchor          # custom gains above it rise from this 2026 anchor
     years = 2030.0 - fixed.t_anchor
     out = pathlib.Path(__file__).parent / "data" / "grid.csv"
 
@@ -37,9 +46,10 @@ def main() -> None:
         w.writerow(list(LEVELS) + ["level_sum", "gdp", "u_C", "s_L"])
         for combo in itertools.product(*[range(3) for _ in LEVELS]):
             v = {k: LEVELS[k][i] for k, i in zip(LEVELS, combo)}
+            a_anchor, g_a = gain_path(v["a"], anchor, years)
             scen = Scenario(
                 name="grid", m_2030=v["m"], d_2030=v["d"],
-                a_anchor=anchor, g_a=(v["a"] - anchor) / years,
+                a_anchor=a_anchor, g_a=g_a,
                 psi=v["psi"], rho=v["rho"], mu=v["mu"], theta_H=v["theta_H"],
             )
             m = sim.run(fixed, scen).at(2030.0)

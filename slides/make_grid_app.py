@@ -47,6 +47,15 @@ NAMED = {
 T0, T1 = 2025.0, 2030.0
 
 
+
+def gain_path(a_2030: float, anchor: float, years: float) -> tuple:
+    """(a_anchor, g_a) for a custom 2030 gain, following the paper's own explorer: above
+    the 0.35 anchor the gain rises linearly from it; at or below the anchor it is held
+    flat at the chosen value rather than sloping down to it."""
+    if a_2030 <= anchor:
+        return a_2030, 0.0
+    return anchor, (a_2030 - anchor) / years
+
 def main() -> None:
     fixed = Fixed()
     anchor = SUBSTANTIAL.a_anchor
@@ -57,9 +66,10 @@ def main() -> None:
     t_start = time.perf_counter()
     for combo in itertools.product(*[range(len(lv)) for _, _, _, lv in DIALS]):
         v = {k: lv[i] for (k, _, _, lv), i in zip(DIALS, combo)}
+        a_anchor, g_a = gain_path(v["a"], anchor, years)
         res = sim.run(fixed, Scenario(
             name="grid", m_2030=v["m"], d_2030=v["d"],
-            a_anchor=anchor, g_a=(v["a"] - anchor) / years,
+            a_anchor=a_anchor, g_a=g_a,
             psi=v["psi"], rho=v["rho"], mu=v["mu"], theta_H=v["theta_H"]))
         e = res.at(T1)
         snap.append([round(x, 2) for x in (
