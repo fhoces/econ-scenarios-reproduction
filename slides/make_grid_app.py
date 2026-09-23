@@ -1,6 +1,7 @@
-"""Export every cell of the 3^7 dial grid, with paths, for the static explorer page.
+"""Export every cell of the dial grid (3^6 x 6 = 4374 cells), with paths, for the explorer.
 
-Writes slides/data/grid_app.json: the seven dials and their levels, the 2030
+Writes explorer/grid.js, the file the explorer page loads, and its gitignored JSON twin
+slides/data/grid_app.json, both from one payload: the seven dials and their levels, the 2030
 outcome snapshot (eleven outcomes: GDP, wages and unemployment broken out by
 AI-sensitive / all-other / all-workers, plus capital, TFP, labor share and GDP
 growth) for each of the 4374 combinations, and the monthly 2025-2030 paths for

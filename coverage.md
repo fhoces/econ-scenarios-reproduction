@@ -34,30 +34,30 @@ regenerated from this file by the project hook in `.claude/settings.json`.
 | Date | Item | Read? | Engagement | Note |
 |---|---|---|---|---|
 | 2026-09 | Landing page and scenario explorer | yes | model | Gives the three scenarios as +1.6% / +8.3% / +32.4% with 2030 GDP of $34.1T / $36.3T / $44.4T. States "External reviewers were not asked to endorse our conclusions", flags itself as Version 1.0, and concedes the model "isolates a few key forces and omits many others" |
-| 2026-09-10 | Anton Korinek, [thread on X](https://x.com/akorinek/status/2097687561565090189) | no | — | Author's own launch thread, "My first working paper at Anthropic" |
+| 2026-09-10 | Anton Korinek, [thread on X](https://x.com/akorinek/status/2097687561565090189) | no | none | Author's own launch thread, "My first working paper at Anthropic" |
 
 ## Commentary worth reading
 
 | Date | Item | Read? | Engagement | Note |
 |---|---|---|---|---|
 | 2026-09-10 | Tyler Cowen, [Marginal Revolution](https://marginalrevolution.com/marginalrevolution/2026/09/economic-scenarios-for-transformative-ai.html) | yes | numbers | "sober, reasoned, scientific, and (for the most part) dynamically consistent"; calls it "a strong line-up from Anthropic". Picks his own path: "I will opt for something a modest bit more than modest", i.e. between modest and substantial. Does not touch the equations or the calibration. Points readers to commentary by Alex Imas |
-| 2026-09 | Alex Imas commentary, linked by Cowen | no | — | Lead only, URL not yet found. Worth chasing since it is the one piece Cowen singled out |
-| 2026-09 | [AI, Redistribution, and the Size of the Pie](https://marginalrevolution.com/marginalrevolution/2026/09/ai-redistribution-and-the-size-of-the-pie.html), Marginal Revolution | no | — | Appears to use the paper as a jumping-off point for the distributional question |
-| 2026-09 | [Anthropic Modeled the End of the Knowledge Worker. Watch the Capital Share.](https://longyield.substack.com/p/anthropic-modeled-the-end-of-the) | no | — | Title suggests it keys on the labor share, the 60 to 45 percent fall, which is the paper's real distributional claim |
-| 2026-09 | [Anthropic's Transformative AI Economic Scenarios: Model, Evidence, and Civilizational Stakes](https://harmoniousdiscourse.substack.com/p/anthropics-transformative-ai-economic) | no | — | Longest independent piece found. A search summary attributes to it the claim that critics think the paper *understates* AI by giving ideas only a 0.6 percent boost by 2030, contrasting Tom Davidson and Leopold Aschenbrenner. Unverified, and the 0.6 percent figure needs checking against the paper's innovation block |
-| 2026-09 | [Three Paths for Work and Income under AI, 2026 to 2030](https://joseluischavezcalva.substack.com/p/three-paths-for-work-and-national) | no | — | |
+| 2026-09 | Alex Imas commentary, linked by Cowen | no | none | Lead only, URL not yet found. Worth chasing since it is the one piece Cowen singled out |
+| 2026-09 | [AI, Redistribution, and the Size of the Pie](https://marginalrevolution.com/marginalrevolution/2026/09/ai-redistribution-and-the-size-of-the-pie.html), Marginal Revolution | no | none | Appears to use the paper as a jumping-off point for the distributional question |
+| 2026-09 | [Anthropic Modeled the End of the Knowledge Worker. Watch the Capital Share.](https://longyield.substack.com/p/anthropic-modeled-the-end-of-the) | no | none | Title suggests it keys on the labor share, the 60 to 45 percent fall, which is the paper's real distributional claim |
+| 2026-09 | [Anthropic's Transformative AI Economic Scenarios: Model, Evidence, and Civilizational Stakes](https://harmoniousdiscourse.substack.com/p/anthropics-transformative-ai-economic) | no | none | Longest independent piece found. A search summary attributes to it the claim that critics think the paper *understates* AI by giving ideas only a 0.6 percent boost by 2030, contrasting Tom Davidson and Leopold Aschenbrenner. Unverified, and the 0.6 percent figure needs checking against the paper's innovation block |
+| 2026-09 | [Three Paths for Work and Income under AI, 2026 to 2030](https://joseluischavezcalva.substack.com/p/three-paths-for-work-and-national) | no | none | |
 
 ## Press
 
 | Date | Item | Read? | Engagement | Note |
 |---|---|---|---|---|
 | 2026-09-11 | Euronews, [Anthropic says AI could bring both 15% growth and mass unemployment by 2030](https://www.euronews.com/business/2026/09/11/anthropic-says-ai-could-bring-both-15-growth-and-mass-unemployment-by-2030) | no | numbers | The "15%" is the extreme scenario's annual growth rate in 2030, a different object from the 32.4 percent level gap. See the conflation note below |
-| 2026-09 | The Next Web, [Anthropic's three AI economic scenarios for 2030, explained](https://thenextweb.com/news/anthropic-ai-economic-scenarios-2030) | no | — | |
-| 2026-09 | unite.ai, [Anthropic Releases Interactive Model of AI's Possible Economic Futures](https://www.unite.ai/anthropic-releases-interactive-model-of-ais-possible-economic-futures/) | no | — | Leads on the explorer rather than the paper |
-| 2026-09 | XenoSpectrum, [Growth and Worker Wages Can Diverge](https://xenospectrum.com/en/anthropic-ai-economic-scenarios/) | no | — | Framing matches the paper's actual point |
+| 2026-09 | The Next Web, [Anthropic's three AI economic scenarios for 2030, explained](https://thenextweb.com/news/anthropic-ai-economic-scenarios-2030) | no | none | |
+| 2026-09 | unite.ai, [Anthropic Releases Interactive Model of AI's Possible Economic Futures](https://www.unite.ai/anthropic-releases-interactive-model-of-ais-possible-economic-futures/) | no | none | Leads on the explorer rather than the paper |
+| 2026-09 | XenoSpectrum, [Growth and Worker Wages Can Diverge](https://xenospectrum.com/en/anthropic-ai-economic-scenarios/) | no | none | Framing matches the paper's actual point |
 | 2026-09-15 | Disruption Banking, [Anthropic is Fine With You Losing Your Job, So Long as It's Done Safely](https://www.disruptionbanking.com/2026/09/15/anthropic-is-fine-with-you-losing-your-job-so-long-as-its-done-safely/) | no | framing | Adversarial framing aimed at Anthropic, likely not at the model |
-| 2026-09 | Startup Fortune, [Anthropic Says AI Could Grow The Economy Or Wreck The Job Market By 2030](https://startupfortune.com/anthropic-says-ai-could-grow-the-economy-or-wreck-the-job-market-by-2030/) | no | — | |
-| 2026-09 | [Anthropic Maps Three AI Economic Scenarios to 2030](https://asset-management-news.com/markets/anthropic-maps-three-ai-economic-scenarios-2030/) | no | — | Asset-management trade press |
+| 2026-09 | Startup Fortune, [Anthropic Says AI Could Grow The Economy Or Wreck The Job Market By 2030](https://startupfortune.com/anthropic-says-ai-could-grow-the-economy-or-wreck-the-job-market-by-2030/) | no | none | |
+| 2026-09 | [Anthropic Maps Three AI Economic Scenarios to 2030](https://asset-management-news.com/markets/anthropic-maps-three-ai-economic-scenarios-2030/) | no | none | Asset-management trade press |
 
 ## Aggregators and career-advice derivatives
 
