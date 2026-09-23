@@ -12,18 +12,19 @@ it has no Course Map slide (a Deck Map takes that slot) and no `concepts.md` /
 
 ## Structure
 
-80 slides: the xaringan title slide, a Deck Map, then four parts and the backups.
+81 slides: the xaringan title slide, "An Open Reproduction" (the OPA framing and links to
+the other artifacts), a Deck Map, then four parts and the backups.
 
 | Part | Slides | Covers |
 |---|---|---|
-| 1. The claim | 3-17 | What the paper asserts, the terminology this deck does not borrow, one slide per input, and the model on one page |
-| 2. The model | 18-33 | Task production, the assignment rule, prices and shares, TFP, the labor share, employment, ideas, unemployment: where every equation comes from |
-| 3. Solving the model for US inputs | 34-47 | Calibration, the steady state, month zero, the two 44-equation walls, the (39) inversion, the root-finds |
-| 4. Results: some scenarios and the explorer | 48-60 | The three scenarios one at a time, robustness, the survey, what reproduces, takeaways, and two postscripts (the seven-input grid, the slop extension) |
-| Backup | 61-80 | Derivations, month 0 step by step, matching, the gain *a*, the U-bar cells |
+| 1. The claim | 4-18 | What the paper asserts, the terminology this deck does not borrow, one slide per input, and the model on one page |
+| 2. The model | 19-34 | Task production, the assignment rule, prices and shares, TFP, the labor share, employment, ideas, unemployment: where every equation comes from |
+| 3. Solving the model for US inputs | 35-48 | Calibration, the steady state, month zero, the two 44-equation walls, the (39) inversion, the root-finds |
+| 4. Results: some scenarios and the explorer | 49-61 | The three scenarios one at a time, robustness, the survey, what reproduces, takeaways, and two postscripts (the seven-input grid, the slop extension) |
+| Backup | 62-81 | Derivations, month 0 step by step, matching, the gain *a*, the U-bar cells |
 
 Cross-references inside the deck use `name:` anchors rather than slide numbers, because
-the numbering moves whenever a slide is inserted. The Deck Map on slide 2 is the one
+the numbering moves whenever a slide is inserted. The Deck Map on slide 3 is the one
 place numbers appear, and it has to be re-checked after any structural change.
 
 ## Rebuilding

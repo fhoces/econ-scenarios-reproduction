@@ -38,7 +38,7 @@ An independent reproduction of
 [Economic Scenarios for Transformative AI](https://www.anthropic.com/institute/econ-scenarios),
 following the [Open Policy Analysis](https://tinyurl.com/1qypbihb) framework:
 
-- **Open Output**: [the explorer](explorer/), every combination of the seven inputs
+- **Open Output**: [the explorer](explorer/), 4374 precomputed combinations of the seven inputs
 - **Open Analysis**: this document, and [the slide deck](slides/slides.html)
 - **Open Materials**: [the repository](https://github.com/fhoces/econ-scenarios-reproduction),
   the model, its tests and every exported CSV
@@ -1496,18 +1496,18 @@ evidence stands behind each input*, which is the question a reader who wants to 
 with the results has to answer first. The three labels are the ones the Open Policy
 Analysis guidelines use.
 
-- **data** --- read off a public dataset, and in principle recomputable from it.
-- **research** --- an estimate taken from a published paper, or a received conventional
+- **data**: read off a public dataset, and in principle recomputable from it.
+- **research**: an estimate taken from a published paper, or a received conventional
   value.
-- **guesswork** --- set by assumption. Some are bounded by evidence, and the basis
+- **guesswork**: set by assumption. Some are bounded by evidence, and the basis
   column says so, but no dataset or estimate pins the value itself.
 
 Two further labels are needed for things that are not inputs at all: **derived**, for
 values another row implies, and **convention**, for the dates and the period length.
 
-The headline is short. All seven scenario dials --- everything that differs between
+The headline is short. All seven scenario dials (everything that differs between
 modest, substantial and extreme, and therefore everything that produces the spread in
-the results --- are guesswork. Everything they are measured *against* is data or
+the results) are guesswork. Everything they are measured *against* is data or
 research.
 
 ```{python}

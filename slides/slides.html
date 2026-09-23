@@ -87,7 +87,7 @@ class: center, middle, inverse, title-slide
 # Economic Scenarios for Transformative AI
 ]
 .subtitle[
-## Korinek, Jones, Sacher, Cotter &amp; McCrory (2026) — the claim, the theory, and the machinery
+## Korinek, Jones, Sacher, Cotter &amp; McCrory (2026): the claim, the theory, and the machinery
 ]
 
 ---
@@ -111,7 +111,7 @@ following the
 &lt;img src="../assets/opa/opa-details.png" class="opa-mark" alt=""&gt;
 
 .opa-legend[
-**Open Output**: [the explorer](../explorer/), every combination of the seven inputs&lt;br&gt;
+**Open Output**: [the explorer](../explorer/), 4374 precomputed combinations of the seven inputs&lt;br&gt;
 **Open Analysis**: [the report](../repro.html), and this deck&lt;br&gt;
 **Open Materials**: [the repository](https://github.com/fhoces/econ-scenarios-reproduction),
 the model, its tests and every exported CSV
@@ -1178,8 +1178,8 @@ name: matching-main
 `$$\ell_{o,t+1} = (1 - q_{o,t})\ell_{o,t} - D_{o,t} + H_{o,t} \;\; \text{(36)}, \qquad U_{o,t+1} = U_{o,t} + q_{o,t}\ell_{o,t} + D_{o,t} - f_{o,t}U_{o,t} \;\; \text{(37)}$$`
 
 Not Cobb-Douglas. The den Haan–Ramey–Watson form guarantees
-`\(H \le \min\{S, v\}\)` automatically, so no cap and no kinks in the simulated paths —
-which matters here because the extreme scenario pushes the ratios far from normal.
+`\(H \le \min\{S, v\}\)` automatically, so no cap and no kinks in the simulated paths.
+That matters here because the extreme scenario pushes the ratios far from normal.
 
 The cross-group discount `\(\mu\)` carries all the occupational human capital in the
 model: a laid-off software engineer is not instantly a nurse.
@@ -2382,7 +2382,7 @@ looking in the wrong series.
 
 One variant helps workers: if checking is genuinely *new human work*, that is a rise
 in `\(\rho\)`, and it is the only case here that cushions wages (+0.7) and raises the
-labor share (57.3) — at the cost of lower output. "Slop that makes work" and "slop
+labor share (57.3), at the cost of lower output. "Slop that makes work" and "slop
 that just does not deliver" are different worlds.
 
 ---
@@ -2424,7 +2424,7 @@ the same routine via `expand_and_bisect()`, `statics.py:92`. The definition row 
 |---|---|---|
 | `\(\bar H_o = \bar q_o \ell_{o,t0}\)` | 2 | **step 1**, gives `\(\bar H_C, \bar H_N\)` directly |
 | `\(\bar U_C + \bar U_N = \bar U\)` | 1 | step 2, substituted to eliminate `\(\bar U_N\)` |
-| `\(\bar S_C = \bar U_C + \bar\mu \bar U_N\)`, `\(\ \bar S_N = \bar\mu \bar U_C + \bar U_N\)` | — | **definition** (33), not a condition; substituted in steps 2 and 3 |
+| `\(\bar S_C = \bar U_C + \bar\mu \bar U_N\)`, `\(\ \bar S_N = \bar\mu \bar U_C + \bar U_N\)` | none | **definition** (33), not a condition; substituted in steps 2 and 3 |
 | `\(\bar f_C = \bar H_C/\bar S_C + \bar\mu \bar H_N/\bar S_N\)` | 1 | step 2, substituted to express `\(\bar f_C\)` |
 | `\(\bar f_o \bar U_o = \bar H_o\)`, for `\(o = C\)` | 1 | **step 2**, bisected at `steady.py:64` |
 | `\(\bar f_N = \bar\mu \bar H_C/\bar S_C + \bar H_N/\bar S_N\)` | 1 | evaluated once the root is known |
@@ -2531,7 +2531,7 @@ first order is what keeps every root-find in this model one-dimensional and mono
 ---
 name: m0-1
 
-# Backup: Month 0 &amp;mdash; Steps 2 and 3
+# Backup: Month 0, Steps 2 and 3
 
 .small[
 Carried in: `\(\Delta \ln A = 0\)`, `\(\ell_C = 0.6003\)`, `\(\ell_N = 0.3617\)`. Exogenous at `\(t_0\)`: `\(m = 0.0698\)`, `\(d = 0.0300\)`, `\(a = 0.280\)`, `\(\psi = 0.75\)`, `\(\rho = 0.25\)`, so `\(md = 0.0021\)`.
@@ -2568,7 +2568,7 @@ The targets are the output that matters next: `\(\ell^*_C = 0.59984\)` against e
 ---
 name: m0-2
 
-# Backup: Month 0 &amp;mdash; Steps 4 and 5
+# Backup: Month 0, Steps 4 and 5
 
 .small[
 Now compare employment with those targets, move the sticky wage, and post vacancies.
@@ -2596,7 +2596,7 @@ The layoff test is the moment of the month: the excess `\(E = 0.000988\)` is a q
 ---
 name: m0-3
 
-# Backup: Month 0 &amp;mdash; Steps 6 and 7
+# Backup: Month 0, Steps 6 and 7
 
 .small[
 Match searchers to vacancies, then step the stocks forward to `\(t+1\)`.
@@ -2621,7 +2621,7 @@ Match searchers to vacancies, then step the stocks forward to `\(t+1\)`.
 ---
 name: m0-4
 
-# Backup: Month 0 &amp;mdash; Steps 8 and 9
+# Backup: Month 0, Steps 8 and 9
 
 .small[
 Report the economy at **realized** employment, then feed the GDP gap into ideas. This is the
@@ -2830,7 +2830,7 @@ name: matching-detail
 
 The workhorse `\(H = \chi S^{\alpha} v^{1-\alpha}\)` can return more hires than there are
 searchers or vacancies once the ratio gets extreme, so it must be capped at
-`\(\min\{S, v\}\)` — and the cap puts a kink into simulated paths exactly where the
+`\(\min\{S, v\}\)`, and the cap puts a kink into simulated paths exactly where the
 extreme scenario spends its time.
 
 `$$H_{j,t} = \chi \frac{S_{j,t} v_{j,t}}{(S_{j,t}^{\iota} + v_{j,t}^{\iota})^{1/\iota}}$$`
