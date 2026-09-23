@@ -15,8 +15,7 @@ from aiscen import simulate
 from aiscen.params import Fixed, SCENARIOS, SURVEY_MEDIAN
 from aiscen.report import (PUBLISHED, ROW_ORDER, build_table3, compare,
                            table3_column)
-from tests.test_robustness import (TABLE5, TABLE5_ROWS, TABLE6, TABLE6_ROWS,
-                                   POOL_SENSITIVE)
+from tests.test_robustness import TABLE5, TABLE5_ROWS, TABLE6, TABLE6_ROWS
 
 
 def robustness_table(title, spec, rows, field_name):
@@ -29,15 +28,11 @@ def robustness_table(title, spec, rows, field_name):
             kw = {field_name: k[1]}
             f = Fixed(**kw)
             cols[k] = table3_column(simulate.run(f, SCENARIOS[scen]))
-            if field_name == "xi":
-                kw2 = dict(kw, U_bar=0.0384)
-                cols[(k, "pool")] = table3_column(simulate.run(Fixed(**kw2), SCENARIOS[scen]))
         out.append(f"  {scen}:  " + "  ".join(f"{field_name}={k[1]}" for k in keys))
         for i, row in enumerate(rows):
             cells = []
             for k in keys:
-                src = cols[(k, "pool")] if (field_name == "xi" and row == POOL_SENSITIVE) else cols[k]
-                cells.append(f"{src[row]:7.2f}/{spec[k][i]:6.1f}")
+                cells.append(f"{cols[k][row]:7.2f}/{spec[k][i]:6.1f}")
             out.append(f"    {row:42s}" + "".join(f"{c:>16s}" for c in cells))
     return "\n".join(out)
 
@@ -80,12 +75,8 @@ def main():
                 for (scen, val), want in spec.items():
                     kw = {field: val}
                     col = table3_column(simulate.run(Fixed(**kw), SCENARIOS[scen]))
-                    if field == "xi":
-                        pool = table3_column(simulate.run(Fixed(xi=val, U_bar=0.0384),
-                                                          SCENARIOS[scen]))
                     for r, pub in zip(rows_, want):
-                        got = pool[r] if (field == "xi" and r == POOL_SENSITIVE) else col[r]
-                        w.writerow([scen, val, r, f"{got:.4f}", pub])
+                        w.writerow([scen, val, r, f"{col[r]:.4f}", pub])
             print(f"wrote {path}")
         # the slop extension, for the deck
         from aiscen import slop

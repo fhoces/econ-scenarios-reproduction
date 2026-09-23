@@ -48,10 +48,11 @@ TABLE6 = {
     ("extreme", 0.9): (29.2, 11.9, 2.8, 21.1, -28.5, 24.0, 15.2),
 }
 
-# The all-workers unemployment row needs U_bar = 0.0384 (the value the p. 26
-# derivation and the published pool split imply) rather than Table 1's rounded
-# 0.038; see tests/test_table3.py::test_pool_rounding_explains_the_two_wide_cells.
-POOL_SENSITIVE = "Unemployment rate, all workers, pct"
+# Every row is checked at the package default U_bar = 0.038 (Table 1), the same
+# reading Table 3 and tests/test_printed_precision.py use. The all-workers rows sit
+# 0.01 to 0.08 points low for the pool-rounding reason documented in
+# tests/test_table3.py::test_pool_rounding_explains_the_two_wide_cells, well inside
+# the tolerance below.
 
 
 def tol(want: float) -> float:
@@ -69,12 +70,9 @@ def test_table5(key, want):
 @pytest.mark.parametrize("key,want", list(TABLE6.items()))
 def test_table6(key, want):
     scen, xi = key
-    f = Fixed(xi=xi)
-    col = table3_column(simulate.run(f, SCENARIOS[scen]))
-    col_pool = table3_column(simulate.run(Fixed(xi=xi, U_bar=0.0384), SCENARIOS[scen]))
+    col = table3_column(simulate.run(Fixed(xi=xi), SCENARIOS[scen]))
     for row, w in zip(TABLE6_ROWS, want):
-        got = col_pool[row] if row == POOL_SENSITIVE else col[row]
-        assert got == pytest.approx(w, abs=tol(w)), f"{key} {row}"
+        assert col[row] == pytest.approx(w, abs=tol(w)), f"{key} {row}"
 
 
 def test_flexible_wage_puts_the_whole_cost_in_wages():

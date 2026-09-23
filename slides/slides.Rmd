@@ -2081,12 +2081,21 @@ name: verify-main
 # What Reproduces
 
 ```{r verify, echo=FALSE}
+# largest |reproduced - published| per table, read from the exported CSVs
+t3_raw <- read_csv("data/table3.csv", show_col_types = FALSE)
+cols3 <- c("no_ai", "modest", "substantial", "extreme")
+dev3 <- max(abs(as.matrix(t3_raw[cols3]) - as.matrix(t3_raw[paste0("pub_", cols3)])))
+dev_rob <- function(f) {
+  d <- read_csv(f, show_col_types = FALSE)
+  max(abs(d$simulated - d$published))
+}
 tibble(
   `Published table` = c("Table 3, three scenarios in 2030",
                         "Table 5, four capital-supply elasticities",
                         "Table 6, four wage rigidities"),
   Cells = c(80, 40, 49),
-  `Largest deviation` = c(0.08, 0.05, 0.11)
+  `Largest deviation` = round(c(dev3, dev_rob("data/table5.csv"),
+                                dev_rob("data/table6.csv")), 2)
 ) |>
   knitr::kable(format = "html")
 ```
@@ -2751,7 +2760,7 @@ same cost for a worse product. And if errors propagate downstream, Hulten's theo
 ---
 name: ubar-detail
 
-# Backup: The Two Cells That Do Not Reproduce
+# Backup: The Two Cells That Need a Wider Tolerance
 
 Table 1 gives the normal search pool as $\bar U = 0.038$. But:
 
@@ -2763,10 +2772,10 @@ points below the published figure in the substantial scenario (4.53 against 4.6;
 and extreme are off by 0.04 points or less, and No-AI matches exactly), and an
 AI-sensitive rate 0.08 points below it in the No-AI column (2.82 against 2.9; the other
 three columns are off by 0.01 points or less). These two are the only cells in Tables 3,
-5 and 6 that need the test tolerance widened.
+5 and 6 that need the test tolerance widened (to 0.09 points).
 
 At $\bar U = 0.0384$ the all-workers row lands exactly, six further cells that had
-rounded to a different last digit fall into line, and nothing else moves. The AI-sensitive
+rounded to a different last digit fall into line, and nothing else changes materially. The AI-sensitive
 rate in the No-AI column is the near miss: it improves to 2.85, which still prints as 2.8
 rather than the paper's 2.9, so the pool accounts for the size of that gap without
 closing it.

@@ -1673,19 +1673,20 @@ Every cell is inside the tolerance the test suite applies: within 0.05 percentag
 of the published value for Table 3, widened to 0.10 where the published value is 10 or
 larger, and within the larger of 0.12 points and 0.4 percent of the published value for
 Tables 5 and 6. The two unemployment-rate cells flagged above are the only two anywhere
-in Tables 3, 5 and 6 that need that tolerance widened. They come out low by
+in Tables 3, 5 and 6 that need that tolerance widened, to 0.09 points. They come out low by
 `{python} num(abs(T3['Unemployment rate, all workers, pct'][2] - 4.6), 2)`
 percentage points (all workers, substantial) and
 `{python} num(abs(T3['Unemployment rate, cognitive, pct'][0] - 2.9), 2)`
 (cognitive, no AI). Both trace to the same rounding: Table 1 gives the normal pool
 as $\bar U = 0.038$, while the quit-rate derivation on p. 26 uses 3.84 percent and
 the published pool split of 1.76 and 2.08 requires 0.0384. At 0.0384 the all-workers
-row lands on the published 4.6 and nothing else moves; the no-AI cognitive rate
-improves to
+row lands on the published 4.6 and nothing else changes materially (outside the two
+unemployment rows, no Table 3 cell moves by more than 0.01 points); the no-AI cognitive
+rate improves to
 `{python} num(build_table3(Fixed(U_bar=0.0384))['Unemployment rate, cognitive, pct'][0], 2)`,
 which still prints as 2.8 rather than the paper's 2.9, so the pool accounts for the size
-of that gap without closing it. The default here stays at Table 1's rounded value;
-`Fixed(U_bar=0.0384)` switches to the other reading.
+of that gap without closing it. The default here stays at Table 1's rounded value, in
+Tables 3, 5 and 6 alike; `Fixed(U_bar=0.0384)` switches to the other reading.
 
 Printed precision is a stricter test than tolerance, and the two are worth keeping
 apart. Rounding half-up to the paper's own number of decimals, 153 of the 169 cells in
@@ -1963,13 +1964,10 @@ TABLE6_PUB = {
 }
 t6 = {}
 for (scen, xi), want in TABLE6_PUB.items():
+    # every row at the package default U_bar = 0.038, as in Table 3 above
     col = table3_column(simulate.run(Fixed(xi=xi), SCENARIOS[scen]))
-    # the pool-sensitive row is reported at the U_bar the p. 26 derivation implies
-    col_pool = table3_column(simulate.run(Fixed(xi=xi, U_bar=0.0384), SCENARIOS[scen]))
     label = f"{scen[:4]}, xi={xi}"
-    t6[label] = [
-        f"{(col_pool if r == 'Unemployment rate, all workers, pct' else col)[r]:,.2f}  ({w:,.1f})"
-        for r, w in zip(TABLE6_ROWS, want)]
+    t6[label] = [f"{col[r]:,.2f}  ({w:,.1f})" for r, w in zip(TABLE6_ROWS, want)]
 show(pd.DataFrame({"row": TABLE6_ROWS, **t6}))
 ```
 
@@ -2087,12 +2085,9 @@ for (scen, eps), want in TABLE5_PUB.items():
     col = table3_column(simulate.run(Fixed(eps=eps), SCENARIOS[scen]))
     t5_dev.append((f"{scen} eps={eps}", dev([col[r] for r in TABLE5_ROWS], want)))
 for (scen, xi), want in TABLE6_PUB.items():
-    # same per-row convention as the Table 6 body above: default U_bar = 0.038
-    # everywhere, swapped to 0.0384 only for the pool-sensitive all-workers row.
+    # same convention as the Table 6 body above: default U_bar = 0.038 everywhere
     col = table3_column(simulate.run(Fixed(xi=xi), SCENARIOS[scen]))
-    col_pool = table3_column(simulate.run(Fixed(xi=xi, U_bar=0.0384), SCENARIOS[scen]))
-    vals = [(col_pool if r == "Unemployment rate, all workers, pct" else col)[r]
-            for r in TABLE6_ROWS]
+    vals = [col[r] for r in TABLE6_ROWS]
     t6_dev.append((f"{scen} xi={xi}", dev(vals, want)))
 
 # max(..., key=lambda x: x[1]) finds the element whose SECOND item is largest, then
