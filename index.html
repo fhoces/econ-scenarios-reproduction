@@ -14,9 +14,9 @@
     --panel:  #ffffff;
     --ink:    #101519;
     --ink-2:  #5b6873;
-    --ink-3:  #8994a0;
+    --ink-3:  #6b7682;
     --rule:   #e2e7ec;
-    --accent: #2a78d6;
+    --accent: #1f6fce;
     --accent-2: #eb6834;
     --chip:   #f1f4f7;
     --serif: "IBM Plex Serif", Georgia, "Times New Roman", serif;
@@ -137,8 +137,10 @@
   th { font-size: 12px; font-family: var(--mono); letter-spacing: 0.06em;
        text-transform: uppercase; color: var(--ink-3); font-weight: 500; }
   .table-subhead { font-family: var(--sans, inherit); text-transform: none;
-       letter-spacing: normal; font-weight: 400; font-size: 11px; opacity: 0.7; }
+       letter-spacing: normal; font-weight: 400; font-size: 11px; }
   td:last-child { color: var(--ink-2); }
+  /* The AI-use table's Built-by cells are content, even where a rowspan makes them last. */
+  table.ai-use td:nth-child(2) { color: var(--ink); }
   /* The scenario table's last column is a result, not a gloss: keep it full strength. */
   table.scen td { color: var(--ink); }
   table.scen td, table.scen th { text-align: right; }
@@ -302,39 +304,39 @@ commentary and any revisions.</p>
 <h2>How AI was used in this exercise, and what has been verified</h2>
 
 <p>This reproduction was a collaboration between the author and <strong>Claude Code</strong>
-across many sessions, not an AI working alone: every commit carries a
+across many sessions, not an AI working alone: commits written with Claude carry a
 <code>Co-Authored-By: Claude</code> trailer, but that trailer records who wrote the commit, not
 who conceived the thing being built. The table below breaks that distinction out by the four
-public objects. For the explorer and the slides, the author did most of the conceptual and
+public objects (commit counts as of 2026-09-23). For the explorer and the slides, the author did most of the conceptual and
 design work himself; Claude wrote the resulting code. For the report and the repository, Claude
 had more latitude, with less direct conceptual direction from the author.</p>
 
 <div class="table-scroll">
-<table>
+<table class="ai-use">
   <thead><tr><th>Object</th><th>Built by</th><th>Verification</th></tr></thead>
   <tbody>
     <tr><td>Explorer<br><span class="table-subhead">Open Output</span></td>
         <td>Conceived and directed by the author: the seven dials, the grid, the layout. Claude
-            Code wrote the implementation (Sonnet-majority: 12 of the 18 commits touching
-            <code>explorer/</code>).</td>
+            Code wrote the implementation (Sonnet-majority: 12 of the 22 commits touching
+            <code>explorer/</code>, against 8 Opus and 2 without a trailer).</td>
         <td>7 tests pin its precomputed grid to the model.</td></tr>
     <tr><td>Report<br><span class="table-subhead">Open Analysis</span></td>
         <td>More Claude-driven: Claude had latitude in how to structure and present the
             material, with less direct conceptual direction from the author than the explorer or
-            the slides (Sonnet-majority: 10 of 17 commits touching
-            <code>repro.qmd</code>/<code>repro.html</code>).</td>
+            the slides (split: 10 Sonnet and 9 Opus of the 20 commits touching
+            <code>repro.qmd</code>/<code>repro.html</code>, one without a trailer).</td>
         <td rowspan="2">Report and slides present the same reproduced numbers and equations, so
             they share the same 102 core tests behind Tables 3, 5 and 6, the prose checks (the
             steady-state switching share, the filling rates, the TFP worked example, and others
             in the README), and the identities the equations imply.</td></tr>
     <tr><td>Slides<br><span class="table-subhead">Open Analysis</span></td>
         <td>Conceived and directed by the author: the four-part structure, the equation walls,
-            the OPA framing. Claude Code wrote the content (split evenly: 11 Sonnet, 11 Opus,
-            across <code>slides/</code>).</td></tr>
+            the OPA framing. Claude Code wrote the content (split evenly: 15 Sonnet, 15 Opus and one
+            without a trailer, across <code>slides/</code>).</td></tr>
     <tr><td>Repository<br><span class="table-subhead">Open Materials</span></td>
         <td>More Claude-driven: the <code>aiscen/</code> model code and test suite were
             structured with less direct conceptual direction from the author than the explorer
-            or the slides (<code>aiscen/</code> and <code>tests/</code> are 9 Opus commits to 1
+            or the slides (<code>aiscen/</code> and <code>tests/</code> are 8 distinct Opus commits to 1
             Sonnet, a data-source comment, not model code; <code>README.md</code> and the build
             scripts are a mix of both).</td>
         <td>Contains and runs all 113 tests (102 core, 7 grid, 4 for the <code>slop.py</code>
@@ -360,8 +362,8 @@ the report and the slides alike, or for the internal layout of the code in
 <code>aiscen/</code>. Mechanical verification confirms the numbers match; it does not by itself
 confirm he has independently worked through why they should.</p>
 
-<p style="margin-top:14px;">Every cell in the table above is a mechanical test result, not an
-outside check: no other person has verified any of it, though several independent AI review
+<p style="margin-top:14px;">Every entry in the Verification column above is a mechanical test
+result, not an outside check: no other person has verified any of it, though several independent AI review
 passes have audited the site for consistency.</p>
 
 <div class="note">
