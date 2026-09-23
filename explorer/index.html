@@ -460,16 +460,19 @@
         Python reimplementation (<code>aiscen</code>) that reproduces all 169 cells of the paper's
         Tables 3, 5 and 6 within the test suite's tolerance, 153 of them to the printed digit; the
         sixteen that round to a different last digit are listed cell by cell in the repository README.
-        The three named scenarios sit at the corners of this grid. One convention to note: the
-        gain <code>a</code> follows a straight line from the mid-2026 anchor common to all scenarios,
-        which is what the paper's own explorer does for off-scenario values, so grid corners land
-        within 0.03 points of the published 2030 levels rather than exactly on them. GDP growth is
+        The three named scenarios sit at the corners of this grid. One convention to note: in every
+        cell the gain <code>a</code> follows a straight line from the substantial scenario's mid-2026
+        anchor (0.35) to the cell's 2030 value. The paper's own explorer uses that same anchor for a
+        custom gain above 0.35, but keeps each named scenario's own anchor (0.30, 0.35, 0.45), so the
+        grid's corners land within 0.03 points of this reproduction's own runs of the named
+        scenarios rather than exactly on them. GDP growth is
         the exception, because it is a change over the preceding twelve months rather than a 2030
         level and so depends on the whole path: at the extreme corner it reads 15.67 here against
         that scenario's own 15.46 and the paper's 15.4. Reinstatement runs over
         six values here, three of them (0.75, 1.00 and 1.25) outside the range the paper uses; at the
         two of those at or above 1, the labor share rises above its 60 percent starting point,
-        territory the paper's own scenarios never enter (at 0.75 it is still just below 60 percent).
+        territory the paper's own scenarios never enter (at 0.75 it can go either way: it ends above
+        60 percent in 162 of that level's 729 cells).
       </div>
     </section>
 
