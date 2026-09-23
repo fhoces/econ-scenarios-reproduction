@@ -80,7 +80,13 @@ aggregate finding rate 0.23 (p. 26), the logistic slopes kappa_m = 0.33 and
 kappa_d = 0.51 (Table A.2, p. 45), the research share going from 3.5 to 4.1 percent of GDP
 (p. 50), the worked example in Section 2.1.3 where the TFP gain is 0.032 to first order
 and 0.029 exactly (p. 12), and the claim that the monthly ideas step stays within
-0.02 percentage points of the closed form (p. 41).
+0.02 percentage points of the closed form (p. 41), and footnote 14's mixed run (p. 37: the substantial scenario's
+m, d and a, the extreme scenario's psi, mu and rho, and eps = 1), where GDP ends 7.2 percent
+above the no-AI path (7.21 here) while labor income falls by 4.3 percent of no-AI GDP
+(4.31 here). The same footnote's third figure does not reproduce: holding the AI-sensitive
+occupations' income at its no-AI level takes a transfer of 84 percent of the GDP gain in
+the paper and 87 percent here (83 percent if posting speed is also set to the extreme
+scenario's 0.5, which the footnote does not say).
 
 One further cross-check, of the model against itself by a different route: the measured
 TFP index (45) is compared with its dual (25), the chained share-weighted growth of the
