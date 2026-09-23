@@ -139,8 +139,8 @@
   .table-subhead { font-family: var(--sans, inherit); text-transform: none;
        letter-spacing: normal; font-weight: 400; font-size: 11px; }
   td:last-child { color: var(--ink-2); }
-  /* The AI-use table's Built-by cells are content, even where a rowspan makes them last. */
-  table.ai-use td:nth-child(2) { color: var(--ink); }
+  /* The AI-use table's cells are all results, including the last column. */
+  table.ai-use td { color: var(--ink); }
   /* The scenario table's last column is a result, not a gloss: keep it full strength. */
   table.scen td { color: var(--ink); }
   table.scen td, table.scen th { text-align: right; }
@@ -304,49 +304,40 @@ commentary and any revisions.</p>
 <h2>How AI was used in this exercise, and what has been verified</h2>
 
 <p>This reproduction was a collaboration between the author and <strong>Claude Code</strong>
-across many sessions, not an AI working alone: commits written with Claude carry a
-<code>Co-Authored-By: Claude</code> trailer, but that trailer records who wrote the commit, not
-who conceived the thing being built. The table below breaks that distinction out by the four
-public objects (commit counts as of 2026-09-23). For the explorer and the slides, the author did most of the conceptual and
-design work himself; Claude wrote the resulting code. For the report and the repository, Claude
-had more latitude, with less direct conceptual direction from the author.</p>
+(Opus and Sonnet models) across many sessions, not an AI working alone. The table records who
+led the work on each public object, using the <a href="https://credit.niso.org/">CRediT</a>
+contributor roles, as the author answered them in a questionnaire on 2026-09-23 rather than as
+inferred from commit history. It groups the 14 roles into three: <em>ideas and direction</em>
+(conceptualization, methodology, supervision, project administration), <em>doing the work</em>
+(data curation, formal analysis, investigation, software, validation, visualization) and
+<em>writing</em> (original draft, review and editing); funding and resources do not apply. Each
+cell counts the roles in that group led by the author (Human), led by Claude (AI) or shared
+equally (Equal). The last column, not part of CRediT, is how closely the author has checked the
+object himself. The role-by-role answers are in
+<a href="https://github.com/fhoces/opa-ai-macro-econ-scenarios/blob/main/CREDIT.md">CREDIT.md</a>.</p>
 
 <div class="table-scroll">
 <table class="ai-use">
-  <thead><tr><th>Object</th><th>Built by</th><th>Verification</th></tr></thead>
+  <thead><tr><th>Object</th><th>Ideas and direction</th><th>Doing the work</th><th>Writing</th><th>Human verification</th></tr></thead>
   <tbody>
-    <tr><td>Explorer<br><span class="table-subhead">Open Output</span></td>
-        <td>Conceived and directed by the author: the seven dials, the grid, the layout. Claude
-            Code wrote the implementation (Sonnet-majority: 12 of the 22 commits touching
-            <code>explorer/</code>, against 8 Opus and 2 without a trailer).</td>
-        <td>7 tests pin its precomputed grid to the model.</td></tr>
-    <tr><td>Report<br><span class="table-subhead">Open Analysis</span></td>
-        <td>More Claude-driven: Claude had latitude in how to structure and present the
-            material, with less direct conceptual direction from the author than the explorer or
-            the slides (split: 10 Sonnet and 9 Opus of the 20 commits touching
-            <code>repro.qmd</code>/<code>repro.html</code>, one without a trailer).</td>
-        <td rowspan="2">Report and slides present the same reproduced numbers and equations, so
-            they share the same 102 core tests behind Tables 3, 5 and 6, the prose checks (the
-            steady-state switching share, the filling rates, the TFP worked example, and others
-            in the README), and the identities the equations imply.</td></tr>
-    <tr><td>Slides<br><span class="table-subhead">Open Analysis</span></td>
-        <td>Conceived and directed by the author: the four-part structure, the equation walls,
-            the OPA framing. Claude Code wrote the content (split evenly: 15 Sonnet, 15 Opus and one
-            without a trailer, across <code>slides/</code>).</td></tr>
-    <tr><td>Repository<br><span class="table-subhead">Open Materials</span></td>
-        <td>More Claude-driven: the <code>aiscen/</code> model code and test suite were
-            structured with less direct conceptual direction from the author than the explorer
-            or the slides (<code>aiscen/</code> and <code>tests/</code> are 8 distinct Opus commits to 1
-            Sonnet, a data-source comment, not model code; <code>README.md</code> and the build
-            scripts are a mix of both).</td>
-        <td>Contains and runs all 128 tests (102 core, 7 grid, 15 that recompute the numbers
-            typed into the explorer and deck prose, and 4 for the <code>slop.py</code>
-            extension, which sits outside the reproduction and has nothing in the paper to check
-            its numbers against). Re-run by hand after every change; there is no continuous
-            integration.</td></tr>
+    <tr><td>Explorer<br><span class="table-subhead">Open Output</span></td><td>Human 3, AI 1</td><td>Human 1, AI 4, Equal 1</td><td>AI 1, Equal 1</td><td>Understood</td></tr>
+    <tr><td>Report<br><span class="table-subhead">Open Analysis</span></td><td>Human 1, AI 3</td><td>AI 6</td><td>AI 2</td><td>Lightly checked</td></tr>
+    <tr><td>Slides<br><span class="table-subhead">Open Analysis</span></td><td>Human 3, Equal 1</td><td>Human 1, AI 4, Equal 1</td><td>Human 1, Equal 1</td><td>Understood</td></tr>
+    <tr><td>Repository<br><span class="table-subhead">Open Materials</span></td><td>Human 1, AI 3</td><td>AI 6</td><td>AI 2</td><td>Lightly checked</td></tr>
+    <tr><td>Overview page<br><span class="table-subhead">this page</span></td><td>Human 4</td><td>Human 3, AI 1</td><td>Equal 2</td><td>Understood</td></tr>
   </tbody>
 </table>
 </div>
+
+<p style="margin-top:14px;">Human verification uses three levels: <em>no human review</em>,
+<em>lightly checked</em> (checked, but the author cannot yet explain it clearly) and
+<em>understood</em> (he can explain it to others). Separately, the repository contains and runs
+128 automated tests: 102 core tests behind Tables 3, 5 and 6, the prose checks and the identities
+the equations imply, which the report and the slides share because they present the same
+numbers; 7 that pin the explorer's precomputed grid to the model; 15 that recompute the numbers
+typed into the explorer and deck prose; and 4 for the <code>slop.py</code> extension, which sits
+outside the reproduction. They are re-run by hand after every change; there is no continuous
+integration.</p>
 
 <p style="margin-top:14px;">The equations and parameters behind those numbers, transcribed
 from the paper's PDF by AI into <code>aiscen/</code> and presented in both the report and the
@@ -363,9 +354,9 @@ the report and the slides alike, or for the internal layout of the code in
 <code>aiscen/</code>. Mechanical verification confirms the numbers match; it does not by itself
 confirm he has independently worked through why they should.</p>
 
-<p style="margin-top:14px;">Every entry in the Verification column above is a mechanical test
-result, not an outside check: no other person has verified any of it, though several independent AI review
-passes have audited the site for consistency.</p>
+<p style="margin-top:14px;">The automated tests are mechanical checks, not an outside review:
+no other person has verified any of this, though several independent AI review passes have
+audited the site for consistency.</p>
 
 <div class="note">
   <strong>The paper itself is not hosted here.</strong> It is third-party content. Get it

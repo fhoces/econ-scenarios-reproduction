@@ -26,7 +26,7 @@ The objects: **Explorer** (`explorer/`, Open Output), **Report** (`repro.qmd`, O
 | Writing – review & editing | Equal | AI (lead) | Equal | AI (lead) | Equal |
 | **Human verification** | Understood | Lightly checked | Understood | Lightly checked | Understood |
 
-Human (lead): Fernando Hoces de la Guardia led, with the AI supporting or not involved. AI (lead): the AI led, with Fernando Hoces de la Guardia supporting (directing, reviewing). Equal: both contributed equally. N/A: no one did this for the object.
+These answers were given with the questionnaire's first option set, which did not yet separate *only* from *lead*. Human (lead): Fernando Hoces de la Guardia led, with the AI supporting or not involved. AI (lead): the AI led, with Fernando Hoces de la Guardia supporting (directing, reviewing) or not involved. Equal: both contributed equally. N/A: no one did this for the object.
 
 ## Statements by object
 
