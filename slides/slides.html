@@ -140,7 +140,7 @@ the model, its tests and every exported CSV
   z-index: 100;
 }
 .eqtag b { color: #1a237e; font-weight: 600; }
-.figfull h1 { font-size: 27px; margin: 0 0 7px; }
+.figfull h1 { font-size: 27px; margin: 0 0 7px 84px; }
 .fig3 { display: flex; align-items: stretch; gap: 7px; min-height: 612px; }
 .fig3 .col { flex: 1; border: 1px solid #d6dbe0; background: #fbfcfd;
              padding: 9px 12px 10px; font-size: 12.5px; line-height: 1.38; }
@@ -191,7 +191,7 @@ the model, its tests and every exported CSV
 .nav-btn-br {
   position: absolute;
   bottom: 12px;
-  right: 70px;
+  right: 96px;
   font-size: 11px;
   background: #e8eaf6;
   padding: 2px 8px;
@@ -281,8 +281,8 @@ tables carry that label throughout.
 .highlight-box[
 **This deck does not use it.** The split the model actually makes is between the occupations
 whose tasks AI is assumed to affect and those it is not. Calling one side *cognitive* is
-inaccurate and demeaning to the work it excludes: it implies the nurse, the electrician and
-the warehouse planner are not thinking, which is false and is not what the model claims. From
+inaccurate and demeaning to the work it excludes: it implies the electrician, the home health aide and
+the machinist are not thinking, which is false and is not what the model claims. From
 here on they are the **AI-sensitive occupations**.
 ]
 
@@ -321,7 +321,7 @@ name: claim-table-main
    &lt;td style="text-align:right;"&gt; 2.0 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 2.4 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 5.4 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 15.4 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 15.5 &lt;/td&gt;
   &lt;/tr&gt;
   &lt;tr&gt;
    &lt;td style="text-align:left;"&gt; Average wage, pct above no-AI &lt;/td&gt;
@@ -349,11 +349,11 @@ name: claim-table-main
    &lt;td style="text-align:right;"&gt; 0.0 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; -0.5 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; -3.9 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; -21.5 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -21.4 &lt;/td&gt;
   &lt;/tr&gt;
   &lt;tr&gt;
    &lt;td style="text-align:left;"&gt; Unemployment rate, AI-sensitive, pct &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 2.9 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2.8 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 2.9 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 4.5 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 17.9 &lt;/td&gt;
@@ -546,7 +546,7 @@ name: input-psi
 ]
 
 .pull-right[
-**What is measured today.** The 0.5–0.9 range is taken from the Anthropic Economic Index automation-versus-augmentation split of observed usage. Of the four disruptiveness inputs, this has the best contemporaneous data.
+**What is measured today.** The low end comes from the Anthropic Economic Index automation-versus-augmentation split of observed usage: about half of chat use and three quarters of API use looks like automation. The 0.9 end is an assumed world where agentic use dominates. Of the four disruptiveness inputs, this has the best contemporaneous data.
 
 **What would settle it.** Classifying observed AI interactions by whether a human stays in the loop, weighted to the economy rather than to the users of one product. Survey median **0.47**, the modest scenario's value.
 ]
@@ -557,8 +557,8 @@ name: input-psi
 with AI or capital performs it outright (p. 11). So asking "what if AI mostly helps people
 rather than replacing them" means lowering `\(\psi\)`, not raising some other input. Across the
 full range from pure augmentation to pure automation, measured TFP moves only
-**3.02 to 3.09**, while the labor share moves **59.8 to 54.9** and AI-sensitive employment
-**−1.2% to −4.9%**. GDP does rise over that range (4.5 to 9.5), but through capital
+**3.02 to 3.09**, while the labor share moves **59.7 to 54.9** and AI-sensitive employment
+**−1.1% to −4.9%**. GDP does rise over that range (4.5 to 9.5), but through capital
 deepening, not productivity.
 ]
 
@@ -581,7 +581,7 @@ name: input-rho
 ]
 
 .pull-right[
-**What is measured today.** The 0–0.5 range comes from the Acemoglu–Restrepo (2019) decomposition, which is **historical and not about AI**. It was not asked in the survey.
+**What is measured today.** The 0.5 comes from the Acemoglu–Restrepo (2019) decomposition for 1987-2017, which is **historical and not about AI**; 0 is an assumption. It was not asked in the survey.
 
 **What would settle it.** Nothing available today. You cannot measure tasks that do not exist yet, and a technology mid-diffusion offers no contemporaneous read. Only historical analogues, from a different technology.
 ]
@@ -725,8 +725,8 @@ and post vacancies to fill what they want.
 &lt;b&gt;Reallocation is slow.&lt;/b&gt; Two occupation groups; a displaced worker counts fully at home and
 only &lt;span class="sym"&gt;&amp;mu;&lt;/span&gt; away; hires come from a matching function that can never
 exceed searchers or vacancies; quits respond to how easy finding work is; layoffs only when
-demand falls short of the payroll; the AI-sensitive wage moves a fraction
-1&amp;minus;&lt;span class="sym"&gt;&amp;xi;&lt;/span&gt; of the way to its clearing level each month.&lt;br&gt;
+demand falls short of the payroll; the AI-sensitive wage closes a fraction
+1&amp;minus;&lt;span class="sym"&gt;&amp;xi;&lt;/span&gt; of its gap to the clearing level each year, about 6 percent a month.&lt;br&gt;
 &lt;b&gt;Capital answers prices, not a plan.&lt;/b&gt; Supply is a schedule with elasticity
 &lt;span class="sym"&gt;&amp;epsilon;&lt;/span&gt;.&lt;br&gt;
 &lt;b&gt;Ideas accumulate.&lt;/b&gt; A share of GDP goes to research, with fishing-out
@@ -994,9 +994,9 @@ name: labor-share-main
 
 # The Labor Share: Three Channels
 
-&lt;div class="eqtag"&gt;the three channels inside &lt;b&gt;(14)&lt;/b&gt;&lt;/div&gt;
+&lt;div class="eqtag"&gt;the first-order form of &lt;b&gt;(14)&lt;/b&gt;, third line of &lt;b&gt;(11)&lt;/b&gt;&lt;/div&gt;
 
-`$$\Delta \ln s_{L,t} \approx -\underbrace{(1-\rho)\psi_t m_t d_t}_{\text{displacement}} + \underbrace{(1-\sigma)\psi_t m_t d_t a_t}_{\text{weak link}} - \underbrace{(1-\sigma)\tfrac{s_{K,t0}}{s_{L,t0}}\Delta \ln r_t}_{\text{dearer capital}} \;\; \text{(14), to first order}$$`
+`$$\Delta \ln s_{L,t} \approx -\underbrace{(1-\rho)\psi_t m_t d_t}_{\text{displacement}} + \underbrace{(1-\sigma)\psi_t m_t d_t a_t}_{\text{weak link}} - \underbrace{(1-\sigma)\tfrac{s_{K,t0}}{s_{L,t0}}\Delta \ln r_t}_{\text{dearer capital}} \;\; \text{(11)}$$`
 
 1. **Displacement.** An automated instance moves its *entire* wage bill to capital,
    however small the cost saving. Reinstatement gives back a fraction `\(\rho\)`.
@@ -1026,7 +1026,7 @@ CES demand: up one-for-one with output, down with its own price at elasticity
 
 Labor supply is fixed, so whatever `\(N\)` gains, `\(C\)` loses:
 
-`$$\frac{\ell_{C,t0} - \ell^*_{C,t}}{\ell_{C,t0}} = \frac{s_{N,t0}}{s_{C,t0}} \cdot \frac{\ell^*_{N,t} - \ell_{N,t0}}{\ell_{N,t0}}, \qquad \frac{s_N}{s_C} = 0.60 \;\; \text{(--)}$$`
+`$$\frac{\ell_{C,t0} - \ell^*_{C,t}}{\ell_{C,t0}} = \frac{s_{N,t0}}{s_{C,t0}} \cdot \frac{\ell^*_{N,t} - \ell_{N,t0}}{\ell_{N,t0}}, \qquad \frac{s_N}{s_C} = 0.60 \;\; \text{(13)}$$`
 
 .highlight-box[
 Because AI-sensitive occupations are the *larger* group, their proportional decline is
@@ -1077,8 +1077,8 @@ a richer economy mechanically buys more research.
 `$$\Delta g_t = g \big[ e^{\lambda \Delta \ln R_t - (1-\phi_R)\Delta \ln A_t} - 1 \big] \;\; \text{(42)}$$`
 
 The leading `\(g\)` is the punchline. The bracket is a *proportional* gap in a growth rate
-that is only 1.67 percent a year, so a 28 percent research uplift adds a fraction of a
-percentage point, not 28.
+that is only 1.67 percent a year, so a research uplift of 0.28 log points adds a fraction of a
+percentage point, not 28 points.
 
 &lt;table&gt;
  &lt;thead&gt;
@@ -1182,7 +1182,7 @@ Not Cobb-Douglas. The den Haan–Ramey–Watson form guarantees
 That matters here because the extreme scenario pushes the ratios far from normal.
 
 The cross-group discount `\(\mu\)` carries all the occupational human capital in the
-model: a laid-off software engineer is not instantly a nurse.
+model: a laid-off paralegal is not instantly an electrician.
 
 .blue-box[
 `\(\mu\)` and `\(\theta_H\)` are the two inputs that convert a given amount of *reallocation*
@@ -1282,7 +1282,7 @@ Grid: &lt;span class="sym"&gt;t&lt;sub&gt;0&lt;/sub&gt;&lt;/span&gt; = 2024, the
 &lt;div class="sub"&gt;Once, before the first month&lt;/div&gt;
 The steady state &lt;b&gt;(38)&lt;/b&gt;: nine normal-times objects, of which
 &lt;span class="sym"&gt;&amp;chi;&lt;/span&gt;, &lt;span class="sym"&gt;&amp;pi;&amp;#772;&lt;sub&gt;o&lt;/sub&gt;&lt;/span&gt;,
-&lt;span class="sym"&gt;q&amp;#772;&lt;sub&gt;o&lt;/sub&gt;&lt;/span&gt; and &lt;span class="sym"&gt;f&amp;#772;&lt;sub&gt;o&lt;/sub&gt;&lt;/span&gt;
+&lt;span class="sym"&gt;H&amp;#772;&lt;sub&gt;o&lt;/sub&gt;&lt;/span&gt; and &lt;span class="sym"&gt;f&amp;#772;&lt;sub&gt;o&lt;/sub&gt;&lt;/span&gt;
 become constants and &lt;span class="sym"&gt;U&amp;#772;&lt;sub&gt;o&lt;/sub&gt;&lt;/span&gt; the starting pools.
 
 &lt;div class="sub"&gt;Then 73 months, 2024 to 2030: the 44 equations of Table A.1&lt;/div&gt;
@@ -1347,8 +1347,8 @@ name: calibration-main
 | `\(\varepsilon\)` | 3 | fixed, varied in robustness | half the wealth elasticity of Moll–Rachel–Restrepo (2022) |
 | `\(m_{2026}\)` | 0.14 | **anchor** for input `\(m\)` | observed-exposure measure (Massenkoff–McCrory 2026) |
 | `\(d_{2026}\)` | 0.10 | **anchor** for input `\(d\)` | Census BTOS AI supplement, adjusted down from firm shares |
-| `\(\psi\)` range | 0.5–0.9 | **range** for input `\(\psi\)` | Anthropic Economic Index automation-vs-augmentation split |
-| `\(\rho\)` range | 0–0.5 | **range** for input `\(\rho\)` | Acemoglu–Restrepo (2019) decomposition |
+| `\(\psi\)` range | 0.5–0.9 | **range** for input `\(\psi\)` | chat use today (0.5) and API use (about 0.75) in the Anthropic Economic Index; 0.9 assumed |
+| `\(\rho\)` range | 0–0.5 | **range** for input `\(\rho\)` | 0.5 from Acemoglu–Restrepo (2019), 1987-2017; 0 assumed |
 ]
 
 .small[
@@ -1358,7 +1358,8 @@ three scenarios. This slide is what sits behind them: five constants that never 
 more, `\(\varepsilon\)`, held fixed across scenarios and varied only in robustness, two mid-2026
 **anchors** that `\(m\)` and `\(d\)` start from and that all three scenarios share, and two **ranges**
 the `\(\psi\)` and `\(\rho\)` scenario values are drawn from. The 2030 values of `\(m\)`, `\(d\)` and `\(a\)`
-are **assumptions**, not estimates; everything on this slide is anchored to data.
+are **assumptions**, not estimates; everything on this slide is measured or taken from
+published estimates, except the ends of the `\(\psi\)` and `\(\rho\)` ranges.
 ]
 
 ---
@@ -1396,7 +1397,7 @@ $$
 
 .pull-right[
 .tiny[
-&lt;span style="color:#FF4500"&gt;&lt;b&gt;What comes out.&lt;/b&gt;&lt;/span&gt; Nine objects, solved once, then held fixed for all 72 months and all
+&lt;span style="color:#FF4500"&gt;&lt;b&gt;What comes out.&lt;/b&gt;&lt;/span&gt; Nine objects, solved once, then held fixed for every month and all
 three scenarios:
 
 | | |
@@ -1446,7 +1447,7 @@ right-hand equations are the **closures**: they pin the pool's split and the lev
   &lt;/tr&gt;
   &lt;tr&gt;
    &lt;td style="text-align:left;"&gt; filling rate, AI-sensitive / other &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; 0.66 / 0.64 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 0.659 / 0.635 (paper: 0.66 / 0.64) &lt;/td&gt;
   &lt;/tr&gt;
   &lt;tr&gt;
    &lt;td style="text-align:left;"&gt; matching efficiency chi &lt;/td&gt;
@@ -1464,7 +1465,8 @@ then held fixed across scenarios.
 
 .blue-box[
 For a reproduction this block is the best available test: it has to hit six published
-numbers using none of them as inputs. The Python reimplementation matches all six.
+numbers using none of them as inputs. The Python reimplementation matches five of six to
+the printed digit; the sixth, 0.635 against 0.64, is the pool rounding again.
 ]
 
 ---
@@ -1864,10 +1866,7 @@ name: series-to-plots
 &lt;/div&gt;
 
 .tiny[
-Only the four connected series are plotted here; the rest are in the tables. Four of
-those seven (TFP, average wage, labor share, capital stock) also appear in the
-explorer; three (employment by group, occupation switching, the ideas stock) are
-tables-only.
+Only the four connected series are plotted; TFP, the average wage, the labor share and the capital stock are also in the explorer.
 ]
 
 ---
@@ -1901,7 +1900,7 @@ name: sc-modest
 &lt;div class="em"&gt;&amp;#129367; labor share &lt;b&gt;59.4%&lt;/b&gt; of income&lt;/div&gt;
 &lt;div class="em"&gt;&amp;#128101; AI-sensitive employment &lt;b&gt;-0.5%&lt;/b&gt; since mid-2026&lt;/div&gt;
 &lt;div class="em"&gt;&amp;#128269; unemployment: AI-sensitive &lt;b&gt;2.9%&lt;/b&gt;, all other &lt;b&gt;5.4%&lt;/b&gt;, overall &lt;b&gt;3.9%&lt;/b&gt;&lt;/div&gt;
-&lt;span class="note"&gt;Normal times: unemployment 2.91 and 5.36 by group, 3.84 overall,
+&lt;span class="note"&gt;Normal times: unemployment 2.82 and 5.39 by group, 3.80 overall,
 labor share 60.0.&lt;/span&gt;
 &lt;/div&gt;
 
@@ -1916,7 +1915,7 @@ calls forth more of them than the productivity gain itself amounts to: the capit
 (&amp;epsilon; = 3).&lt;br&gt;&lt;br&gt;
 &lt;b&gt;The frictions never bind.&lt;/b&gt; Displaced workers move between occupations as easily as they do
 today (&amp;mu; at its normal-times 0.17), so unemployment ends 3.86 against a
-normal 3.84 and the two groups&amp;rsquo; wages move together.
+normal 3.80 and the two groups&amp;rsquo; wages move together.
 &lt;/div&gt;
 
 &lt;/div&gt;
@@ -1952,7 +1951,7 @@ name: sc-substantial
 &lt;div class="em"&gt;&amp;#129367; labor share &lt;b&gt;56.1%&lt;/b&gt; of income&lt;/div&gt;
 &lt;div class="em"&gt;&amp;#128101; AI-sensitive employment &lt;b&gt;-3.9%&lt;/b&gt; since mid-2026&lt;/div&gt;
 &lt;div class="em"&gt;&amp;#128269; unemployment: AI-sensitive &lt;b&gt;4.5%&lt;/b&gt;, all other &lt;b&gt;4.6%&lt;/b&gt;, overall &lt;b&gt;4.5%&lt;/b&gt;&lt;/div&gt;
-&lt;span class="note"&gt;Normal times: unemployment 2.91 and 5.36 by group, 3.84 overall,
+&lt;span class="note"&gt;Normal times: unemployment 2.82 and 5.39 by group, 3.80 overall,
 labor share 60.0.&lt;/span&gt;
 &lt;/div&gt;
 
@@ -2004,7 +2003,7 @@ name: sc-extreme
 &lt;div class="em"&gt;&amp;#129367; labor share &lt;b&gt;45.2%&lt;/b&gt; of income&lt;/div&gt;
 &lt;div class="em"&gt;&amp;#128101; AI-sensitive employment &lt;b&gt;-21.4%&lt;/b&gt; since mid-2026&lt;/div&gt;
 &lt;div class="em"&gt;&amp;#128269; unemployment: AI-sensitive &lt;b&gt;17.9%&lt;/b&gt;, all other &lt;b&gt;3.9%&lt;/b&gt;, overall &lt;b&gt;11.9%&lt;/b&gt;&lt;/div&gt;
-&lt;span class="note"&gt;Normal times: unemployment 2.91 and 5.36 by group, 3.84 overall,
+&lt;span class="note"&gt;Normal times: unemployment 2.82 and 5.39 by group, 3.80 overall,
 labor share 60.0.&lt;/span&gt;
 &lt;/div&gt;
 
@@ -2162,7 +2161,7 @@ name: verify-main
 &lt;/table&gt;
 
 Also matched without being targeted: the steady-state switching share of 1 in 7,
-filling rates 0.66 / 0.64, `\(\chi = 0.76\)`, the logistic slopes `\(\kappa_m = 0.33\)` and
+filling rates 0.66 / 0.64 (0.635 for the second, the pool rounding), `\(\chi = 0.76\)`, the logistic slopes `\(\kappa_m = 0.33\)` and
 `\(\kappa_d = 0.51\)`, and the worked example's exact TFP gain of 0.029.
 
 .highlight-box[
@@ -2206,8 +2205,8 @@ uses 0.0384. The all-workers rate is 0.07 points low (substantial), the AI-sensi
 1. **The claim is conditional, and the conditioning set is small.** Five numbers about
    AI, two about labor-market frictions.
 2. **TFP and distribution are separate questions.** `\(\psi\)` moves the labor share
-   without moving productivity at all.
-3. **$\sigma &lt; 1$ is load-bearing.** Set it above one and the labor-share results
+   while measured TFP barely changes.
+3. **The inequality `\(\sigma &lt; 1\)` is load-bearing.** Set it above one and the labor-share results
    change sign.
 4. **Capital supply decides whether workers gain**, and wage rigidity decides whether
    the cost is paid in wages or in jobs.
@@ -2383,8 +2382,8 @@ looking in the wrong series.
 ]
 
 One variant helps workers: if checking is genuinely *new human work*, that is a rise
-in `\(\rho\)`, and it is the only case here that cushions wages (+0.7) and raises the
-labor share (57.3), at the cost of lower output. "Slop that makes work" and "slop
+in `\(\rho\)`, and it is the only case here in which the average wage still rises (+0.7).
+It lifts the labor share to 57.3, as stalled adoption also does, at the cost of lower output. "Slop that makes work" and "slop
 that just does not deliver" are different worlds.
 
 ---
@@ -2417,7 +2416,7 @@ name: eq38-solve
 
 # Backup: How Equation (38) Is Actually Solved
 
-.small[
+.tiny[
 Ten conditions for nine unknowns, one redundant; each step substitutes what it can and leaves
 **one scalar equation** to bisect with `bisect()`, `numerics.py:4`; the monthly rental rate uses
 the same routine via `expand_and_bisect()`, `statics.py:92`. The definition row is not one of the ten.
@@ -2428,18 +2427,18 @@ the same routine via `expand_and_bisect()`, `statics.py:92`. The definition row 
 | `\(\bar U_C + \bar U_N = \bar U\)` | 1 | step 2, substituted to eliminate `\(\bar U_N\)` |
 | `\(\bar S_C = \bar U_C + \bar\mu \bar U_N\)`, `\(\ \bar S_N = \bar\mu \bar U_C + \bar U_N\)` | none | **definition** (33), not a condition; substituted in steps 2 and 3 |
 | `\(\bar f_C = \bar H_C/\bar S_C + \bar\mu \bar H_N/\bar S_N\)` | 1 | step 2, substituted to express `\(\bar f_C\)` |
-| `\(\bar f_o \bar U_o = \bar H_o\)`, for `\(o = C\)` | 1 | **step 2**, bisected at `steady.py:64` |
+| `\(\bar f_o \bar U_o = \bar H_o\)`, for `\(o = C\)` | 1 | **step 2**, bisected at `steady.py:61` |
 | `\(\bar f_N = \bar\mu \bar H_C/\bar S_C + \bar H_N/\bar S_N\)` | 1 | evaluated once the root is known |
 | `\(\bar f_o \bar U_o = \bar H_o\)`, for `\(o = N\)` | 1 | never imposed: the **redundant** one; checked anyway, `\(-1.2 \times 10^{-14}\)` |
 | `\(\bar \pi_o = \chi[1 - (\bar H_o/\chi \bar S_o)^{\iota}]^{1/\iota}\)` | 2 | step 3, substituted to express `\(\bar\pi_o(\chi)\)` |
-| mean filling `\(=\)` mean `\(\bar\pi\)` | 1 | **step 3**, bisected at `steady.py:84` |
+| mean filling `\(=\)` mean `\(\bar\pi\)` | 1 | **step 3**, bisected at `steady.py:81` |
 ]
 
 `$$\Big[\frac{\bar H_C}{{\color{OrangeRed} \bar U_C} + \bar\mu(\bar U - {\color{OrangeRed} \bar U_C})} + \bar\mu\,\frac{\bar H_N}{\bar\mu {\color{OrangeRed} \bar U_C} + (\bar U - {\color{OrangeRed} \bar U_C})}\Big] {\color{OrangeRed} \bar U_C} = \bar H_C$$`
 
 .small[
 **Step 2** substitutes rows two to four into row five, leaving `\({\color{OrangeRed} \bar U_C}\)` as the only unknown.
-The residual runs from `\(-\infty\)` at `\(\bar U_C \to 0\)` to `\(+0.086\)` at `\(\bar U_C = \bar U\)`, so bisect on
+The residual runs from `\(-\infty\)` at `\(\bar U_C \to 0\)` to `\(+0.13\)` at `\(\bar U_C = \bar U\)`, so bisect on
 `\((0, \bar U)\)`: the root is `\(\bar U_C = 0.0174\)`, 46% of the pool for 62% of employment. Step 3 has the same shape.
 ]
 
@@ -2499,8 +2498,8 @@ $$
 .small[
 **Which of them is solved.** The right-hand rows are *definitions*, the matching function
 inverted, each giving `\(\bar\pi_o\)` in closed form as a function of `\(\chi\)` alone. The left-hand
-row is the only *condition*, and it is the one bisected (`fill_resid`, `steady.py:78`,
-bisected at `:84`). How wrong a guess is = the mean filling rate it implies, minus the
+row is the only *condition*, and it is the one bisected (`fill_resid`, `steady.py:75`,
+bisected at `:81`). How wrong a guess is = the mean filling rate it implies, minus the
 `\(0.65\)` target. `\(\chi\)` must exceed hires per searcher, `\(\max_o \bar H_o/\bar S_o = 0.2155\)`, or
 the bracket turns negative: at that floor the model fills `\(0.037\)` of vacancies, far too few,
 and at `\(\chi = 1\)` it fills `\(0.900\)`, too many. Opposite signs, so bisect between them.
@@ -2674,7 +2673,7 @@ number and one anchor per equation, the paper's own numbering throughout.
 |---|---|---|---|
 | **A. Ideas** | 3 | research uplift ([22](../repro.html#eq-22)), growth gap ([42](../repro.html#eq-42)), the ideas stock ([42](../repro.html#eq-42), [43](../repro.html#eq-43)) | [§2.2](../repro.html#innovation) · `simulate.py:196`; closed form at `:215` |
 | **B. Capital, wage, shares, targets** | 9 | `\(\Delta \ln r\)` ([18](../repro.html#eq-18), [6](../repro.html#eq-6)), `\(\tilde\ell_N\)` ([15](../repro.html#eq-15)), `\(s_L\)` ([14](../repro.html#eq-14)), `\(\Delta \ln w\)` ([16](../repro.html#eq-16)), `\(Y/L\)` ([5](../repro.html#eq-5)), `\(K\)` ([17](../repro.html#eq-17)), TFP ([45](../repro.html#eq-45)), the two targets ([13](../repro.html#eq-13)) | [§2.1.1](../repro.html#technology-and-factor-markets), [§2.1.3](../repro.html#measured-tfp-and-the-factor-price-frontier), [§2.1.5](../repro.html#employment-in-the-two-groups) · `statics.py:67` `frictionless()`, called at `simulate.py:129` |
-| **C. Flows** | 23 | overhang and shortfall ([28](../repro.html#eq-28)), quits ([27](../repro.html#eq-27)), attached force ([29](../repro.html#eq-29)), sticky wage ([30](../repro.html#eq-30)), demand ([39](../repro.html#eq-39)), layoffs ([31](../repro.html#eq-31)), openings ([32](../repro.html#eq-32)), search ([33](../repro.html#eq-33)), hires ([34](../repro.html#eq-34)), finding rates ([35](../repro.html#eq-35)), employment ([36](../repro.html#eq-36)), pools ([37](../repro.html#eq-37)) | [§2.3](../repro.html#unemployment) · `simulate.py:140-178`, stocks at `:200`; ([33](../repro.html#eq-33)) in `steady.py:46` |
+| **C. Flows** | 23 | overhang and shortfall ([28](../repro.html#eq-28)), quits ([27](../repro.html#eq-27)), attached force ([29](../repro.html#eq-29)), sticky wage ([30](../repro.html#eq-30)), demand ([39](../repro.html#eq-39)), layoffs ([31](../repro.html#eq-31)), openings ([32](../repro.html#eq-32)), search ([33](../repro.html#eq-33)), hires ([34](../repro.html#eq-34)), finding rates ([35](../repro.html#eq-35)), employment ([36](../repro.html#eq-36)), pools ([37](../repro.html#eq-37)) | [§2.3](../repro.html#unemployment) · `simulate.py:140-178`, stocks at `:200`; ([33](../repro.html#eq-33)) in `steady.py:43` |
 | **D. Reporting** | 9 | the AI-sensitive shift ([19](../repro.html#eq-19)), the actual economy ([39](../repro.html#eq-39)), and three rows the paper leaves unnumbered: excess unemployment, reallocation, aggregate overhang | [§2.3](../repro.html#unemployment), [§5](../repro.html#verification-summary) · `statics.py:152` `actual_at_employment()`, called at `simulate.py:179`; `report.py` |
 
 **The mapping runs both ways**, because Table A.1 is organised by endogenous variable, not by
@@ -2691,7 +2690,7 @@ pairs plus three that exist only for `\(C\)`: the attached force, the sticky wag
 Two rows are approximations when the exact set is run: **measured TFP**, a base-price index,
 and the **ideas update**, a monthly step on the closed form [(43)](../repro.html#eq-43). Every other row holds exactly
 given its right-hand side. A fifth panel, the steady state, is nine more objects solved once at
-`\(t_0\)` and deliberately outside the 44: `steady.py:51`.
+`\(t_0\)` and deliberately outside the 44: `steady.py:48`.
 ]
 ]
 
@@ -2852,9 +2851,9 @@ name: slop-mechanism
 
 # Backup: Why Slop Flips the Wage Sign
 
-Equation (19), split into its two terms:
+The labor-share line of Equation (11), split by what scales with the gain:
 
-`$$\tilde \ell_{N,t} \approx \underbrace{(1-\rho)\psi_t m_t d_t}_{\text{no } a_t \text{ in it}} + \underbrace{(1-\sigma)(1-\psi_t) m_t d_t a_t}_{\text{proportional to } a_t}$$`
+`$$\Delta \ln s_{L,t} \approx -\underbrace{(1-\rho)\psi_t m_t d_t}_{\text{no } a_t \text{ in it}} + \underbrace{(1-\sigma)\psi_t m_t d_t a_t}_{\text{proportional to } a_t} - (1-\sigma)\tfrac{s_{K,t0}}{s_{L,t0}}\Delta \ln r_t$$`
 
 An automated instance takes its **whole wage bill** to capital whether the machine
 saved an hour or a minute. The weak-link cushion that partly protects the labor share
@@ -2868,13 +2867,11 @@ is proportional to the saving. Slop removes the offset and leaves the harm.
 
 Formally this is the `\(\varepsilon^*\)` threshold again, since it contains
 `\((1-\rho)/a_t\)`: slop pushes the required capital-supply elasticity from 1.30 to 3.39
-and then 7.58, straight through the calibrated `\(\varepsilon = 3\)`.
+and then 9.63 across the three rows, straight through the calibrated `\(\varepsilon = 3\)`.
 
 .small[
-What the model cannot host: quality itself. Instances are homogeneous and prices are
-quality-adjusted by assumption, so slop can only be a smaller cost saving, never the
-same cost for a worse product. And if errors propagate downstream, Hulten's theorem
-(Equation 9) no longer applies, because it assumes an efficient economy.
+What the model cannot host: quality itself. Slop can only be a smaller cost saving, never
+the same cost for a worse product.
 ]
 
 &lt;a href="#slop-main" class="nav-btn"&gt;← back&lt;/a&gt;
@@ -2969,7 +2966,7 @@ compounding it gives 32.4%.
 **Redoing this by hand has three traps.** *Ratio, not difference*: the gap divides the two
 2030 levels. *Log rates*: the gross factor for 15.5% is exp(0.155) =
 1.167, not 1.155. *Head start*: a factor of 1.00606, because
-AI adoption begins in mid-2026, so the paths have already separated by 0.61% before 2027 opens.
+the AI paths start in 2024 and pass their shared anchor in mid-2026, so they have already separated by 0.61% before 2027 opens.
 ]
 
 &lt;table&gt;
