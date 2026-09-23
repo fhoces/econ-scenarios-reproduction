@@ -592,7 +592,7 @@ name: input-rho
 
 .highlight-box[
 .small[
-**Status:** the **least identified** of the seven, and the second-strongest of the four disruptiveness inputs: moved alone it shifts 2030 AI-sensitive unemployment by 1.35 points across the paper's range, behind search efficiency $\mu$ at 1.47 and ahead of $\psi$ at 0.75. More if you allow full offset.
+**Status:** the **least identified** of the seven, and the second-strongest of the four disruptiveness inputs: moved alone it shifts 2030 AI-sensitive unemployment by 1.35 points across the paper's range, behind search efficiency $\mu$ at 1.47 and ahead of $\psi$ at 0.76. More if you allow full offset.
 ]
 ]
 
@@ -2153,7 +2153,7 @@ uses 0.0384. The all-workers rate is 0.07 points low (substantial), the AI-sensi
 5. **The growth channel is small over six years**, by construction.
 
 .blue-box[
-The reproduction: `aiscen` Python package, 113 tests, reproduces all 169 cells of
+The reproduction: `aiscen` Python package, 128 tests, reproduces all 169 cells of
 Tables 3, 5 and 6 within tolerance, 153 of them to the printed digit. Narrative
 walkthrough with every equation in `repro.qmd`.
 ]
@@ -2608,7 +2608,7 @@ is distributional, not productive.
 **5. When automation sticks.** Base-period units equalise all unit costs, so an automated
 instance sits $a_{i,t}$ below labor's cost and stays on capital while
 $\Delta \ln r_t - \Delta \ln w_t \le a_{i,t}$, the paper's Equation (7). In the reproduction
-the squeeze reaches **0.004 / 0.047 / 0.271** log points at 2030 against gains of
+the squeeze reaches **0.004 / 0.046 / 0.271** log points at 2030 against gains of
 **0.30 / 0.45 / 0.80**: even the extreme scenario uses only a third of its margin, so no
 instance hands itself back.
 ]

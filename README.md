@@ -209,7 +209,7 @@ is that map, made clickable.
 ```sh
 python3 run.py                      # print the Table 3 / 5 / 6 comparisons
 python3 run.py --survey --csv out   # add the survey-median run, write paths and comparison CSVs
-python3 -m pytest -q                # 113 tests: the checks above, the explorer grid, the slop extension
+python3 -m pytest -q                # 128 tests: the checks above, the explorer grid, the slop extension, the typed-in prose numbers
 
 # the narrative report: every table and inline estimate, in the paper's own order
 QUARTO_PYTHON=/opt/anaconda3/bin/python3 quarto render repro.qmd
@@ -260,7 +260,7 @@ res.series("u_rate")        # monthly path of any field
 | `aiscen/report.py` | Table 3 rows, the published Tables 3, 5 and 6, and the comparison printout |
 | `aiscen/numerics.py` | The bisection routine behind every root-find |
 | `aiscen/slop.py` | The exploratory "AI slop" extension; outside the reproduction, its mechanism pinned by four tests |
-| `tests/` | The validation suite: paths, steady state, statics, Table 3, Tables 5-6, identities |
+| `tests/` | The validation suite: paths, steady state, statics, Table 3, Tables 5-6, identities, and `test_prose_numbers.py`, which recomputes the numbers typed into the explorer page and the deck |
 | `repro.qmd`, `repro.css` | The narrative report: the paper's sections in order, every equation explained, tables and inline estimates computed |
 | `slides/` | The xaringan deck walking through the paper in four parts: the claim, the model, solving it for US inputs, results (see `slides/README.md`) |
 | `repro.html` | The rendered report. Committed, not ignored, because Pages serves it |
