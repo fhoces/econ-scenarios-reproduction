@@ -1,0 +1,106 @@
+{
+ "contributors": {
+  "human": "Fernando Hoces de la Guardia",
+  "ai": "Claude Code (Opus, Sonnet)"
+ },
+ "objects": [
+  "Explorer",
+  "Report",
+  "Slides",
+  "Repository",
+  "Overview page"
+ ],
+ "version": "full",
+ "option_set": "first (Human lead / Equal / AI lead / Not applicable; no 'only' answers yet)",
+ "date": "2026-09-23",
+ "answers": {
+  "Explorer": {
+   "Conceptualization": "Human lead",
+   "Data curation": "AI lead",
+   "Formal analysis": "AI lead",
+   "Funding acquisition": "Not applicable",
+   "Investigation": "Human lead",
+   "Methodology": "AI lead",
+   "Project administration": "Human lead",
+   "Resources": "Human lead",
+   "Software": "AI lead",
+   "Supervision": "Human lead",
+   "Validation": "AI lead",
+   "Visualization": "Equal",
+   "Writing – original draft": "AI lead",
+   "Writing – review & editing": "Equal",
+   "Human verification": "Understood"
+  },
+  "Report": {
+   "Conceptualization": "Human lead",
+   "Data curation": "AI lead",
+   "Formal analysis": "AI lead",
+   "Funding acquisition": "Not applicable",
+   "Investigation": "AI lead",
+   "Methodology": "AI lead",
+   "Project administration": "AI lead",
+   "Resources": "Not applicable",
+   "Software": "AI lead",
+   "Supervision": "AI lead",
+   "Validation": "AI lead",
+   "Visualization": "AI lead",
+   "Writing – original draft": "AI lead",
+   "Writing – review & editing": "AI lead",
+   "Human verification": "Lightly checked"
+  },
+  "Slides": {
+   "Conceptualization": "Human lead",
+   "Data curation": "AI lead",
+   "Formal analysis": "AI lead",
+   "Funding acquisition": "Not applicable",
+   "Investigation": "Human lead",
+   "Methodology": "Equal",
+   "Project administration": "Human lead",
+   "Resources": "Not applicable",
+   "Software": "AI lead",
+   "Supervision": "Human lead",
+   "Validation": "AI lead",
+   "Visualization": "Equal",
+   "Writing – original draft": "Human lead",
+   "Writing – review & editing": "Equal",
+   "Human verification": "Understood, except the Part 2 derivations"
+  },
+  "Repository": {
+   "Conceptualization": "Human lead",
+   "Data curation": "AI lead",
+   "Formal analysis": "AI lead",
+   "Funding acquisition": "Not applicable",
+   "Investigation": "AI lead",
+   "Methodology": "AI lead",
+   "Project administration": "AI lead",
+   "Resources": "Not applicable",
+   "Software": "AI lead",
+   "Supervision": "AI lead",
+   "Validation": "AI lead",
+   "Visualization": "AI lead",
+   "Writing – original draft": "AI lead",
+   "Writing – review & editing": "AI lead",
+   "Human verification": "No human review"
+  },
+  "Overview page": {
+   "Conceptualization": "Human lead",
+   "Data curation": "Not applicable",
+   "Formal analysis": "Not applicable",
+   "Funding acquisition": "Not applicable",
+   "Investigation": "Human lead",
+   "Methodology": "Human lead",
+   "Project administration": "Human lead",
+   "Resources": "Not applicable",
+   "Software": "AI lead",
+   "Supervision": "Human lead",
+   "Validation": "Human lead",
+   "Visualization": "Human lead",
+   "Writing – original draft": "Equal",
+   "Writing – review & editing": "Equal",
+   "Human verification": "Understood"
+  }
+ },
+ "notes": {
+  "Slides/Human verification": "Everything understood except Part 2 (The Model): the derivations of the model's equations, including the backup derivation slides."
+ }
+}

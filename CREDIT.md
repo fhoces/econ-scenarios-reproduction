@@ -6,6 +6,8 @@ Contributor roles follow [CRediT](https://credit.niso.org/) (ANSI/NISO Z39.104-2
 
 The objects: **Explorer** (`explorer/`, Open Output), **Report** (`repro.qmd`, Open Analysis), **Slides** (`slides/`, Open Analysis), **Repository** (`aiscen/`, `tests/`, README, Open Materials) and the **Overview page** (`index.html`).
 
+The raw answers are in `credit-answers.json`, the file the `credit` skill rebuilds this page and the landing table from.
+
 ## Matrix
 
 | Role | Explorer | Report | Slides | Repository | Overview page |
