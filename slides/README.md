@@ -29,8 +29,10 @@ place numbers appear, and it has to be re-checked after any structural change.
 
 ## Rebuilding
 
-The deck holds no transcribed numbers: it reads CSVs exported by the Python model in
-the parent directory. Three exporters feed it.
+The deck's tables and figures hold no transcribed model outputs: they read CSVs exported
+by the Python model in the parent directory. A few reproduced values are quoted in prose
+(the U-bar gaps on the verification slide and its backup, the test and cell counts) and
+have to be re-checked by hand if the model changes. Three exporters feed it.
 
 ```sh
 cd ..

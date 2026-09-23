@@ -588,7 +588,7 @@ name: input-rho
 
 .highlight-box[
 .small[
-**Status:** the **least identified** of the seven, and the second-strongest of the four frictions: moved alone it shifts 2030 AI-sensitive unemployment by 1.35 points across the paper's range, behind search efficiency `\(\mu\)` at 1.47 and ahead of `\(\psi\)` at 0.75. More if you allow full offset.
+**Status:** the **least identified** of the seven, and the second-strongest of the four disruptiveness inputs: moved alone it shifts 2030 AI-sensitive unemployment by 1.35 points across the paper's range, behind search efficiency `\(\mu\)` at 1.47 and ahead of `\(\psi\)` at 0.75. More if you allow full offset.
 ]
 ]
 
@@ -636,7 +636,7 @@ name: input-theta
 
 .highlight-box[
 .small[
-**Status:** baseline measured, scenario values assumed. It is the **weakest of the four frictions**: moved alone it shifts 2030 AI-sensitive unemployment by 0.66 points. Of all seven inputs only the gain `\(a\)` moves it less, by 0.24.
+**Status:** baseline measured, scenario values assumed. It is the **weakest of the four disruptiveness inputs**: moved alone it shifts 2030 AI-sensitive unemployment by 0.66 points. Of all seven inputs only the gain `\(a\)` moves it less, by 0.24.
 ]
 ]
 
@@ -2166,11 +2166,12 @@ filling rates 0.66 / 0.64, `\(\chi = 0.76\)`, the logistic slopes `\(\kappa_m = 
 `\(\kappa_d = 0.51\)`, and the worked example's exact TFP gain of 0.029.
 
 .highlight-box[
-Two cells need the tolerance widened, both unemployment rates and both from one
-rounding: Table 1 puts the normal pool at 0.038 while the paper's own derivation uses
-0.0384. The all-workers rate is 0.07 points low in the substantial scenario, and the
-AI-sensitive rate 0.08 points low in the No-AI column. At 0.0384 the all-workers row
-lands exactly; the No-AI rate improves to 2.85 and still prints as 2.8 against 2.9.
+Two Table 3 cells fall outside its 0.05-point tolerance, both unemployment rates and both
+from one rounding: Table 1 puts the normal pool at 0.038 while the paper's own derivation
+uses 0.0384. The all-workers rate is 0.07 points low (substantial), the AI-sensitive rate
+0.08 low (No-AI); four Table 6 unemployment cells are as far off, inside that table's
+0.12-point floor. At 0.0384 the all-workers row lands on 4.6; the No-AI rate improves to
+2.85 and still prints as 2.8 against 2.9.
 ]
 
 &lt;a href="#ubar-detail" class="nav-btn"&gt;the U-bar detail →&lt;/a&gt;
@@ -2252,7 +2253,7 @@ median and a maximum, not three interior points.
 `\(\mu = 0.17\)`:
 GDP 39.4 percent above no-AI instead of 32.4, with AI-sensitive unemployment
 10.3 instead of 17.9.
-Holding the three size inputs at extreme, the four friction inputs alone move AI-sensitive
+Holding the three size inputs at extreme, the four disruptiveness inputs alone move AI-sensitive
 unemployment from 4.7 to 19.5 percent.
 ]
 ]
@@ -2266,7 +2267,8 @@ across the grid, so the diagonal is not arbitrary, and the scenario explorer doe
 the values freely. The objection is to what the headline table reports, not to what the model can
 do. Grid caveat: every cell builds `\(a_t\)` from the substantial scenario's mid-2026 anchor (0.35), as
 the paper's explorer does for custom gains above it, so the grid's corners reproduce this
-reproduction's runs of the named scenarios to within 0.03 points.
+reproduction's runs of the named scenarios to within 0.03 points for levels (GDP growth, a
+twelve-month rate, is off by about 0.2).
 ]
 
 ---
@@ -2880,25 +2882,24 @@ same cost for a worse product. And if errors propagate downstream, Hulten's theo
 ---
 name: ubar-detail
 
-# Backup: The Two Cells That Need a Wider Tolerance
+# Backup: One Pool Rounding, Six Unemployment Cells
 
 Table 1 gives the normal search pool as `\(\bar U = 0.038\)`. But:
 
 - the quit-rate derivation on p. 26 uses `\(0.219 \times 3.84 / 96.16\)`, i.e. 3.84%
 - the reported pool split, 1.76 and 2.08 percent of the labor force, sums to 3.84%
 
-At `\(\bar U = 0.038\)` the reimplementation gives an all-workers unemployment rate 0.07
-points below the published figure in the substantial scenario (4.53 against 4.6; modest
-and extreme are off by 0.04 points or less, and No-AI matches exactly), and an
-AI-sensitive rate 0.08 points below it in the No-AI column (2.82 against 2.9; the other
-three columns are off by 0.01 points or less). These two are the only cells in Tables 3,
-5 and 6 that need the test tolerance widened (to 0.09 points).
+At `\(\bar U = 0.038\)` the all-workers unemployment rate is 0.07 points low in the substantial
+scenario (4.53 against 4.6) and the AI-sensitive rate 0.08 points low in the No-AI column
+(2.82 against 2.9); every other column is within 0.04. These are the only two cells outside
+Table 3's 0.05-point tolerance (the tests widen it to 0.09), but not unusually far off: inside
+the 0.12-point floor of Tables 5 and 6, the same rounding leaves four Table 6 unemployment
+cells 0.07 to 0.08 low, one of them the identical run.
 
-At `\(\bar U = 0.0384\)` the all-workers row lands exactly, six further cells that had
-rounded to a different last digit fall into line, and nothing else changes materially. The AI-sensitive
-rate in the No-AI column is the near miss: it improves to 2.85, which still prints as 2.8
-rather than the paper's 2.9, so the pool accounts for the size of that gap without
-closing it.
+At `\(\bar U = 0.0384\)` the all-workers row lands on 4.6, and five more unemployment cells plus
+one Table 5 GDP cell (by coincidence) fall onto their printed digit; nothing else changes
+materially. The No-AI AI-sensitive rate improves only to 2.85, still printing as 2.8 against
+2.9: the pool explains the size of that gap without closing it.
 
 .blue-box[
 This is what a reproduction is for: not to catch an error, since the paper's own text

@@ -116,23 +116,30 @@ fails the suite rather than quietly ageing the text.
 | Table 6 | extreme, xi=0.75, unemployment AI-sensitive | 21.65 | 21.7 |
 | Table 6 | extreme, xi=0.9, unemployment all workers | 15.12 | 15.2 |
 
-**The pool rounding accounts for seven of them.** Table 1 gives the normal search pool
+**The pool rounding accounts for six of them.** Table 1 gives the normal search pool
 as `U_bar = 0.038`, but the quit-rate derivation on p. 26 uses 3.84 percent and the
 published pool split of 1.76 / 2.08 percent (p. 21) requires 0.0384. At
-`Fixed(U_bar=0.0384)` seven of the sixteen cells above land on the published digit,
-including every all-workers unemployment cell, and nothing else changes materially. The
+`Fixed(U_bar=0.0384)` seven of the sixteen cells above land on the published digit: six
+unemployment cells, including every all-workers one, which the pool explains, and Table 5's
+substantial eps=6 GDP cell, which moves by 0.006 and crosses its rounding boundary by
+coincidence. Nothing else changes materially. The
 No-AI AI-sensitive rate is the near miss: it improves from 2.82 to 2.85, which still prints
 as 2.8 rather than the paper's 2.9, so the pool accounts for the size of that gap
 without closing it. Those same two Table 3 cells, all workers in the substantial column
 (4.53 against 4.6, a 0.07pp gap) and AI-sensitive in the No-AI column (2.82 against 2.9, a
-0.08pp gap), are also the only two of the 169 that fall outside the suite's standard
-tolerance, which is why `tests/test_table3.py` widens it, to 0.09 points, for exactly
-those two. The
+0.08pp gap), are also the only two of the 169 outside Table 3's standard tolerance of
+0.05 points, which is why `tests/test_table3.py` widens it, to 0.09 points, for exactly
+those two. They are not unusually far off: Tables 5 and 6 are tested against a looser floor
+of 0.12 points, and inside it the same rounding leaves four Table 6 unemployment cells 0.07
+to 0.08 points low (one of them, substantial `xi = 0.5` all workers, is the identical model
+run). The
 default here stays at Table 1's 0.038 for transcription fidelity; the tests check both
 readings.
 
-**The remaining nine are last-digit noise.** They sit between 0.006 and 0.11 percentage
-points of the published figure, share no common cause, and every one passes the test
+**The other eight are last-digit noise.** Leaving aside the No-AI rate above, the cells
+still off at 0.0384 sit between 0.0065 and 0.11 percentage points of the published figure,
+share no common cause (two of them are one model run reported in Table 3 and Table 6),
+and every one passes the test
 suite's numerical tolerance (`max(0.12, 0.004 * |published value|)` percentage points
 for Tables 5 and 6, in `tests/test_robustness.py`). That is what ordinary rounding in a
 nonlinear numerical solve looks like rather than a modelling discrepancy, but
@@ -152,7 +159,9 @@ grid conventions.
 
 The headline: **all seven scenario dials are guesswork**, and they are exactly what
 differs between modest, substantial and extreme, so they produce the entire spread in
-the results. Everything they are measured against is data or research. The normal-times
+the results. Apart from the gain's mid-2026 anchor, which also differs by scenario, and two
+further assumptions (the returns to research `lambda` and labor-force growth `n`),
+everything they are measured against is data or research. The normal-times
 labor market in particular is pinned hard (the search pool, the quit rate, the
 separation rates by group, the occupational switching matrix and the filling rate are
 all data). This is not a criticism of the calibration, it is what a scenario exercise
@@ -186,7 +195,7 @@ is that map, made clickable.
 ```sh
 python3 run.py                      # print the Table 3 / 5 / 6 comparisons
 python3 run.py --survey --csv out   # add the survey-median run, write monthly paths
-python3 -m pytest -q                # 113 tests, all of the checks described above
+python3 -m pytest -q                # 113 tests: the checks above, the explorer grid, the slop extension
 
 # the narrative report: every table and inline estimate, in the paper's own order
 QUARTO_PYTHON=/opt/anaconda3/bin/python3 quarto render repro.qmd
@@ -235,6 +244,8 @@ res.series("u_rate")        # monthly path of any field
 | `aiscen/statics.py` | Proposition 1 (exact closed form) and the actual-economy system (39) |
 | `aiscen/simulate.py` | Appendix A steps 1-9 on a monthly grid, plus the closed form (43) |
 | `aiscen/report.py` | Table 3 rows, the published values, and the comparison printout |
+| `aiscen/numerics.py` | The bisection routine behind both root-finds |
+| `aiscen/slop.py` | The exploratory "AI slop" extension; outside the reproduction, its mechanism pinned by four tests |
 | `tests/` | The validation suite: paths, steady state, statics, Table 3, Tables 5-6, identities |
 | `repro.qmd`, `repro.css` | The narrative report: the paper's sections in order, every equation explained, tables and inline estimates computed |
 | `slides/` | The xaringan deck walking through the paper in four parts: the claim, the model, solving it for US inputs, results (see `slides/README.md`) |

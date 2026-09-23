@@ -83,10 +83,11 @@ Four more conventions worth holding onto:
 - **Head counts are shares of the labor force.** $\ell_{C,t} + \ell_{N,t} + U_{C,t}
   + U_{N,t} = 1$ at every date, so employment and unemployment are fractions, not
   millions of people. The subscript $C$ is the paper's own **"cognitive"** occupations
-  ($N$ is everyone else), which this document keeps; the slide deck alongside it
-  relabels the same group **"AI-sensitive occupations"** in prose while keeping the
-  same subscript and the same underlying data, so a reader moving from the deck to
-  this report isn't hit with a silent, unexplained vocabulary swap.
+  ($N$ is everyone else), which this document keeps, because it follows the paper line
+  by line. The slide deck, the explorer and the landing page relabel the same group
+  **"AI-sensitive occupations"** in prose while keeping the same subscript and the same
+  underlying data, so a reader moving between them and this report isn't hit with a
+  silent, unexplained vocabulary swap.
 - **The final good is the numeraire**, $P_t \equiv 1$. "The wage" is therefore a
   real wage, and the price index is a *constraint* rather than an output: if AI
   lowers the cost of some tasks, some other price has to rise to hold $P_t$ at one.
@@ -1507,8 +1508,9 @@ values another row implies, and **convention**, for the dates and the period len
 
 The headline is short. All seven scenario dials (everything that differs between
 modest, substantial and extreme, and therefore everything that produces the spread in
-the results) are guesswork. Everything they are measured *against* is data or
-research.
+the results) are guesswork. Apart from the gain's mid-2026 anchor, which also differs
+by scenario, and two further assumptions (the returns to research $\lambda$ and labor-force
+growth $n$), everything they are measured *against* is data or research.
 
 ```{python}
 #| label: origins
@@ -1587,7 +1589,7 @@ origins = [
      "Equation (41), set so the ideas stock grows at g without AI (iota_R,2030 = 0.041)."),
     # --- the labor market in normal times
     ("U_bar", "normal search pool, share of the labor force", f"{F.U_bar:g}", "data",
-     "CPS 2025. See the rounding discrepancy in Section 5: the p. 26 derivation and the "
+     "CPS 2025. See the rounding discrepancy in Sections 2.3 and 4: the p. 26 derivation and the "
      "published pool split both imply 0.0384 rather than Table 1's 0.038."),
     ("q_bar", "normal quit rate, per year", f"{F.q_bar_ann:g}", "data",
      "Implied by the pool and the CPS finding rate, rounded (Section 3.2)."),
@@ -1672,8 +1674,11 @@ show(t3_df, floatfmt=".3f")
 Every cell is inside the tolerance the test suite applies: within 0.05 percentage points
 of the published value for Table 3, widened to 0.10 where the published value is 10 or
 larger, and within the larger of 0.12 points and 0.4 percent of the published value for
-Tables 5 and 6. The two unemployment-rate cells flagged above are the only two anywhere
-in Tables 3, 5 and 6 that need that tolerance widened, to 0.09 points. They come out low by
+Tables 5 and 6. The two unemployment-rate cells flagged above are the only two outside
+Table 3's 0.05-point tolerance, which the tests widen to 0.09 points for them. They are not
+the worst fits: inside the looser floor of Tables 5 and 6, the same rounding leaves four
+Table 6 unemployment cells 0.07 to 0.08 points low (one of them the identical model run),
+and the largest gap anywhere is 0.11 (Table 6's extreme $\xi = 0$ wage). They come out low by
 `{python} num(abs(T3['Unemployment rate, all workers, pct'][2] - 4.6), 2)`
 percentage points (all workers, substantial) and
 `{python} num(abs(T3['Unemployment rate, cognitive, pct'][0] - 2.9), 2)`
@@ -1691,8 +1696,9 @@ Tables 3, 5 and 6 alike; `Fixed(U_bar=0.0384)` switches to the other reading.
 Printed precision is a stricter test than tolerance, and the two are worth keeping
 apart. Rounding half-up to the paper's own number of decimals, 153 of the 169 cells in
 Tables 3, 5 and 6 land on the published digit and 16 do not: seven in Table 3, one in
-Table 5 and eight in Table 6, none off by more than 0.11 percentage points, and seven of
-the sixteen explained by the same $\bar U$ fork. `tests/test_printed_precision.py` holds
+Table 5 and eight in Table 6, none off by more than 0.11 percentage points. Seven of
+the sixteen land at $\bar U = 0.0384$: six unemployment cells the pool explains, plus one
+Table 5 GDP cell that crosses its rounding boundary by coincidence. `tests/test_printed_precision.py` holds
 the sixteen as an exact allowlist, and the repository README lists them cell by cell.
 
 ```{python}

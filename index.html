@@ -171,7 +171,7 @@
 
 <div class="section-title">
   <img class="section-title-icon" src="assets/opa/opa-all.png" alt="" aria-hidden="true">
-  <h2>Three Layers to understand the paper</h2>
+  <h2>Three layers to understand the paper</h2>
 </div>
 
 <div class="cards">
@@ -294,8 +294,8 @@ widened get 0.09 points. Rounding to the printed digit is a stricter test, which
 <a href="https://github.com/fhoces/econ-scenarios-reproduction#status-the-papers-published-tables-reproduce">the sixteen cells that round to a different digit</a>
 and sets out
 <a href="https://github.com/fhoces/econ-scenarios-reproduction#readings-the-paper-leaves-implicit">the readings the paper leaves implicit</a>.
-A <a href="coverage.html">coverage note</a> tracks which parts of the paper are
-implemented and which are not.</p>
+A <a href="coverage.html">coverage note</a> tracks the paper's reception: press,
+commentary and any revisions.</p>
 
 <h2>How AI was used in this exercise, and what has been verified</h2>
 
@@ -307,10 +307,12 @@ Every commit in the repository's history carries a <code>Co-Authored-By: Claude<
 for exactly that reason. One person directed and reviewed all of it. No other person has
 checked it; several independent AI review passes have audited the site for consistency.</p>
 
-<p style="margin-top:14px;">Numeric verification is mechanical: the 113 tests in
-<code>tests/</code> compare the model's own output against the values printed in the paper's
-Tables 3, 5 and 6, and against several checks the paper states in prose (the steady-state
-switching share, the filling rates, the TFP worked example, and others listed in the README).
+<p style="margin-top:14px;">Numeric verification is mechanical: most of the 113 tests in
+<code>tests/</code> compare the model's own output against the paper, meaning the values
+printed in its Tables 3, 5 and 6, several checks it states in prose (the steady-state
+switching share, the filling rates, the TFP worked example, and others listed in the README)
+and identities its equations imply. Seven more pin the explorer's precomputed grid to the
+model, and four pin the slop extension described below.
 They are re-run by hand after every change (there is no continuous integration) and fail if a
 reproduced number drifts from the published one past the tolerance stated above. That part does not depend on anyone's memory: the numbers either
 match on re-run or they don't.</p>
@@ -321,12 +323,13 @@ second, independent reader. Where the paper's text left a modelling choice impli
 adopted here was chosen for internal consistency (see the README) rather than confirmed with the
 paper's authors.</p>
 
-<p style="margin-top:14px;">A separate, lower bar is whether the author can explain a section
-unaided, without relying on the AI's own explanation of it, which he tracks in a private running
-record. As of the most recent update, he rates himself able to do that for the paper's framing and
-claims, for how the model is solved numerically month by month, and for the results and the
-explorer (a self-assessment, not yet tested), but not yet for the equation-by-equation derivation of the model itself, the part that derives every
-equation the rest of the material runs on, and not yet for the internal layout of the code in
+<p style="margin-top:14px;">A separate question, with weaker evidence behind it, is whether the
+author can explain a section unaided, without relying on the AI's own explanation of it, which he
+tracks in a private running record. As of the most recent update he rates himself able to do that
+(a self-assessment, none of it yet tested) for the paper's framing and claims, for how the model
+is solved numerically month by month, and for the results and the explorer, but not yet for the
+equation-by-equation derivation of the model itself, the part every other equation in the
+material runs on, and not yet for the internal layout of the code in
 <code>aiscen/</code>. Mechanical verification confirms the numbers match; it does not by itself
 confirm the person publishing this has independently worked through why they should.</p>
 
