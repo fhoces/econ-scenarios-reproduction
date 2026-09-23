@@ -10,9 +10,10 @@ An independent, from-scratch implementation of the model in
 
 Following the [Open Policy Analysis](https://tinyurl.com/1qypbihb) (OPA) framework:
 
-1. **Open Output**: [an interactive explorer](https://fhoces.github.io/econ-scenarios-reproduction/explorer/),
-   which recomputes all eleven outcome series live over every combination of the paper's
-   seven scenario dials.
+1. **Open Output**: [an interactive explorer](https://fhoces.github.io/econ-scenarios-reproduction/explorer/)
+   over a precomputed grid of the paper's seven scenario dials: 4374 combinations, three
+   levels per dial (six for reinstatement), each showing eleven outcomes in 2030 and the
+   2025-2030 paths of three of them.
 2. **Open Analysis**: [a full written reproduction](https://fhoces.github.io/econ-scenarios-reproduction/repro.html)
    that walks every table and equation in the paper's own order, and
    [a slide deck](https://fhoces.github.io/econ-scenarios-reproduction/slides/slides.html)
@@ -54,13 +55,20 @@ where labor reallocates instantly; the 44-equation monthly system of Table A.1
 (pp. 42-43); the simulation procedure of Appendix A (pp. 40-41); the innovation block of
 Appendix C (pp. 49-51); and the parameters of Tables 1 and A.2 (pp. 23-25, 43-45).
 
+**A note on terminology.** The paper calls the occupations whose tasks AI is assumed to
+touch "cognitive". This README, the deck, the explorer and the landing page call them
+**AI-sensitive** instead, because the paper's label implies the excluded work (the nurse's,
+the electrician's) involves no thinking. The subscript `C` in the math, the `aiscen` code
+and the CSV row names keep the paper's wording, so the data still lines up row for row
+with the paper; `repro.qmd`, which follows the paper line by line, keeps it too and says so.
+
 ## Status: the paper's published tables reproduce
 
 | Published table | Cells | Result |
 |---|---|---|
 | Table 3, the three scenarios in 2030 (p. 31) | 20 rows x 4 columns (80 cells, including the No-AI baseline column) | within test tolerance on every cell; two need a widened tolerance and seven round to a different printed digit (below) |
 | Table 5, four elasticities of capital supply (p. 37) | 5 rows x 8 columns (40 cells) | within test tolerance on every cell, including the pegged-rental case eps = infinity; one cell rounds to a different printed digit (below) |
-| Table 6, four rigidities of the cognitive wage (p. 38) | 7 rows x 7 columns (49 cells) | within test tolerance on every cell; eight cells round to a different printed digit (below) |
+| Table 6, four rigidities of the AI-sensitive wage (p. 38) | 7 rows x 7 columns (49 cells) | within test tolerance on every cell; eight cells round to a different printed digit (below) |
 
 Independent checks the paper states in prose and that the code hits without being
 targeted at them: the steady-state cross-group switching share of 1/7 (p. 21), the
@@ -93,19 +101,19 @@ fails the suite rather than quietly ageing the text.
 |---|---|---|---|
 | Table 3 | modest, GDP index 2024 = 100 | 114.56 | 114.5 |
 | Table 3 | extreme, GDP growth pct per year | 15.46 | 15.4 |
-| Table 3 | extreme, cognitive employment since mid-2026 | -21.44 | -21.5 |
-| Table 3 | No AI, unemployment rate cognitive | 2.82 | 2.9 |
+| Table 3 | extreme, AI-sensitive employment since mid-2026 | -21.44 | -21.5 |
+| Table 3 | No AI, unemployment rate AI-sensitive | 2.82 | 2.9 |
 | Table 3 | substantial, unemployment rate all workers | 4.53 | 4.6 |
 | Table 3 | substantial, growth of the ideas stock | 1.767 | 1.76 |
 | Table 3 | extreme, growth of the ideas stock | 2.027 | 2.02 |
 | Table 5 | substantial, eps=6, GDP above no-AI | 9.05 | 9.1 |
 | Table 6 | substantial, xi=0.5, unemployment all workers | 4.53 | 4.6 |
-| Table 6 | substantial, xi=0.75, unemployment cognitive | 5.03 | 5.1 |
+| Table 6 | substantial, xi=0.75, unemployment AI-sensitive | 5.03 | 5.1 |
 | Table 6 | substantial, xi=0.9, unemployment all workers | 5.12 | 5.2 |
-| Table 6 | extreme, xi=0, cognitive wage w_C | -42.09 | -42.2 |
-| Table 6 | extreme, xi=0.5, cognitive employment | -21.44 | -21.5 |
-| Table 6 | extreme, xi=0.75, cognitive employment | -25.83 | -25.9 |
-| Table 6 | extreme, xi=0.75, unemployment cognitive | 21.65 | 21.7 |
+| Table 6 | extreme, xi=0, AI-sensitive wage w_C | -42.09 | -42.2 |
+| Table 6 | extreme, xi=0.5, AI-sensitive employment | -21.44 | -21.5 |
+| Table 6 | extreme, xi=0.75, AI-sensitive employment | -25.83 | -25.9 |
+| Table 6 | extreme, xi=0.75, unemployment AI-sensitive | 21.65 | 21.7 |
 | Table 6 | extreme, xi=0.9, unemployment all workers | 15.12 | 15.2 |
 
 **The pool rounding accounts for seven of them.** Table 1 gives the normal search pool
@@ -113,12 +121,13 @@ as `U_bar = 0.038`, but the quit-rate derivation on p. 26 uses 3.84 percent and 
 published pool split of 1.76 / 2.08 percent (p. 21) requires 0.0384. At
 `Fixed(U_bar=0.0384)` seven of the sixteen cells above land on the published digit,
 including every all-workers unemployment cell, and nothing else changes materially. The
-No-AI cognitive rate is the near miss: it improves from 2.82 to 2.85, which still prints
+No-AI AI-sensitive rate is the near miss: it improves from 2.82 to 2.85, which still prints
 as 2.8 rather than the paper's 2.9, so the pool accounts for the size of that gap
-without closing it. Those same two Table 3 cells - all workers in the substantial column
-(4.53 against 4.6, a 0.07pp gap) and cognitive in the No-AI column (2.82 against 2.9, a
-0.08pp gap) - are also the only two of the 169 that fall outside the suite's standard
-tolerance, which is why `tests/test_table3.py` widens it for exactly those two. The
+without closing it. Those same two Table 3 cells, all workers in the substantial column
+(4.53 against 4.6, a 0.07pp gap) and AI-sensitive in the No-AI column (2.82 against 2.9, a
+0.08pp gap), are also the only two of the 169 that fall outside the suite's standard
+tolerance, which is why `tests/test_table3.py` widens it, to 0.09 points, for exactly
+those two. The
 default here stays at Table 1's 0.038 for transcription fidelity; the tests check both
 readings.
 
@@ -126,7 +135,7 @@ readings.
 points of the published figure, share no common cause, and every one passes the test
 suite's numerical tolerance (`max(0.12, 0.004 * |published value|)` percentage points
 for Tables 5 and 6, in `tests/test_robustness.py`). That is what ordinary rounding in a
-nonlinear numerical solve looks like rather than a modelling discrepancy - but
+nonlinear numerical solve looks like rather than a modelling discrepancy, but
 "reproduced to the printed precision" overstated it, and the table above is the
 accurate claim.
 
@@ -251,13 +260,13 @@ test. They are the places where a different reader might reasonably code somethi
    in closed form as `(eps + sigma) dln r - ln(B / s_K0) - dln A`. The test
    `test_system_39_at_the_targets_is_proposition_1` enforces the paper's own statement
    that (39) at the targets *is* Proposition 1, with and without an ideas gap.
-3. **Which cognitive wage prices the economy.** Step 8 of Appendix A records the actual
-   economy from (39) "at realized employment", which implies the cognitive price is the
+3. **Which AI-sensitive wage prices the economy.** Step 8 of Appendix A records the actual
+   economy from (39) "at realized employment", which implies the AI-sensitive price is the
    marginal product consistent with realized employment; the note also says the reported
    wage is the sticky wage paid. Both are computed (`dlnw_C_mpl`, `dlnw_C_paid`); the
    published `w_C` row of Table 3 matches the wage *paid*, which is what the comparison
-   uses. The gap between them is the cognitive-firm profit the paper bounds at half a
-   percent of GDP.
+   uses. The gap between them is the profit of the firms employing AI-sensitive
+   occupations, which the paper bounds at half a percent of GDP.
 4. **Reporting conventions.** Level differences in Tables 3, 5 and 6 are percent
    deviations, `exp(dln x) - 1`, not log points; growth rates are log changes over the
    preceding twelve months (note to Table 3). Reading the extreme scenario's GDP gap as
