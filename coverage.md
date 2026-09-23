@@ -4,9 +4,8 @@ Reception of the paper: press, commentary, citations, and any revision of the ar
 itself. This is not a tracker of whether the scenarios come true, and not a reading list
 of my own understanding, which lives in a separate tracker kept out of this repository.
 
-Updated by hand. Say "check for new coverage" and I sweep, verify, and append; paste a
-link and I slot it in. `coverage.html`, the version published with the site, is
-regenerated from this file by the project hook in `.claude/settings.json`.
+Updated by hand when new coverage appears. `coverage.html`, the version published with
+the site, is regenerated from `coverage.md`.
 
 ## The artifact being tracked
 
@@ -44,7 +43,7 @@ regenerated from this file by the project hook in `.claude/settings.json`.
 | 2026-09 | Alex Imas commentary, linked by Cowen | no | none | Lead only, URL not yet found. Worth chasing since it is the one piece Cowen singled out |
 | 2026-09 | [AI, Redistribution, and the Size of the Pie](https://marginalrevolution.com/marginalrevolution/2026/09/ai-redistribution-and-the-size-of-the-pie.html), Marginal Revolution | no | none | Appears to use the paper as a jumping-off point for the distributional question |
 | 2026-09 | [Anthropic Modeled the End of the Knowledge Worker. Watch the Capital Share.](https://longyield.substack.com/p/anthropic-modeled-the-end-of-the) | no | none | Title suggests it keys on the labor share, the 60 to 45 percent fall, which is the paper's real distributional claim |
-| 2026-09 | [Anthropic's Transformative AI Economic Scenarios: Model, Evidence, and Civilizational Stakes](https://harmoniousdiscourse.substack.com/p/anthropics-transformative-ai-economic) | no | none | Longest independent piece found. A search summary attributes to it the claim that critics think the paper *understates* AI by giving ideas only a 0.6 percent boost by 2030, contrasting Tom Davidson and Leopold Aschenbrenner. Unverified, and the 0.6 percent figure needs checking against the paper's innovation block |
+| 2026-09 | [Anthropic's Transformative AI Economic Scenarios: Model, Evidence, and Civilizational Stakes](https://harmoniousdiscourse.substack.com/p/anthropics-transformative-ai-economic) | no | none | Longest independent piece found. A search summary attributes to it the claim that critics think the paper *understates* AI by giving ideas only a 0.6 percent boost by 2030, contrasting Tom Davidson and Leopold Aschenbrenner. The attribution is unverified; the 0.6 percent itself matches Table 3's ideas stock in the extreme scenario (0.61; this reproduction gives 0.607) |
 | 2026-09 | [Three Paths for Work and Income under AI, 2026 to 2030](https://joseluischavezcalva.substack.com/p/three-paths-for-work-and-national) | no | none | |
 
 ## Press
@@ -97,6 +96,6 @@ Checked against the paper, since this is where a reproduction has something to s
 ## Log
 
 - **2026-09-17.** Tracker created. First sweep: four web searches plus two pages read in
-  full (the landing page and Cowen's post). 20 items logged, 3 read, 17 leads. Two
+  full (the landing page and Cowen's post). 20 items logged, 2 read, 18 leads. Two
   circulating claims checked against the paper and recorded as overstatements. No
   revision of the PDF and no replication package as of today.

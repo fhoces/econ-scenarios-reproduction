@@ -13,6 +13,13 @@ import markdown
 ROOT = pathlib.Path(__file__).resolve().parent
 DOCS = ["understanding", "coverage"]
 
+# The site's nav line, as on the report; relative links work for the published coverage.html.
+NAV = ('<p style="font-size:14px;color:#5b6873;">'
+       '<a href="explorer/">Open Output (the explorer)</a> &middot; Open Analysis: '
+       '<a href="repro.html">Report</a> and <a href="slides/slides.html">Slides</a> &middot; '
+       '<a href="https://github.com/fhoces/opa-ai-macro-econ-scenarios">Open Materials</a> '
+       '&middot; <a href="index.html">Overview</a></p>\n')
+
 TEMPLATE = """<!DOCTYPE html>
 <html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -76,7 +83,10 @@ def render(stem: str, only_if_stale: bool) -> bool:
         text,
         extensions=["tables", "fenced_code", "sane_lists", "attr_list"],
     )
-    html = TEMPLATE.replace("__TITLE__", title_of(text, stem)).replace("__BODY__", body)
+    # Wide tables scroll inside their own box on a phone instead of widening the page.
+    body = body.replace("<table>", '<div style="overflow-x:auto"><table>').replace(
+        "</table>", "</table></div>")
+    html = TEMPLATE.replace("__TITLE__", title_of(text, stem)).replace("__BODY__", NAV + body)
     out.write_text(html)
     print(f"rendered {out.name} ({out.stat().st_size} bytes)")
     return True

@@ -15,7 +15,7 @@
     --panel:      #ffffff;
     --ink:        #101519;
     --ink-2:      #5b6873;
-    --ink-3:      #8994a0;
+    --ink-3:      #6b7682;
     --rule:       #e2e7ec;
     --rule-2:     #eef1f5;
     --series-1:   #2a78d6;
@@ -41,7 +41,7 @@
       --series-1:   #3987e5;
       --series-2:   #d95926;
       --series-3:   #0d9e6e;
-        --ref:        #525c66;
+        --ref:        #6f7b87;
       --chip:       #232930;
       --chip-on:    #eef1f4;
       --chip-on-tx: #14171a;
@@ -58,7 +58,7 @@
     --series-1:   #3987e5;
     --series-2:   #d95926;
     --series-3:   #0d9e6e;
-    --ref:        #525c66;
+    --ref:        #6f7b87;
     --chip:       #232930;
     --chip-on:    #eef1f4;
     --chip-on-tx: #14171a;
@@ -215,6 +215,7 @@
     left: 0;
     width: 360px;
     max-width: calc(100vw - 40px);
+    box-sizing: border-box;
     background: var(--panel);
     border: 1px solid var(--rule);
     box-shadow: 0 6px 20px rgb(16 21 25 / 0.13);
@@ -325,6 +326,7 @@
   .plot { position: relative; max-width: 80%; }
   svg { display: block; width: 100%; height: auto; overflow: visible; }
   .grid-line { stroke: var(--rule); stroke-width: 1; fill: none; }
+  .grid-line.zero { stroke: var(--ref); }
   .axis-text { font-family: var(--mono); font-size: 9px; fill: var(--ink-3); }
   .ref-line { fill: none; stroke: var(--ref); stroke-width: 1; }
   .ref-text { font-family: var(--mono); font-size: 8.5px; fill: var(--ink-3); }
@@ -434,7 +436,7 @@
       the level. And <strong>the model splits the workforce in two</strong>: the AI-sensitive
       occupations, whose tasks AI is assumed to touch, and all other occupations. (The paper
       calls the first group "cognitive"; this page, the deck and the landing page do not, because
-      the label implies the nurse and the electrician are not thinking. The written report keeps
+      the label implies the electrician and the home health aide are not thinking. The written report keeps
       the paper's word, since it follows the paper line by line.)
     </p>
   </header>
@@ -470,7 +472,8 @@
         the substantial corner, which shares the grid's 0.35 anchor, misses slightly: Table 1's literal
         slope for that scenario, 0.028 per year, only reaches a 2030 gain of 0.448 (which Table 1 itself
         rounds to "0.45" in prose), while the grid solves backward from the axis label to land on 0.45
-        exactly, so its GDP gap reads 8.30 against 8.28 for the scenario's own run. GDP growth is
+        exactly, so its GDP gap reads 8.30 against 8.28 for the scenario's own run, and its average wage 2.16
+        against 2.14, which rounds to 2.2 rather than the paper's 2.1. GDP growth is
         the exception, because it is a change over the preceding twelve months rather than a 2030
         level and so depends on the whole path: at the extreme corner it reads 15.67 here against
         that scenario's own 15.46 and the paper's 15.4. Reinstatement runs over
@@ -514,9 +517,11 @@
         <summary>Show the numbers as a table</summary>
         <div class="table-scroll">
           <table id="cmp">
-            <caption class="tcap">The three right-hand columns are the paper's own scenarios, so they
-              do not move as you click. They are there to place whatever setting you have chosen
-              against the three the paper reports.</caption>
+            <caption class="tcap">The three right-hand columns are this grid's corners at the paper's
+              three scenario settings, so they do not move as you click. They match the paper's
+              Table 3 to the printed digit except in three cells: the substantial average wage (2.2
+              here, 2.1 in the paper), substantial all-workers unemployment (4.5 against 4.6) and
+              extreme GDP growth (15.7 against 15.4); the note above explains why.</caption>
             <thead>
               <tr><th>Outcome in 2030</th><th>This setting</th><th>Modest</th><th>Substantial</th><th>Extreme</th></tr>
             </thead>
@@ -623,7 +628,7 @@
             "across its range from the substantial setting takes the labor share from 57.3 to " +
             "55.4 percent while measured TFP moves only from 3.07 to 3.10.",
       levels: "0.50 / 0.75 / 0.90 of AI use is automation",
-      source: "Table 1, panel C. Survey median 0.47, which is the modest scenario's value."
+      source: "Table 1, panel C. Survey median 0.47, close to the modest scenario's 0.50."
     },
     rho: {
       title: "Reinstatement ratio", sym: "rho",
@@ -657,7 +662,7 @@
             "reallocation is, which is why it has the smallest effect of the four disruptiveness inputs (panel C).",
       levels: "0.10 / 0.25 / 0.50 per month. Alone, this input moves 2030 AI-sensitive unemployment " +
               "by 0.66 points",
-      source: "Table 1, panel C. Not asked in the survey; like the search discount and wage " +
+      source: "Table 1, panel C. Not asked in the survey. Like the search discount and wage " +
               "rigidity, it is not identified from any past AI episode."
     }
   };
@@ -775,23 +780,20 @@
     for (var k in attrs) n.setAttribute(k, attrs[k]);
     return n;
   }
-  function niceMax(v) {
-    if (v <= 0) return 1;
-    var mag = Math.pow(10, Math.floor(Math.log10(v)));
-    var steps = [1, 1.5, 2, 2.5, 3, 4, 5, 7.5, 10];
+  // Round gridline step: 1, 2, 2.5 or 5 times a power of ten, about four steps in all.
+  function niceStep(span) {
+    var raw = span / 4;
+    if (!(raw > 0)) return 1;
+    var mag = Math.pow(10, Math.floor(Math.log10(raw)));
+    var steps = [1, 2, 2.5, 5, 10];
     for (var i = 0; i < steps.length; i++) {
-      if (steps[i] * mag >= v) return steps[i] * mag;
+      if (steps[i] * mag >= raw) return steps[i] * mag;
     }
     return 10 * mag;
   }
-  // GDP and unemployment never go negative across the grid, so this returns
-  // exactly 0 for them (unchanged behavior); the AI-sensitive wage gap does go
-  // negative (cells where automation outpaces reinstatement push displaced
-  // workers' wages below the no-AI path), so this gives that chart a real
-  // floor instead of clipping negative values off the bottom of a lo=0 plot.
-  function niceMin(v) {
-    if (v >= 0) return 0;
-    return -niceMax(-v);
+  function stepDecimals(step) {
+    if (step >= 1) return 0;
+    return step >= 0.1 && Math.abs(step * 10 - Math.round(step * 10)) < 1e-9 ? 1 : 2;
   }
 
   function drawChart(host, series, refKeys, cls, dotCls) {
@@ -799,7 +801,17 @@
     var t = G.t;
     var all = series.slice();
     refKeys.forEach(function (r) { all = all.concat(r.values); });
-    var lo = niceMin(Math.min.apply(null, all)), hi = niceMax(Math.max.apply(null, all));
+    // Gridlines sit on round values, so zero always gets one when the range spans it.
+    // The axis starts at zero unless a series goes below it (the AI-sensitive wage often
+    // does, and GDP dips just below zero early on in some cells).
+    var vmin = Math.min(0, Math.min.apply(null, all)), vmax = Math.max.apply(null, all);
+    var step = niceStep(vmax - vmin);
+    var lo = Math.floor(vmin / step + 1e-9) * step, hi = Math.ceil(vmax / step - 1e-9) * step;
+    // A dip of less than a quarter step just below zero extends the axis to fit it rather
+    // than adding a whole empty step of gridlines.
+    if (vmin < 0 && -vmin < 0.25 * step) lo = vmin;
+    if (hi <= lo) hi = lo + step;
+    var dec = stepDecimals(step);
 
     var x = function (i) { return L + (W - L - R) * (i / (t.length - 1)); };
     var y = function (v) { return H - B - (H - B - T) * ((v - lo) / (hi - lo)); };
@@ -811,11 +823,14 @@
 
     var svg = el("svg", { viewBox: "0 0 " + W + " " + H, role: "img" });
 
-    for (var g = 0; g <= 4; g++) {
-      var v = lo + (hi - lo) * g / 4;
-      svg.appendChild(el("line", { class: "grid-line", x1: L, x2: W - R, y1: y(v), y2: y(v) }));
+    var gFirst = Math.ceil(lo / step - 1e-9), gLast = Math.floor(hi / step + 1e-9);
+    for (var g = gFirst; g <= gLast; g++) {
+      var v = step * g;
+      if (Math.abs(v) < step * 1e-6) v = 0;
+      svg.appendChild(el("line", { class: v === 0 ? "grid-line zero" : "grid-line",
+                                   x1: L, x2: W - R, y1: y(v), y2: y(v) }));
       var lab = el("text", { class: "axis-text", x: L - 6, y: y(v) + 3, "text-anchor": "end" });
-      lab.textContent = (hi >= 10 ? v.toFixed(0) : v.toFixed(1));
+      lab.textContent = v.toFixed(dec);
       svg.appendChild(lab);
     }
     for (var yr = 2025; yr <= 2030; yr++) {
@@ -825,13 +840,18 @@
       svg.appendChild(xl);
     }
 
-    refKeys.forEach(function (r) {
+    // Reference-scenario letters at the right edge, nudged apart when they would overprint.
+    var refLabels = refKeys.map(function (r) {
       svg.appendChild(el("path", { class: "ref-line", d: path(r.values) }));
-      var rt = el("text", {
-        class: "ref-text", x: W - R + 4,
-        y: Math.min(H - B, Math.max(T + 4, y(r.values[r.values.length - 1]) + 3))
-      });
-      rt.textContent = r.letter;
+      return { letter: r.letter,
+               y: Math.min(H - B, Math.max(T + 4, y(r.values[r.values.length - 1]) + 3)) };
+    }).sort(function (p, q) { return p.y - q.y; });
+    for (var k = 1; k < refLabels.length; k++) {
+      if (refLabels[k].y - refLabels[k - 1].y < 9) refLabels[k].y = refLabels[k - 1].y + 9;
+    }
+    refLabels.forEach(function (lbl) {
+      var rt = el("text", { class: "ref-text", x: W - R + 4, y: lbl.y });
+      rt.textContent = lbl.letter;
       svg.appendChild(rt);
     });
 
@@ -894,7 +914,7 @@
     document.getElementById("cell-name").textContent =
       name ? "This is the " + name + " scenario" :
       i === bestIdx ? "The highest-GDP cell in the grid" :
-      i === bestWageIdx ? "The highest-wage-growth cell in the grid" :
+      i === bestWageIdx ? "The highest AI-sensitive wage in the grid (reinstatement 1.25, outside the paper's range)" :
       "A mixed setting, not one of the three scenarios";
     document.getElementById("cell-meta").textContent =
       "cell " + (i + 1) + " of " + G.snap.length +
