@@ -8,7 +8,8 @@ An independent, from-scratch implementation of the model in
 > "Economic Scenarios for Transformative AI", The Anthropic Institute Working Paper
 > No. 2026-02, September 2026.
 
-Following the [Open Policy Analysis](https://tinyurl.com/1qypbihb) (OPA) framework:
+The work is organised in three layers, adapted from the
+[Open Policy Analysis](https://tinyurl.com/1qypbihb) (OPA) framework:
 
 1. **Open Output**: [an interactive explorer](https://fhoces.github.io/opa-ai-macro-econ-scenarios/explorer/)
    over a precomputed grid of the paper's seven scenario dials: 4374 combinations, three
