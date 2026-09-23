@@ -343,13 +343,14 @@ been assumed, so it holds exactly at every date.
 
 Its use is that **any two of the three pin the third**. The paper's headline that
 wages rise much less than GDP is the same statement as the labor share falling.
-Check it in the extreme scenario at 2030: output per worker is
+Check it in the extreme scenario at 2030, at the frictionless targets of Proposition 1: output per worker is
 `{python} num(100 * RUNS['extreme'].at(2030.0).dlnYL_star, 1)` log points above the no-AI
 path, the labor share change is
 `{python} num(100 * math.log(RUNS['extreme'].at(2030.0).s_L_star / F.s_L0), 1)` log
 points, and they sum to
 `{python} num(100 * (RUNS['extreme'].at(2030.0).dlnYL_star + math.log(RUNS['extreme'].at(2030.0).s_L_star / F.s_L0)), 1)`,
-the wage gap.
+the common wage gap. (The simulated economy, with its unemployment, reports an average
+wage `{python} num(T3['Average wage, pct above no-AI'][3], 1)` percent above the no-AI path.)
 :::
 
 []{#eq-6}
@@ -480,8 +481,8 @@ For the substantial scenario the paper states those slopes as $\kappa_m = 0.33$ 
 $\kappa_d = 0.51$ (Table A.2, p. 45); here they are
 `{python} num(P['substantial'].kappa_m, 2)` and
 `{python} num(P['substantial'].kappa_d, 2)`. Because the paths start near zero, the
-largest GDP gap the AI objects imply at the 2024 base period is
-`{python} num(100 * max(F.s_L0 * P[n].at(F.t0)['md'] * P[n].at(F.t0)['a'] for n in NAMES), 2)`
+largest GDP gap the simulation shows at the 2024 base period is
+`{python} num(max(100 * (math.exp(RUNS[n].months[0].dlnY) - 1) for n in NAMES), 2)`
 percent, matching the "at most a quarter of a percent" of Appendix A.
 
 By 2030 AI performs `{python} num(100 * D['modest'].iloc[-1].md, 0)`,
@@ -622,6 +623,15 @@ supplied at $\varepsilon = 3$ the rental rate instead rises
 `{python} num(100 * F.s_K0 * ex.dlnr, 1)` of the frontier, and the wage gains
 `{python} num(100 * ex.dlnw, 1)` percent rather than
 `{python} num(100 * md_x * a_x, 1)`.
+
+Two rows differ from the paper's: its rental-rate and wage figures include the
+substantial run's 2030 ideas gap, $\Delta \ln A \approx$
+`{python} num(RUNS['substantial'].at(2030.0).dlnA, 3)`. Passing it,
+`statics.frictionless(F, md_x, a_x, 0.75, 0.25, dlnA=...)`, gives
+`{python} num(100 * statics.frictionless(F, md_x, a_x, 0.75, 0.25, dlnA=RUNS['substantial'].at(2030.0).dlnA).dlnr, 1)`
+and
+`{python} num(100 * statics.frictionless(F, md_x, a_x, 0.75, 0.25, dlnA=RUNS['substantial'].at(2030.0).dlnA).dlnw, 1)`
+percent, against the paper's 4.6 and 1.9.
 
 ### 2.1.4 First-order solutions against the exact model
 
@@ -1136,8 +1146,8 @@ cost of the affected ones.
 [Equation (4)](#eq-4) rebuilt at *base-period* factor prices: hold $w$ and $r$ at their no-AI
 values, let only the technology change, and ask how much cheaper the basket of tasks
 becomes. The $-\frac{1}{1-\sigma}\ln[\cdot]$ out front is just inverting the CES
-aggregator. Inside, $m_t d_t (1 - e^{-(1-\sigma)a_t})$ is the share of the economy's
-cost the AI gains remove, and $e^{-(1-\sigma)\Delta \ln A_t}$ scales every labor
+aggregator. Inside, $m_t d_t (1 - e^{-(1-\sigma)a_t})$ is the share of labor's
+base-period cost the AI gains remove, and $e^{-(1-\sigma)\Delta \ln A_t}$ scales every labor
 instance for the ideas stock.
 
 The three agree to first order and diverge beyond it, because (45) is a base-weighted
@@ -1208,7 +1218,8 @@ quantity the group's wage has to clear.
 
 **(30) The rigid wage, in the Blanchard and Galí (2007) form.** In logs this is
 partial adjustment: the gap between the wage actually paid and the wage that would
-clear the group closes by a fraction $1 - \xi$ each year, $\xi^{1/12}$ each month. Two
+clear the group closes by a fraction $1 - \xi$ each year, and by $1 - \xi^{1/12}$ each month, so
+$\xi^{1/12}$ of the gap carries over from one month to the next. Two
 details are easy to misread. First, what is rigid is the cognitive **discount to the
 common wage**, $\ln(w_{C,t}/w_t)$, not the wage level, so the cognitive wage still
 inherits economy-wide productivity growth. Second, $\xi$ is a persistence, so higher
@@ -1273,7 +1284,7 @@ a tenth of the gap per month.
 **(33) Effective search, and where occupational specificity lives.** A worker supplies
 one unit of search in their own group and only $\mu \le 1$ units in the other. This
 one parameter carries all of the occupational human capital in the model: a laid-off
-software engineer is not instantly a nurse (Kambourov and Manovskii, 2009). Normal
+paralegal is not instantly an electrician (Kambourov and Manovskii, 2009). Normal
 times give $\bar\mu =$ `{python} num(F.mu_bar, 2)`, estimated from CPS switching, and
 the disruptive scenarios lower it to
 `{python} num(SCENARIOS['substantial'].mu, 2)` and
@@ -1339,8 +1350,10 @@ employment-weighted mean filling rate matches the JOLTS-based
 `{python} num(F.fill_bar, 2)`.
 
 Nothing in this block is fitted to anything about AI, so the numbers it produces are a
-clean test of the transcription. The steady state reproduces the paper's reported
-filling rates of `{python} num(SS.pi_C, 2)` and `{python} num(SS.pi_N, 2)`, matching
+clean test of the transcription. The steady state gives filling rates of
+`{python} num(SS.pi_C, 3)` and `{python} num(SS.pi_N, 3)` against the paper's 0.66 and
+0.64 (the second reaches 0.64 at $\bar U = 0.0384$, the pool rounding discussed with
+Table 3), matching
 efficiency `{python} num(SS.chi, 2)`, aggregate finding rate
 `{python} num(SS.f_agg, 2)`, and the calibration target that one job-finder in seven
 changes group, here `{python} num(SS.switch_share, 3)`.
@@ -1672,10 +1685,10 @@ show(t3_df, floatfmt=".3f")
 ```
 
 Every cell is inside the tolerance the test suite applies: within 0.05 percentage points
-of the published value for Table 3, widened to 0.10 where the published value is 10 or
-larger, and within the larger of 0.12 points and 0.4 percent of the published value for
-Tables 5 and 6. The two unemployment-rate cells flagged above are the only two outside
-Table 3's 0.05-point tolerance, which the tests widen to 0.09 points for them. They are not
+of the published value for Table 3 (0.10 where the published value is 10 or larger, and
+0.09 for two unemployment cells explained below), and within the larger of 0.12 points
+and 0.4 percent of the published value for Tables 5 and 6. Those two unemployment cells
+are the only ones outside Table 3's standard band. They are not
 the worst fits: inside the looser floor of Tables 5 and 6, the same rounding leaves four
 Table 6 unemployment cells 0.07 to 0.08 points low (one of them the identical model run),
 and the largest gap anywhere is 0.11 (Table 6's extreme $\xi = 0$ wage). They come out low by
@@ -1989,11 +2002,11 @@ fixing the AI's work", and Table 1 sources the 0.30 to 0.45 range to field trial
 frontier firms. A slop world is one where the realised all-in gain in the wild is far
 below what trials measured.
 
-What makes that consequential is an asymmetry already visible in [Equation (19)](#eq-19):
+What makes that consequential is an asymmetry already visible in the labor-share line of [Equation (11)](#eq-11):
 
 ```{python}
 #| label: slop-decomposition
-#| code-summary: "Equation (19): what scales with the gain, and what does not"
+#| code-summary: "The labor-share line of Equation (11): what scales with the gain, and what does not"
 from aiscen import slop                     # the extension module, documented in aiscen/slop.py
 
 a0 = slop.gain_2030(slop.BASE)              # the substantial scenario's 2030 gain
@@ -2053,8 +2066,8 @@ form.
 
 **One version of slop helps workers.** If checking and fixing is genuinely new human
 work rather than pure waste, that is a rise in the reinstatement ratio $\rho$, and it
-is the only variant here that cushions the wage and raises the labor share, at the cost
-of lower output. "Slop that makes work" and "slop that just does not deliver" are
+is the only case here in which the average wage still rises (+0.7). It lifts the labor
+share to 57.3, as stalled adoption also does, at the cost of lower output. "Slop that makes work" and "slop that just does not deliver" are
 different worlds, and the model separates them.
 
 ::: {.callout-note appearance="simple" title="What the model cannot say about slop"}

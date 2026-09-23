@@ -22,8 +22,9 @@ Following the [Open Policy Analysis](https://tinyurl.com/1qypbihb) (OPA) framewo
    and every exported CSV needed to replicate the analysis in full.
 
 [The landing page](https://fhoces.github.io/opa-ai-macro-econ-scenarios/) links to all
-three. The deck pulls `remark.js` from a CDN, so it needs an internet connection to
-render; the report and the explorer are self-contained apart from web fonts.
+three. The deck pulls `remark.js` from a CDN and the report pulls MathJax from one, so both
+need an internet connection to render fully; the explorer is self-contained apart from
+web fonts.
 
 To learn more about the OPA framework and BITSS, its home at UC Berkeley,
 [click here](https://www.bitss.org/opa/).
@@ -57,8 +58,8 @@ Appendix C (pp. 49-51); and the parameters of Tables 1 and A.2 (pp. 23-25, 43-45
 
 **A note on terminology.** The paper calls the occupations whose tasks AI is assumed to
 touch "cognitive". This README, the deck, the explorer and the landing page call them
-**AI-sensitive** instead, because the paper's label implies the excluded work (the nurse's,
-the electrician's) involves no thinking. The subscript `C` in the math, the `aiscen` code
+**AI-sensitive** instead, because the paper's label implies the excluded work (the electrician's,
+the home health aide's) involves no thinking. The subscript `C` in the math, the `aiscen` code
 and the CSV row names keep the paper's wording, so the data still lines up row for row
 with the paper; `repro.qmd`, which follows the paper line by line, keeps it too and says so.
 
@@ -72,7 +73,8 @@ with the paper; `repro.qmd`, which follows the paper line by line, keeps it too 
 
 Independent checks the paper states in prose and that the code hits without being
 targeted at them: the steady-state cross-group switching share of 1/7 (p. 21), the
-monthly filling rates 0.66 and 0.64 with matching efficiency chi = 0.76 (p. 21), the
+monthly filling rates 0.66 and 0.64 with matching efficiency chi = 0.76 (p. 21; the
+second rate is 0.635 at Table 1's pool and 0.64 at 0.0384, see below), the
 aggregate finding rate 0.23 (p. 26), the logistic slopes kappa_m = 0.33 and
 kappa_d = 0.51 (Table A.2, p. 45), the research share going from 3.5 to 4.1 percent of GDP
 (p. 50), the worked example in Section 2.1.3 where the TFP gain is 0.032 to first order
@@ -122,22 +124,27 @@ published pool split of 1.76 / 2.08 percent (p. 21) requires 0.0384. At
 `Fixed(U_bar=0.0384)` seven of the sixteen cells above land on the published digit: six
 unemployment cells, including every all-workers one, which the pool explains, and Table 5's
 substantial eps=6 GDP cell, which moves by 0.006 and crosses its rounding boundary by
-coincidence. Nothing else changes materially. The
+coincidence. The same fork moves the p. 21 filling rate for the all-other group from
+0.635 to 0.64. Nothing else changes materially. The
 No-AI AI-sensitive rate is the near miss: it improves from 2.82 to 2.85, which still prints
 as 2.8 rather than the paper's 2.9, so the pool accounts for the size of that gap
 without closing it. Those same two Table 3 cells, all workers in the substantial column
 (4.53 against 4.6, a 0.07pp gap) and AI-sensitive in the No-AI column (2.82 against 2.9, a
-0.08pp gap), are also the only two of the 169 outside Table 3's standard tolerance of
-0.05 points, which is why `tests/test_table3.py` widens it, to 0.09 points, for exactly
-those two. They are not unusually far off: Tables 5 and 6 are tested against a looser floor
-of 0.12 points, and inside it the same rounding leaves four Table 6 unemployment cells 0.07
+0.08pp gap), are also the only two Table 3 cells outside that table's standard tolerance (0.05
+points for values below 10, 0.10 at or above), which is why `tests/test_table3.py` widens it, to 0.09 points, for exactly
+those two. They are not unusually far off: twelve other cells of the 169 also sit more than 0.05
+points from the printed figure, three of them Table 3 values above 10 and the rest in
+Tables 5 and 6, which are tested against a looser floor of 0.12 points; among them the
+same rounding leaves four Table 6 unemployment cells 0.07
 to 0.08 points low (one of them, substantial `xi = 0.5` all workers, is the identical model
 run). The
 default here stays at Table 1's 0.038 for transcription fidelity; the tests check both
 readings.
 
 **The other eight are last-digit noise.** Leaving aside the No-AI rate above, the cells
-still off at 0.0384 sit between 0.0065 and 0.11 percentage points of the published figure,
+still off sit between 0.0065 and 0.11 percentage points of the published figure at the
+default pool (the largest, the extreme `xi = 0` AI-sensitive wage, widens to 0.13 at
+0.0384),
 share no common cause (two of them are one model run reported in Table 3 and Table 6),
 and every one passes the test
 suite's numerical tolerance (`max(0.12, 0.004 * |published value|)` percentage points
@@ -194,7 +201,7 @@ is that map, made clickable.
 
 ```sh
 python3 run.py                      # print the Table 3 / 5 / 6 comparisons
-python3 run.py --survey --csv out   # add the survey-median run, write monthly paths
+python3 run.py --survey --csv out   # add the survey-median run, write paths and comparison CSVs
 python3 -m pytest -q                # 113 tests: the checks above, the explorer grid, the slop extension
 
 # the narrative report: every table and inline estimate, in the paper's own order
@@ -224,8 +231,8 @@ pandas/matplotlib/tabulate installed actually lives, and `RSTUDIO_PANDOC` at the
 and `quarto pandoc --version`, or `which pandoc`, will locate it).
 
 The package itself requires Python 3.9+ and the standard library only (`pytest` for the tests). No numpy or
-scipy dependency: the two root-finding problems, the rental-rate gap and the price index,
-are solved by bisection in `aiscen/numerics.py`.
+scipy dependency: every root-find (the rental-rate gap, the price index, and the
+steady-state pool split and matching efficiency) is a bisection in `aiscen/numerics.py`.
 
 ```python
 from aiscen import Fixed, SCENARIOS, simulate
@@ -243,8 +250,8 @@ res.series("u_rate")        # monthly path of any field
 | `aiscen/steady.py` | Equation (38), Table A.1 panel E: the normal-times search steady state |
 | `aiscen/statics.py` | Proposition 1 (exact closed form) and the actual-economy system (39) |
 | `aiscen/simulate.py` | Appendix A steps 1-9 on a monthly grid, plus the closed form (43) |
-| `aiscen/report.py` | Table 3 rows, the published values, and the comparison printout |
-| `aiscen/numerics.py` | The bisection routine behind both root-finds |
+| `aiscen/report.py` | Table 3 rows, the published Tables 3, 5 and 6, and the comparison printout |
+| `aiscen/numerics.py` | The bisection routine behind every root-find |
 | `aiscen/slop.py` | The exploratory "AI slop" extension; outside the reproduction, its mechanism pinned by four tests |
 | `tests/` | The validation suite: paths, steady state, statics, Table 3, Tables 5-6, identities |
 | `repro.qmd`, `repro.css` | The narrative report: the paper's sections in order, every equation explained, tables and inline estimates computed |
@@ -253,12 +260,14 @@ res.series("u_rate")        # monthly path of any field
 | `explorer/` | The scenario explorer: `index.html` plus the precomputed `grid.js`, also committed for Pages |
 | `index.html`, `.nojekyll` | The Pages landing page, and the marker that stops Jekyll eating `slides_files/` |
 | `coverage.md`, `coverage.html` | Reception of the paper: press, commentary, revisions. Linked from the landing page; the `.md` is the source and `render_understanding.py` rebuilds the `.html` |
-| `run.py` | Command-line comparison tables and monthly CSV export |
+| `run.py` | Command-line comparison tables, and with `--csv` the monthly paths plus `table3/5/6.csv` and `slop.csv` |
+| `out/` | The committed output of `python3 run.py --survey --csv out` |
+| `requirements.txt`, `pytest.ini` | Rendering dependencies for the report, and the test configuration |
 
 ## Readings the paper leaves implicit
 
-Each of these was resolved by requiring internal consistency, and each is checked by a
-test. They are the places where a different reader might reasonably code something else.
+Readings 1 to 4 were resolved by requiring internal consistency and are each checked by a
+test; 5 and 6 are documented choices, exposed as switches. They are the places where a different reader might reasonably code something else.
 
 1. **Equation (13) with endogenous ideas.** As printed, `ell_N_tilde = dln(Y/L) -
    sigma dln w`, which acquires a spurious `(1 - sigma) dln A` term once the ideas stock
@@ -271,10 +280,11 @@ test. They are the places where a different reader might reasonably code somethi
    in closed form as `(eps + sigma) dln r - ln(B / s_K0) - dln A`. The test
    `test_system_39_at_the_targets_is_proposition_1` enforces the paper's own statement
    that (39) at the targets *is* Proposition 1, with and without an ideas gap.
-3. **Which AI-sensitive wage prices the economy.** Step 8 of Appendix A records the actual
-   economy from (39) "at realized employment", which implies the AI-sensitive price is the
-   marginal product consistent with realized employment; the note also says the reported
-   wage is the sticky wage paid. Both are computed (`dlnw_C_mpl`, `dlnw_C_paid`); the
+3. **Which AI-sensitive wage prices the economy.** Step 8 of Appendix A evaluates (39)
+   "at realized employment", which prices AI-sensitive labor at the marginal product
+   consistent with that employment, and then reports "the cognitive wage paid"; the
+   Table A.1 note says the price in (39) is the sticky wage, "or MPL_C where employment
+   trails demand". Both are computed (`dlnw_C_mpl`, `dlnw_C_paid`); the
    published `w_C` row of Table 3 matches the wage *paid*, which is what the comparison
    uses. The gap between them is the profit of the firms employing AI-sensitive
    occupations, which the paper bounds at half a percent of GDP.

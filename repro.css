@@ -50,3 +50,12 @@ figure img {
 @media print {
   .cell-output-display img, figure img { max-width: 100% !important; }
 }
+
+/* Wide display equations scroll inside their own box on a phone instead of widening
+   the page. MathJax sets an inline min-width on tagged equations, hence !important. */
+mjx-container[jax="CHTML"][display="true"] {
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+}
