@@ -10,18 +10,18 @@ An independent, from-scratch implementation of the model in
 
 Following the [Open Policy Analysis](https://tinyurl.com/1qypbihb) (OPA) framework:
 
-1. **Open Output**: [an interactive explorer](https://fhoces.github.io/econ-scenarios-reproduction/explorer/)
+1. **Open Output**: [an interactive explorer](https://fhoces.github.io/opa-ai-macro-econ-scenarios/explorer/)
    over a precomputed grid of the paper's seven scenario dials: 4374 combinations, three
    levels per dial (six for reinstatement), each showing eleven outcomes in 2030 and the
    2025-2030 paths of three of them.
-2. **Open Analysis**: [a full written reproduction](https://fhoces.github.io/econ-scenarios-reproduction/repro.html)
+2. **Open Analysis**: [a full written reproduction](https://fhoces.github.io/opa-ai-macro-econ-scenarios/repro.html)
    that walks every table and equation in the paper's own order, and
-   [a slide deck](https://fhoces.github.io/econ-scenarios-reproduction/slides/slides.html)
+   [a slide deck](https://fhoces.github.io/opa-ai-macro-econ-scenarios/slides/slides.html)
    that teaches the same material step by step.
 3. **Open Materials**: this repository, which stores the `aiscen` model, its test suite,
    and every exported CSV needed to replicate the analysis in full.
 
-[The landing page](https://fhoces.github.io/econ-scenarios-reproduction/) links to all
+[The landing page](https://fhoces.github.io/opa-ai-macro-econ-scenarios/) links to all
 three. The deck pulls `remark.js` from a CDN, so it needs an internet connection to
 render; the report and the explorer are self-contained apart from web fonts.
 
@@ -150,7 +150,7 @@ accurate claim.
 
 Table 1 of the paper gives a source for each number in a prose column. The report
 re-sorts the same information by how much evidence stands behind each input, in
-[Every input, by origin](https://fhoces.github.io/econ-scenarios-reproduction/repro.html#every-input-by-origin),
+[Every input, by origin](https://fhoces.github.io/opa-ai-macro-econ-scenarios/repro.html#every-input-by-origin),
 using the three labels of the Open Policy Analysis guidelines: **data** (read off a
 public dataset), **research** (an estimate from a published paper, or a received
 conventional value) and **guesswork** (set by assumption, however well bounded). Of the
@@ -166,7 +166,7 @@ labor market in particular is pinned hard (the search pool, the quit rate, the
 separation rates by group, the occupational switching matrix and the filling rate are
 all data). This is not a criticism of the calibration, it is what a scenario exercise
 is, but it means the results are a map from seven guesses to outcomes rather than a
-forecast. The [scenario explorer](https://fhoces.github.io/econ-scenarios-reproduction/explorer/)
+forecast. The [scenario explorer](https://fhoces.github.io/opa-ai-macro-econ-scenarios/explorer/)
 is that map, made clickable.
 
 ## Not reproducible without the authors' data

@@ -95,7 +95,7 @@ following the
 .opa-legend[
 **Open Output**: [the explorer](../explorer/), 4374 precomputed combinations of the seven inputs<br>
 **Open Analysis**: [the report](../repro.html), and this deck<br>
-**Open Materials**: [the repository](https://github.com/fhoces/econ-scenarios-reproduction),
+**Open Materials**: [the repository](https://github.com/fhoces/opa-ai-macro-econ-scenarios),
 the model, its tests and every exported CSV
 ]
 
@@ -226,7 +226,7 @@ a.reflink:hover { color: #1a237e; border-bottom-color: #1a237e; }
 Part of an independent reproduction of Korinek et al. (2026):
 [Open Output (the explorer)](../explorer/) &middot; Open Analysis:
 [Report](../repro.html) and Slides (here) &middot;
-[Open Materials](https://github.com/fhoces/econ-scenarios-reproduction) &middot;
+[Open Materials](https://github.com/fhoces/opa-ai-macro-econ-scenarios) &middot;
 [Overview](../index.html)
 ]
 

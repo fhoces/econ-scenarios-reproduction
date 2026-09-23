@@ -25,7 +25,7 @@ execute:
 Part of an independent reproduction of Korinek et al. (2026):
 [Open Output (the explorer)](explorer/) &middot; Open Analysis: Report (here) and
 [Slides](slides/slides.html) &middot;
-[Open Materials](https://github.com/fhoces/econ-scenarios-reproduction) &middot;
+[Open Materials](https://github.com/fhoces/opa-ai-macro-econ-scenarios) &middot;
 [Overview](index.html)
 :::
 
@@ -40,7 +40,7 @@ following the [Open Policy Analysis](https://tinyurl.com/1qypbihb) framework:
 
 - **Open Output**: [the explorer](explorer/), 4374 precomputed combinations of the seven inputs
 - **Open Analysis**: this document, and [the slide deck](slides/slides.html)
-- **Open Materials**: [the repository](https://github.com/fhoces/econ-scenarios-reproduction),
+- **Open Materials**: [the repository](https://github.com/fhoces/opa-ai-macro-econ-scenarios),
   the model, its tests and every exported CSV
 :::
 
@@ -2203,6 +2203,6 @@ places where the paper leaves a modelling choice implicit and how each was resol
 Part of an independent reproduction of Korinek et al. (2026):
 [Open Output (the explorer)](explorer/) &middot; Open Analysis: Report (here) and
 [Slides](slides/slides.html) &middot;
-[Open Materials](https://github.com/fhoces/econ-scenarios-reproduction) &middot;
+[Open Materials](https://github.com/fhoces/opa-ai-macro-econ-scenarios) &middot;
 [Overview](index.html)
 :::
