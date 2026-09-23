@@ -294,6 +294,42 @@ implicit, are set out in the
 A <a href="coverage.html">coverage note</a> tracks which parts of the paper are
 implemented and which are not.</p>
 
+<h2>How AI was used in this exercise, and what has been verified</h2>
+
+<p>This reproduction was built with <strong>Claude Code</strong> across many sessions, using a
+mix of Opus and Sonnet models: drafting the model code in <code>aiscen/</code>, transcribing the
+paper's equations and parameter tables into it, writing the test suite, and building the
+explorer, report and deck. Every commit in the repository's history carries a
+<code>Co-Authored-By: Claude</code> trailer for exactly that reason. One person directed and
+reviewed all of it; no one else has checked it.</p>
+
+<p style="margin-top:14px;">Numeric verification is mechanical: the 113 tests in
+<code>tests/</code> compare the model's own output against the values printed in the paper's
+Tables 3, 5 and 6, and against several checks the paper states in prose (the steady-state
+switching share, the filling rates, the TFP worked example, and others listed in the README).
+These run on every change and fail if a reproduced number drifts from the published one past
+the tolerance stated above. That part does not depend on anyone's memory: the numbers either
+match on re-run or they don't.</p>
+
+<p style="margin-top:14px;">The equations and parameters behind those numbers were transcribed
+from the paper's PDF by AI and reviewed by one person, not checked against the paper by a
+second, independent reader. Where the paper's text left a modelling choice implicit, the reading
+adopted here was chosen for internal consistency (see the README) rather than confirmed with the
+paper's authors.</p>
+
+<p style="margin-top:14px;">A separate, lower bar is whether the author can explain a section
+unaided, without relying on the AI's own explanation of it, which he tracks in a private running
+record. As of the most recent update, he can do that for the paper's framing and claims, for how
+the model is solved numerically month by month, and for the results and the explorer, but not
+yet for the equation-by-equation derivation of the model itself, the part that derives every
+equation the rest of the material runs on, and not yet for the internal layout of the code in
+<code>aiscen/</code>. Mechanical verification confirms the numbers match; it does not by itself
+confirm the person publishing this has independently worked through why they should.</p>
+
+<p style="margin-top:14px;">The exploratory extension in <code>aiscen/slop.py</code> sits
+outside all of this: speculative model-extension work, outside the test suite entirely, held to
+none of the standards above.</p>
+
 <div class="note">
   <strong>The paper itself is not hosted here.</strong> It is third-party content. Get it
   from the <a href="https://www.anthropic.com/institute/econ-scenarios">Anthropic Institute
