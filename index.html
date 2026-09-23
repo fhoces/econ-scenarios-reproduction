@@ -304,56 +304,54 @@ commentary and any revisions.</p>
 <p>This reproduction was built with <strong>Claude Code</strong> across many sessions, one
 person directing and reviewing all of it, and every commit carrying a
 <code>Co-Authored-By: Claude</code> trailer. The table below breaks that work out by the four
-public objects rather than by task, since who built what and how it's checked differs across
-them; the model split is counted straight from those trailers.</p>
+public objects, since who built what and how it's checked differs across them; the model split
+is counted straight from those trailers.</p>
 
 <div class="table-scroll">
 <table>
-  <thead><tr><th></th><th>Explorer<br><span class="table-subhead">Open Output</span></th>
-    <th>Report<br><span class="table-subhead">Open Analysis</span></th>
-    <th>Slides<br><span class="table-subhead">Open Analysis</span></th>
-    <th>Repository<br><span class="table-subhead">Open Materials</span></th></tr></thead>
+  <thead><tr><th>Object</th><th>Built by</th><th>Verification</th></tr></thead>
   <tbody>
-    <tr><td>Built by</td>
+    <tr><td>Explorer<br><span class="table-subhead">Open Output</span></td>
         <td>Sonnet-majority: 12 of the 18 commits touching <code>explorer/</code> are Sonnet.</td>
+        <td>7 tests pin its precomputed grid to the model.</td></tr>
+    <tr><td>Report<br><span class="table-subhead">Open Analysis</span></td>
         <td>Sonnet-majority: 10 of 17 commits touching <code>repro.qmd</code>/<code>repro.html</code>.</td>
-        <td>Split evenly: 11 Sonnet, 11 Opus, across <code>slides/</code>.</td>
-        <td><code>aiscen/</code> and <code>tests/</code> are 9 Opus commits to 1 Sonnet (a
-            data-source comment, not model code); <code>README.md</code> and the build scripts
-            are a mix of both.</td></tr>
-    <tr><td>Numeric verification</td>
-        <td>7 tests pin its precomputed grid to the model.</td>
-        <td colspan="2">Report and slides present the same reproduced numbers and equations, so
+        <td rowspan="2">Report and slides present the same reproduced numbers and equations, so
             they share the same 102 core tests behind Tables 3, 5 and 6, the prose checks (the
             steady-state switching share, the filling rates, the TFP worked example, and others
-            in the README), and the identities the equations imply.</td>
+            in the README), and the identities the equations imply.</td></tr>
+    <tr><td>Slides<br><span class="table-subhead">Open Analysis</span></td>
+        <td>Split evenly: 11 Sonnet, 11 Opus, across <code>slides/</code>.</td></tr>
+    <tr><td>Repository<br><span class="table-subhead">Open Materials</span></td>
+        <td><code>aiscen/</code> and <code>tests/</code> are 9 Opus commits to 1 Sonnet (a
+            data-source comment, not model code); <code>README.md</code> and the build scripts
+            are a mix of both.</td>
         <td>Contains and runs all 113 tests (102 core, 7 grid, 4 for the <code>slop.py</code>
             extension, which sits outside the reproduction and has nothing in the paper to check
             its numbers against). Re-run by hand after every change; there is no continuous
             integration.</td></tr>
-    <tr><td>Equations and parameters</td>
-        <td>Inherits the model's calibration; nothing is separately transcribed for the
-            explorer.</td>
-        <td colspan="2">Present the equations and Table 1 parameters transcribed from the
-            paper's PDF by AI. Where the paper's text left a modelling choice implicit, the
-            reading adopted here was chosen for internal consistency (see the README).</td>
-        <td>Where that transcription actually lives, in <code>aiscen/</code>. Reviewed by one
-            person; not checked against the paper by a second, independent reader, or confirmed
-            with the paper's authors.</td></tr>
-    <tr><td>The author's own understanding</td>
-        <td>Can explain it unaided.</td>
-        <td>Can explain the framing, claims and results unaided; not yet the equation-by-equation
-            derivation.</td>
-        <td>Can explain the month-by-month numerical solution unaided; not yet the
-            equation-by-equation derivation.</td>
-        <td>Not yet the internal layout of the code.</td></tr>
   </tbody>
 </table>
 </div>
 
-<p style="margin-top:14px;">Every cell above is a self-assessment or a mechanical test result,
-not an outside check: no other person has verified any of it, though several independent AI
-review passes have audited the site for consistency.</p>
+<p style="margin-top:14px;">The equations and parameters behind those numbers, transcribed
+from the paper's PDF by AI into <code>aiscen/</code> and presented in both the report and the
+deck, were reviewed by one person; not checked against the paper by a second, independent
+reader, or confirmed with the paper's authors. Where the paper's text left a modelling choice
+implicit, the reading adopted here was chosen for internal consistency (see the README).</p>
+
+<p style="margin-top:14px;">A separate question, with weaker evidence behind it, is whether the
+author can explain each object unaided, without relying on the AI's own explanation of it,
+tracked in a private running record. As of the most recent update he rates himself able to do
+that for the explorer, for the report's framing, claims and results, and for the slides'
+month-by-month numerical solution, but not yet for the equation-by-equation derivation behind
+the report and the slides alike, or for the internal layout of the code in
+<code>aiscen/</code>. Mechanical verification confirms the numbers match; it does not by itself
+confirm he has independently worked through why they should.</p>
+
+<p style="margin-top:14px;">Every cell in the table above is a mechanical test result, not an
+outside check: no other person has verified any of it, though several independent AI review
+passes have audited the site for consistency.</p>
 
 <div class="note">
   <strong>The paper itself is not hosted here.</strong> It is third-party content. Get it
