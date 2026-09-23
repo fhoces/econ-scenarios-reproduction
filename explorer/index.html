@@ -463,10 +463,14 @@
         sixteen that round to a different last digit are listed cell by cell in the repository README.
         The three named scenarios sit at the corners of this grid. One convention to note: in every
         cell the gain <code>a</code> follows a straight line from the substantial scenario's mid-2026
-        anchor (0.35) to the cell's 2030 value. The paper's own explorer uses that same anchor for a
-        custom gain above 0.35, but keeps each named scenario's own anchor (0.30, 0.35, 0.45), so the
-        grid's corners land within 0.03 points of this reproduction's own runs of the named
-        scenarios rather than exactly on them. GDP growth is
+        anchor (0.35) to the cell's 2030 value, so each dial level lands exactly on its labeled 2030
+        target. The paper's own explorer uses that same anchor for a custom gain above 0.35, but keeps
+        each named scenario's own anchor (0.30, 0.35, 0.45), so the grid's corners land within 0.03
+        points of this reproduction's own runs of the named scenarios rather than exactly on them. Even
+        the substantial corner, which shares the grid's 0.35 anchor, misses slightly: Table 1's literal
+        slope for that scenario, 0.028 per year, only reaches a 2030 gain of 0.448 (which Table 1 itself
+        rounds to "0.45" in prose), while the grid solves backward from the axis label to land on 0.45
+        exactly, so its GDP gap reads 8.30 against 8.28 for the scenario's own run. GDP growth is
         the exception, because it is a change over the preceding twelve months rather than a 2030
         level and so depends on the whole path: at the extreme corner it reads 15.67 here against
         that scenario's own 15.46 and the paper's 15.4. Reinstatement runs over
