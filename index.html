@@ -301,31 +301,42 @@ commentary and any revisions.</p>
 
 <h2>How AI was used in this exercise, and what has been verified</h2>
 
-<p>This reproduction was built with <strong>Claude Code</strong> across many sessions, one
-person directing and reviewing all of it, and every commit carrying a
-<code>Co-Authored-By: Claude</code> trailer. The table below breaks that work out by the four
-public objects, since who built what and how it's checked differs across them; the model split
-is counted straight from those trailers.</p>
+<p>This reproduction was a collaboration between the author and <strong>Claude Code</strong>
+across many sessions, not an AI working alone: every commit carries a
+<code>Co-Authored-By: Claude</code> trailer, but that trailer records who wrote the commit, not
+who conceived the thing being built. The table below breaks that distinction out by the four
+public objects. For the explorer and the slides, the author did most of the conceptual and
+design work himself; Claude wrote the resulting code. For the report and the repository, Claude
+had more latitude, with less direct conceptual direction from the author.</p>
 
 <div class="table-scroll">
 <table>
   <thead><tr><th>Object</th><th>Built by</th><th>Verification</th></tr></thead>
   <tbody>
     <tr><td>Explorer<br><span class="table-subhead">Open Output</span></td>
-        <td>Sonnet-majority: 12 of the 18 commits touching <code>explorer/</code> are Sonnet.</td>
+        <td>Conceived and directed by the author: the seven dials, the grid, the layout. Claude
+            Code wrote the implementation (Sonnet-majority: 12 of the 18 commits touching
+            <code>explorer/</code>).</td>
         <td>7 tests pin its precomputed grid to the model.</td></tr>
     <tr><td>Report<br><span class="table-subhead">Open Analysis</span></td>
-        <td>Sonnet-majority: 10 of 17 commits touching <code>repro.qmd</code>/<code>repro.html</code>.</td>
+        <td>More Claude-driven: Claude had latitude in how to structure and present the
+            material, with less direct conceptual direction from the author than the explorer or
+            the slides (Sonnet-majority: 10 of 17 commits touching
+            <code>repro.qmd</code>/<code>repro.html</code>).</td>
         <td rowspan="2">Report and slides present the same reproduced numbers and equations, so
             they share the same 102 core tests behind Tables 3, 5 and 6, the prose checks (the
             steady-state switching share, the filling rates, the TFP worked example, and others
             in the README), and the identities the equations imply.</td></tr>
     <tr><td>Slides<br><span class="table-subhead">Open Analysis</span></td>
-        <td>Split evenly: 11 Sonnet, 11 Opus, across <code>slides/</code>.</td></tr>
+        <td>Conceived and directed by the author: the four-part structure, the equation walls,
+            the OPA framing. Claude Code wrote the content (split evenly: 11 Sonnet, 11 Opus,
+            across <code>slides/</code>).</td></tr>
     <tr><td>Repository<br><span class="table-subhead">Open Materials</span></td>
-        <td><code>aiscen/</code> and <code>tests/</code> are 9 Opus commits to 1 Sonnet (a
-            data-source comment, not model code); <code>README.md</code> and the build scripts
-            are a mix of both.</td>
+        <td>More Claude-driven: the <code>aiscen/</code> model code and test suite were
+            structured with less direct conceptual direction from the author than the explorer
+            or the slides (<code>aiscen/</code> and <code>tests/</code> are 9 Opus commits to 1
+            Sonnet, a data-source comment, not model code; <code>README.md</code> and the build
+            scripts are a mix of both).</td>
         <td>Contains and runs all 113 tests (102 core, 7 grid, 4 for the <code>slop.py</code>
             extension, which sits outside the reproduction and has nothing in the paper to check
             its numbers against). Re-run by hand after every change; there is no continuous
