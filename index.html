@@ -180,9 +180,10 @@
       <div class="card-text">
         <span class="kicker">Open Output</span>
         <h3>The effects on the economy &rarr;</h3>
-        <p>A precomputed grid over the paper's seven scenario dials, with reinstatement
-           (the new labor tasks that appear for each one automated) carried past the
-           range the paper uses, and eleven outcome series recomputed as you move them.</p>
+        <p>A precomputed grid over the paper's seven scenario dials, 4374 combinations of
+           three levels each (six for reinstatement, the new labor tasks that appear for
+           each one automated, carried past the range the paper uses), with eleven 2030
+           outcomes that update as you move them.</p>
       </div>
       <div class="card-icon-box" aria-hidden="true">
         <img src="assets/opa/opa-assumptions-solo.png" alt="">
@@ -224,9 +225,10 @@
       <div class="card-text">
         <span class="kicker">Open Materials</span>
         <h3>Every script, test and CSV &rarr;</h3>
-        <p>The model, the 113-test validation suite and every exported CSV, self-contained
-           and standard library only: no numpy, no scipy, nothing to install beyond
-           Python itself to check any number on this site.</p>
+        <p>The model, the 113-test validation suite and every exported CSV. The model is
+           standard library only, no numpy and no scipy; the tests add
+           <code>pytest</code>, and nothing else is needed to check any number on this
+           site.</p>
       </div>
       <div class="card-icon-box" aria-hidden="true">
         <img src="assets/opa/opa-materials.png" alt="">
@@ -275,7 +277,7 @@
     <tr><td>Table 5, elasticities of capital supply (p. 37)</td>
         <td>5 rows x 8 columns, within test tolerance on every cell, including the
             pegged-rental case; one cell rounds to a different printed digit</td></tr>
-    <tr><td>Table 6, rigidities of the cognitive wage (p. 38)</td>
+    <tr><td>Table 6, rigidities of the AI-sensitive wage (p. 38)</td>
         <td>7 rows x 7 columns, within test tolerance on every cell; eight cells round
             to a different printed digit</td></tr>
   </tbody>
@@ -285,30 +287,32 @@
 <p style="margin-top:14px;"><strong>"Within test tolerance"</strong> means the reproduced
 value sits within 0.05 percentage points of the published one for Table 3, widened to 0.10
 where the published value is 10 or larger, and within the larger of 0.12 points and
-0.4 percent of the published value for Tables 5 and 6. Rounding to the printed digit is a
-stricter test, which is why the two are counted separately above.</p>
+0.4 percent of the published value for Tables 5 and 6; the two Table 3 cells that need it
+widened get 0.09 points. Rounding to the printed digit is a stricter test, which is why the two are counted separately above.</p>
 
-<p style="margin-top:14px;">The discrepant cells, and the readings the paper leaves
-implicit, are set out in the
-<a href="https://github.com/fhoces/econ-scenarios-reproduction#readings-the-paper-leaves-implicit">repository README</a>.
+<p style="margin-top:14px;">The repository README lists
+<a href="https://github.com/fhoces/econ-scenarios-reproduction#status-the-papers-published-tables-reproduce">the sixteen cells that round to a different digit</a>
+and sets out
+<a href="https://github.com/fhoces/econ-scenarios-reproduction#readings-the-paper-leaves-implicit">the readings the paper leaves implicit</a>.
 A <a href="coverage.html">coverage note</a> tracks which parts of the paper are
 implemented and which are not.</p>
 
 <h2>How AI was used in this exercise, and what has been verified</h2>
 
-<p>This reproduction was built with <strong>Claude Code</strong> across many sessions, using a
-mix of Opus and Sonnet models: drafting the model code in <code>aiscen/</code>, transcribing the
-paper's equations and parameter tables into it, writing the test suite, and building the
-explorer, report and deck. Every commit in the repository's history carries a
-<code>Co-Authored-By: Claude</code> trailer for exactly that reason. One person directed and
-reviewed all of it; no one else has checked it.</p>
+<p>This reproduction was built with <strong>Claude Code</strong> across many sessions. The git
+history and the surviving session logs attribute the model code in <code>aiscen/</code>, the
+transcription of the paper's equations and parameter tables into it, and the test suite to
+Opus models; the explorer, the report and the deck were built with a mix of Opus and Sonnet.
+Every commit in the repository's history carries a <code>Co-Authored-By: Claude</code> trailer
+for exactly that reason. One person directed and reviewed all of it. No other person has
+checked it; several independent AI review passes have audited the site for consistency.</p>
 
 <p style="margin-top:14px;">Numeric verification is mechanical: the 113 tests in
 <code>tests/</code> compare the model's own output against the values printed in the paper's
 Tables 3, 5 and 6, and against several checks the paper states in prose (the steady-state
 switching share, the filling rates, the TFP worked example, and others listed in the README).
-These run on every change and fail if a reproduced number drifts from the published one past
-the tolerance stated above. That part does not depend on anyone's memory: the numbers either
+They are re-run by hand after every change (there is no continuous integration) and fail if a
+reproduced number drifts from the published one past the tolerance stated above. That part does not depend on anyone's memory: the numbers either
 match on re-run or they don't.</p>
 
 <p style="margin-top:14px;">The equations and parameters behind those numbers were transcribed
@@ -319,16 +323,17 @@ paper's authors.</p>
 
 <p style="margin-top:14px;">A separate, lower bar is whether the author can explain a section
 unaided, without relying on the AI's own explanation of it, which he tracks in a private running
-record. As of the most recent update, he can do that for the paper's framing and claims, for how
-the model is solved numerically month by month, and for the results and the explorer, but not
-yet for the equation-by-equation derivation of the model itself, the part that derives every
+record. As of the most recent update, he rates himself able to do that for the paper's framing and
+claims, for how the model is solved numerically month by month, and for the results and the
+explorer (a self-assessment, not yet tested), but not yet for the equation-by-equation derivation of the model itself, the part that derives every
 equation the rest of the material runs on, and not yet for the internal layout of the code in
 <code>aiscen/</code>. Mechanical verification confirms the numbers match; it does not by itself
 confirm the person publishing this has independently worked through why they should.</p>
 
 <p style="margin-top:14px;">The exploratory extension in <code>aiscen/slop.py</code> sits
-outside all of this: speculative model-extension work, outside the test suite entirely, held to
-none of the standards above.</p>
+outside the reproduction: speculative model-extension work. Four tests pin its mechanism, but
+nothing in the paper exists to check its numbers against, so it is held to none of the
+reproduction standards above.</p>
 
 <div class="note">
   <strong>The paper itself is not hosted here.</strong> It is third-party content. Get it
