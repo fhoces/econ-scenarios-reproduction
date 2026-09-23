@@ -107,9 +107,16 @@ def test_the_common_anchor_is_what_moves_gdp_growth(grid):
         pytest.approx(cell[GDP_GROWTH], abs=0.05)
 
 
-def test_the_json_twin_agrees_when_it_exists(grid):
-    """make_grid_app.py writes grid_app.json and grid.js from one payload."""
+def test_grid_js_is_the_exporters_own_serialization(grid):
+    """make_grid_app.py writes one compact JSON blob to both grid.js and grid_app.json.
+
+    Checked against the committed grid.js alone, so it runs on a fresh clone: the file
+    must be byte-for-byte what the exporter's serializer produces from the payload it
+    holds (no hand edits, no reformatting). The JSON twin is gitignored; when a local
+    rebuild has written it, it must carry the identical blob.
+    """
+    blob = json.dumps(grid, separators=(",", ":"))
+    assert GRID_JS.read_text() == "window.__GRID__=" + blob + ";\n"
     twin = ROOT / "slides" / "data" / "grid_app.json"
-    if not twin.exists():                          # gitignored; only built locally
-        pytest.skip("slides/data/grid_app.json not built")
-    assert json.loads(twin.read_text()) == grid
+    if twin.exists():
+        assert twin.read_text() == blob
