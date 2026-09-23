@@ -545,8 +545,10 @@ Why does $s_{L,t0}$ appear in the last one? Purely as a change of units, not as 
 behavioural claim. The affected tasks are all tasks labor was doing, and the paper
 measures their size as a fraction of the *wage bill*, $m_i \equiv \omega_i/s_{L,t0}$,
 so that $\sum_i m_i = 1$ across labor's tasks. Converting back to a fraction of GDP
-multiplies by the labor share. So "AI touches 12 percent of task instances" means 12
-percent of labor's tasks, which is $0.6 \times 0.12$ of the whole economy.
+multiplies by the labor share. So "AI touches 12 percent of the economy's task
+instances", the paper's phrase, counts instances at their pre-AI wage-bill weights, as
+Table A.2 defines it; measured in GDP it is $0.6 \times 0.12$, about 7 percent, because
+capital's pre-AI instances are left out.
 
 Notice what is *absent*: the automation share $\psi_t$. For aggregate productivity it
 is irrelevant whether the cheaper instance ends up in a machine's hands or a worker's,
