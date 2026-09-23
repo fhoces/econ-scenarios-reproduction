@@ -26,7 +26,7 @@ Part of an independent reproduction of Korinek et al. (2026):
 [Open Output (the explorer)](explorer/) &middot; Open Analysis: Report (here) and
 [Slides](slides/slides.html) &middot;
 [Open Materials](https://github.com/fhoces/econ-scenarios-reproduction) &middot;
-[overview](index.html)
+[Overview](index.html)
 :::
 
 ## Introduction
@@ -2204,5 +2204,5 @@ Part of an independent reproduction of Korinek et al. (2026):
 [Open Output (the explorer)](explorer/) &middot; Open Analysis: Report (here) and
 [Slides](slides/slides.html) &middot;
 [Open Materials](https://github.com/fhoces/econ-scenarios-reproduction) &middot;
-[overview](index.html)
+[Overview](index.html)
 :::
