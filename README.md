@@ -307,3 +307,18 @@ test; 5 and 6 are documented choices, exposed as switches. They are the places w
 6. **Rate conventions.** Appendix A converts per-period fractions to continuously
    compounded rates (`q = -ln(1 - q_hat)`); `Fixed(cc_rates=False)` switches that off and
    moves nothing visible in the published tables.
+
+## License
+
+The code, report, slide deck, explorer and exported CSVs in this repository are released
+under the [MIT License](LICENSE). That license covers only the work done here: writing the
+model out in code, testing it, and explaining it.
+
+It does **not** cover the underlying analysis, which belongs to its authors. The model,
+its equations, the scenario design, the parameter values and the published results are
+those of Korinek, Jones, Sacher, Cotter and McCrory (2026), cited at the top of this
+README; they are restated here only so the reproduction can be checked against them, and
+nothing in this repository claims them as original. If you use this code, please cite
+that paper for the analysis. The paper itself is not redistributed (see above), and the
+external data inputs listed under [Where the inputs come from](#where-the-inputs-come-from)
+remain under their publishers' terms.
