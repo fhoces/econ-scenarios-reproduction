@@ -84,6 +84,6 @@ class Paths:
 
 
 def research_share(fixed: Fixed, t: float) -> float:
-    """iota_R,t on its trend; Equation (41), Appendix C.2. Does not affect the
+    """iota_R,t on its trend; Equation (41), Appendix C.1. Does not affect the
     gaps (the share is common to the AI and no-AI paths) - reported only."""
     return fixed.iota_R0 * math.exp(fixed.g_iota * (t - fixed.t0))

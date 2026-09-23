@@ -2,7 +2,8 @@
 """Reproduce the paper's tables and write the simulated monthly paths to CSV.
 
     python3 run.py               # print Table 3, 5, 6 comparisons
-    python3 run.py --csv out/    # also write per-scenario monthly paths
+    python3 run.py --csv out/    # also write per-scenario monthly paths and the
+                                 # table3/table5/table6/slop comparison CSVs
 """
 
 import argparse
@@ -13,9 +14,8 @@ from dataclasses import asdict, fields
 
 from aiscen import simulate
 from aiscen.params import Fixed, SCENARIOS, SURVEY_MEDIAN
-from aiscen.report import (PUBLISHED, ROW_ORDER, build_table3, compare,
-                           table3_column)
-from tests.test_robustness import TABLE5, TABLE5_ROWS, TABLE6, TABLE6_ROWS
+from aiscen.report import (PUBLISHED, ROW_ORDER, TABLE5, TABLE5_ROWS, TABLE6,
+                           TABLE6_ROWS, build_table3, compare, table3_column)
 
 
 def robustness_table(title, spec, rows, field_name):

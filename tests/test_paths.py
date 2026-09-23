@@ -3,6 +3,7 @@
 import math
 import pytest
 
+from aiscen import simulate
 from aiscen.params import Fixed, SCENARIOS
 from aiscen.paths import Paths, research_share
 
@@ -40,9 +41,8 @@ def test_paths_coincide_at_the_mid_2026_anchor(name):
 @pytest.mark.parametrize("name", ["modest", "substantial", "extreme"])
 def test_gdp_gap_at_t0_is_at_most_a_quarter_percent(name):
     """Appendix A, p. 40: at t0 the AI objects imply a GDP gap of at most 0.25 pct."""
-    p = Paths.build(F, SCENARIOS[name])
-    x = p.at(F.t0)
-    assert F.s_L0 * x["md"] * x["a"] < 0.0025
+    gap = simulate.run(F, SCENARIOS[name]).months[0].dlnY
+    assert 100 * (math.exp(gap) - 1) <= 0.25
 
 
 def test_task_instances_performed_with_ai_in_2030():
@@ -52,7 +52,7 @@ def test_task_instances_performed_with_ai_in_2030():
 
 
 def test_research_share_path():
-    """Appendix C.2: the research share goes from 3.5 pct in 2024 to 4.1 pct in 2030."""
+    """Appendix C.1: the research share goes from 3.5 pct in 2024 to 4.1 pct in 2030."""
     assert research_share(F, 2024.0) == pytest.approx(0.035, abs=1e-12)
     assert research_share(F, 2030.0) == pytest.approx(0.041, abs=0.0005)
     g_R = F.fishing_out_R * F.g / F.lam

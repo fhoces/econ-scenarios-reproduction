@@ -61,10 +61,14 @@ def test_ideas_step_matches_the_closed_form():
 
 @pytest.mark.parametrize("name", ["modest", "substantial", "extreme"])
 def test_layoffs_only_in_the_cognitive_group_and_shortfalls_only_in_the_other(name):
-    """Table A.1 notes: on the scenario paths G_N is zero and B_C is negligible."""
-    for r in RUNS[name].months:
-        assert r.D_C >= 0.0
-        assert r.B_N >= 0.0
+    """Table A.1 notes: on the scenario paths G_N is zero and B_C is negligible.
+
+    G_N (other-group layoffs) is the excess of last month's employment over this
+    month's target; B_C (AI-sensitive shortfall) the reverse. Checked month by month."""
+    ms = RUNS[name].months
+    for a, b in zip(ms, ms[1:]):
+        assert max(0.0, math.log(a.l_N) - math.log(b.l_N_star)) == 0.0
+        assert max(0.0, math.log(b.l_C_star) - math.log(a.l_C)) < 0.002
 
 
 def test_cognitive_wage_discount_is_weakly_negative_and_sticky():

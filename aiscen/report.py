@@ -22,7 +22,10 @@ def table3_column(res: simulate.Result, t: float = 2030.0) -> dict:
     """One scenario column of Table 3."""
     f = res.fixed
     m = res.at(t)
-    m12 = res.months[res.months.index(m) - 12]
+    i = res.months.index(m)
+    if i < 12:
+        raise ValueError(f"Table 3 growth rows need 12 months of history before t = {t}")
+    m12 = res.months[i - 12]
     l_C_2026 = res.at(f.t_anchor).l_C
     L_emp0 = f.l_C0 + f.l_N0
 
@@ -114,6 +117,48 @@ PUBLISHED = {
 ROW_ORDER = list(PUBLISHED)
 
 
+# Tables 5 and 6 of the paper (pp. 37-38), transcribed for comparison: the
+# capital-supply (eps) and wage-rigidity (xi) variants, keyed by (scenario, value).
+TABLE5_ROWS = [
+    "GDP, pct above no-AI",
+    "Average wage, pct above no-AI",
+    "Net return r - delta, pct per year",
+    "Capital stock, pct above no-AI",
+    "Labor share, pct of income",
+]
+
+TABLE5 = {
+    ("substantial", 1.0): (6.4, -1.6, 7.6, 9.3, 55.1),
+    ("substantial", 3.0): (8.3, 2.1, 7.0, 13.8, 56.1),
+    ("substantial", 6.0): (9.1, 3.7, 6.8, 15.7, 56.5),
+    ("substantial", math.inf): (10.0, 5.6, 6.5, 18.2, 57.0),
+    ("extreme", 1.0): (21.3, -9.2, 10.3, 33.5, 41.2),
+    ("extreme", 3.0): (32.4, 9.7, 8.3, 56.3, 45.2),
+    ("extreme", 6.0): (37.2, 18.3, 7.5, 67.1, 46.9),
+    ("extreme", math.inf): (43.3, 30.1, 6.5, 82.2, 49.1),
+}
+
+TABLE6_ROWS = [
+    "GDP, pct above no-AI",
+    "Average wage, pct above no-AI",
+    "  cognitive occupations w_C",
+    "  all other occupations w_N",
+    "Cognitive employment, pct since mid-2026",
+    "Unemployment rate, cognitive, pct",
+    "Unemployment rate, all workers, pct",
+]
+
+TABLE6 = {
+    ("substantial", 0.5): (8.3, 2.1, -0.3, 5.9, -3.9, 4.5, 4.6),
+    ("substantial", 0.75): (7.9, 2.2, 0.7, 4.5, -4.6, 5.1, 4.9),
+    ("substantial", 0.9): (7.7, 2.3, 1.4, 3.7, -5.0, 5.4, 5.2),
+    ("extreme", 0.0): (36.6, 1.6, -42.2, 70.1, -1.3, 2.6, 3.1),
+    ("extreme", 0.5): (32.4, 9.7, -11.5, 33.6, -21.5, 17.9, 11.9),
+    ("extreme", 0.75): (30.5, 11.1, -2.9, 25.8, -25.9, 21.7, 13.9),
+    ("extreme", 0.9): (29.2, 11.9, 2.8, 21.1, -28.5, 24.0, 15.2),
+}
+
+
 def build_table3(f: Fixed = None, t: float = 2030.0) -> dict:
     """Simulate all three scenarios and return {row: (no_ai, modest, subst, extreme)}."""
     f = f or Fixed()
@@ -129,16 +174,14 @@ def compare(f: Fixed = None, t: float = 2030.0) -> str:
     mine = build_table3(f, t)
     head = f"{'Row':42s} {'No AI':>13s} {'Modest':>13s} {'Substantial':>13s} {'Extreme':>13s}"
     out = [head, "-" * len(head)]
-    worst = 0.0
     for row in ROW_ORDER:
         cells = []
         for got, want in zip(mine[row], PUBLISHED[row]):
             diff = abs(got - want)
-            tol = 0.05 if abs(want) < 1 else 0.05 * max(1.0, abs(want) / 10.0)
-            worst = max(worst, diff / max(tol, 1e-12))
+            tol = 0.10 if abs(want) >= 10.0 else 0.05     # tests/test_table3.py::tol
             flag = " " if diff <= tol else "*"
             cells.append(f"{got:6.2f}/{want:5.2f}{flag}")
         out.append(f"{row:42s} " + " ".join(f"{c:>13s}" for c in cells))
     out.append("-" * len(head))
-    out.append("cells shown as simulated/published; * = outside rounding tolerance")
+    out.append("cells shown as simulated/published; * = outside the test tolerance (0.05, or 0.10 at 10 and above)")
     return "\n".join(out)

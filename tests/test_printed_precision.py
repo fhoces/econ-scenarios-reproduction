@@ -1,9 +1,10 @@
 """Does every cell of Tables 3, 5 and 6 round to the digit the paper prints?
 
 The rest of the suite checks the cells against a numerical tolerance, which is the
-right test of the model. This module checks the strictly harder claim the README, the
-landing page, the report and the deck all make in prose: that the reproduced value,
-rounded half-up to the paper's own number of decimals, *is* the published value.
+right test of the model. This module checks the strictly harder question behind the
+prose in the README, the landing page, the report and the deck: which cells, rounded
+half-up to the paper's own number of decimals, land on the published value (153 of
+169) and which do not.
 
 It is written as an exact allowlist rather than a tolerance, so that a cell moving in
 or out of agreement fails here and the prose has to be updated with it.
@@ -16,7 +17,7 @@ import pytest
 from aiscen import report, simulate
 from aiscen.params import Fixed, SCENARIOS
 from aiscen.report import table3_column
-from tests.test_robustness import TABLE5, TABLE5_ROWS, TABLE6, TABLE6_ROWS
+from aiscen.report import TABLE5, TABLE5_ROWS, TABLE6, TABLE6_ROWS
 
 # Table 3 prints one decimal everywhere except the two ideas rows, which carry two.
 DECIMALS = {
@@ -112,7 +113,7 @@ def test_the_pool_fork_fixes_seven_of_them_but_not_the_no_ai_cognitive_rate():
 
     The all-workers rows all do, which is the headline of the U_bar story. The No-AI
     cognitive rate does not: it moves from 2.82 to 2.85, which still prints as 2.8
-    against the paper's 2.9. So the fork explains that cell's size, not its sign.
+    against the paper's 2.9. So the fork explains that cell's size, not its printed digit.
     """
     fixed = _misses(0.0384)
     assert len(fixed) == 9

@@ -87,7 +87,10 @@ class Result:
     months: list = field(default_factory=list)
 
     def at(self, t: float) -> Month:
-        """The row closest to date t."""
+        """The row closest to date t (t must lie within the simulated path)."""
+        if not self.months[0].t - 1e-6 <= t <= self.months[-1].t + 1e-6:
+            raise ValueError(f"t = {t} is outside the simulated path "
+                             f"[{self.months[0].t}, {self.months[-1].t}]")
         return min(self.months, key=lambda r: abs(r.t - t))
 
     def series(self, name: str) -> list:
@@ -96,6 +99,8 @@ class Result:
     def growth(self, name: str, t: float, months: int = 12) -> float:
         """Log change in a gap-plus-trend series over the preceding `months`."""
         i = self.months.index(self.at(t))
+        if i < months:
+            raise ValueError(f"no {months}-month history before t = {t}")
         return getattr(self.months[i], name) - getattr(self.months[i - months], name)
 
 

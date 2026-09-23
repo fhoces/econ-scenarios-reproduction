@@ -21,9 +21,13 @@ def test_aggregate_finding_rate():
 
 
 def test_filling_rates_and_matching_efficiency():
-    """p. 21: 'The filling rates are 0.66 and 0.64, and chi is 0.76'."""
+    """p. 21: 'The filling rates are 0.66 and 0.64, and chi is 0.76'.
+
+    pi_N is 0.635 at Table 1's U_bar = 0.038, which prints as 0.63; it reaches the
+    paper's 0.64 only at the p. 26 pool of 0.0384, the same rounding fork as Table 3."""
     assert SS.pi_C == pytest.approx(0.66, abs=0.005)
-    assert SS.pi_N == pytest.approx(0.64, abs=0.006)
+    assert SS.pi_N == pytest.approx(0.635, abs=0.001)
+    assert steady.solve(Fixed(U_bar=0.0384)).pi_N == pytest.approx(0.64, abs=0.005)
     assert SS.chi == pytest.approx(0.76, abs=0.005)
 
 
@@ -33,8 +37,8 @@ def test_pool_split_matches_paper():
     rounds it to 3.8; the proportions are what the steady state pins down."""
     f = Fixed(U_bar=0.0384)
     ss = steady.solve(f)
-    assert ss.U_C * 100 == pytest.approx(1.76, abs=0.02)
-    assert ss.U_N * 100 == pytest.approx(2.08, abs=0.02)
+    assert ss.U_C * 100 == pytest.approx(1.76, abs=0.005)   # 1.741 at U_bar = 0.038 fails
+    assert ss.U_N * 100 == pytest.approx(2.08, abs=0.005)   # 2.059 at U_bar = 0.038 fails
     assert ss.U_C / (ss.U_C + f.l_C0) * 100 == pytest.approx(2.9, abs=0.06)
     assert ss.U_N / (ss.U_N + f.l_N0) * 100 == pytest.approx(5.4, abs=0.06)
 

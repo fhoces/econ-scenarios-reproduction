@@ -5,48 +5,9 @@ import pytest
 
 from aiscen import simulate
 from aiscen.params import Fixed, SCENARIOS
-from aiscen.report import table3_column
+from aiscen.report import TABLE5, TABLE5_ROWS, TABLE6, TABLE6_ROWS, table3_column
 
 F = Fixed()
-
-TABLE5_ROWS = [
-    "GDP, pct above no-AI",
-    "Average wage, pct above no-AI",
-    "Net return r - delta, pct per year",
-    "Capital stock, pct above no-AI",
-    "Labor share, pct of income",
-]
-
-TABLE5 = {
-    ("substantial", 1.0): (6.4, -1.6, 7.6, 9.3, 55.1),
-    ("substantial", 3.0): (8.3, 2.1, 7.0, 13.8, 56.1),
-    ("substantial", 6.0): (9.1, 3.7, 6.8, 15.7, 56.5),
-    ("substantial", math.inf): (10.0, 5.6, 6.5, 18.2, 57.0),
-    ("extreme", 1.0): (21.3, -9.2, 10.3, 33.5, 41.2),
-    ("extreme", 3.0): (32.4, 9.7, 8.3, 56.3, 45.2),
-    ("extreme", 6.0): (37.2, 18.3, 7.5, 67.1, 46.9),
-    ("extreme", math.inf): (43.3, 30.1, 6.5, 82.2, 49.1),
-}
-
-TABLE6_ROWS = [
-    "GDP, pct above no-AI",
-    "Average wage, pct above no-AI",
-    "  cognitive occupations w_C",
-    "  all other occupations w_N",
-    "Cognitive employment, pct since mid-2026",
-    "Unemployment rate, cognitive, pct",
-    "Unemployment rate, all workers, pct",
-]
-
-TABLE6 = {
-    ("substantial", 0.5): (8.3, 2.1, -0.3, 5.9, -3.9, 4.5, 4.6),
-    ("substantial", 0.75): (7.9, 2.2, 0.7, 4.5, -4.6, 5.1, 4.9),
-    ("substantial", 0.9): (7.7, 2.3, 1.4, 3.7, -5.0, 5.4, 5.2),
-    ("extreme", 0.0): (36.6, 1.6, -42.2, 70.1, -1.3, 2.6, 3.1),
-    ("extreme", 0.5): (32.4, 9.7, -11.5, 33.6, -21.5, 17.9, 11.9),
-    ("extreme", 0.75): (30.5, 11.1, -2.9, 25.8, -25.9, 21.7, 13.9),
-    ("extreme", 0.9): (29.2, 11.9, 2.8, 21.1, -28.5, 24.0, 15.2),
-}
 
 # Every row is checked at the package default U_bar = 0.038 (Table 1), the same
 # reading Table 3 and tests/test_printed_precision.py use. The all-workers rows sit
@@ -92,7 +53,7 @@ def test_inelastic_capital_flips_the_sign_of_the_wage():
 # ---------------------------------------------------------------- slop extension ----
 
 def test_displacement_does_not_depend_on_the_gain():
-    """The mechanism behind the slop result: Equation (19)'s displacement term has no
+    """The mechanism behind the slop result: Equation (11)'s displacement term has no
     a in it, while the weak-link cushion is proportional to a."""
     from aiscen import slop
     full = slop.decomposition(F, slop.BASE)
@@ -113,7 +74,7 @@ def test_slop_raises_the_wage_threshold_through_the_calibrated_elasticity():
 
 def test_critical_gain_is_where_the_wage_changes_sign():
     from aiscen import slop
-    from aiscen.report import table3_column
+    from aiscen.report import TABLE5, TABLE5_ROWS, TABLE6, TABLE6_ROWS, table3_column
     a_crit = slop.critical_gain(F)
     assert 0.15 < a_crit < 0.35
     below = table3_column(simulate.run(F, slop.scale_gain(slop.BASE, a_crit * 0.8)))

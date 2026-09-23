@@ -109,7 +109,7 @@ class Actual:
 
     dlnr: float
     dlnY: float            # Delta ln (Y_t / L_bar), the GDP gap
-    dlnw_C_tilde: float    # the cognitive price of labour (MPL_C when rationing binds)
+    dlnw_C_tilde: float    # the A-deflated MPL of AI-sensitive labour at the given employment
     dlnw_N_tilde: float
     s_L: float
     s_C: float

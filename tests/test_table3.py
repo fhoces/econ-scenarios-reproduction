@@ -45,8 +45,8 @@ def test_pool_rounding_explains_the_two_wide_cells():
     t3 = build_table3(f)
     from aiscen import steady
     ss = steady.solve(f)
-    assert ss.U_C * 100 == pytest.approx(1.76, abs=0.02)
-    assert ss.U_N * 100 == pytest.approx(2.08, abs=0.02)
+    assert ss.U_C * 100 == pytest.approx(1.76, abs=0.005)   # 1.741 at U_bar = 0.038 fails
+    assert ss.U_N * 100 == pytest.approx(2.08, abs=0.005)   # 2.059 at U_bar = 0.038 fails
     assert t3["Unemployment rate, all workers, pct"][2] == pytest.approx(4.6, abs=0.05)
     assert t3["Unemployment rate, cognitive, pct"][0] == pytest.approx(2.85, abs=0.02)
 

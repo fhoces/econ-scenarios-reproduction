@@ -6,9 +6,10 @@ a_t is defined all-in, net of checking (the survey asks for time "counting the t
 spent checking and fixing the AI's work"), so slop is the claim that the realised a_t
 is far below the 0.30-0.45 taken from field trials.
 
-The asymmetry that makes it consequential is visible in Equation (19): displacement,
-(1 - rho) psi m d, does not contain a, while the weak-link cushion that protects the
-labor share, (1 - sigma) psi m d a, is proportional to it. Slop removes the offset
+The asymmetry that makes it consequential is visible in the labor-share row of
+Equation (11): displacement, (1 - rho) psi m d, does not contain a, while the weak-link
+term that protects the labor share, (1 - sigma) psi m d a, is proportional to it. (The
+same displacement term leads Equation (19).) Slop removes the offset
 and leaves the harm.
 
 Nothing here is in the paper; it is a sensitivity analysis its equations support.
@@ -63,7 +64,8 @@ def eps_star(f: Fixed, scen: Scenario, t: float = 2030.0) -> float:
 
 
 def decomposition(f: Fixed, scen: Scenario, t: float = 2030.0) -> dict:
-    """Equation (19) split into the part that scales with a and the part that does not."""
+    """The labor-share row of Equation (11), and the employment target (19), split into
+    the parts that scale with a and the part that does not."""
     x = Paths.build(f, scen).at(t)
     displacement = (1.0 - x["rho"]) * x["psi"] * x["md"]
     cushion = (1.0 - f.sigma) * (1.0 - x["psi"]) * x["md"] * x["a"]

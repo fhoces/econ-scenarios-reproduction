@@ -1,6 +1,7 @@
-# Dependencies for rendering repro.qmd, and nothing else. The aiscen package, run.py and
+# Dependencies for rendering repro.qmd, plus markdown for render_understanding.py. The aiscen package, run.py and
 # the exporters in slides/ are standard-library only; the tests need pytest. See README.md.
 # No strict pins: any reasonably recent release of each should work.
 pandas
 matplotlib
 tabulate
+markdown
