@@ -1022,7 +1022,7 @@ In the extreme scenario this channel moves idea growth from
 `{python} num(100 * F.g, 2)` to `{python} v('extreme', 'ideas_growth', 2)` percent a
 year, and the ideas stock ends `{python} v('extreme', 'ideas', 2)` percent above the
 no-AI path after six years. Compare that with the level channel of Section 2.1, worth
-`{python} v('extreme', 'gdp', 1)` percent of GDP. Over a five-year horizon the
+`{python} v('extreme', 'gdp', 1)` percent of GDP. Over a six-year horizon the
 innovation block is a rounding error; over fifty years it would not be.
 :::
 
@@ -1772,7 +1772,7 @@ are automated and half augmented, and one new task arrives for every two automat
 
 GDP ends `{python} v('modest', 'gdp')` percent above its no-AI path, an extra
 `{python} num(12 * D['modest'].iloc[-1].gdp / (100 * (F.g + F.n)), 0)` months of
-ordinary growth accumulated over four years, and the economy grows at
+ordinary growth accumulated since 2024, and the economy grows at
 `{python} v('modest', 'gdp_growth')` percent a year rather than
 `{python} num(100 * (F.g + F.n), 0)`. The average wage is
 `{python} v('modest', 'wage')` percent higher and the cognitive wage
@@ -1803,8 +1803,8 @@ the rest of the economy are `{python} v('substantial', 'wN')` percent higher. Th
 labor share falls to `{python} v('substantial', 'labor_share')` percent and the
 capital share rises to `{python} num(100 - float(v('substantial', 'labor_share', 4)), 1)`
 percent, a shift of
-`{python} num(100 * F.s_L0 - float(v('substantial', 'labor_share', 4)), 1)` points in
-four years. Cognitive employment is `{python} v('substantial', 'cog_emp')` percent
+`{python} num(100 * F.s_L0 - float(v('substantial', 'labor_share', 4)), 1)` points
+since 2024. Cognitive employment is `{python} v('substantial', 'cog_emp')` percent
 below its mid-2026 level while all-other employment is
 `{python} v('substantial', 'oth_emp')` percent above it, and because reallocation
 takes time the cognitive unemployment rate rises to

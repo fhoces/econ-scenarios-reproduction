@@ -1076,7 +1076,7 @@ name: growth-small
 
 Extreme scenario, 2030: GDP **+32.4 percent**.
 
-Immediate, and the whole story over five years.
+Immediate, and the whole story over six years.
 ]
 
 .pull-right[
@@ -1088,7 +1088,7 @@ Long-run target is ~10 percent, but $\gamma = 0.35$ and cumulation takes decades
 ]
 
 .highlight-box[
-Over a five-year horizon the innovation block is nearly a rounding error. Over fifty
+Over a six-year horizon the innovation block is nearly a rounding error. Over fifty
 years it would not be. The paper is explicit that recursive self-improvement is
 *hard-coded into* $a_t$ rather than modelled, which is where a reader who cares about
 fast takeoff should push.
@@ -2150,7 +2150,7 @@ uses 0.0384. The all-workers rate is 0.07 points low (substantial), the AI-sensi
    change sign.
 4. **Capital supply decides whether workers gain**, and wage rigidity decides whether
    the cost is paid in wages or in jobs.
-5. **The growth channel is small over five years**, by construction.
+5. **The growth channel is small over six years**, by construction.
 
 .blue-box[
 The reproduction: `aiscen` Python package, 113 tests, reproduces all 169 cells of
