@@ -2428,8 +2428,8 @@ name: m0-1
 .small[
 Carried in: $\Delta \ln A = 0$, $\ell_C = 0.6003$, $\ell_N = 0.3617$. Exogenous at $t_0$: $m = 0.0698$, $d = 0.0300$, $a = 0.280$, $\psi = 0.75$, $\rho = 0.25$, so $md = 0.0021$.
 
-The guess starts at **0**, the no-AI path, and walks out in steps of 0.02 until the residual
-changes sign. The two $K$ columns are one stock reckoned twice: what firms want at that rental
+The guess starts at **0**, the no-AI path, and walks out in steps of 0.02 until the sign of how wrong the trial is
+flips. The two $K$ columns are one stock reckoned twice: what firms want at that rental
 rate, falling in it, against what savers offer, $\varepsilon \Delta \ln r$, rising in it. All
 columns but the first two are in $10^{-3}$.
 
