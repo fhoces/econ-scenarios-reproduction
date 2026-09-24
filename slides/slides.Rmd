@@ -560,7 +560,7 @@ name: input-psi
 *same* cost saving $a$: the paper applies the saving whether a worker performs the instance
 with AI or capital performs it outright (p. 11). So asking "what if AI mostly helps people
 rather than replacing them" means lowering $\psi$, not raising some other input. Over $\psi$ from 0
-to 1, wider than any scenario uses (pure augmentation to pure automation), measured TFP moves only
+to 1, wider than any scenario uses, measured TFP moves only
 **3.02 to 3.09**, while the labor share moves **59.7 to 54.9** and AI-sensitive employment
 **−1.1% to −4.9%**. GDP does rise over that range (4.5 to 9.5), but through capital
 deepening, not productivity.
@@ -1409,9 +1409,9 @@ name: month-main
 # What the Model Does in One Month
 
 .small[
-1. <b>Paths.</b> Evaluate the AI paths at <i>t</i> and <i>t</i>+1: a lookup, not a solve
+1. <b>Paths.</b> The AI paths at <i>t</i> and <i>t</i>+1: a lookup, not a solve
    (<i>m</i><sub>t</sub>, <i>d</i><sub>t</sub>, <i>a</i><sub>t</sub>; &psi; and &rho; are constant
-   in the three scenarios, and <i>m</i>, <i>d</i> enter only as <i>m</i><sub>t</sub><i>d</i><sub>t</sub>).
+   in all scenarios, and <i>m</i>, <i>d</i> enter only as <i>m</i><sub>t</sub><i>d</i><sub>t</sub>).
 2. <b>Capital market.</b> Solve for the rental-rate gap &Delta;ln <i>r</i><sub>t</sub> by bisection,
    from <a href="#prop1-main" class="reflink">Proposition 1</a>, the closed form for the
    <b>frictionless</b> economy where labor reallocates instantly.
@@ -2428,10 +2428,10 @@ name: m0-1
 .small[
 Carried in: $\Delta \ln A = 0$, $\ell_C = 0.6003$, $\ell_N = 0.3617$. Exogenous at $t_0$: $m = 0.0698$, $d = 0.0300$, $a = 0.280$, $\psi = 0.75$, $\rho = 0.25$, so $md = 0.0021$.
 
-The guess starts at **0**, the no-AI path, and walks out in steps of 0.02 until the sign of how wrong the trial is
+The guess starts at **0**, the no-AI path, and steps out by 0.02 until the sign of how wrong the trial is
 flips. The two $K$ columns are one stock reckoned twice: what firms want at that rental
-rate, falling in it, against what savers offer, $\varepsilon \Delta \ln r$, rising in it. All
-columns but the first two are in $10^{-3}$.
+rate, falling in it, against what savers offer, $\varepsilon \Delta \ln r$, rising in it.
+Columns after the first two are in $10^{-3}$.
 
 | trial $\Delta \ln r$ | | $s_{L}$ (14) | $\Delta \ln w$ (16) | $\Delta \ln (Y/L)$ (5) | $K$ firms want (17) | $K$ savers offer (6) | how wrong (18) |
 |---|---|---|---|---|---|---|---|
