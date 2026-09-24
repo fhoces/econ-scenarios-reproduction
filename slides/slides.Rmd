@@ -733,8 +733,8 @@ demand falls short of the payroll; the AI-sensitive wage closes a fraction
 1&minus;<span class="sym">&xi;</span> of its gap to the clearing level each year, about 6 percent a month.<br>
 <b>Capital answers prices, not a plan.</b> Supply is a schedule with elasticity
 <span class="sym">&epsilon;</span>.<br>
-<b>Ideas accumulate.</b> A share of GDP goes to research, with fishing-out
-<span class="sym">1&minus;&phi;<sub>R</sub></span>.
+<b>Ideas accumulate.</b> A share of GDP goes to research, and each new idea is harder to find
+than the last (fishing-out, <span class="sym">1&minus;&phi;<sub>R</sub></span> = 2.86).
 
 <div class="sub">What the model is not</div>
 <span class="foot">Nobody is forward-looking. There is no household Euler equation, no
