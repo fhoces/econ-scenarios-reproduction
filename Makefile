@@ -28,4 +28,4 @@ grid:                       ## the explorer's precomputed grid (explorer/grid.js
 	$(PYTHON) slides/make_grid_app.py
 
 slides:                     ## slides/slides.Rmd -> slides/slides.html
-	cd slides && RSTUDIO_PANDOC=$(RSTUDIO_PANDOC) Rscript -e 'rmarkdown::render("slides.Rmd", quiet = TRUE)'
+	cd slides && $(if $(RSTUDIO_PANDOC),RSTUDIO_PANDOC=$(RSTUDIO_PANDOC),) Rscript -e 'rmarkdown::render("slides.Rmd", quiet = TRUE)'
