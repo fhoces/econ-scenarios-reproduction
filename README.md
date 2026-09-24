@@ -8,6 +8,8 @@ An independent, from-scratch implementation of the model in
 > "Economic Scenarios for Transformative AI", The Anthropic Institute Working Paper
 > No. 2026-02, September 2026.
 
+Version 1.0, September 2026 (git tag `v1.0`). DOI: to be added once the release is archived.
+
 The work is organised in three layers, adapted from the
 [Open Policy Analysis](https://tinyurl.com/1qypbihb) (OPA) framework:
 
