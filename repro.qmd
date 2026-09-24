@@ -633,7 +633,9 @@ substantial run's 2030 ideas gap, $\Delta \ln A \approx$
 `{python} num(100 * statics.frictionless(F, md_x, a_x, 0.75, 0.25, dlnA=RUNS['substantial'].at(2030.0).dlnA).dlnr, 1)`
 and
 `{python} num(100 * statics.frictionless(F, md_x, a_x, 0.75, 0.25, dlnA=RUNS['substantial'].at(2030.0).dlnA).dlnw, 1)`
-percent, against the paper's 4.6 and 1.9.
+percent, against the paper's 4.6 and 1.9. The paper's own next step uses 0.045 for that
+rental-rate gap (its capital term is $0.4 \times 0.045 = 0.018$), so the printed 4.6 looks
+like a rounding of the same number rather than a different value.
 
 ### 2.1.4 First-order solutions against the exact model
 
