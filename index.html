@@ -364,8 +364,8 @@ object himself. The role-by-role answers are in
 the equations imply, which the report and the slides share because they present the same
 numbers; 7 that pin the explorer's precomputed grid to the model; 15 that recompute the numbers
 typed into the explorer and deck prose; and 4 for the <code>slop.py</code> extension, which sits
-outside the reproduction. They are re-run by hand after every change; there is no continuous
-integration.</p>
+outside the reproduction. Continuous integration runs them on every push to GitHub, on a clean
+machine, and also rebuilds the explorer's grid and fails if the committed copy differs.</p>
 
 <p style="margin-top:14px;">The equations and parameters behind those numbers were
 transcribed from the paper's PDF by AI into <code>aiscen/</code>. The author reviewed them as
