@@ -228,7 +228,7 @@ environment and falls back to the `python3` and `pandoc` on your PATH. The expli
 ```sh
 python3 run.py                      # print the Table 3 / 5 / 6 comparisons
 python3 run.py --survey --csv out   # add the survey-median run, write paths and comparison CSVs
-python3 -m pytest -q                # 128 tests: the checks above, the explorer grid, the slop extension, the typed-in prose numbers
+python3 -m pytest -q                # 129 tests: the checks above, the explorer grid, the slop extension, the typed-in prose numbers
 
 # the narrative report: every table and inline estimate, in the paper's own order
 QUARTO_PYTHON=/opt/anaconda3/bin/python3 quarto render repro.qmd

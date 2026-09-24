@@ -15,7 +15,7 @@ PYTHON ?= python3
 
 all: test csv report grid slides
 
-test:                       ## the 128-test validation suite
+test:                       ## the 129-test validation suite
 	$(PYTHON) -m pytest -q
 
 csv:                        ## the CSVs the deck reads (slides/data/)
