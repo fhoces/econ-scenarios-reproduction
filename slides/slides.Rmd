@@ -2532,8 +2532,8 @@ by how far the price index sits from 1, and employment is fixed. Columns other t
 | 0.000625 | 4 | +0.730 | &minus;2.535 | +1.461 | 0.59894 | &minus;0.347 |
 | 0.000776 | root, 12 | +1.260 | &minus;1.477 | +2.519 | 0.59926 | $8 \cdot 10^{-12}$ |
 
-Then, with no root-find left: $\tilde \ell_{C,t} = -0.000752$ (19), $u^x = 0$, $X = 0.000461$,
-$G = 0.000482$, $\Delta \ln R = \Delta \ln Y = 0.001260$ (22),
+Then, with no root-find left: $\tilde \ell_{C,t} = -0.000752$ (19), $u^x = 0$ (excess unemployment), $X = 0.000461$
+(share changing occupation), $G = 0.000482$ (aggregate overhang), $\Delta \ln R = \Delta \ln Y = 0.001260$ (22),
 $\Delta g = 2.105 \cdot 10^{-5}$ (42), $\Delta \ln A_{t+1} = 1.754 \cdot 10^{-6}$ (43).
 ]
 
