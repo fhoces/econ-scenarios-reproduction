@@ -557,9 +557,9 @@ name: input-psi
 
 .small[
 **There is no separate augmentation input.** Augmentation is $1 - \psi$, and it delivers the
-*same* cost saving $a$: the paper applies the saving whether a worker performs the instance
-with AI or capital performs it outright (p. 11). So asking "what if AI mostly helps people
-rather than replacing them" means lowering $\psi$, not raising some other input. Over $\psi$ from 0
+*same* cost saving $a$: the paper applies it whether a worker performs the instance with AI
+or capital does it outright (p. 11). So "what if AI mostly helps people rather than
+replacing them" means lowering $\psi$, not raising some other input. Over $\psi$ from 0
 to 1, wider than any scenario uses, measured TFP moves only
 **3.02 to 3.09**, while the labor share moves **59.7 to 54.9** and AI-sensitive employment
 **−1.1% to −4.9%**. GDP does rise over that range (4.5 to 9.5), but through capital
