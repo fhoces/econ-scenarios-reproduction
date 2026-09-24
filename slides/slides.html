@@ -729,8 +729,8 @@ demand falls short of the payroll; the AI-sensitive wage closes a fraction
 1&amp;minus;&lt;span class="sym"&gt;&amp;xi;&lt;/span&gt; of its gap to the clearing level each year, about 6 percent a month.&lt;br&gt;
 &lt;b&gt;Capital answers prices, not a plan.&lt;/b&gt; Supply is a schedule with elasticity
 &lt;span class="sym"&gt;&amp;epsilon;&lt;/span&gt;.&lt;br&gt;
-&lt;b&gt;Ideas accumulate.&lt;/b&gt; A share of GDP goes to research, with fishing-out
-&lt;span class="sym"&gt;1&amp;minus;&amp;phi;&lt;sub&gt;R&lt;/sub&gt;&lt;/span&gt;.
+&lt;b&gt;Ideas accumulate.&lt;/b&gt; A share of GDP goes to research, and each new idea is harder to find
+than the last (fishing-out, &lt;span class="sym"&gt;1&amp;minus;&amp;phi;&lt;sub&gt;R&lt;/sub&gt;&lt;/span&gt; = 2.86).
 
 &lt;div class="sub"&gt;What the model is not&lt;/div&gt;
 &lt;span class="foot"&gt;Nobody is forward-looking. There is no household Euler equation, no
@@ -1020,7 +1020,7 @@ name: employment-main
 
 `$$\tilde \ell_{N,t} = \Delta \ln (Y_t/L_t) - \sigma \Delta \ln w_t \;\; \text{(13)}$$`
 
-Nursing and electrical work are unaffected, so demand for that labor is an ordinary
+Home health aides and electricians are unaffected, so demand for that labor is an ordinary
 CES demand: up one-for-one with output, down with its own price at elasticity
 `\(\sigma\)`.
 
@@ -1128,7 +1128,9 @@ Immediate, and the whole story over six years.
 
 Extreme scenario, 2030: ideas stock **+0.61 percent**.
 
-Long-run target is ~10 percent, but `\(\gamma = 0.35\)` and cumulation takes decades.
+In the long run the ideas stock would settle about 10 percent higher, because each 1 percent
+more research eventually buys `\(\gamma = \lambda/(1-\phi_R) = 0.35\)` percent more ideas (0.28 log
+points of extra research times 0.35 is about 10 percent). Getting there takes decades.
 ]
 
 .highlight-box[
@@ -1245,8 +1247,9 @@ Production and prices: &lt;span class="sym"&gt;&amp;sigma;&lt;/span&gt; = 0.5,
 &lt;span class="sym"&gt;s&lt;sub&gt;L,t0&lt;/sub&gt;&lt;/span&gt; = 0.60,
 &lt;span class="sym"&gt;s&lt;sub&gt;C,t0&lt;/sub&gt;/s&lt;sub&gt;L,t0&lt;/sub&gt;&lt;/span&gt; = 0.624,
 &lt;span class="sym"&gt;r&amp;#772;&lt;/span&gt; = 11.5%, &lt;span class="sym"&gt;&amp;delta;&lt;/span&gt; = 5%&lt;br&gt;
-Labor market: &lt;span class="sym"&gt;U&amp;#772;&lt;/span&gt; = 3.8%, &lt;span class="sym"&gt;q&amp;#772;&lt;/span&gt; = 0.11/yr
-split 0.69&amp;times; / 1.52&amp;times; (55% responsive), &lt;span class="sym"&gt;&amp;mu;&amp;#772;&lt;/span&gt; = 0.17,
+Labor market: &lt;span class="sym"&gt;U&amp;#772;&lt;/span&gt; = 3.8%, &lt;span class="sym"&gt;q&amp;#772;&lt;/span&gt; = 0.11/yr,
+&amp;times;0.69 for AI-sensitive and &amp;times;1.52 for all other, of which 55% responds to how easy
+finding work is, &lt;span class="sym"&gt;&amp;mu;&amp;#772;&lt;/span&gt; = 0.17,
 &lt;span class="sym"&gt;&amp;iota;&lt;/span&gt; = 1.27, mean &lt;span class="sym"&gt;&amp;pi;&amp;#772;&lt;/span&gt; = 0.65,
 &lt;span class="sym"&gt;&amp;#8467;&lt;sub&gt;C,t0&lt;/sub&gt;&lt;/span&gt; = 0.600,
 &lt;span class="sym"&gt;&amp;#8467;&lt;sub&gt;N,t0&lt;/sub&gt;&lt;/span&gt; = 0.362, &lt;span class="sym"&gt;L&lt;/span&gt; = 1&lt;br&gt;
@@ -1486,10 +1489,13 @@ name: month-main
    &amp;Delta;ln &lt;i&gt;K&lt;/i&gt;&lt;sub&gt;t&lt;/sub&gt;, &amp;Delta;ln TFP&lt;sub&gt;t&lt;/sub&gt;, and the &lt;b&gt;targets&lt;/b&gt;
    &amp;#8467;&lt;sup&gt;&amp;#8727;&lt;/sup&gt;&lt;sub&gt;C,t+1&lt;/sub&gt;, &amp;#8467;&lt;sup&gt;&amp;#8727;&lt;/sup&gt;&lt;sub&gt;N,t+1&lt;/sub&gt;. Steps 4 to 7
    are all about the gap between those targets and where labor actually is.
-4. &lt;b&gt;Gaps and the AI-sensitive wage.&lt;/b&gt; Form the &lt;b&gt;overhang&lt;/b&gt; (&lt;i&gt;G&lt;/i&gt;&lt;sub&gt;o,t&lt;/sub&gt;), the
-   &lt;b&gt;shortfall&lt;/b&gt; (&lt;i&gt;B&lt;/i&gt;&lt;sub&gt;o,t&lt;/sub&gt;) and the attached force (&lt;i&gt;N&lt;/i&gt;&lt;sub&gt;C,t&lt;/sub&gt;); move the
-   actual wage (&lt;i&gt;w&lt;/i&gt;&lt;sub&gt;C,t&lt;/sub&gt;/&lt;i&gt;w&lt;/i&gt;&lt;sub&gt;t&lt;/sub&gt;) a fraction 1&amp;minus;&amp;xi;&lt;sub&gt;m&lt;/sub&gt;
-   toward the wage that would clear it (&lt;i&gt;w&lt;/i&gt;&lt;sup&gt;c&lt;/sup&gt;&lt;sub&gt;C,t&lt;/sub&gt;).
+4. &lt;b&gt;Gaps and the AI-sensitive wage.&lt;/b&gt; Compare each group's employment with its target: the
+   &lt;b&gt;overhang&lt;/b&gt; (&lt;i&gt;G&lt;/i&gt;&lt;sub&gt;o,t&lt;/sub&gt;, workers above target), the &lt;b&gt;shortfall&lt;/b&gt;
+   (&lt;i&gt;B&lt;/i&gt;&lt;sub&gt;o,t&lt;/sub&gt;, below it) and the &lt;b&gt;attached force&lt;/b&gt; (&lt;i&gt;N&lt;/i&gt;&lt;sub&gt;C,t&lt;/sub&gt;,
+   employed plus extra unemployed still counted in the group). Then move the AI-sensitive
+   wage (&lt;i&gt;w&lt;/i&gt;&lt;sub&gt;C,t&lt;/sub&gt;/&lt;i&gt;w&lt;/i&gt;&lt;sub&gt;t&lt;/sub&gt;) a monthly fraction 1&amp;minus;&amp;xi;&lt;sub&gt;m&lt;/sub&gt; of
+   the way to its clearing level (&lt;i&gt;w&lt;/i&gt;&lt;sup&gt;c&lt;/sup&gt;&lt;sub&gt;C,t&lt;/sub&gt;), with
+   &amp;xi;&lt;sub&gt;m&lt;/sub&gt; = &amp;xi;&lt;sup&gt;1/12&lt;/sup&gt; the yearly stickiness &amp;xi; on a monthly clock.
 5. &lt;b&gt;Separations and openings.&lt;/b&gt; At that wage read off labor demand
    (&amp;#8467;&lt;sup&gt;d&lt;/sup&gt;&lt;sub&gt;C,t&lt;/sub&gt;); the excess (&lt;i&gt;E&lt;/i&gt;&lt;sub&gt;t&lt;/sub&gt;) becomes quits-not-replaced
    (&lt;i&gt;q&lt;/i&gt;&lt;sub&gt;o,t&lt;/sub&gt;) and &lt;b&gt;layoffs&lt;/b&gt; (&lt;i&gt;D&lt;/i&gt;&lt;sub&gt;C,t&lt;/sub&gt;); post vacancies
@@ -1620,8 +1626,9 @@ line-height:1.45; text-align:left;"&gt;
 &lt;b&gt;1.&lt;/b&gt; Trial &amp;Delta;ln r&lt;sub&gt;t&lt;/sub&gt;&lt;br&gt;
 &lt;b&gt;2.&lt;/b&gt; s&lt;sub&gt;L,t&lt;/sub&gt; (14) &amp;rarr; &amp;Delta;ln w&lt;sub&gt;t&lt;/sub&gt; (16) &amp;rarr;
 &amp;Delta;ln(Y&lt;sub&gt;t&lt;/sub&gt;/L&lt;sub&gt;t&lt;/sub&gt;) (5) &amp;rarr; &amp;Delta;ln K&lt;sub&gt;t&lt;/sub&gt; (17)&lt;br&gt;
-&lt;b&gt;3.&lt;/b&gt; Residual of (18), &amp;Delta;ln K&lt;sub&gt;t&lt;/sub&gt; &amp;minus; &amp;epsilon;&amp;thinsp;&amp;Delta;ln r&lt;sub&gt;t&lt;/sub&gt;,
-falls in &amp;Delta;ln r&lt;sub&gt;t&lt;/sub&gt;: bisect, back to 2&lt;br&gt;
+&lt;b&gt;3.&lt;/b&gt; How wrong the trial is: &amp;Delta;ln K&lt;sub&gt;t&lt;/sub&gt; &amp;minus; &amp;epsilon;&amp;thinsp;&amp;Delta;ln r&lt;sub&gt;t&lt;/sub&gt;
+(what firms want minus what savers offer, the residual of (18)). It falls as the trial rises,
+so bisect and go back to 2&lt;br&gt;
 &lt;b&gt;4.&lt;/b&gt; At the root, the targets (13). &amp;#8467;&amp;#771;&lt;sub&gt;N,t&lt;/sub&gt; (15) and
 &amp;Delta;ln TFP&lt;sub&gt;t&lt;/sub&gt; (45) need no r&lt;sub&gt;t&lt;/sub&gt; at all
 &lt;div style="margin-top:5px; color:#5b6873;"&gt;Each symbol is
@@ -2438,7 +2445,8 @@ the same routine via `expand_and_bisect()`, `statics.py:92`. The definition row 
 
 .small[
 **Step 2** substitutes rows two to four into row five, leaving `\({\color{OrangeRed} \bar U_C}\)` as the only unknown.
-The residual runs from `\(-\infty\)` at `\(\bar U_C \to 0\)` to `\(+0.13\)` at `\(\bar U_C = \bar U\)`, so bisect on
+How wrong a guess is, the left side minus `\(\bar H_C\)`, goes from far too low near `\(\bar U_C = 0\)` (minus infinity)
+to slightly too high, `\(+0.13\)`, at `\(\bar U_C = \bar U\)`. The sign changes across the interval, so bisect on
 `\((0, \bar U)\)`: the root is `\(\bar U_C = 0.0174\)`, 46% of the pool for 62% of employment. Step 3 has the same shape.
 ]
 
@@ -2542,7 +2550,7 @@ changes sign. The two `\(K\)` columns are one stock reckoned twice: what firms w
 rate, falling in it, against what savers offer, `\(\varepsilon \Delta \ln r\)`, rising in it. All
 columns but the first two are in `\(10^{-3}\)`.
 
-| trial `\(\Delta \ln r\)` | | `\(s_{L}\)` (14) | `\(\Delta \ln w\)` (16) | `\(\Delta \ln (Y/L)\)` (5) | `\(K\)` firms want (17) | `\(K\)` savers offer (6) | residual (18) |
+| trial `\(\Delta \ln r\)` | | `\(s_{L}\)` (14) | `\(\Delta \ln w\)` (16) | `\(\Delta \ln (Y/L)\)` (5) | `\(K\)` firms want (17) | `\(K\)` savers offer (6) | how wrong (18) |
 |---|---|---|---|---|---|---|---|
 | 0.000000 | start | 0.59942 | +0.547 | +1.520 | +2.977 | 0.000 | **+2.98** |
 | 0.020000 | step out | 0.59539 | &amp;minus;12.9 | &amp;minus;5.219 | &amp;minus;13.762 | 60.000 | **&amp;minus;73.8** |
@@ -2628,8 +2636,8 @@ name: m0-4
 Report the economy at **realized** employment, then feed the GDP gap into ideas. This is the
 **last of four one-dimensional root-finds every month**: one on (18) in the frictionless block
 (&lt;a href="#m0-1" class="reflink"&gt;the month-0 walkthrough&lt;/a&gt;), two inside step 4 for the clearing wage and for
-labor demand, and this one. Same routine, different economy: here the price index is the residual
-and employment is fixed. Columns other than the trial and `\(s_L\)` are in `\(10^{-3}\)`.
+labor demand, and this one. Same routine, different economy: here how wrong a trial is is measured
+by how far the price index sits from 1, and employment is fixed. Columns other than the trial and `\(s_L\)` are in `\(10^{-3}\)`.
 
 | trial `\(\Delta \ln r\)` | | `\(\Delta \ln (Y/\bar L)\)` | `\(\Delta \ln w_C\)` | `\(\Delta \ln w_N\)` | `\(s_{L}\)` | price index `\(-1\)` |
 |---|---|---|---|---|---|---|
