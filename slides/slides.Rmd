@@ -2320,7 +2320,8 @@ $$\Big[\frac{\bar H_C}{{\color{OrangeRed} \bar U_C} + \bar\mu(\bar U - {\color{O
 
 .small[
 **Step 2** substitutes rows two to four into row five, leaving ${\color{OrangeRed} \bar U_C}$ as the only unknown.
-The residual runs from $-\infty$ at $\bar U_C \to 0$ to $+0.13$ at $\bar U_C = \bar U$, so bisect on
+How wrong a guess is, the left side minus $\bar H_C$, goes from far too low near $\bar U_C = 0$ (minus infinity)
+to slightly too high, $+0.13$, at $\bar U_C = \bar U$. The sign changes across the interval, so bisect on
 $(0, \bar U)$: the root is $\bar U_C = 0.0174$, 46% of the pool for 62% of employment. Step 3 has the same shape.
 ]
 
