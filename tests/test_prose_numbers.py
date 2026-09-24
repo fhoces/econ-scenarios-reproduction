@@ -108,6 +108,13 @@ def test_explorer_psi_popup():
     lo, hi = _cell("substantial", psi=0.5), _cell("substantial", psi=0.9)
     assert (f"labor share from {f1(lo[LSHARE])} to {f1(hi[LSHARE])} percent while measured "
             f"TFP moves only from {f2(lo[TFP])} to {f2(hi[TFP])}") in EXPLORER
+    # The parenthesis quotes the deck's figures for the same sweep, run on the paper's own
+    # gain path (2030 gain 0.448) rather than the grid's 0.45 label.
+    tfp = "Measured TFP, pct above no-AI"
+    dlo, dhi = _col(psi=0.5), _col(psi=0.9)
+    a_2030 = S.a_anchor + S.g_a * (2030.0 - F.t_anchor)
+    assert (f"({f2(dlo[tfp])} to {f2(dhi[tfp])} on the scenario's own path, whose 2030 gain is "
+            f"{a_2030:.3f} rather than this grid's 0.45") in EXPLORER
 
 
 def test_explorer_gain_popup_minutes():
