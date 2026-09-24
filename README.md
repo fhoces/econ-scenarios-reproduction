@@ -196,15 +196,28 @@ is that map, made clickable.
   parameters as an indicative comparison only (it gives GDP 9.9 percent above the no-AI
   path against Table 4's median of 8.6).
 * **Figure 1** (the capability question by task) is survey output.
-* The paper's external inputs are public but not bundled here:
-  [IPUMS-CPS](https://cps.ipums.org/cps/) matched monthly files 2010-19, the
-  Carrillo-Tudela and Visschers (2023) Econometrica replication files for the
-  occupational switching matrix, [CPS](https://www.bls.gov/cps/) 2025 annual averages,
-  [JOLTS](https://www.bls.gov/jlt/), the [Census BTOS](https://www.census.gov/hfp/btos/)
-  AI supplement, and [FRED](https://fred.stlouisfed.org/). The calibration targets they
-  produce are transcribed as numbers in `aiscen/params.py` rather than recomputed from
-  source. (No link for the Carrillo-Tudela and Visschers replication files: not
-  confident of a stable URL, so left as a citation only rather than guessed.)
+* The paper's external inputs are public but not bundled here. The calibration targets
+  they produce are transcribed as numbers in `aiscen/params.py` rather than recomputed
+  from source. Where each one lives:
+  * **CPS 2025 annual averages** (`cog_share`, the two groups' employment shares, and
+    `U_bar`, the unemployed pool): BLS, Labor Force Statistics from the CPS, Household
+    Data Annual Averages 2025, Table 11 (employed people by detailed occupation) and
+    Table 25b (unemployment by detailed occupation), at [bls.gov/cps](https://www.bls.gov/cps/).
+  * **IPUMS-CPS matched monthly files 2010-19** (the finding rate behind `q_bar_ann`, and
+    the separation rates by group, `q_rel_C` and `q_rel_N`): the basic monthly samples with
+    the month-to-month linking keys, from [cps.ipums.org](https://cps.ipums.org/cps/)
+    (free registration); the paper cites Flood et al. (2025).
+  * **The occupational switching matrix** (`mu_bar`): tabulated from the replication files
+    of Carrillo-Tudela and Visschers (2023), "Unemployment and Endogenous Reallocation over
+    the Business Cycle", Econometrica 91(3), which are the article's supplementary material
+    at the Econometric Society, DOI [10.3982/ECTA12498](https://doi.org/10.3982/ECTA12498).
+  * **JOLTS** (the quits elasticity `q_resp_share` and the 2010-19 filling rate
+    `fill_bar`): [bls.gov/jlt](https://www.bls.gov/jlt/); the paper takes the quits rate
+    series JTSQUR from [FRED](https://fred.stlouisfed.org/).
+  * **Census BTOS AI supplement** (`d_anchor`, the mid-2026 diffusion share): the AI use
+    estimates and the 2026 supplement at [census.gov/hfp/btos](https://www.census.gov/hfp/btos/).
+  * **FRED** (the CPS unemployment levels UNEMPLOY and UEMPLT5 in the paper's references):
+    [fred.stlouisfed.org](https://fred.stlouisfed.org/).
 
 ## Usage
 
