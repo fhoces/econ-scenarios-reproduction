@@ -1392,8 +1392,10 @@ subtracted from the group's base share. The next two rows are the CES labor dema
 The logic runs backwards from the usual direction. Ordinarily you would set prices and
 solve for quantities. Here employment is a *state variable* handed over by the flow
 block, so the system is inverted: find the prices at which the observed
-$(\ell_{C,t}, \ell_{N,t})$ is exactly what firms want to hire, and GDP follows. That
-is a legitimate primal-dual inversion, and it has a useful consequence for solving it:
+$(\ell_{C,t}, \ell_{N,t})$ is exactly what firms want to hire, and GDP follows. Running
+the demand system backwards this way is legitimate because the same equations hold either
+way; here the quantities are the given and the prices the unknown. That has a useful
+consequence for solving it:
 the capital row can be substituted out in closed form, leaving one monotone equation
 in $\Delta \ln r_t$, which is why a bisection is all the code needs. When the cognitive
 wage is rationed the price the system returns is the marginal product rather than the
