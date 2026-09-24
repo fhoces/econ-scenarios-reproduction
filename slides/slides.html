@@ -553,10 +553,10 @@ name: input-psi
 
 .small[
 **There is no separate augmentation input.** Augmentation is `\(1 - \psi\)`, and it delivers the
-*same* cost saving `\(a\)`: the paper applies the saving whether a worker performs the instance
-with AI or capital performs it outright (p. 11). So asking "what if AI mostly helps people
-rather than replacing them" means lowering `\(\psi\)`, not raising some other input. Across the
-full range from pure augmentation to pure automation, measured TFP moves only
+*same* cost saving `\(a\)`: the paper applies it whether a worker performs the instance with AI
+or capital does it outright (p. 11). So "what if AI mostly helps people rather than
+replacing them" means lowering `\(\psi\)`, not raising some other input. Over `\(\psi\)` from 0
+to 1, wider than any scenario uses, measured TFP moves only
 **3.02 to 3.09**, while the labor share moves **59.7 to 54.9** and AI-sensitive employment
 **−1.1% to −4.9%**. GDP does rise over that range (4.5 to 9.5), but through capital
 deepening, not productivity.
@@ -1478,9 +1478,9 @@ name: month-main
 # What the Model Does in One Month
 
 .small[
-1. &lt;b&gt;Paths.&lt;/b&gt; Evaluate the AI paths at &lt;i&gt;t&lt;/i&gt; and &lt;i&gt;t&lt;/i&gt;+1: a lookup, not a solve
+1. &lt;b&gt;Paths.&lt;/b&gt; The AI paths at &lt;i&gt;t&lt;/i&gt; and &lt;i&gt;t&lt;/i&gt;+1: a lookup, not a solve
    (&lt;i&gt;m&lt;/i&gt;&lt;sub&gt;t&lt;/sub&gt;, &lt;i&gt;d&lt;/i&gt;&lt;sub&gt;t&lt;/sub&gt;, &lt;i&gt;a&lt;/i&gt;&lt;sub&gt;t&lt;/sub&gt;; &amp;psi; and &amp;rho; are constant
-   in the three scenarios, and &lt;i&gt;m&lt;/i&gt;, &lt;i&gt;d&lt;/i&gt; enter only as &lt;i&gt;m&lt;/i&gt;&lt;sub&gt;t&lt;/sub&gt;&lt;i&gt;d&lt;/i&gt;&lt;sub&gt;t&lt;/sub&gt;).
+   in all scenarios, and &lt;i&gt;m&lt;/i&gt;, &lt;i&gt;d&lt;/i&gt; enter only as &lt;i&gt;m&lt;/i&gt;&lt;sub&gt;t&lt;/sub&gt;&lt;i&gt;d&lt;/i&gt;&lt;sub&gt;t&lt;/sub&gt;).
 2. &lt;b&gt;Capital market.&lt;/b&gt; Solve for the rental-rate gap &amp;Delta;ln &lt;i&gt;r&lt;/i&gt;&lt;sub&gt;t&lt;/sub&gt; by bisection,
    from &lt;a href="#prop1-main" class="reflink"&gt;Proposition 1&lt;/a&gt;, the closed form for the
    &lt;b&gt;frictionless&lt;/b&gt; economy where labor reallocates instantly.
@@ -1499,8 +1499,9 @@ name: month-main
 5. &lt;b&gt;Separations and openings.&lt;/b&gt; At that wage read off labor demand
    (&amp;#8467;&lt;sup&gt;d&lt;/sup&gt;&lt;sub&gt;C,t&lt;/sub&gt;); the excess (&lt;i&gt;E&lt;/i&gt;&lt;sub&gt;t&lt;/sub&gt;) becomes quits-not-replaced
    (&lt;i&gt;q&lt;/i&gt;&lt;sub&gt;o,t&lt;/sub&gt;) and &lt;b&gt;layoffs&lt;/b&gt; (&lt;i&gt;D&lt;/i&gt;&lt;sub&gt;C,t&lt;/sub&gt;); post vacancies
-   (&lt;i&gt;v&lt;/i&gt;&lt;sub&gt;C,t&lt;/sub&gt;, &lt;i&gt;v&lt;/i&gt;&lt;sub&gt;N,t&lt;/sub&gt;) to replace quits plus &amp;theta;&lt;sub&gt;H&lt;/sub&gt; of the
-   shortfall (&lt;i&gt;Z&lt;/i&gt;&lt;sub&gt;t&lt;/sub&gt;, &lt;i&gt;B&lt;/i&gt;&lt;sub&gt;N,t&lt;/sub&gt;), over the normal filling rate
+   (&lt;i&gt;v&lt;/i&gt;&lt;sub&gt;C,t&lt;/sub&gt;, &lt;i&gt;v&lt;/i&gt;&lt;sub&gt;N,t&lt;/sub&gt;) for quits plus &amp;theta;&lt;sub&gt;H&lt;/sub&gt; of the shortfall,
+   meaning the AI-sensitive hiring gap at the sticky wage (&lt;i&gt;Z&lt;/i&gt;&lt;sub&gt;t&lt;/sub&gt;, from (39)) and the
+   other group's target gap (&lt;i&gt;B&lt;/i&gt;&lt;sub&gt;N,t&lt;/sub&gt;), over the normal filling rate
    (&amp;pi;&amp;#772;&lt;sub&gt;o&lt;/sub&gt;).
 6. &lt;b&gt;Matching.&lt;/b&gt; Hires (&lt;i&gt;H&lt;/i&gt;&lt;sub&gt;j,t&lt;/sub&gt;) from effective search (&lt;i&gt;S&lt;/i&gt;&lt;sub&gt;j,t&lt;/sub&gt;) and
    vacancies; finding rates by origin (&lt;i&gt;f&lt;/i&gt;&lt;sub&gt;C,t&lt;/sub&gt;, &lt;i&gt;f&lt;/i&gt;&lt;sub&gt;N,t&lt;/sub&gt;).
@@ -2545,10 +2546,10 @@ name: m0-1
 .small[
 Carried in: `\(\Delta \ln A = 0\)`, `\(\ell_C = 0.6003\)`, `\(\ell_N = 0.3617\)`. Exogenous at `\(t_0\)`: `\(m = 0.0698\)`, `\(d = 0.0300\)`, `\(a = 0.280\)`, `\(\psi = 0.75\)`, `\(\rho = 0.25\)`, so `\(md = 0.0021\)`.
 
-The guess starts at **0**, the no-AI path, and walks out in steps of 0.02 until the residual
-changes sign. The two `\(K\)` columns are one stock reckoned twice: what firms want at that rental
-rate, falling in it, against what savers offer, `\(\varepsilon \Delta \ln r\)`, rising in it. All
-columns but the first two are in `\(10^{-3}\)`.
+The guess starts at **0**, the no-AI path, and steps out by 0.02 until the sign of how wrong the trial is
+flips. The two `\(K\)` columns are one stock reckoned twice: what firms want at that rental
+rate, falling in it, against what savers offer, `\(\varepsilon \Delta \ln r\)`, rising in it.
+Columns after the first two are in `\(10^{-3}\)`.
 
 | trial `\(\Delta \ln r\)` | | `\(s_{L}\)` (14) | `\(\Delta \ln w\)` (16) | `\(\Delta \ln (Y/L)\)` (5) | `\(K\)` firms want (17) | `\(K\)` savers offer (6) | how wrong (18) |
 |---|---|---|---|---|---|---|---|
@@ -2649,8 +2650,8 @@ by how far the price index sits from 1, and employment is fixed. Columns other t
 | 0.000625 | 4 | +0.730 | &amp;minus;2.535 | +1.461 | 0.59894 | &amp;minus;0.347 |
 | 0.000776 | root, 12 | +1.260 | &amp;minus;1.477 | +2.519 | 0.59926 | `\(8 \cdot 10^{-12}\)` |
 
-Then, with no root-find left: `\(\tilde \ell_{C,t} = -0.000752\)` (19), `\(u^x = 0\)`, `\(X = 0.000461\)`,
-`\(G = 0.000482\)`, `\(\Delta \ln R = \Delta \ln Y = 0.001260\)` (22),
+Then, with no root-find left: `\(\tilde \ell_{C,t} = -0.000752\)` (19), `\(u^x = 0\)` (excess unemployment), `\(X = 0.000461\)`
+(share changing occupation), `\(G = 0.000482\)` (aggregate overhang), `\(\Delta \ln R = \Delta \ln Y = 0.001260\)` (22),
 `\(\Delta g = 2.105 \cdot 10^{-5}\)` (42), `\(\Delta \ln A_{t+1} = 1.754 \cdot 10^{-6}\)` (43).
 ]
 
