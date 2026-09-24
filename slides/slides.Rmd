@@ -1430,8 +1430,9 @@ name: month-main
 5. <b>Separations and openings.</b> At that wage read off labor demand
    (&#8467;<sup>d</sup><sub>C,t</sub>); the excess (<i>E</i><sub>t</sub>) becomes quits-not-replaced
    (<i>q</i><sub>o,t</sub>) and <b>layoffs</b> (<i>D</i><sub>C,t</sub>); post vacancies
-   (<i>v</i><sub>C,t</sub>, <i>v</i><sub>N,t</sub>) to replace quits plus &theta;<sub>H</sub> of the
-   shortfall (<i>Z</i><sub>t</sub>, <i>B</i><sub>N,t</sub>), over the normal filling rate
+   (<i>v</i><sub>C,t</sub>, <i>v</i><sub>N,t</sub>) for quits plus &theta;<sub>H</sub> of the shortfall,
+   meaning the AI-sensitive hiring gap at the sticky wage (<i>Z</i><sub>t</sub>, from (39)) and the
+   other group's target gap (<i>B</i><sub>N,t</sub>), over the normal filling rate
    (&pi;&#772;<sub>o</sub>).
 6. <b>Matching.</b> Hires (<i>H</i><sub>j,t</sub>) from effective search (<i>S</i><sub>j,t</sub>) and
    vacancies; finding rates by origin (<i>f</i><sub>C,t</sub>, <i>f</i><sub>N,t</sub>).
