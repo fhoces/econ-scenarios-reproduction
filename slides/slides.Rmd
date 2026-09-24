@@ -994,7 +994,7 @@ name: employment-main
 
 $$\tilde \ell_{N,t} = \Delta \ln (Y_t/L_t) - \sigma \Delta \ln w_t \;\; \text{(13)}$$
 
-Nursing and electrical work are unaffected, so demand for that labor is an ordinary
+Home health aides and electricians are unaffected, so demand for that labor is an ordinary
 CES demand: up one-for-one with output, down with its own price at elasticity
 $\sigma$.
 

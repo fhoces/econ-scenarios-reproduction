@@ -782,7 +782,7 @@ $$
 
 ::: {.callout-note appearance="simple" collapse="true" title="Refresher: the trick in (13) is to look at the group AI does not touch (click to expand)"}
 The appealing move here is to solve for the group that is *unaffected*. AI does
-nothing to the productivity of nursing or electrical work, so the cost of those tasks
+nothing to the productivity of home health aides or electricians, so the cost of those tasks
 depends only on the wage, and demand for that labor is an ordinary CES demand curve
 for a good priced at $w_t$: it rises one for one with output and falls with its own
 price at elasticity $\sigma$. That is the first equation, derived in two lines from
