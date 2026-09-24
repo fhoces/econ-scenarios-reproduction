@@ -271,3 +271,33 @@ def test_deck_squeeze():
         e = simulate.run(F, SCENARIOS[n]).at(2030.0)
         sq.append(f"{e.dlnr - e.dlnw_C_paid:.3f}")
     assert f"the squeeze reaches **{' / '.join(sq)}** log points" in DECK
+
+
+def test_deck_pool_rounding_backup():
+    """The U-bar backup slide restates the verification box's numbers with more detail."""
+    from aiscen.report import PUBLISHED, TABLE6, TABLE6_ROWS, build_table3
+    t3, t3b = build_table3(), build_table3(Fixed(U_bar=0.0384))
+    UA = "Unemployment rate, all workers, pct"
+    gap = {r: [p - g for p, g in zip(PUBLISHED[r], t3[r])] for r in (UC, UA)}
+    assert (f"all-workers unemployment rate is {f2(gap[UA][2])} points low in the substantial "
+            f"scenario ({f2(t3[UA][2])} against {PUBLISHED[UA][2]})") in DECK
+    assert (f"AI-sensitive rate {f2(gap[UC][0])} points low in the No-AI column "
+            f"({f2(t3[UC][0])} against {PUBLISHED[UC][0]})") in DECK
+    others = [abs(g) for r in (UC, UA) for i, g in enumerate(gap[r])
+              if (r, i) not in ((UA, 2), (UC, 0))]
+    assert max(others) <= 0.04 and "every other column is within 0.04" in DECK
+    # Table 6 unemployment cells as far off as the two Table 3 ones, and that one of
+    # them is the Table 3 substantial run itself (xi at its default).
+    far = []
+    for (scen, xi), want in TABLE6.items():
+        col = table3_column(simulate.run(Fixed(xi=xi), SCENARIOS[scen]))
+        for i in (TABLE6_ROWS.index(UC), TABLE6_ROWS.index(UA)):
+            g = want[i] - col[TABLE6_ROWS[i]]
+            if g >= 0.065:
+                far.append((scen, xi, g))
+    assert len(far) == 4
+    assert f"cells {f2(min(g for *_, g in far))} to {f2(max(g for *_, g in far))} low" in DECK
+    assert ("substantial", F.xi) in [(s, x) for s, x, _ in far]
+    assert "four Table 6 unemployment cells" in DECK
+    assert f"all-workers row lands on {f1(t3b[UA][2])}" in DECK and f1(t3b[UA][2]) == f"{PUBLISHED[UA][2]}"
+    assert f"improves only to {f2(t3b[UC][0])}, still printing as 2.8 against" in DECK

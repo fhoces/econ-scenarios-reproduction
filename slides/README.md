@@ -31,8 +31,9 @@ place numbers appear, and it has to be re-checked after any structural change.
 
 The deck's tables and figures hold no transcribed model outputs: they read CSVs exported
 by the Python model in the parent directory. A few reproduced values are quoted in prose
-(the U-bar gaps on the verification slide and its backup, the test and cell counts) and
-have to be re-checked by hand if the model changes. Three exporters feed it.
+(the U-bar gaps on the verification slide and its backup, the slop slide's results);
+`tests/test_prose_numbers.py` recomputes each one and fails if the prose no longer
+matches. The test and cell counts are still re-checked by hand. Three exporters feed it.
 
 ```sh
 cd ..
