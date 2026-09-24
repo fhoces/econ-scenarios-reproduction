@@ -1084,7 +1084,9 @@ Immediate, and the whole story over six years.
 
 Extreme scenario, 2030: ideas stock **+0.61 percent**.
 
-Long-run target is ~10 percent, but $\gamma = 0.35$ and cumulation takes decades.
+In the long run the ideas stock would settle about 10 percent higher, because each 1 percent
+more research eventually buys $\gamma = \lambda/(1-\phi_R) = 0.35$ percent more ideas (0.28 log
+points of extra research times 0.35 is about 10 percent). Getting there takes decades.
 ]
 
 .highlight-box[
