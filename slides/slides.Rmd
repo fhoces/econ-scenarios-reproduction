@@ -1558,8 +1558,9 @@ line-height:1.45; text-align:left;">
 <b>1.</b> Trial &Delta;ln r<sub>t</sub><br>
 <b>2.</b> s<sub>L,t</sub> (14) &rarr; &Delta;ln w<sub>t</sub> (16) &rarr;
 &Delta;ln(Y<sub>t</sub>/L<sub>t</sub>) (5) &rarr; &Delta;ln K<sub>t</sub> (17)<br>
-<b>3.</b> Residual of (18), &Delta;ln K<sub>t</sub> &minus; &epsilon;&thinsp;&Delta;ln r<sub>t</sub>,
-falls in &Delta;ln r<sub>t</sub>: bisect, back to 2<br>
+<b>3.</b> How wrong the trial is: &Delta;ln K<sub>t</sub> &minus; &epsilon;&thinsp;&Delta;ln r<sub>t</sub>
+(what firms want minus what savers offer, the residual of (18)). It falls as the trial rises,
+so bisect and go back to 2<br>
 <b>4.</b> At the root, the targets (13). &#8467;&#771;<sub>N,t</sub> (15) and
 &Delta;ln TFP<sub>t</sub> (45) need no r<sub>t</sub> at all
 <div style="margin-top:5px; color:#5b6873;">Each symbol is
@@ -2432,7 +2433,7 @@ changes sign. The two $K$ columns are one stock reckoned twice: what firms want 
 rate, falling in it, against what savers offer, $\varepsilon \Delta \ln r$, rising in it. All
 columns but the first two are in $10^{-3}$.
 
-| trial $\Delta \ln r$ | | $s_{L}$ (14) | $\Delta \ln w$ (16) | $\Delta \ln (Y/L)$ (5) | $K$ firms want (17) | $K$ savers offer (6) | residual (18) |
+| trial $\Delta \ln r$ | | $s_{L}$ (14) | $\Delta \ln w$ (16) | $\Delta \ln (Y/L)$ (5) | $K$ firms want (17) | $K$ savers offer (6) | how wrong (18) |
 |---|---|---|---|---|---|---|---|
 | 0.000000 | start | 0.59942 | +0.547 | +1.520 | +2.977 | 0.000 | **+2.98** |
 | 0.020000 | step out | 0.59539 | &minus;12.9 | &minus;5.219 | &minus;13.762 | 60.000 | **&minus;73.8** |
@@ -2518,8 +2519,8 @@ name: m0-4
 Report the economy at **realized** employment, then feed the GDP gap into ideas. This is the
 **last of four one-dimensional root-finds every month**: one on (18) in the frictionless block
 (<a href="#m0-1" class="reflink">the month-0 walkthrough</a>), two inside step 4 for the clearing wage and for
-labor demand, and this one. Same routine, different economy: here the price index is the residual
-and employment is fixed. Columns other than the trial and $s_L$ are in $10^{-3}$.
+labor demand, and this one. Same routine, different economy: here how wrong a trial is is measured
+by how far the price index sits from 1, and employment is fixed. Columns other than the trial and $s_L$ are in $10^{-3}$.
 
 | trial $\Delta \ln r$ | | $\Delta \ln (Y/\bar L)$ | $\Delta \ln w_C$ | $\Delta \ln w_N$ | $s_{L}$ | price index $-1$ |
 |---|---|---|---|---|---|---|
