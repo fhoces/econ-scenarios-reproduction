@@ -1417,10 +1417,14 @@ name: month-main
    &Delta;ln <i>K</i><sub>t</sub>, &Delta;ln TFP<sub>t</sub>, and the <b>targets</b>
    &#8467;<sup>&#8727;</sup><sub>C,t+1</sub>, &#8467;<sup>&#8727;</sup><sub>N,t+1</sub>. Steps 4 to 7
    are all about the gap between those targets and where labor actually is.
-4. <b>Gaps and the AI-sensitive wage.</b> Form the <b>overhang</b> (<i>G</i><sub>o,t</sub>), the
-   <b>shortfall</b> (<i>B</i><sub>o,t</sub>) and the attached force (<i>N</i><sub>C,t</sub>); move the
-   actual wage (<i>w</i><sub>C,t</sub>/<i>w</i><sub>t</sub>) a fraction 1&minus;&xi;<sub>m</sub>
-   toward the wage that would clear it (<i>w</i><sup>c</sup><sub>C,t</sub>).
+4. <b>Gaps and the AI-sensitive wage.</b> Compare where each group's employment is with where
+   the targets say it should be: the <b>overhang</b> (<i>G</i><sub>o,t</sub>, workers above the
+   target) and the <b>shortfall</b> (<i>B</i><sub>o,t</sub>, workers below it), plus the
+   <b>attached force</b> (<i>N</i><sub>C,t</sub>, the employed and the extra unemployed who still
+   count as belonging to the group). Then move the AI-sensitive wage
+   (<i>w</i><sub>C,t</sub>/<i>w</i><sub>t</sub>) a monthly fraction 1&minus;&xi;<sub>m</sub> of the
+   way toward the wage that would clear it (<i>w</i><sup>c</sup><sub>C,t</sub>), where
+   &xi;<sub>m</sub> = &xi;<sup>1/12</sup> is the yearly stickiness &xi; on a monthly clock.
 5. <b>Separations and openings.</b> At that wage read off labor demand
    (&#8467;<sup>d</sup><sub>C,t</sub>); the excess (<i>E</i><sub>t</sub>) becomes quits-not-replaced
    (<i>q</i><sub>o,t</sub>) and <b>layoffs</b> (<i>D</i><sub>C,t</sub>); post vacancies
