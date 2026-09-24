@@ -1203,8 +1203,9 @@ Production and prices: <span class="sym">&sigma;</span> = 0.5,
 <span class="sym">s<sub>L,t0</sub></span> = 0.60,
 <span class="sym">s<sub>C,t0</sub>/s<sub>L,t0</sub></span> = 0.624,
 <span class="sym">r&#772;</span> = 11.5%, <span class="sym">&delta;</span> = 5%<br>
-Labor market: <span class="sym">U&#772;</span> = 3.8%, <span class="sym">q&#772;</span> = 0.11/yr
-split 0.69&times; / 1.52&times; (55% responsive), <span class="sym">&mu;&#772;</span> = 0.17,
+Labor market: <span class="sym">U&#772;</span> = 3.8%, <span class="sym">q&#772;</span> = 0.11/yr,
+&times;0.69 for AI-sensitive and &times;1.52 for all other, of which 55% responds to how easy
+finding work is, <span class="sym">&mu;&#772;</span> = 0.17,
 <span class="sym">&iota;</span> = 1.27, mean <span class="sym">&pi;&#772;</span> = 0.65,
 <span class="sym">&#8467;<sub>C,t0</sub></span> = 0.600,
 <span class="sym">&#8467;<sub>N,t0</sub></span> = 0.362, <span class="sym">L</span> = 1<br>
