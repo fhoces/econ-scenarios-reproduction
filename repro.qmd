@@ -1533,107 +1533,176 @@ growth $n$), everything they are measured *against* is data or research.
 #| label: origins
 #| code-summary: "every model input, classified by the evidence behind it"
 # Values come from the parameter objects, so this table cannot drift from the model;
-# the origin and basis columns are editorial, read off Table 1 and Table A.2.
+# the origin, basis and where columns are editorial, read off Table 1, Table A.2 and
+# Section 3 of the paper. "where" says where in the paper each value is stated and, for
+# a data row, where the underlying series lives; "Table 1 cites X without a location"
+# means the paper names the source paper but not a table or page in it.
 def three(attr):
     """The three scenarios' values for one Scenario field, as 'a / b / c'."""
     return " / ".join(f"{getattr(SCENARIOS[n], attr):g}" for n in NAMES)
 
+SET = "Set by the authors, September 2026: "
 origins = [
     # --- the seven dials: everything that separates the scenarios
     ("m_2030", "affected mass in 2030", three("m_2030"), "guesswork",
      "Scenario values. The range spans the low end to near the high end of the task "
-     "feasibility ratings of Eloundou et al. (2024); the points inside it are chosen."),
+     "feasibility ratings of Eloundou et al. (2024); the points inside it are chosen.",
+     SET + "Table 1 panel B, p. 23; Section 3.3, p. 27. Table 1 cites Eloundou et al. "
+     "(2024) without a location."),
     ("d_2030", "diffusion share in 2030", three("d_2030"), "guesswork",
-     "Scenario values. Table 1 gives no basis beyond 'scenario assumptions'."),
+     "Scenario values. Table 1 gives no basis beyond 'scenario assumptions'.",
+     SET + "Table 1 panel B, p. 24; Section 3.3, p. 27. No basis given."),
     ("a_2030", "log gain per AI-performed instance, 2030",
      " / ".join(f"{P[n].a(F.t_target):.2f}" for n in NAMES), "guesswork",
      "Scenario values, implied by the mid-2026 anchor and the slope g_a. Informed by "
-     "measured trial gains (Brynjolfsson et al. 2025; Huang et al. 2025; Demirer et al. 2026)."),
+     "measured trial gains (Brynjolfsson et al. 2025; Huang et al. 2025; Demirer et al. 2026).",
+     SET + "Table 1 panel B (the g_a row), p. 24; Section 3.3, p. 27. Table 1 cites the "
+     "three trial papers without a location."),
     ("psi", "automation share of AI use", three("psi"), "guesswork",
      "Scenario values. The low end is similar to the observed automation-like share of "
-     "use (Appel et al. 2025); 0.75 and 0.90 are assumed."),
+     "use (Appel et al. 2025); 0.75 and 0.90 are assumed.",
+     SET + "Table 1 panel C, p. 24; Section 3.4, pp. 27-28. Table 1 cites Appel et al. "
+     "(2025) without a location."),
     ("rho", "reinstatement ratio", three("rho"), "guesswork",
      "Scenario values. Acemoglu and Restrepo (2019) estimate 0.5 for past technologies, "
-     "which is the modest value; nothing measures it for AI."),
+     "which is the modest value; nothing measures it for AI.",
+     SET + "Table 1 panel C, p. 24; Section 3.4, p. 28. Table 1 cites Acemoglu and "
+     "Restrepo (2019) without a location."),
     ("mu", "cross-group search discount on the path", three("mu"), "guesswork",
      "Scenario values. Only the normal-times value below is measured; how much harder "
-     "reallocation becomes under the shock is assumed."),
+     "reallocation becomes under the shock is assumed.",
+     SET + "Table 1 panel C, p. 24; Section 3.4, p. 28 (the 0.09 fitted to managers "
+     "and professionals is the stated reason for 0.08 and 0.04)."),
     ("theta_H", "share of the hiring shortfall posted per month", three("theta_H"),
-     "guesswork", "Scenario values. Table 1 gives no basis."),
+     "guesswork", "Scenario values. Table 1 gives no basis.",
+     SET + "Table 1 panel C, p. 24; Section 3.4, p. 28. No basis given."),
     # --- the anchors the dials start from
     ("m_2026", "affected mass, mid-2026 anchor", f"{SCENARIOS['substantial'].m_anchor:g}", "research",
      "Observed-exposure measure of Massenkoff and McCrory (2026): occupations scored by "
      "the share of task time on tasks with significant work-related Claude use. Common "
-     "to the three scenarios."),
+     "to the three scenarios.",
+     "Table 1 panel B, p. 23; Section 3.1, p. 25, and Section 3.3, p. 27 (0.22 in the "
+     "AI-sensitive group, 0.01 in the other). Table 1 cites Massenkoff and McCrory (2026) "
+     "without a location."),
     ("d_2026", "diffusion share, mid-2026 anchor", f"{SCENARIOS['substantial'].d_anchor:g}", "data",
      "Census Business Trends and Outlook Survey and its 2026 AI supplement "
-     "(https://www.census.gov/hfp/btos/). Common to the three scenarios."),
+     "(https://www.census.gov/hfp/btos/). Common to the three scenarios.",
+     "Table 1 panel B, p. 24; Section 3.3, p. 27 (18 percent of firms, 32 percent "
+     "employment-weighted, set to 0.10). Series: BTOS AI supplement, "
+     "https://www.census.gov/hfp/btos/."),
     ("a_2026", "log gain, mid-2026 anchor", three("a_anchor"), "guesswork",
-     "Scenario values: unlike m and d, the gain's anchor already differs by scenario."),
+     "Scenario values: unlike m and d, the gain's anchor already differs by scenario.",
+     SET + "Table 1 panel B, p. 24; Section 3.3, p. 27. Table 1 cites the three trial "
+     "papers without a location."),
     # --- technology and factor markets
     ("sigma", "elasticity of substitution across tasks", f"{F.sigma:g}", "research",
-     "Gross complements: Acemoglu and Restrepo (2022), Humlum (2019), Jones and Tonetti (2026)."),
+     "Gross complements: Acemoglu and Restrepo (2022), Humlum (2019), Jones and Tonetti (2026).",
+     "Table 1 panel A, p. 23; Section 3.1, p. 25. Table 1 cites the three papers without "
+     "a location."),
     ("s_L,t0", "base-period labor share", f"{F.s_L0:g}", "research",
-     "Conventional US value; Table 1 cites no series."),
+     "Conventional US value; Table 1 cites no series.",
+     "Table 1 panel A, p. 23; Section 3.1, p. 25. No source named."),
     ("s_C,t0/s_L,t0", "AI-sensitive share of employment", f"{F.cog_share:g}", "data",
      "CPS 2025 annual averages (https://www.bls.gov/cps/): employees in SOC major "
-     "groups 11-29, 41 and 43. This is also the ceiling m_bar on the affected mass."),
+     "groups 11-29, 41 and 43. This is also the ceiling m_bar on the affected mass.",
+     "Table 1 panel A, p. 23; Section 3.1, p. 25, footnote 10 (the SOC list); Table A.2 "
+     "panel B, p. 44. Series: CPS 2025 annual averages, Table 11, "
+     "https://www.bls.gov/cps/."),
     ("eps", "elasticity of capital supply", f"{F.eps:g}", "research",
      "Half the long-run wealth elasticity of Moll, Rachel and Restrepo (2022); the "
      "halving is the authors' judgement about the horizon. Varied over 1 / 3 / 6 / inf "
-     "in Table 5, which is where its weight shows."),
+     "in Table 5, which is where its weight shows.",
+     "Table 1 panel A, p. 23; Section 3.1, p. 26 (the reasoning for a high value). "
+     "Table 1 cites Moll et al. (2022) without a location."),
     ("r_bar, delta", "no-AI rental rate and depreciation",
      f"{F.r_bar:g}, {F.delta:g}", "research",
-     "Moll et al. (2022): a 6.5 percent net return at a capital-output ratio of 3.5."),
+     "Moll et al. (2022): a 6.5 percent net return at a capital-output ratio of 3.5.",
+     "Table 1 panel A, p. 23; Table A.2 panel A, p. 44. Table 1 cites Moll et al. (2022) "
+     "without a location."),
     ("xi", "rigidity of the AI-sensitive wage, per year", f"{F.xi:g}", "research",
-     "Wage-setting evidence, Section 3.4. Varied over 0 / 0.5 / 0.75 / 0.9 in Table 6."),
+     "Wage-setting evidence, Section 3.4. Varied over 0 / 0.5 / 0.75 / 0.9 in Table 6.",
+     "Table 1 panel C, p. 24; Section 3.4, p. 28 (the wage-setting evidence and the "
+     "half-life argument); Table A.2 panel D, p. 44."),
     # --- ideas production
     ("lambda", "returns to research input", f"{F.lam:g}", "guesswork",
-     "Set to 1, no duplication in research. A normalization rather than an estimate."),
+     "Set to 1, no duplication in research. A normalization rather than an estimate.",
+     SET + "Table 1 panel A, p. 23; Section 3.1, p. 26; Table A.2 panel C, p. 44."),
     ("1 - phi_R", "fishing out, labor-augmenting units", f"{F.fishing_out_R:g}", "derived",
      "s_L,t0 (1 - phi) + lambda, Equation (40), from the TFP-units value 3.1 of "
-     "Bloom et al. (2020), which is itself research."),
+     "Bloom et al. (2020), which is itself research.",
+     "Table 1 panel A, p. 23 (both rows, Equation (40)); Section 3.1, p. 26; Table A.2 "
+     "panel C, p. 44. Table 1 cites Bloom et al. (2020) without a location."),
     ("g", "no-AI growth of the ideas stock, per year", f"{F.g:g}", "data",
      "Postwar US TFP growth, implying measured TFP growth of s_L,t0 g = 1 percent. "
-     "Table 1 cites no series."),
+     "Table 1 cites no series.",
+     "Table 1 panel A, p. 23; Section 3.1, p. 26; Table A.2 panel C, p. 44. No series "
+     "named."),
     ("n", "labor-force growth, per year", f"{F.n:g}", "guesswork",
      "Chosen so that GDP grows at 2 percent a year without AI. Table 1 notes BLS "
      "projections put labor-force growth near 0.4 percent, so the value is close to "
-     "measured but is set by the target."),
+     "measured but is set by the target.",
+     SET + "Table 1 panel A, p. 23; Table A.2 panel C, p. 44. The BLS projection is "
+     "cited without a location."),
     ("iota_R,t0", "research share of GDP in 2024", f"{F.iota_R0:g}", "data",
-     "R&D share in the US national accounts."),
+     "R&D share in the US national accounts.",
+     "Table 1 panel A, p. 23; Section 3.1, p. 26; Table A.2 panel C, p. 44. No series "
+     "named."),
     ("g_iota", "growth of the research share, per year", f"{F.g_iota:g}", "derived",
-     "Equation (41), set so the ideas stock grows at g without AI (iota_R,2030 = 0.041)."),
+     "Equation (41), set so the ideas stock grows at g without AI (iota_R,2030 = 0.041).",
+     "Table 1 panel A, p. 23 (Equation (41), Appendix C); Table A.2 panel C, p. 44."),
     # --- the labor market in normal times
     ("U_bar", "normal search pool, share of the labor force", f"{F.U_bar:g}", "data",
      "CPS 2025. See the rounding discrepancy in Sections 2.3 and 4: the p. 26 derivation and the "
-     "published pool split both imply 0.0384 rather than Table 1's 0.038."),
+     "published pool split both imply 0.0384 rather than Table 1's 0.038.",
+     "Table 1 panel D, p. 25; Section 3.2, p. 26 (3.84 in the quit-rate derivation); "
+     "Table A.2 panel D, p. 44. Series: CPS 2025 annual averages, Table 25b, "
+     "https://www.bls.gov/cps/, and UNEMPLOY on FRED, https://fred.stlouisfed.org/."),
     ("q_bar", "normal quit rate, per year", f"{F.q_bar_ann:g}", "data",
-     "Implied by the pool and the CPS finding rate, rounded (Section 3.2)."),
+     "Implied by the pool and the CPS finding rate, rounded (Section 3.2).",
+     "Table 1 panel D, p. 25; Section 3.2, p. 26 (0.219 x 3.84/96.16 = 0.875 percent a "
+     "month, rounded to 0.11 a year); Table A.2 panel D, p. 44. Series: the CPS finding "
+     "rate from the IPUMS-CPS matched files 2010-19, https://cps.ipums.org/cps/."),
     ("q^T_o / q_bar_o", "share of quits responding to job prospects",
      f"{F.q_resp_share:g}", "research",
      "Elasticity of JOLTS quits to the CPS finding rate, estimated at 0.53 and rounded "
-     "to 0.55 (Section 3.2)."),
+     "to 0.55 (Section 3.2).",
+     "Table 1 panel D, p. 25; Section 3.2, p. 27 (the 0.53 elasticity over 2001-19). "
+     "Series: JOLTS quits rate JTSQUR on FRED, https://fred.stlouisfed.org/, and the CPS "
+     "finding rate."),
     ("q_bar_C/q_bar, q_bar_N/q_bar", "relative separation rates by group",
      f"{F.q_rel_C:g}, {F.q_rel_N:g}", "data",
-     "IPUMS-CPS matched monthly files 2010-19 (https://cps.ipums.org/cps/)."),
+     "IPUMS-CPS matched monthly files 2010-19 (https://cps.ipums.org/cps/).",
+     "Table 1 panel D, p. 25; Section 3.2, p. 26 (0.84 and 1.84 percent a month become "
+     "unemployed; the calibration uses their ratio). Series: IPUMS-CPS matched monthly "
+     "files 2010-19, https://cps.ipums.org/cps/."),
     ("mu_bar", "cross-group search discount in normal times", f"{F.mu_bar:g}", "data",
      "CPS 2010-19 occupational switching matrix from the Carrillo-Tudela and Visschers "
-     "(2023) replication files, corrected by their method (Section 3.2)."),
+     "(2023) replication files, corrected by their method (Section 3.2).",
+     "Table 1 panel D, p. 25; Section 3.2, pp. 26-27 (19 and 11 percent cross, "
+     "sqrt(0.23 x 0.12) = 0.17); Table A.2 panel D, p. 44. Files: Carrillo-Tudela and "
+     "Visschers (2023), Econometrica 91(3), supplementary material at "
+     "https://doi.org/10.3982/ECTA12498."),
     ("iota", "matching curvature", f"{F.iota_match:g}", "research",
-     "den Haan, Ramey and Watson (2000)."),
+     "den Haan, Ramey and Watson (2000).",
+     "Table 1 panel D, p. 25; Table A.2 panel D, p. 44. Table 1 cites den Haan, Ramey and "
+     "Watson (2000) without a location."),
     ("mean filling rate", "employment-weighted filling rate, per month",
      f"{F.fill_bar:g}", "data",
      "JOLTS 2010-19 (https://www.bls.gov/jlt/), by the method of Davis et al. (2013). "
-     "The matching efficiency chi is then calibrated to hit it, so chi is derived."),
+     "The matching efficiency chi is then calibrated to hit it, so chi is derived.",
+     "Table 1 panel D, p. 25; Section 3.2, p. 27; Table A.2 panel D, p. 44. Series: JOLTS "
+     "2010-19, https://www.bls.gov/jlt/. Table 1 cites Davis et al. (2013) without a "
+     "location."),
     # --- conventions
     ("t0, t_anchor, t_target", "base period, anchor, scenario date",
      f"{F.t0:g}, {F.t_anchor:g}, {F.t_target:g}", "convention",
-     "Dates, not estimates."),
-    ("h", "period length, years", "1/12", "convention", "A monthly grid, Appendix A."),
+     "Dates, not estimates.",
+     "Table 1 panel A, p. 23; Table A.2 panel A, p. 44."),
+    ("h", "period length, years", "1/12", "convention", "A monthly grid, Appendix A.",
+     "Table 1 panel A, p. 23; Table A.2 panel A, p. 44."),
 ]
 odf = pd.DataFrame(origins, columns=["symbol", "what it is", "modest / substantial / extreme",
-                                     "origin", "basis"])
+                                     "origin", "basis", "where"])
 show(odf)
 ```
 
