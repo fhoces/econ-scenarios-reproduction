@@ -208,6 +208,10 @@ is that map, made clickable.
 
 ## Usage
 
+`make test`, `make csv`, `make report`, `make grid`, `make slides` (or `make all`) run the
+commands below; the `Makefile` reads `QUARTO_PYTHON` and `RSTUDIO_PANDOC` from the
+environment and falls back to the `python3` and `pandoc` on your PATH. The explicit form:
+
 ```sh
 python3 run.py                      # print the Table 3 / 5 / 6 comparisons
 python3 run.py --survey --csv out   # add the survey-median run, write paths and comparison CSVs
@@ -272,6 +276,7 @@ res.series("u_rate")        # monthly path of any field
 | `run.py` | Command-line comparison tables, and with `--csv` the monthly paths plus `table3/5/6.csv` and `slop.csv` |
 | `out/` | The committed output of `python3 run.py --survey --csv out` |
 | `requirements.txt`, `pytest.ini` | Rendering dependencies for the report, and the test configuration |
+| `Makefile` | `make test / csv / report / grid / slides / all`: the Usage commands, with the two tool paths taken from the environment |
 
 ## Readings the paper leaves implicit
 
