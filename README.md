@@ -24,6 +24,9 @@ The work is organised in three layers, adapted from the
 3. **Open Materials**: this repository, which stores the `aiscen` model, its test suite,
    and every exported CSV needed to replicate the analysis in full.
 
+Quick check: `python3 -m pytest -q` runs the 129 tests (Python 3.9+, standard library plus
+pytest); the full commands are under [Usage](#usage).
+
 [The landing page](https://fhoces.github.io/opa-ai-macro-econ-scenarios/) links to all
 three. The deck pulls `remark.js` from a CDN and the report pulls MathJax from one, so both
 need an internet connection to render fully; the explorer is self-contained apart from
@@ -271,7 +274,7 @@ res.series("u_rate")        # monthly path of any field
 
 | File | Contents |
 |---|---|
-| `aiscen/params.py` | Tables 1 and A.2: fixed parameters, the three scenarios, the survey medians |
+| `aiscen/params.py` | Tables 1 and A.2: fixed parameters, the three scenarios, the survey medians, and `gain_path`, the explorer's straight-line gain convention |
 | `aiscen/paths.py` | Equations (8) and (8'): the logistic paths for m and d, the linear gain a |
 | `aiscen/steady.py` | Equation (38), Table A.1 panel E: the normal-times search steady state |
 | `aiscen/statics.py` | Proposition 1 (exact closed form) and the actual-economy system (39) |
