@@ -505,7 +505,8 @@ everywhere else in this document (the no-AI path, [Equation (43)](#eq-43)): the 
 why (8) is displayed above with $a_{2026}$ and $t - 2026.5$, which is what the code
 does. Read with $t_0 = 2024$ the substantial gain would reach
 `{python} num(SCENARIOS['substantial'].a_anchor + SCENARIOS['substantial'].g_a * (2030.0 - F.t0), 3)`
-in 2030 instead of Table 1's `{python} num(P['substantial'].a(2030.0), 3)`.
+in 2030 instead of the `{python} num(P['substantial'].a(2030.0), 3)` that Table 1's anchor and
+slope give (printed there as 0.45).
 :::
 
 For the substantial scenario the paper states those slopes as $\kappa_m = 0.33$ and
@@ -1271,8 +1272,9 @@ their group of origin (33); openings and searchers meet through a matching funct
 never yields more hires than either side offers (34), and each origin's job-finding rate
 adds up its chances in the two groups (35). Employment and the two pools then roll
 forward a month (36) and (37). Unemployment is what accumulates while the sticky wage
-releases workers faster than search places them. Before AI arrives, (38) pins the normal
-pool, the hiring and the filling rates, and every simulation starts from there.
+releases workers faster than search places them. Before AI arrives, (38) takes the normal
+pool from Table 1, splits it between the two origins, and pins the hiring, finding and
+filling rates of normal times; every simulation starts from there.
 
 []{#eq-27}
 $$
@@ -1882,7 +1884,7 @@ three scenarios; in the extreme one the average wage is
 the cognitive wage is `{python} num(-T3['  cognitive occupations w_C'][3], 1)` percent
 below it and cognitive unemployment reaches
 `{python} num(T3['Unemployment rate, cognitive, pct'][3], 1)` percent. The largest gap
-between a reproduced cell and its published value is
+between a reproduced Table 3 cell and its published value is
 `{python} num(t3_df['max diff'].max(), 2)` points.
 
 Every cell is inside the tolerance the test suite applies: within 0.05 percentage points
