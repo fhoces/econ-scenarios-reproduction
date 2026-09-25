@@ -1,15 +1,25 @@
 """The static blocks: Proposition 1 (p. 15) and the actual-economy system (39)
 (Table A.1, panel D, p. 43).
 
-Notation follows the paper. Wage variables carrying a tilde are deflated by the
-ideas stock A_t, as the system (39) requires; Delta ln w = Delta ln w_tilde
-+ Delta ln A.
+Both blocks answer the same kind of question at a single date: given the AI
+objects (m d, a, psi, rho) and the ideas stock, what are the prices, shares and
+GDP? Proposition 1 does it for the frictionless economy (no unemployment, one
+common wage) and yields the employment TARGETS; the system (39) does it at
+whatever employment the flow block actually delivered, so it is what the model
+reports. At the targets the two coincide (tested).
+
+Every quantity is a log gap against the no-AI path ("Delta ln x"). Notation follows
+the paper. A variable with a tilde is deflated by the ideas stock A_t: the ideas
+stock raises the productivity of every worker, so what matters for unit costs is
+w / A rather than w. The system (39) is written in those deflated units (Table A.1's
+note), and this reproduction reads its output gap the same way; the code adds
+Delta ln A back before reporting, Delta ln w = Delta ln w_tilde + Delta ln A.
 """
 
 import math
 from dataclasses import dataclass
 
-from .numerics import bisect, expand_and_bisect
+from .numerics import expand_and_bisect
 from .params import Fixed
 
 
@@ -75,20 +85,28 @@ def frictionless(f: Fixed, md: float, a: float, psi: float, rho: float,
     lN = ell_N_tilde(f, md, a, psi, rho)
     one_minus_sigma = 1.0 - f.sigma
 
+    # Everything in Proposition 1 follows from the rental-rate gap in order, so it
+    # is written once as a function of a trial Delta ln r and called twice: inside
+    # the root-find and again at the root. Returns the tuple
+    #   (s_L, dln_sL, dlnw, dlnw_t, dlnYL, dlnK), indices 0 to 5.
     def pieces(dlnr: float):
         s_L = 1.0 - B * math.exp(one_minus_sigma * dlnr)          # (14)
         dln_sL = math.log(s_L / f.s_L0)
         dlnw_t = (dln_sL + lN) / one_minus_sigma                  # (16), deflated by A
-        dlnw = dlnw_t + dlnA
+        dlnw = dlnw_t + dlnA                                      # the wage actually paid
         dlnYL = dlnw - dln_sL                                     # identity (5)
         dlnK = math.log((1.0 - s_L) / f.s_K0) + dlnYL - dlnr      # (17)
         return s_L, dln_sL, dlnw, dlnw_t, dlnYL, dlnK
 
     if math.isinf(f.eps):
-        dlnr = 0.0
+        dlnr = 0.0            # perfectly elastic capital: the rental rate is pegged
     else:
-        # Excess demand for capital: K demanded (17) less K supplied (6). Strictly
-        # decreasing in Delta ln r, so bracket outward from zero and bisect.
+        # Equation (18): capital demanded, pieces(x)[5] = Delta ln K by (17), equals
+        # capital supplied, eps x by (6). The residual (demand minus supply) is
+        # strictly decreasing in x: it is positive when the trial rental gap is too
+        # small (AI has raised the demand for capital and the price has not caught
+        # up) and negative when it is too large. Start at zero, the no-AI value,
+        # and walk out in steps of 0.02 (two percent) until the sign flips.
         dlnr = expand_and_bisect(lambda x: pieces(x)[5] - f.eps * x, 0.0, step=0.02)
 
     s_L, dln_sL, dlnw, dlnw_t, dlnYL, dlnK = pieces(dlnr)
@@ -157,14 +175,23 @@ def _wages_at_employment(f: Fixed, LamC: float, y: float, l_C: float, l_N: float
 
 def actual_at_employment(f: Fixed, md: float, a: float, psi: float, rho: float,
                          l_C: float, l_N: float, dlnA: float = 0.0) -> Actual:
-    """Solve (39) for prices and GDP at realized employment (l_C, l_N)."""
+    """Solve (39) for prices and GDP at realized employment (l_C, l_N).
+
+    The system runs backwards from the usual direction: employment is given (a
+    state variable from the flow block) and the prices are the unknowns. The two
+    labor-demand rows are inverted for the wages, the capital row is substituted
+    out in closed form (see _y_of_dlnr), and what is left is the price-index row
+    as one equation in the rental gap, solved by bisection.
+    """
     B = bracket_B(f, md, a, psi, rho)
     LamC = Lambda_C(f, md, a, psi, rho)
     oms = 1.0 - f.sigma
 
     if math.isinf(f.eps):
         # The rental rate is pegged at r_bar, so Delta ln r = 0 and the price index
-        # alone pins the output gap; capital is whatever demand calls for.
+        # alone pins the output gap; capital is whatever demand calls for. The
+        # unknown here is the A-deflated output gap y itself (a log change; the
+        # residual is the price index minus one, rising in y). Steps of 0.02.
         def resid_inf(y: float) -> float:
             wtC, wtN = _wages_at_employment(f, LamC, y, l_C, l_N)
             return _price_index_resid(f, LamC, B, wtC, wtN, 0.0)
@@ -178,6 +205,10 @@ def actual_at_employment(f: Fixed, md: float, a: float, psi: float, rho: float,
         return Actual(dlnr=0.0, dlnY=y + dlnA, dlnw_C_tilde=wtC, dlnw_N_tilde=wtN,
                       s_L=s_C + s_N, s_C=s_C, s_N=s_N, s_K=s_K, dlnK=dlnK)
 
+    # Finite eps: the unknown is the rental gap. For a trial Delta ln r, the capital
+    # row gives the output gap, the demand rows give the wages, and the residual is
+    # the price index minus one. A finer step (0.01) than Proposition 1's, since this
+    # solve runs three times a month and the root moves little between calls.
     def resid(dlnr: float) -> float:
         y = _y_of_dlnr(f, B, dlnr, dlnA)
         wtC, wtN = _wages_at_employment(f, LamC, y, l_C, l_N)
@@ -186,6 +217,8 @@ def actual_at_employment(f: Fixed, md: float, a: float, psi: float, rho: float,
     dlnr = expand_and_bisect(resid, 0.0, step=0.01)
     y = _y_of_dlnr(f, B, dlnr, dlnA)
     wtC, wtN = _wages_at_employment(f, LamC, y, l_C, l_N)
+    # Expenditure shares at the new prices: each base share times e^{(1-sigma) x
+    # its price change}, the price-index logic of Equation (4).
     s_C = f.s_L0 * LamC * math.exp(oms * wtC)
     s_N = f.s_N0 * math.exp(oms * wtN)
     s_K = B * math.exp(oms * dlnr)
@@ -195,7 +228,14 @@ def actual_at_employment(f: Fixed, md: float, a: float, psi: float, rho: float,
 
 def cognitive_demand(f: Fixed, md: float, a: float, psi: float, rho: float,
                      wtC: float, l_N: float, dlnA: float = 0.0) -> tuple:
-    """Solve (39) for l_C at a given cognitive wage: labour demand l^d_C."""
+    """Solve (39) for l_C at a given (A-deflated) cognitive wage: labour demand l^d_C.
+
+    The other use of the system that Table A.1's note names ("solved for l_C,t at
+    w_C,t it gives l^d_C,t"). Now the cognitive wage is the given, the sticky wage of
+    Equation (30), and cognitive employment is the unknown; the all-other row is
+    still inverted for w_N at the given l_N. Returns the tuple
+    (l_C demanded, Delta ln Y with the ideas term added back, Delta ln r).
+    """
     B = bracket_B(f, md, a, psi, rho)
     LamC = Lambda_C(f, md, a, psi, rho)
 
@@ -215,6 +255,8 @@ def cognitive_demand(f: Fixed, md: float, a: float, psi: float, rho: float,
 
     dlnr = expand_and_bisect(resid, 0.0, step=0.01)
     y = _y_of_dlnr(f, B, dlnr, dlnA)
+    # The cognitive demand row of (39), read forwards this time: employment from
+    # the output gap and the wage.
     l_C = f.l_C0 * (LamC / f.cog_share) * math.exp(y - f.sigma * wtC)
     return l_C, y + dlnA, dlnr
 

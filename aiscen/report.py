@@ -8,9 +8,9 @@ months (note to Table 3). Both conventions are applied here.
 import math
 
 from .params import Fixed, SCENARIOS
-from . import simulate
+from . import simulate, steady
 
-PCT = 100.0
+PCT = 100.0     # every row of Table 3 is in percent, so multiply log gaps and shares by this
 
 
 def pct(dln: float) -> float:
@@ -21,16 +21,21 @@ def pct(dln: float) -> float:
 def table3_column(res: simulate.Result, t: float = 2030.0) -> dict:
     """One scenario column of Table 3."""
     f = res.fixed
-    m = res.at(t)
+    m = res.at(t)                    # the month being reported, normally 2030.0
     i = res.months.index(m)
     if i < 12:
         raise ValueError(f"Table 3 growth rows need 12 months of history before t = {t}")
-    m12 = res.months[i - 12]
-    l_C_2026 = res.at(f.t_anchor).l_C
+    m12 = res.months[i - 12]         # twelve months earlier, for the growth rows
+    l_C_2026 = res.at(f.t_anchor).l_C            # the "since mid-2026" base
     L_emp0 = f.l_C0 + f.l_N0
 
+    # Wage levels relative to the no-AI path (which is 1 by construction), so that
+    # labor income can be summed at the wages actually paid.
     w_C, w_N = math.exp(m.dlnw_C_paid), math.exp(m.dlnw_N)
     labor_income = w_C * m.l_C + w_N * m.l_N          # no-AI counterpart: 1 * L_emp0
+    # The no-AI path grows at g + n (ideas plus labor force) for GDP and at
+    # s_L,t0 g for measured TFP (Section 2.1.1); the growth rows add the change
+    # in the gap over the preceding twelve months to that trend.
     g_trend = f.g + f.n
     g_tfp_trend = f.s_L0 * f.g
 
@@ -43,6 +48,8 @@ def table3_column(res: simulate.Result, t: float = 2030.0) -> dict:
         "Average wage, pct above no-AI": pct(m.dlnw_avg),
         "  cognitive occupations w_C": pct(m.dlnw_C_paid),
         "  all other occupations w_N": pct(m.dlnw_N),
+        # The net return is the one level row: the gross rental rate r_bar scaled by
+        # its gap, less depreciation, in percent per year (Section 2.1.1).
         "Net return r - delta, pct per year": PCT * (f.r_bar * math.exp(m.dlnr) - f.delta),
         "Capital stock, pct above no-AI": pct(m.dlnK),
         "Labor share, pct of income": PCT * m.s_L,
@@ -63,8 +70,8 @@ def table3_column(res: simulate.Result, t: float = 2030.0) -> dict:
 
 
 def no_ai_column(f: Fixed, t: float = 2030.0) -> dict:
-    """The 'No AI' column of Table 3."""
-    from . import steady
+    """The 'No AI' column of Table 3: every gap is zero and every level is its
+    base-period value grown along the trend."""
     ss = steady.solve(f)
     return {
         "GDP, pct above no-AI": 0.0,

@@ -51,11 +51,16 @@ def solve(fixed: Fixed) -> SteadyState:
     q_C, q_N = fixed.q_bar_C, fixed.q_bar_N
     H_C, H_N = q_C * fixed.l_C0, q_N * fixed.l_N0     # hiring replaces quits
 
-    # Split the pool: the cognitive origin's inflow = outflow, given adding-up.
+    # Split the pool between the two origins. The unknown is U_C (then U_N is the
+    # rest of U_bar by adding-up); the condition is the cognitive origin's flow
+    # balance, f_C U_C = H_C: hires from that pool equal the quits into it. The
+    # residual is written as f_C - H_C / U_C, which falls from +inf (U_C near 0,
+    # so H_C / U_C is huge) to below zero (U_C near U_bar), so the bracket just
+    # stays a hair inside (0, U_bar) and the root is unique.
     def resid(U_C: float) -> float:
         U_N = fixed.U_bar - U_C
         S_C, S_N = effective_search(U_C, U_N, mu)
-        f_C = H_C / S_C + mu * H_N / S_N
+        f_C = H_C / S_C + mu * H_N / S_N              # (35) at the steady state
         return f_C - H_C / U_C                        # f_C U_C = H_C
 
     U_C = bisect(resid, 1e-8, fixed.U_bar - 1e-8)
@@ -77,6 +82,13 @@ def solve(fixed: Fixed) -> SteadyState:
         mean = (fixed.l_C0 * pi_C + fixed.l_N0 * pi_N) / fixed.L_emp0
         return mean - fixed.fill_bar
 
+    # Bracket for chi. Lower end: the inversion needs H/(chi S) < 1 for both
+    # groups ("a solution as long as normal hiring per unit of effective search is
+    # below the ceiling chi", p. 21), so start a hair above the larger of the two
+    # ratios. Upper end: chi <= 1 by definition of the matching function (p. 20 and
+    # its footnote 8; den Haan et al. set chi = 1). The mean filling rate rises
+    # with chi, so the residual has one sign change in between. The paper's value
+    # is 0.76.
     lo = max(H_C / S_C, H_N / S_N) * 1.000001          # chi must exceed hires per searcher
     chi = bisect(fill_resid, lo, 1.0)
     ss = SteadyState(

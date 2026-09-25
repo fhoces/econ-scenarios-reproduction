@@ -8,7 +8,7 @@ so each value can be checked against the source.
 This is an independent reimplementation; no code was released with the paper.
 """
 
-from dataclasses import dataclass, replace
+from dataclasses import dataclass
 
 
 @dataclass(frozen=True)
@@ -55,20 +55,27 @@ class Fixed:
     cc_rates: bool = True       # "a quit fraction q enters as -ln(1-q)"
 
     # --- Derived ---
+    # These are not free parameters: each is fixed by the ones above, so it is
+    # computed on demand (a @property reads like a field, F.s_K0, but runs the
+    # formula every time) rather than transcribed a second time.
     @property
     def s_K0(self) -> float:
+        """Base-period capital share, 1 - s_L,t0 (factor payments exhaust output)."""
         return 1.0 - self.s_L0
 
     @property
     def s_C0(self) -> float:
+        """Base-period income share of cognitive labor, s_C,t0 = s_L,t0 x 0.624."""
         return self.s_L0 * self.cog_share
 
     @property
     def s_N0(self) -> float:
+        """Base-period income share of all other labor, s_N,t0 = s_L,t0 - s_C,t0."""
         return self.s_L0 * (1.0 - self.cog_share)
 
     @property
     def phi_R(self) -> float:
+        """The fishing-out exponent of Equation (20), phi_R = 1 - 2.86 = -1.86."""
         return 1.0 - self.fishing_out_R
 
     @property
@@ -83,23 +90,37 @@ class Fixed:
 
     @property
     def l_C0(self) -> float:
+        """Base-period cognitive employment, share of the labor force (p. 18:
+        the group's employment share times L - U_bar)."""
         return self.cog_share * self.L_emp0
 
     @property
     def l_N0(self) -> float:
+        """Base-period all-other employment, share of the labor force."""
         return (1.0 - self.cog_share) * self.L_emp0
 
     def rate(self, x: float) -> float:
-        """Convert a per-period fraction to the model's rate (Appendix A, p. 40)."""
+        """Convert a per-period fraction to the model's rate (Appendix A, p. 40).
+
+        A fraction x of workers quitting within a month is a continuously
+        compounded rate -ln(1 - x), slightly above x itself (0.00633 becomes 0.00635)."""
         import math
         return -math.log(1.0 - x) if self.cc_rates else x
 
+    # The normal quit rates, per month, by group. Three conversions in one line:
+    # the annual rate 0.11 becomes a monthly fraction (/ 12, simple division, since
+    # Table 1 states it per year and the grid is monthly); the group's relative rate
+    # (0.69 or 1.52 times the average, Table 1 panel D) scales it; and rate() turns
+    # the monthly fraction into the continuously compounded rate the flow block
+    # uses. The paper quotes the results as 0.63 and 1.40 percent a month (p. 26).
     @property
     def q_bar_C(self) -> float:
+        """Normal quit rate of cognitive workers, per month (Equation (27) in normal times)."""
         return self.rate(self.q_bar_ann / 12.0 * self.q_rel_C)
 
     @property
     def q_bar_N(self) -> float:
+        """Normal quit rate of all other workers, per month."""
         return self.rate(self.q_bar_ann / 12.0 * self.q_rel_N)
 
 
