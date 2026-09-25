@@ -37,9 +37,19 @@ DECK = _text("slides/slides.Rmd")
 
 
 # Format the way the prose prints: one or two decimals, and the deck's U+2212 minus.
-def f1(x): return f"{x:.1f}"
-def f2(x): return f"{x:.2f}"
-def neg(x, fmt=f1): return ("−" + fmt(-x)) if x < 0 else fmt(x)     # the deck's U+2212 minus
+def f1(x):
+    """One decimal, the way most of the prose prints a number."""
+    return f"{x:.1f}"
+
+
+def f2(x):
+    """Two decimals."""
+    return f"{x:.2f}"
+
+
+def neg(x, fmt=f1):
+    """Format with the deck's U+2212 minus sign for negatives."""
+    return ("−" + fmt(-x)) if x < 0 else fmt(x)
 
 
 # ---------------------------------------------------------------- explorer grid ----
@@ -158,6 +168,7 @@ def test_explorer_note_numbers():
 def test_explorer_corners_against_their_runs():
     """'the extreme corner lands within 0.03 points', 'the modest corner matches its run'."""
     def gap(name):
+        """Largest gap between the grid's corner cell and the scenario's own run, over seven outcomes."""
         r = simulate.run(F, SCENARIOS[name])
         c = table3_column(r)
         own = [c["GDP, pct above no-AI"], c["  cognitive occupations w_C"],
@@ -234,6 +245,7 @@ def test_deck_psi_paper_range():
 def test_deck_one_at_a_time_ranges():
     """The deck's one-dial-at-a-time spreads, on the scenario's own gain path."""
     def spread(**pairs):
+        """Change in 2030 cognitive unemployment when one input moves between two values."""
         (k, (a, b)), = pairs.items()
         return abs(_col(**{k: a})[UC] - _col(**{k: b})[UC])
     rho, mu = spread(rho=(0.5, 0.0)), spread(mu=(0.17, 0.04))
