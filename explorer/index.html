@@ -522,17 +522,20 @@
   <footer class="page-foot">
     <div class="note">
       <p>
-      Every cell is a full monthly solve of the model from 2024 to 2030, computed by an independent
-      Python reimplementation (<code>aiscen</code>) that reproduces all 169 cells of the paper's
-      Tables 3, 5 and 6 within the test suite's tolerance, 153 of them to the printed digit; the
-      sixteen that round to a different last digit are listed cell by cell in the repository README.
-      The three named scenarios sit at the corners of this grid. One convention to note: the gain
-      <code>a</code> follows the paper's own explorer. At 0.30 it is held flat; at 0.45 and 0.80 it
-      rises in a straight line from the substantial scenario's mid-2026 anchor (0.35) to the dial's
-      2030 value, so each level lands exactly on its label.
+      Every cell is a full monthly solve of the model from 2024 to 2030, and the three named
+      scenarios sit at the corners of this grid.
       </p>
       <details>
-        <summary>Why the corners differ slightly from the paper's own runs</summary>
+        <summary>How the grid was computed, and why its corners differ slightly from the paper's own runs</summary>
+        <p>
+      The solves use an independent Python reimplementation (<code>aiscen</code>) that reproduces
+      all 169 cells of the paper's Tables 3, 5 and 6 within the test suite's tolerance, 153 of them
+      to the printed digit; the sixteen that round to a different last digit are listed cell by
+      cell in the repository README. One convention to note: the gain <code>a</code> follows the
+      paper's own explorer. At 0.30 it is held flat; at 0.45 and 0.80 it rises in a straight line
+      from the substantial scenario's mid-2026 anchor (0.35) to the dial's 2030 value, so each
+      level lands exactly on its label.
+        </p>
         <p>
 The paper keeps the extreme scenario's own
       anchor (0.45), so the extreme corner lands within 0.03 points of this reproduction's own run of
