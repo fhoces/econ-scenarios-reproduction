@@ -8,7 +8,6 @@
 
 import argparse
 import csv
-import math
 import os
 from dataclasses import asdict, fields
 
@@ -19,14 +18,20 @@ from aiscen.report import (PUBLISHED, ROW_ORDER, TABLE5, TABLE5_ROWS, TABLE6,
 
 
 def robustness_table(title, spec, rows, field_name):
+    """Print one of the paper's robustness tables (5 or 6) as simulated/published pairs.
+
+    `spec` is the transcribed table keyed by (scenario, parameter value), `rows` the
+    Table 3 rows it reports, and `field_name` the Fixed field the table varies
+    ("eps" for Table 5, "xi" for Table 6). Each cell reruns the whole simulation
+    with that one field changed.
+    """
     out = [f"\n{title}"]
-    head = f"{'Row':44s}" + "".join(f"{'sim/pub':>16s}" for _ in range(len(spec) // 2))
     for scen in ("substantial", "extreme"):
         keys = [k for k in spec if k[0] == scen]
         cols = {}
         for k in keys:
-            kw = {field_name: k[1]}
-            f = Fixed(**kw)
+            kw = {field_name: k[1]}          # e.g. {"eps": 6.0}
+            f = Fixed(**kw)                  # a copy of the defaults with one field changed
             cols[k] = table3_column(simulate.run(f, SCENARIOS[scen]))
         out.append(f"  {scen}:  " + "  ".join(f"{field_name}={k[1]}" for k in keys))
         for i, row in enumerate(rows):
@@ -38,6 +43,9 @@ def robustness_table(title, spec, rows, field_name):
 
 
 def main():
+    """Print the three table comparisons; with --csv, also export everything the deck
+    and the tests read (the comparison tables, the slop cases, and one monthly path
+    per scenario, every Month field as a column)."""
     ap = argparse.ArgumentParser()
     ap.add_argument("--csv", metavar="DIR", help="write monthly paths to DIR")
     ap.add_argument("--survey", action="store_true", help="also run the survey-median scenario")
@@ -100,6 +108,9 @@ def main():
             for row in ROW_ORDER:
                 w.writerow([row] + [f"{x:.4f}" for x in t3[row]] + list(PUBLISHED[row]))
         print(f"wrote {path}")
+        # One CSV per scenario, one row per month, one column per Month field. The
+        # column names are the dataclass field names, which is what slides.Rmd reads;
+        # renaming a field here renames a column the deck depends on.
         names = list(SCENARIOS) + (["survey_median"] if args.survey else [])
         for name in names:
             scen = SURVEY_MEDIAN if name == "survey_median" else SCENARIOS[name]

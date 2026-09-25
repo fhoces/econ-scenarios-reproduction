@@ -17,10 +17,11 @@ SCEN = SUBSTANTIAL
 
 
 def main() -> None:
+    """Simulate the substantial scenario and write its first month, one row per
+    Table A.1 equation: panel, equation number, symbol, plain-word gloss, value."""
     f = Fixed()
     res = sim.run(f, SCEN)
-    r = res.months[0]
-    ss = res.ss
+    r = res.months[0]                  # the 2024.0 row; months[1] is used for the t+1 stocks
     assert abs(r.t - f.t0) < 1e-9, r.t
 
     # Panel B's capital row is the frictionless one; the CSV carries only the actual,

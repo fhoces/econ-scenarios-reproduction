@@ -60,12 +60,14 @@ __BODY__
 
 
 def stale(src: pathlib.Path, out: pathlib.Path) -> bool:
+    """True when the markdown is newer than its html, or the html does not exist."""
     if not out.exists():
         return True
     return src.stat().st_mtime > out.stat().st_mtime
 
 
 def title_of(text: str, fallback: str) -> str:
+    """The page title: the first level-one heading, cut at its first colon."""
     for line in text.split("\n"):
         if line.startswith("# "):
             return line[2:].split(":")[0].strip()
@@ -73,6 +75,7 @@ def title_of(text: str, fallback: str) -> str:
 
 
 def render(stem: str, only_if_stale: bool) -> bool:
+    """Convert <stem>.md to <stem>.html in the same folder; returns whether it did."""
     src, out = ROOT / f"{stem}.md", ROOT / f"{stem}.html"
     if not src.exists():
         return False
@@ -93,6 +96,7 @@ def render(stem: str, only_if_stale: bool) -> bool:
 
 
 def main() -> int:
+    """Render both trackers (or only the stale ones with --if-stale); exit code 0."""
     only_if_stale = "--if-stale" in sys.argv
     for stem in DOCS:
         render(stem, only_if_stale)

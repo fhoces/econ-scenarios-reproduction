@@ -51,21 +51,30 @@ T0, T1 = 2025.0, 2030.0
 
 
 def main() -> None:
+    """Run every dial combination once and write the explorer's payload."""
     fixed = Fixed()
-    anchor = SUBSTANTIAL.a_anchor
-    years = T1 - fixed.t_anchor
-    months = [T0 + k / 12.0 for k in range(int(round((T1 - T0) * 12)) + 1)]
+    anchor = SUBSTANTIAL.a_anchor              # 0.35, the mid-2026 gain custom paths rise from
+    years = T1 - fixed.t_anchor                # 3.5 years from that anchor to 2030
+    months = [T0 + k / 12.0 for k in range(int(round((T1 - T0) * 12)) + 1)]   # 61 dates
 
     snap, gdp_path, wage_path, u_path = [], [], [], []
     t_start = time.perf_counter()
+    # itertools.product over the level INDICES of the seven dials, in DIALS order,
+    # so the k-th cell written is the k-th combination in mixed-radix order (see
+    # the module docstring). Each combination is one full monthly simulation.
     for combo in itertools.product(*[range(len(lv)) for _, _, _, lv in DIALS]):
-        v = {k: lv[i] for (k, _, _, lv), i in zip(DIALS, combo)}
+        v = {k: lv[i] for (k, _, _, lv), i in zip(DIALS, combo)}      # {"m": 0.20, ...}
         a_anchor, g_a = gain_path(v["a"], anchor, years)
         res = sim.run(fixed, Scenario(
             name="grid", m_2030=v["m"], d_2030=v["d"],
             a_anchor=a_anchor, g_a=g_a,
             psi=v["psi"], rho=v["rho"], mu=v["mu"], theta_H=v["theta_H"]))
-        e = res.at(T1)
+        e = res.at(T1)                          # the 2030 row
+        # The 2030 snapshot: ELEVEN outcomes in a FIXED order, indexed by position.
+        # The explorer's JS reads snap[cell][i] and labels it with outcomes[i] and
+        # units[i] below, and tests/test_explorer_grid.py checks all three stay the
+        # same length. Log gaps become percent deviations, exp(dln) - 1, as Table 3
+        # reports them; shares and rates are simply times 100. Two decimals.
         snap.append([round(x, 2) for x in (
             100 * (math.exp(e.dlnY) - 1),        # GDP gap
             100 * (math.exp(e.dlnw_C_paid) - 1), # AI-sensitive wage gap (the charted wage)
@@ -85,6 +94,7 @@ def main() -> None:
             100 * e.u_rate_N,                    # all-other-occupation unemployment (table-only)
             100 * (math.exp(e.dlnw_N) - 1),       # all-other wage gap (table-only)
         )])
+        # The three charted series, monthly from 2025: same conventions as above.
         gdp_path.append([round(100 * (math.exp(res.at(t).dlnY) - 1), 2) for t in months])
         wage_path.append([round(100 * (math.exp(res.at(t).dlnw_C_paid) - 1), 2) for t in months])
         u_path.append([round(100 * res.at(t).u_rate_C, 2) for t in months])
@@ -100,6 +110,7 @@ def main() -> None:
                      "Unemployment, all workers", "GDP growth", "Average wage, all workers",
                      "Unemployment, all-other occupations", "All-other wage vs no-AI"],
         "units": ["%", "%", "%", "%", "% of income", "%", "%", "% per year", "%", "%", "%"],
+        # The named scenarios as level indices per dial, so the JS can jump to them.
         "named": {name: [lv.index(v) for (_, _, _, lv), v in zip(DIALS, vals)]
                   for name, vals in NAMED.items()},
         "snap": snap, "gdp": gdp_path, "wage": wage_path, "u": u_path,

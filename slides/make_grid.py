@@ -26,9 +26,12 @@ NAMES = ("modest", "substantial", "extreme")
 
 
 def main() -> None:
+    """Run all 3^7 combinations and write one row each: the seven inputs, their
+    level sum (0 = all modest, 14 = all extreme, the deck's x-axis), and three
+    2030 outcomes in percent."""
     fixed = Fixed()
     anchor = SUBSTANTIAL.a_anchor          # custom gains above it rise from this 2026 anchor
-    years = 2030.0 - fixed.t_anchor
+    years = 2030.0 - fixed.t_anchor        # 3.5
     out = pathlib.Path(__file__).parent / "data" / "grid.csv"
 
     t0 = time.perf_counter()
