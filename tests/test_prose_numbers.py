@@ -17,7 +17,7 @@ from dataclasses import replace
 import pytest
 
 from aiscen import simulate, slop
-from aiscen.params import SCENARIOS, Fixed, scenario_from_2030_values
+from aiscen.params import SCENARIOS, Fixed, gain_path, scenario_from_2030_values
 from aiscen.report import table3_column
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
@@ -74,9 +74,6 @@ def _cell(base, **moves):
 
 def _grid_substantial():
     """The substantial corner as the grid builds it (gain landing exactly on 0.45)."""
-    import sys
-    sys.path.insert(0, str(ROOT / "slides"))
-    from make_grid_app import gain_path
     a_anchor, g_a = gain_path(0.45, S.a_anchor, 2030.0 - F.t_anchor)
     return replace(S, a_anchor=a_anchor, g_a=g_a)
 
@@ -92,9 +89,6 @@ def _spread(key, values):
     elif key == "d":
         scens = [replace(GS, d_2030=v) for v in values]
     elif key == "a":
-        import sys
-        sys.path.insert(0, str(ROOT / "slides"))
-        from make_grid_app import gain_path
         scens = [replace(GS, **dict(zip(("a_anchor", "g_a"),
                                         gain_path(v, S.a_anchor, 2030.0 - F.t_anchor))))
                  for v in values]

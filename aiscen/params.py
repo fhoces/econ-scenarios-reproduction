@@ -161,6 +161,23 @@ def scenario_from_2030_values(name: str, m_2030: float, d_2030: float, a_2030: f
     )
 
 
+def gain_path(a_2030: float, anchor: float, years: float) -> tuple:
+    """(a_anchor, g_a) for a dial set to a custom 2030 gain, the convention of the
+    paper's own explorer, used by both grid exporters.
+
+    Above the anchor (0.35, the substantial scenario's mid-2026 gain) the gain rises
+    in a straight line from the anchor to the chosen 2030 value, so the dial's label
+    is exact. At or below the anchor it is held FLAT at the chosen value for the whole
+    path, rather than sloping down to it: a line pinned through 0.35 in mid-2026 and
+    ending at 0.30 would mean AI getting worse every year, which no scenario intends.
+    One consequence, disclosed in the explorer's note: the grid's substantial corner
+    lands on 0.45 exactly, while Table 1's own slope reaches only 0.448.
+    """
+    if a_2030 <= anchor:
+        return a_2030, 0.0
+    return anchor, (a_2030 - anchor) / years
+
+
 # Table 2 (p. 30): the medians of the five parameters implied by the survey of
 # 10,980 US adults (Morning Consult, 11-23 August 2026). Table 4's columns are
 # medians of outcomes across respondents, not the outcome at the median answers,

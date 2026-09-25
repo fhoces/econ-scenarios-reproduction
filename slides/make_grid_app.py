@@ -21,7 +21,7 @@ import itertools, json, math, pathlib, sys, time
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[1]))
 
-from aiscen.params import Fixed, Scenario, SUBSTANTIAL
+from aiscen.params import Fixed, Scenario, SUBSTANTIAL, gain_path
 import aiscen.simulate as sim
 
 # The paper varies each dial over three values. Reinstatement is carried at a finer grid,
@@ -44,17 +44,11 @@ NAMED = {
     "substantial": (0.30, 0.40, 0.45, 0.75, 0.25, 0.08, 0.25),
     "extreme":     (0.50, 0.60, 0.80, 0.90, 0.00, 0.04, 0.50),
 }
+# The charted monthly paths run 2025 to 2030. The model itself starts at the 2024 base
+# period, but 2024 and most of 2025 are flat (the scenarios only fan out after the
+# mid-2026 anchor), so the charts start in 2025 to give the curves room.
 T0, T1 = 2025.0, 2030.0
 
-
-
-def gain_path(a_2030: float, anchor: float, years: float) -> tuple:
-    """(a_anchor, g_a) for a custom 2030 gain, following the paper's own explorer: above
-    the 0.35 anchor the gain rises linearly from it; at or below the anchor it is held
-    flat at the chosen value rather than sloping down to it."""
-    if a_2030 <= anchor:
-        return a_2030, 0.0
-    return anchor, (a_2030 - anchor) / years
 
 def main() -> None:
     fixed = Fixed()

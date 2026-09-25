@@ -9,7 +9,7 @@ import csv, itertools, math, pathlib, sys, time
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[1]))
 
-from aiscen.params import Fixed, Scenario, SUBSTANTIAL
+from aiscen.params import Fixed, Scenario, SUBSTANTIAL, gain_path
 import aiscen.simulate as sim
 
 # Each dial's three levels, in the order modest / substantial / extreme (Table 1).
@@ -24,15 +24,6 @@ LEVELS = {
 }
 NAMES = ("modest", "substantial", "extreme")
 
-
-
-def gain_path(a_2030: float, anchor: float, years: float) -> tuple:
-    """(a_anchor, g_a) for a custom 2030 gain, following the paper's own explorer: above
-    the 0.35 anchor the gain rises linearly from it; at or below the anchor it is held
-    flat at the chosen value rather than sloping down to it."""
-    if a_2030 <= anchor:
-        return a_2030, 0.0
-    return anchor, (a_2030 - anchor) / years
 
 def main() -> None:
     fixed = Fixed()
