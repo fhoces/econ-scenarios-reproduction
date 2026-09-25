@@ -102,6 +102,7 @@ the model, its tests and every exported CSV
 .credit[OPA done by [Fernando Hoces de la Guardia](https://fhoces.github.io)]
 
 ---
+name: deck-map
 
 ```{css, echo=FALSE}
 .remark-code, .remark-inline-code { font-size: 80%; }
@@ -774,6 +775,7 @@ AI</b>, never a forecast of the level.</span>
 </div>
 
 ---
+name: part2-divider
 class: center, middle, inverse
 
 # Part 2: The Model
@@ -1732,6 +1734,7 @@ $Y$ and the labor share all fall out.
 ]
 
 ---
+name: how-solved
 
 # How the Model Is Actually Solved
 
@@ -1761,6 +1764,7 @@ no solver library at all. The Python reimplementation is standard library only.
 ]
 
 ---
+name: part4-divider
 class: center, middle, inverse
 
 # Part 4: Results: Some Scenarios and the Explorer
@@ -2066,6 +2070,7 @@ They are the honest soft spots of the exercise.
 ]
 
 ---
+name: survey
 
 # The Survey
 
@@ -2156,6 +2161,7 @@ uses 0.0384. The all-workers rate is 0.07 points low (substantial), the AI-sensi
 ]
 
 ---
+name: takeaways
 
 # Takeaways
 
@@ -2264,6 +2270,7 @@ about 30 percent of respondents expect AI to save *no* time on a task it suits.
 <a href="#slop-mechanism" class="nav-btn">why the sign flips →</a>
 
 ---
+name: slop-distribution
 
 # Slop Is a Distributional Event, Not a Missing Boom
 
