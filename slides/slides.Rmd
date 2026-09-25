@@ -1693,11 +1693,12 @@ name: read-prices
 
 <img src="img/seq29.png" alt="The month as a sequence: AI inputs to targets by Proposition 1, targets to realized employment by the flows, realized employment to prices by system 39" style="display:block; width:100%; max-width:1210px; margin:4px auto 8px;">
 
-$$s_{L,t0}\Lambda_{C,t} e^{(1-\sigma)\Delta \ln w_{C,t}} + s_{N,t0} e^{(1-\sigma)\Delta \ln w_{N,t}} + B_t e^{(1-\sigma)\Delta \ln r_t} = 1$$
+$$s_{L,t0}\Lambda_{C,t} e^{(1-\sigma)\Delta \ln \tilde w_{C,t}} + s_{N,t0} e^{(1-\sigma)\Delta \ln \tilde w_{N,t}} + B_t e^{(1-\sigma)\Delta \ln r_t} = 1$$
 
 .small[
 The first of the three rows the paper tags <a href="../repro.html#eq-39" class="reflink">(39)</a>,
 its system for the actual economy: this price index, the two CES labor demands, and capital supply.
+The tilde marks a wage deflated by the ideas stock $A_t$, as Table A.1's note requires.
 ]
 
 Employment is a *state variable* handed over by the flow block

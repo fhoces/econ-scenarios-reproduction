@@ -443,7 +443,7 @@ m_t = \frac{\bar m}{1 + e^{-\kappa_m (t - t_m)}},
 \qquad
 d_t = \frac{\bar d}{1 + e^{-\kappa_d (t - t_d)}},
 \qquad
-a_t = a_0 + g_a (t - t_0)
+a_t = a_{2026} + g_a (t - 2026.5)
 \tag{8}
 $$
 
@@ -475,6 +475,15 @@ which is (8') with the two logs combined. The ceiling $\bar m = s_{C,t0}/s_{L,t0
 of it, and the scenarios differ only in how much it reaches by 2030. Since all three
 share the mid-2026 anchor, the scenarios are a fan opening from a single point, which
 is why the paper stresses that almost all divergence happens after 2027.
+
+One date to keep straight. The paper prints the gain's line as $a_0 + g_a (t - t_0)$,
+but Table 1 anchors it at mid-2026, not at the 2024 base period that $t_0$ means
+everywhere else in this document (the no-AI path, [Equation (43)](#eq-43)): the anchors
+0.30 / 0.35 / 0.45 are the gains in mid-2026 and the slope runs from there. That is
+why (8) is displayed above with $a_{2026}$ and $t - 2026.5$, which is what the code
+does. Read with $t_0 = 2024$ the substantial gain would reach
+`{python} num(SCENARIOS['substantial'].a_anchor + SCENARIOS['substantial'].g_a * (2030.0 - F.t0), 3)`
+in 2030 instead of Table 1's `{python} num(P['substantial'].a(2030.0), 3)`.
 :::
 
 For the substantial scenario the paper states those slopes as $\kappa_m = 0.33$ and
@@ -1370,13 +1379,13 @@ Proposition 1. That is the system (39):
 []{#eq-39}
 $$
 \begin{aligned}
-s_{L,t0}\Lambda_{C,t} e^{(1-\sigma)\Delta \ln w_{C,t}}
-&+ s_{N,t0} e^{(1-\sigma)\Delta \ln w_{N,t}}
+s_{L,t0}\Lambda_{C,t} e^{(1-\sigma)\Delta \ln \tilde w_{C,t}}
+&+ s_{N,t0} e^{(1-\sigma)\Delta \ln \tilde w_{N,t}}
 + B_t e^{(1-\sigma)\Delta \ln r_t} = 1 \\[2pt]
 \frac{\ell_{C,t}}{\ell_{C,t0}} &= \frac{\Lambda_{C,t}}{s_{C,t0}/s_{L,t0}}
-e^{\Delta \ln (Y_t/\bar L) - \sigma \Delta \ln w_{C,t}},
+e^{\Delta \ln (\tilde Y_t/\bar L) - \sigma \Delta \ln \tilde w_{C,t}},
 \qquad
-\frac{\ell_{N,t}}{\ell_{N,t0}} = e^{\Delta \ln (Y_t/\bar L) - \sigma \Delta \ln w_{N,t}} \\[2pt]
+\frac{\ell_{N,t}}{\ell_{N,t0}} = e^{\Delta \ln (\tilde Y_t/\bar L) - \sigma \Delta \ln \tilde w_{N,t}} \\[2pt]
 \Delta \ln K_t &= \varepsilon \Delta \ln r_t
 \end{aligned}
 \tag{39}
@@ -1388,6 +1397,13 @@ surviving cognitive instances, all-other instances, and capital's instances.
 $\Lambda_{C,t}$ is the surviving cognitive mass, the same bracket as [Equation (15)](#eq-15)
 subtracted from the group's base share. The next two rows are the CES labor demands of
 [Equation (13)](#eq-13), one per group. The last is the capital supply schedule.
+
+The tildes make Table A.1's note visible: the two wages in (39) are deflated by the
+ideas stock, $\tilde w = w / A_t$ (the notation bullet in the Introduction), and this
+reproduction reads the output gap the same way, $\Delta \ln \tilde Y_t = \Delta \ln Y_t -
+\Delta \ln A_t$, one of the readings the README records as left implicit by the paper.
+The code solves the system in those deflated units and adds $\Delta \ln A_t$ back when it
+reports the wages and GDP.
 
 The logic runs backwards from the usual direction. Ordinarily you would set prices and
 solve for quantities. Here employment is a *state variable* handed over by the flow
