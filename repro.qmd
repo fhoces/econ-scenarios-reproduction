@@ -2295,8 +2295,9 @@ nothing at all, GDP is still
 `{python} num(slop_tbl.loc[slop_tbl.case.str.startswith('pure slop'), 'GDP, pct above no-AI'].iloc[0], 1)`
 percent above the no-AI path while measured TFP is
 `{python} num(slop_tbl.loc[slop_tbl.case.str.startswith('pure slop'), 'Measured TFP, pct above no-AI'].iloc[0], 1)`
-and the average wage is
-`{python} num(slop_tbl.loc[slop_tbl.case.str.startswith('pure slop'), 'Average wage, pct above no-AI'].iloc[0], 1)`.
+percent above it, and the average wage is
+`{python} num(-slop_tbl.loc[slop_tbl.case.str.startswith('pure slop'), 'Average wage, pct above no-AI'].iloc[0], 1)`
+percent below it.
 Automation converts work from a fixed factor into an accumulable one: the rental rate
 rises, capital deepens, output rises, and labor pays for it. The signature of slop in
 this model is therefore "output fine, wages falling, labor share sliding", not "the
