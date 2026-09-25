@@ -92,9 +92,13 @@ Four more conventions worth holding onto:
   real wage, and the price index is a *constraint* rather than an output: if AI
   lowers the cost of some tasks, some other price has to rise to hold $P_t$ at one.
   That constraint is what forces the productivity gains into factor prices.
-- **A tilde means deflated by the ideas stock**, $\tilde w = w / A_t$. The
-  labor-augmenting ideas stock $A_t$ raises the productivity of every worker, so
-  unit costs depend on $w/A$ rather than $w$ alone.
+- **A tilde on a price or on output means deflated by the ideas stock**,
+  $\tilde w = w / A_t$. The labor-augmenting ideas stock $A_t$ raises the productivity
+  of every worker, so unit costs depend on $w/A$ rather than $w$ alone.
+- **A tilde on employment means something else.** $\tilde \ell_{N,t}$ and
+  $\tilde \ell_{C,t}$ in Equations (13), (15) and (19) are the paper's own symbols for
+  the log gap of a group's frictionless employment target from its base employment,
+  $\ln(\ell^*_{o,t} / \ell_{o,t0})$; the ideas stock plays no part in them.
 - **The grid is monthly**, but dates are written in calendar years: $t = 2026.5$ is
   mid-2026, and one period is $h = 1/12$.
 
@@ -299,6 +303,13 @@ instance's unit cost by the same $a_{i,t}$ log points. What differs is who is ho
 it afterwards, which is why $\psi_t$ moves the labor share without moving TFP.
 :::
 
+Equation (4) is the bookkeeping of a CES economy: each task instance's share of
+spending is its base-period weight times its relative unit cost raised to $1-\sigma$,
+and the price index of the final good is held at one. With $\sigma < 1$ that exponent is
+positive, so an instance that gets cheaper takes a *smaller* share of spending, and the
+tasks that did not get cheaper become the bottleneck and gain weight. Most of what
+follows is that one sign at work.
+
 []{#eq-4}
 $$
 s_{i,t} \equiv \frac{p_{i,t} y_{i,t}}{P_t Y_t} = \omega_i \Big(\frac{c_{i,t}}{P_t}\Big)^{1-\sigma},
@@ -327,6 +338,10 @@ remaining prices, the wage and the rental rate, to rise. That is the mechanical
 channel through which productivity gains become factor income.
 :::
 
+Equation (5) is an accounting identity, not a behavioural assumption: the labor share
+is the wage bill over GDP, so any two of the wage, output per worker and the labor
+share pin the third. The paper uses it at every turn, and so does this report.
+
 []{#eq-5}
 $$
 s_{L,t} = \sum_{i \in \mathcal{L}_t} s_{i,t} = \frac{w_t L_t}{P_t Y_t},
@@ -353,6 +368,11 @@ the common wage gap. (The simulated economy, with its unemployment, reports an a
 wage `{python} num(T3['Average wage, pct above no-AI'][3], 1)` percent above the no-AI path.)
 :::
 
+Equation (6) is the supply side of the capital market, a schedule rather than a savings
+problem: the capital stock sits $\varepsilon$ percent above its no-AI path for every
+percent the rental rate is above its no-AI level. Its slope decides who receives the
+productivity gains, and Section 4.5 reruns everything at four values of it.
+
 []{#eq-6}
 $$
 \Delta \ln K_t = \varepsilon\, \Delta \ln r_t
@@ -378,7 +398,9 @@ Section 4.5 reruns everything at $\varepsilon = 1, 3, 6, \infty$, and this is th
 single parameter that decides whether the average wage rises or falls.
 :::
 
-Tasks are gross complements at $\sigma =$ `{python} num(F.sigma, 1)`, labor earns
+Tasks are gross complements at $\sigma =$ `{python} num(F.sigma, 1)` (each task is
+needed alongside the others, so making one cheap does not let it stand in for the rest;
+an elasticity below one measures how weakly they substitute), labor earns
 60 percent of income before AI, and the capital supply schedule (6) has elasticity
 $\varepsilon =$ `{python} num(F.eps, 0)`.
 
@@ -531,6 +553,11 @@ plt.show()
 
 ### 2.1.3 Measured TFP and the factor-price frontier
 
+Measured TFP is where the cost savings show up in the aggregate, and (9) says how: to a
+first order the gap is the sum of the per-instance gains, each weighted by the instance's
+share of GDP, which for a labor task is the labor share times its share of labor payments.
+With uniform parameters that collapses to the labor share times $m_t d_t a_t$.
+
 []{#eq-9}
 $$
 \Delta \ln \mathrm{TFP}_t \approx \sum_i \omega_i d_{i,t} a_{i,t}
@@ -647,6 +674,11 @@ rental-rate gap (its capital term is $0.4 \times 0.045 = 0.018$), so the printed
 like a rounding of the same number rather than a different value.
 
 ### 2.1.4 First-order solutions against the exact model
+
+Everything in Sections 2.1.1 to 2.1.3 has an exact solution, collected in Proposition 1
+below, and a first-order approximation that is easier to read. Equation (11) is the
+approximate set, one line per question: what the wage gets, what sets the rental rate,
+what moves the labor share, and what output per worker adds up to.
 
 []{#eq-11}
 $$
@@ -779,7 +811,22 @@ fo_df = pd.DataFrame(rows)
 show(fo_df, floatfmt=(".0f", "", "", ".4f", ".4f", ".1f"))
 ```
 
+The table says how good the shortcut is. Across the six variables, the first-order rows
+miss the exact ones by at most
+`{python} num(fo_df[fo_df.scenario == 'modest']['gap, pct of exact'].abs().max(), 1)`
+percent of the exact value in the modest scenario,
+`{python} num(fo_df[fo_df.scenario == 'substantial']['gap, pct of exact'].abs().max(), 1)`
+percent in the substantial one and
+`{python} num(fo_df[fo_df.scenario == 'extreme']['gap, pct of exact'].abs().max(), 1)`
+percent in the extreme one: good for signs and orders of magnitude, not for the extreme
+scenario's numbers.
+
 ### 2.1.5 Employment in the two groups
+
+The employment targets are the destination that the flow block of Section 2.3 works
+toward: the employment each group would have if the labor market cleared. Equation (13)
+pins them from the group AI does not touch: demand for all-other labor is an ordinary CES
+demand curve, and the cognitive target is whatever is left of base employment.
 
 []{#eq-13}
 $$
@@ -929,7 +976,7 @@ there. Set $\sigma = 1$ and this channel vanishes entirely.
 The second line is the mirror image. The two targets add up to base employment
 (the rule (13)), so the cognitive target falls by what the other group's rises, scaled by
 the ratio of the base shares. It is the $\tilde \ell_{C,t}$ the targets chunk below computes
-and the deck's panel D reads.
+and the deck's backup slide on the 44 equations lists in its Reporting row.
 :::
 
 Target employment in the unaffected group follows from [Equation (15)](#eq-15) and the
@@ -1161,11 +1208,20 @@ g_{\mathrm{TFP},t} = s_{L,t} g_{w,t} + s_{K,t} g_{r,t}
 \tag{25}
 $$
 
+Equation (25) is that residual written as its dual, the share-weighted growth of the two
+factor prices, which equals it because factor payments exhaust output. To a first order
+both channels enter with the labor share as their weight:
+
 []{#eq-26}
 $$
 \Delta \ln \mathrm{TFP}_t \approx s_{L,t0} \big( \Delta \ln A_t + m_t d_t a_t \big)
 \tag{26}
 $$
+
+The simulation does not use the approximation. It evaluates (45), the CES price index of
+the tasks at base-period factor prices, which keeps the curvature of the gains and agrees
+with (26) to first order. It is a base-weighted index where (25) chains its weights month
+by month, so the two part company beyond first order; Section 5 measures that wedge.
 
 []{#eq-45}
 $$
@@ -1200,6 +1256,23 @@ with the size of the shock, exactly as an index-number problem should.
 Sections 2.1 and 2.2 describe where employment *should* end up. This section is about
 the fact that getting there takes time, and that the transition is what unemployment
 is. The whole block runs on a monthly grid.
+
+Read the twelve equations in the order the model runs them each month. Each group
+compares its employment with next month's target: cognitive employment sits above its
+falling target, an *overhang*, and all-other employment below its rising one, a
+*shortfall*, both measured in (28). The cognitive wage does not fall enough to keep
+everyone employed: by (30) it closes only a fraction of its gap to the wage that would
+clear the group, at a speed set by the rigidity $\xi$, so firms want fewer cognitive
+workers than they have. Quits, which rise when jobs are easy to find (27), remove part of
+the surplus and layoffs remove the rest (31). The expanding occupations, meanwhile, post
+openings for a fraction $\theta_H$ of their shortfall each month on top of replacing
+their quits (32). The unemployed search in both groups, but at a discount $\mu$ outside
+their group of origin (33); openings and searchers meet through a matching function that
+never yields more hires than either side offers (34), and each origin's job-finding rate
+adds up its chances in the two groups (35). Employment and the two pools then roll
+forward a month (36) and (37). Unemployment is what accumulates while the sticky wage
+releases workers faster than search places them. Before AI arrives, (38) pins the normal
+pool, the hiring and the filling rates, and every simulation starts from there.
 
 []{#eq-27}
 $$
@@ -1801,6 +1874,17 @@ t3_df = pd.DataFrame(rows)
 show(t3_df, floatfmt=".3f")
 ```
 
+In one line: GDP in 2030 ends `{python} num(T3['GDP, pct above no-AI'][1], 1)`,
+`{python} num(T3['GDP, pct above no-AI'][2], 1)` and
+`{python} num(T3['GDP, pct above no-AI'][3], 1)` percent above the no-AI path in the
+three scenarios; in the extreme one the average wage is
+`{python} num(T3['Average wage, pct above no-AI'][3], 1)` percent above that path while
+the cognitive wage is `{python} num(T3['  cognitive occupations w_C'][3], 1)` percent
+below it and cognitive unemployment reaches
+`{python} num(T3['Unemployment rate, cognitive, pct'][3], 1)` percent. The largest gap
+between a reproduced cell and its published value is
+`{python} num(t3_df['max diff'].max(), 2)` points.
+
 Every cell is inside the tolerance the test suite applies: within 0.05 percentage points
 of the published value for Table 3 (0.10 where the published value is 10 or larger, and
 0.09 for two unemployment cells explained below), and within the larger of 0.12 points
@@ -2287,6 +2371,12 @@ checks.append(("f_C U_C + f_N U_N = H_C + H_N (p. 20)", f"{worst:.2e}", "0"))
 
 show(pd.DataFrame(checks, columns=["identity", "largest violation", "expected"]))
 ```
+
+All four hold. The two accounting identities, rows 1 and 4, hold to
+`{python} checks[0][1]` and `{python} checks[3][1]`, which is floating-point noise; the
+system (39) evaluated at the targets returns Proposition 1 to `{python} checks[1][1]`; and
+the monthly ideas step sits `{python} checks[2][1]` from the closed form, inside the 0.02
+points the paper reports.
 
 One further cross-check of the model against itself: the measured TFP index (45) is a
 base-weighted index, its dual (25) a chained one, and Appendix C.4 says the two agree
