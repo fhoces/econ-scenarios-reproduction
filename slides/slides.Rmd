@@ -2406,7 +2406,7 @@ $$
 **Which of them is solved.** The right-hand rows are *definitions*, the matching function
 inverted, each giving $\bar\pi_o$ in closed form as a function of $\chi$ alone. The left-hand
 row is the only *condition*, and it is the one bisected (`fill_resid()` inside `solve()`,
-`steady.py`). How wrong a guess is = the mean filling rate it implies, minus the
+`steady.py`). How wrong a guess is: the mean filling rate it implies, minus the
 $0.65$ target. $\chi$ must exceed hires per searcher, $\max_o \bar H_o/\bar S_o = 0.2155$, or
 the bracket turns negative: at that floor the model fills $0.037$ of vacancies, far too few,
 and at $\chi = 1$ it fills $0.900$, too many. Opposite signs, so bisect between them.
@@ -2426,11 +2426,8 @@ for the ninth object.
 .highlight-box[
 .small[
 **Substitute the explicit into the implicit, not the reverse.** Putting both definitions into
-the condition turns three unknowns into one scalar equation in $\chi$. Going the other way,
-using the condition to write $\bar\pi_C$ in terms of $\bar\pi_N$, is equally valid and gives the
-same answer, but it leaves a $2 \times 2$ system in $\chi$ and $\bar\pi_N$: the $N$ definition
-still has to be substituted before it reduces to that same scalar equation. Doing it in the
-first order is what keeps every root-find in this model one-dimensional and monotone.
+the condition turns three unknowns into one scalar equation in $\chi$, and that order is what
+keeps every root-find in this model one-dimensional and monotone.
 ]
 ]
 
