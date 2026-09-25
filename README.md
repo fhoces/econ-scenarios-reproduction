@@ -293,6 +293,11 @@ res.series("u_rate")        # monthly path of any field
 | `out/` | The committed output of `python3 run.py --survey --csv out` |
 | `requirements.txt`, `pytest.ini` | Rendering dependencies for the report, and the test configuration |
 | `Makefile` | `make test / csv / report / grid / slides / all`: the Usage commands, with the two tool paths taken from the environment |
+| `.github/workflows/ci.yml` | Continuous integration: on every push to `main`, every pull request, and on demand, a clean Ubuntu machine with Python 3.11 installs pytest, runs the test suite, then regenerates `explorer/grid.js` and fails if it differs from the committed file |
+| `CREDIT.md`, `credit-answers.json` | Who did what, by CRediT contributor role, for each of the five objects; the `.json` holds the raw questionnaire answers the page and the landing-page table are built from |
+| `AUDIT.md` | A self-audit against the BITSS Open Policy Analysis guidelines: each of the nine steps, the level it reaches, the evidence, and what the next level needs |
+| `assets/opa/` | The four Open Policy Analysis layer images used on the landing page, the explorer, the report, the deck and this README |
+| `LICENSE` | MIT License |
 
 ## Readings the paper leaves implicit
 
