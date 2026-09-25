@@ -1888,15 +1888,15 @@ nt <- d |> filter(scenario == "modest", abs(t - 2024) < 1e-8)   # normal times, 
 
 <div style="flex:0.86;">
 <h4>then in 2030</h4>
-<div class="em">&#128200; GDP <b>`r f1(ov("modest","gdp"))`%</b> above the no-AI path</div>
-<div class="em">&#9881;&#65039; measured TFP <b>`r f1(ov("modest","tfp"))`%</b></div>
-<div class="em">&#127981; capital stock <b>`r f1(ov("modest","capital"))`%</b></div>
-<div class="em">&#128181; average wage <b>`r f1(ov("modest","wage"))`%</b></div>
-<div class="em">&#129489;&#8205;&#128187; AI-sensitive wage <b>`r f1(ov("modest","wage_C"))`%</b></div>
-<div class="em">&#128295; all-other wage <b>`r f1(ov("modest","wage_N"))`%</b></div>
-<div class="em">&#129367; labor share <b>`r f1(ov("modest","lab_share"))`%</b> of income</div>
-<div class="em">&#128101; AI-sensitive employment <b>`r f1(ov("modest","cog_emp"))`%</b> since mid-2026</div>
-<div class="em">&#128269; unemployment: AI-sensitive <b>`r f1(ov("modest","u_C"))`%</b>, all other <b>`r f1(ov("modest","u_N"))`%</b>, overall <b>`r f1(ov("modest","u_all"))`%</b></div>
+<div class="em">GDP <b>`r f1(ov("modest","gdp"))`%</b> above the no-AI path</div>
+<div class="em">measured TFP <b>`r f1(ov("modest","tfp"))`%</b></div>
+<div class="em">capital stock <b>`r f1(ov("modest","capital"))`%</b></div>
+<div class="em">average wage <b>`r f1(ov("modest","wage"))`%</b></div>
+<div class="em">AI-sensitive wage <b>`r f1(ov("modest","wage_C"))`%</b></div>
+<div class="em">all-other wage <b>`r f1(ov("modest","wage_N"))`%</b></div>
+<div class="em">labor share <b>`r f1(ov("modest","lab_share"))`%</b> of income</div>
+<div class="em">AI-sensitive employment <b>`r f1(ov("modest","cog_emp"))`%</b> since mid-2026</div>
+<div class="em">unemployment: AI-sensitive <b>`r f1(ov("modest","u_C"))`%</b>, all other <b>`r f1(ov("modest","u_N"))`%</b>, overall <b>`r f1(ov("modest","u_all"))`%</b></div>
 <span class="note">Normal times: unemployment `r f2(nt$u_C)` and `r f2(nt$u_N)` by group, `r f2(nt$u_all)` overall,
 labor share 60.0.</span>
 </div>
@@ -1939,15 +1939,15 @@ name: sc-substantial
 
 <div style="flex:0.86;">
 <h4>then in 2030</h4>
-<div class="em">&#128200; GDP <b>`r f1(ov("substantial","gdp"))`%</b> above the no-AI path</div>
-<div class="em">&#9881;&#65039; measured TFP <b>`r f1(ov("substantial","tfp"))`%</b></div>
-<div class="em">&#127981; capital stock <b>`r f1(ov("substantial","capital"))`%</b></div>
-<div class="em">&#128181; average wage <b>`r f1(ov("substantial","wage"))`%</b></div>
-<div class="em">&#129489;&#8205;&#128187; AI-sensitive wage <b>`r f1(ov("substantial","wage_C"))`%</b></div>
-<div class="em">&#128295; all-other wage <b>`r f1(ov("substantial","wage_N"))`%</b></div>
-<div class="em">&#129367; labor share <b>`r f1(ov("substantial","lab_share"))`%</b> of income</div>
-<div class="em">&#128101; AI-sensitive employment <b>`r f1(ov("substantial","cog_emp"))`%</b> since mid-2026</div>
-<div class="em">&#128269; unemployment: AI-sensitive <b>`r f1(ov("substantial","u_C"))`%</b>, all other <b>`r f1(ov("substantial","u_N"))`%</b>, overall <b>`r f1(ov("substantial","u_all"))`%</b></div>
+<div class="em">GDP <b>`r f1(ov("substantial","gdp"))`%</b> above the no-AI path</div>
+<div class="em">measured TFP <b>`r f1(ov("substantial","tfp"))`%</b></div>
+<div class="em">capital stock <b>`r f1(ov("substantial","capital"))`%</b></div>
+<div class="em">average wage <b>`r f1(ov("substantial","wage"))`%</b></div>
+<div class="em">AI-sensitive wage <b>`r f1(ov("substantial","wage_C"))`%</b></div>
+<div class="em">all-other wage <b>`r f1(ov("substantial","wage_N"))`%</b></div>
+<div class="em">labor share <b>`r f1(ov("substantial","lab_share"))`%</b> of income</div>
+<div class="em">AI-sensitive employment <b>`r f1(ov("substantial","cog_emp"))`%</b> since mid-2026</div>
+<div class="em">unemployment: AI-sensitive <b>`r f1(ov("substantial","u_C"))`%</b>, all other <b>`r f1(ov("substantial","u_N"))`%</b>, overall <b>`r f1(ov("substantial","u_all"))`%</b></div>
 <span class="note">Normal times: unemployment `r f2(nt$u_C)` and `r f2(nt$u_N)` by group, `r f2(nt$u_all)` overall,
 labor share 60.0.</span>
 </div>
@@ -1991,15 +1991,15 @@ name: sc-extreme
 
 <div style="flex:0.86;">
 <h4>then in 2030</h4>
-<div class="em">&#128200; GDP <b>`r f1(ov("extreme","gdp"))`%</b> above the no-AI path</div>
-<div class="em">&#9881;&#65039; measured TFP <b>`r f1(ov("extreme","tfp"))`%</b></div>
-<div class="em">&#127981; capital stock <b>`r f1(ov("extreme","capital"))`%</b></div>
-<div class="em">&#128181; average wage <b>`r f1(ov("extreme","wage"))`%</b></div>
-<div class="em">&#129489;&#8205;&#128187; AI-sensitive wage <b>`r f1(ov("extreme","wage_C"))`%</b></div>
-<div class="em">&#128295; all-other wage <b>`r f1(ov("extreme","wage_N"))`%</b></div>
-<div class="em">&#129367; labor share <b>`r f1(ov("extreme","lab_share"))`%</b> of income</div>
-<div class="em">&#128101; AI-sensitive employment <b>`r f1(ov("extreme","cog_emp"))`%</b> since mid-2026</div>
-<div class="em">&#128269; unemployment: AI-sensitive <b>`r f1(ov("extreme","u_C"))`%</b>, all other <b>`r f1(ov("extreme","u_N"))`%</b>, overall <b>`r f1(ov("extreme","u_all"))`%</b></div>
+<div class="em">GDP <b>`r f1(ov("extreme","gdp"))`%</b> above the no-AI path</div>
+<div class="em">measured TFP <b>`r f1(ov("extreme","tfp"))`%</b></div>
+<div class="em">capital stock <b>`r f1(ov("extreme","capital"))`%</b></div>
+<div class="em">average wage <b>`r f1(ov("extreme","wage"))`%</b></div>
+<div class="em">AI-sensitive wage <b>`r f1(ov("extreme","wage_C"))`%</b></div>
+<div class="em">all-other wage <b>`r f1(ov("extreme","wage_N"))`%</b></div>
+<div class="em">labor share <b>`r f1(ov("extreme","lab_share"))`%</b> of income</div>
+<div class="em">AI-sensitive employment <b>`r f1(ov("extreme","cog_emp"))`%</b> since mid-2026</div>
+<div class="em">unemployment: AI-sensitive <b>`r f1(ov("extreme","u_C"))`%</b>, all other <b>`r f1(ov("extreme","u_N"))`%</b>, overall <b>`r f1(ov("extreme","u_all"))`%</b></div>
 <span class="note">Normal times: unemployment `r f2(nt$u_C)` and `r f2(nt$u_N)` by group, `r f2(nt$u_all)` overall,
 labor share 60.0.</span>
 </div>
