@@ -1375,8 +1375,9 @@ $D_{C,t}$ remove the rest. This is **job rationing** in the sense of Michaillat
 (2012): the unemployment is not only frictional, some of it exists because the wage is
 too high and the jobs simply are not offered. It is also the mechanism behind the
 Table 6 trade-off: rigid wages convert the shock into unemployment, flexible wages
-convert it into wage declines.
-::: In symbols, $\ell^d_{C,t}$ is the cognitive employment firms demand at the wage (30) delivers, and $E_t$ the surplus above it.
+convert it into wage declines. In symbols, $\ell^d_{C,t}$ is the cognitive employment firms demand at
+the wage (30) delivers, and $E_t$ the surplus above it.
+:::
 
 []{#eq-32}
 $$
