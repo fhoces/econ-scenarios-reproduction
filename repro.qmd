@@ -2467,5 +2467,5 @@ Part of an independent reproduction of Korinek et al. (2026):
 :::
 
 ::: {.credit}
-OPA done by [Fernando Hoces de la Guardia](https://fhoces.github.io)
+OPA done by [Fernando Hoces de la Guardia](https://fhoces.github.io), using [agentic coding tools](index.html#how-ai-was-used)
 :::
