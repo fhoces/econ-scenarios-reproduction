@@ -210,9 +210,43 @@ def test_explorer_table_caption():
 
 
 def test_explorer_printed_digit_count():
-    """"153 of them to the printed digit" follows the allowlist in test_printed_precision."""
+    """"153 of them to the printed digit" follows the allowlist in test_printed_precision,
+    and the suite's own size, typed in seven places, follows the suite."""
     from tests.test_printed_precision import MISSES
     assert f"{169 - len(MISSES)} of them to the printed digit" in EXPLORER
+
+    # The test count (129) is typed into the README twice, the Makefile, the landing page
+    # twice (with its 102 / 7 / 16 / 4 breakdown) and the deck twice. Count the suite by
+    # collecting it in a separate pytest process, so the check holds however this run was
+    # filtered (-k, a single file): collecting runs no tests, it only lists them.
+    import subprocess
+    import sys
+    out = subprocess.run([sys.executable, "-m", "pytest", "--collect-only", "-q", "tests"],
+                         cwd=ROOT, capture_output=True, text=True).stdout
+    ids = [ln for ln in out.splitlines() if "::" in ln]
+    n = len(ids)
+    grid = sum(1 for i in ids if i.startswith("tests/test_explorer_grid.py::"))
+    prose = sum(1 for i in ids if i.startswith("tests/test_prose_numbers.py::"))
+    rob = (ROOT / "tests/test_robustness.py").read_text()
+    slop_n = len(re.findall(r"^def test_", rob.split("slop extension", 1)[1], flags=re.M))
+    typed = {
+        "README.md": [r"runs the (\d+) tests", r"# (\d+) tests:"],
+        "Makefile": [r"the (\d+)-test validation suite"],
+        "index.html": [r"The model, the (\d+)-test validation suite", r"(\d+) automated tests:"],
+        "slides/slides.Rmd": [r"the model, (\d+) tests and every CSV"],
+    }
+    found = 0
+    for rel, pats in typed.items():
+        text = _text(rel)
+        for pat in pats:
+            hits = re.findall(pat, text)
+            assert hits and all(int(h) == n for h in hits), (rel, pat, hits, n)
+            found += len(hits)
+    assert found == 7
+    assert (f"{n} automated tests: {n - grid - prose - slop_n} core tests" in _text("index.html")
+            and f"; {grid} that pin the explorer's precomputed grid" in _text("index.html")
+            and f"; {prose} that recompute the numbers" in _text("index.html")
+            and f"and {slop_n} for the <code>slop.py</code> extension" in _text("index.html"))
 
 
 # ------------------------------------------------------------------------ deck ----
