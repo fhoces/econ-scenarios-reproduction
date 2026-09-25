@@ -1,5 +1,8 @@
 """Tables 5 and 6 (pp. 37-38): the capital-supply and wage-rigidity variants."""
 
+import pathlib
+from dataclasses import replace
+
 import pytest
 
 from aiscen import simulate
@@ -50,6 +53,26 @@ def test_inelastic_capital_flips_the_sign_of_the_wage():
     """Section 4.5: 'at eps = 1 the wage changes sign'."""
     col = table3_column(simulate.run(Fixed(eps=1.0), SCENARIOS["substantial"]))
     assert col["Average wage, pct above no-AI"] < 0.0
+
+    # Footnote 14 (p. 37), also at eps = 1: the substantial scenario's m, d and a with
+    # the extreme scenario's psi, mu and rho. README.md types its three figures: the GDP
+    # gap, the fall in labor income as a share of no-AI GDP, and the transfer that would
+    # hold the AI-sensitive occupations' income at its no-AI level, as a share of the
+    # GDP gain (their no-AI wage bill is s_C,t0 of GDP). The last is repeated with
+    # posting speed also at the extreme value, which the footnote does not say.
+    readme = " ".join((pathlib.Path(__file__).resolve().parent.parent / "README.md")
+                      .read_text().split())
+    S, E = SCENARIOS["substantial"], SCENARIOS["extreme"]
+    for theta_H, words in ((S.theta_H, "{t:.0f} percent here"),
+                           (E.theta_H, "({t:.0f} percent if posting speed")):
+        mix = replace(S, psi=E.psi, mu=E.mu, rho=E.rho, theta_H=theta_H)
+        c = table3_column(simulate.run(Fixed(eps=1.0), mix))
+        gdp = c["GDP, pct above no-AI"]
+        transfer = -F.s_C0 * c["  wage bill of cognitive occs"] / gdp * 100
+        assert words.format(t=transfer) in readme
+        if theta_H == S.theta_H:
+            assert f"({gdp:.2f} here)" in readme
+            assert f"({-F.s_L0 * c['Labor income, pct above no-AI']:.2f} here)" in readme
 
 
 # ---------------------------------------------------------------- slop extension ----
