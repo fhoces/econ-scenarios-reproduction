@@ -148,6 +148,9 @@ name: deck-map
 .eqstep .eqnote { font-size: 15px; color: #333; margin: 0 0 6px; }
 .eqwall .eqnote { font-size: 15px; color: #333; margin: 0 0 4px 92px; }
 .tiny td, .tiny th { padding: 1px 5px 1px 0; }
+/* inputs-main: slightly shorter table rows, so the box below ends clear of the
+   explorer button and the page number. */
+.remark-slide-content.inputs-tight td, .remark-slide-content.inputs-tight th { padding-top: 3px; padding-bottom: 3px; }
 .highlight-box {
   background: #fff3e0;
   border-left: 4px solid #e65100;
@@ -444,6 +447,7 @@ disruptive.
 
 ---
 name: inputs-main
+class: inputs-tight
 
 # The Seven Inputs
 
