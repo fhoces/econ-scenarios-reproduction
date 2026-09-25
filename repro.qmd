@@ -2202,7 +2202,7 @@ show(pd.DataFrame({"row": TABLE5_ROWS, **t5}))
 Table 6 reruns them at four rigidities of the cognitive wage. The parameter governs
 where the cost to cognitive workers shows up: at $\xi = 0$ the wage takes it all and
 unemployment barely moves; at $\xi = 0.9$ the cognitive wage ends *above* its no-AI
-path while cognitive unemployment reaches 24 percent.
+path while cognitive unemployment reaches 24 percent in the extreme scenario.
 
 ```{python}
 #| label: table6
