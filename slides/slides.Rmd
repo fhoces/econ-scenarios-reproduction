@@ -2176,9 +2176,9 @@ name: takeaways
 5. **The growth channel is small over six years**, by construction.
 
 .blue-box[
-The reproduction: `aiscen` Python package, 129 tests, reproduces all 169 cells of
-Tables 3, 5 and 6 within tolerance, 153 of them to the printed digit. Narrative
-walkthrough with every equation in `repro.qmd`.
+Set your own seven inputs in [the explorer](../explorer/); every equation, recomputed, in
+[the report](../repro.html); the model, 129 tests and every CSV in
+[the repository](https://github.com/fhoces/opa-ai-macro-econ-scenarios).
 ]
 
 ---
@@ -2291,6 +2291,12 @@ One variant helps workers: if checking is genuinely *new human work*, that is a 
 in $\rho$, and it is the only case here in which the average wage still rises (+0.7).
 It lifts the labor share to 57.3, as stalled adoption also does, at the cost of lower output. "Slop that makes work" and "slop
 that just does not deliver" are different worlds.
+
+.small[
+Set your own seven inputs in [the explorer](../explorer/); every equation, recomputed, in
+[the report](../repro.html); the model, 129 tests and every CSV in
+[the repository](https://github.com/fhoces/opa-ai-macro-econ-scenarios).
+]
 
 ---
 class: center, middle, inverse
