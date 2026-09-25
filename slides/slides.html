@@ -267,8 +267,8 @@ Part of an independent reproduction of Korinek et al. (2026):
 &lt;tr&gt;&lt;td style="padding:6px;"&gt;&lt;b&gt;1. The claim&lt;/b&gt;&lt;/td&gt;&lt;td style="padding:6px;"&gt;What the paper asserts, and the seven inputs it rests on&lt;/td&gt;&lt;td style="text-align:center;"&gt;4&amp;ndash;18&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;td style="padding:6px;"&gt;&lt;b&gt;2. The model&lt;/b&gt;&lt;/td&gt;&lt;td style="padding:6px;"&gt;Task-based production, the assignment rule, prices and shares, TFP, the labor share, employment, ideas, unemployment: where every equation comes from&lt;/td&gt;&lt;td style="text-align:center;"&gt;19&amp;ndash;34&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;td style="padding:6px;"&gt;&lt;b&gt;3. Solving the model for US inputs&lt;/b&gt;&lt;/td&gt;&lt;td style="padding:6px;"&gt;Calibration, the steady state, all 44 equations and the order they run in, the root-finds&lt;/td&gt;&lt;td style="text-align:center;"&gt;35&amp;ndash;48&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;td style="padding:6px;"&gt;&lt;b&gt;4. Results: some scenarios and the explorer&lt;/b&gt;&lt;/td&gt;&lt;td style="padding:6px;"&gt;The three scenarios one at a time, robustness, the survey, what reproduces, and the whole grid&lt;/td&gt;&lt;td style="text-align:center;"&gt;49&amp;ndash;61&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;td style="padding:6px;"&gt;&lt;b&gt;Backup&lt;/b&gt;&lt;/td&gt;&lt;td style="padding:6px;"&gt;Derivations, month 0 step by step, the gain &lt;i&gt;a&lt;/i&gt;, the slop extension&lt;/td&gt;&lt;td style="text-align:center;"&gt;62&amp;ndash;81&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td style="padding:6px;"&gt;&lt;b&gt;4. Results: some scenarios and the explorer&lt;/b&gt;&lt;/td&gt;&lt;td style="padding:6px;"&gt;The three scenarios one at a time, robustness, the survey, what reproduces, takeaways, and two postscripts (the whole grid, AI slop)&lt;/td&gt;&lt;td style="text-align:center;"&gt;49&amp;ndash;61&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td style="padding:6px;"&gt;&lt;b&gt;Backup&lt;/b&gt;&lt;/td&gt;&lt;td style="padding:6px;"&gt;A CES refresher, solving the steady state, month 0 step by step, the 44 equations in the code, five derivations, matching, why slop flips the wage, the pool rounding, growth against levels, the gain &lt;i&gt;a&lt;/i&gt;&lt;/td&gt;&lt;td style="text-align:center;"&gt;62&amp;ndash;81&lt;/td&gt;&lt;/tr&gt;
 &lt;/table&gt;
 
 .blue-box[
@@ -343,7 +343,7 @@ name: claim-table-main
    &lt;td style="text-align:right;"&gt; 9.7 &lt;/td&gt;
   &lt;/tr&gt;
   &lt;tr&gt;
-   &lt;td style="text-align:left;"&gt; AI-sensitive occupations w_C &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; AI-sensitive wage, pct above no-AI &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 0.0 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 0.4 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; -0.3 &lt;/td&gt;
@@ -779,6 +779,8 @@ name: part2-divider
 class: center, middle, inverse
 
 # Part 2: The Model
+
+Why the labor share can fall while productivity barely moves, and where unemployment comes from.
 
 ---
 name: tasks-main
@@ -1809,10 +1811,10 @@ one monotone equation in `\(\Delta \ln r_t\)` is left. Bisect it, and `\(w_C\)`,
 ---
 name: how-solved
 
-# How the Model Is Actually Solved
+# Two Equations Need a Root-Find: Four Solves a Month
 
 .pull-left[
-**Two equations need one, four solves a month**
+**Where the four solves are**
 
 1. The rental rate, (18): capital demanded equals capital supplied. Demand is strictly
    decreasing in `\(\Delta \ln r\)`, so exactly one root; bisection. Once a month.
@@ -1842,11 +1844,13 @@ class: center, middle, inverse
 
 # Part 4: Results: Some Scenarios and the Explorer
 
+What the seven inputs produce by 2030, and how far to trust it.
+
 ---
 class: figfull
 name: series-to-plots
 
-# Result: Eleven Series (Four Plotted Here) For Three Scenarios. &lt;a href="../explorer/" class="reflink" target="_blank"&gt;Explore All Scenarios Here&lt;/a&gt;
+# Three Scenarios, Four of the Eleven Outcomes
 
 &lt;div style="display:flex; justify-content:flex-end; gap:20px; font-size:13px; color:#5b6873; margin:0 24px 3px 0;"&gt;
 &lt;span&gt;&lt;i style="display:inline-block; width:18px; height:3px; background:#2a78d6; vertical-align:middle; margin-right:6px;"&gt;&lt;/i&gt;modest&lt;/span&gt;
@@ -1859,17 +1863,17 @@ name: series-to-plots
 &lt;div style="display:flex; align-items:stretch; gap:0; margin-top:0;"&gt;
 
 &lt;div style="flex:0 0 330px; display:flex; flex-direction:column; font-size:12.5px;"&gt;
-&lt;div class="ser" style="flex:1; display:flex; align-items:center; border-left:3px solid #5b6873; padding-left:7px; margin:0; color:#101519;"&gt; GDP&lt;/div&gt;
-&lt;div class="ser" style="flex:1; display:flex; align-items:center; border-left:3px solid #e2e7ec; padding-left:7px; margin:0; color:#9aa6b2;"&gt; measured TFP&lt;/div&gt;
-&lt;div class="ser" style="flex:1; display:flex; align-items:center; border-left:3px solid #e2e7ec; padding-left:7px; margin:0; color:#9aa6b2;"&gt; the average wage&lt;/div&gt;
-&lt;div class="ser" style="flex:1; display:flex; align-items:center; border-left:3px solid #5b6873; padding-left:7px; margin:0; color:#101519;"&gt; the AI-sensitive wage&lt;/div&gt;
-&lt;div class="ser" style="flex:1; display:flex; align-items:center; border-left:3px solid #5b6873; padding-left:7px; margin:0; color:#101519;"&gt; the all-other wage&lt;/div&gt;
-&lt;div class="ser" style="flex:1; display:flex; align-items:center; border-left:3px solid #e2e7ec; padding-left:7px; margin:0; color:#9aa6b2;"&gt; the labor share of income&lt;/div&gt;
-&lt;div class="ser" style="flex:1; display:flex; align-items:center; border-left:3px solid #e2e7ec; padding-left:7px; margin:0; color:#9aa6b2;"&gt; the capital stock&lt;/div&gt;
-&lt;div class="ser" style="flex:1; display:flex; align-items:center; border-left:3px solid #e2e7ec; padding-left:7px; margin:0; color:#9aa6b2;"&gt; employment, by group&lt;/div&gt;
-&lt;div class="ser" style="flex:1; display:flex; align-items:center; border-left:3px solid #5b6873; padding-left:7px; margin:0; color:#101519;"&gt; unemployment, by group&lt;/div&gt;
-&lt;div class="ser" style="flex:1; display:flex; align-items:center; border-left:3px solid #e2e7ec; padding-left:7px; margin:0; color:#9aa6b2;"&gt; workers changing occupation&lt;/div&gt;
-&lt;div class="ser" style="flex:1; display:flex; align-items:center; border-left:3px solid #e2e7ec; padding-left:7px; margin:0; color:#9aa6b2;"&gt; the stock of ideas&lt;/div&gt;
+&lt;div class="ser" style="flex:1; display:flex; align-items:center; border-left:3px solid #5b6873; padding-left:7px; margin:0; color:#101519;"&gt;GDP&lt;/div&gt;
+&lt;div class="ser" style="flex:1; display:flex; align-items:center; border-left:3px solid #e2e7ec; padding-left:7px; margin:0; color:#9aa6b2;"&gt;measured TFP&lt;/div&gt;
+&lt;div class="ser" style="flex:1; display:flex; align-items:center; border-left:3px solid #e2e7ec; padding-left:7px; margin:0; color:#9aa6b2;"&gt;the average wage&lt;/div&gt;
+&lt;div class="ser" style="flex:1; display:flex; align-items:center; border-left:3px solid #5b6873; padding-left:7px; margin:0; color:#101519;"&gt;the AI-sensitive wage&lt;/div&gt;
+&lt;div class="ser" style="flex:1; display:flex; align-items:center; border-left:3px solid #5b6873; padding-left:7px; margin:0; color:#101519;"&gt;the all-other wage&lt;/div&gt;
+&lt;div class="ser" style="flex:1; display:flex; align-items:center; border-left:3px solid #e2e7ec; padding-left:7px; margin:0; color:#9aa6b2;"&gt;the labor share of income&lt;/div&gt;
+&lt;div class="ser" style="flex:1; display:flex; align-items:center; border-left:3px solid #e2e7ec; padding-left:7px; margin:0; color:#9aa6b2;"&gt;the capital stock&lt;/div&gt;
+&lt;div class="ser" style="flex:1; display:flex; align-items:center; border-left:3px solid #e2e7ec; padding-left:7px; margin:0; color:#9aa6b2;"&gt;employment, by group&lt;/div&gt;
+&lt;div class="ser" style="flex:1; display:flex; align-items:center; border-left:3px solid #5b6873; padding-left:7px; margin:0; color:#101519;"&gt;unemployment, by group&lt;/div&gt;
+&lt;div class="ser" style="flex:1; display:flex; align-items:center; border-left:3px solid #e2e7ec; padding-left:7px; margin:0; color:#9aa6b2;"&gt;workers changing occupation&lt;/div&gt;
+&lt;div class="ser" style="flex:1; display:flex; align-items:center; border-left:3px solid #e2e7ec; padding-left:7px; margin:0; color:#9aa6b2;"&gt;the stock of ideas&lt;/div&gt;
 &lt;/div&gt;
 
 &lt;div style="flex:0 0 135px; position:relative;"&gt;
@@ -1894,6 +1898,8 @@ name: series-to-plots
 Only the four connected series are plotted; TFP, the average wage, the labor share and the capital stock are also in the explorer.
 ]
 
+&lt;a href="../explorer/" class="nav-btn-br" target="_blank"&gt;explore all scenarios &amp;rarr;&lt;/a&gt;
+
 ---
 name: sc-modest
 
@@ -1916,15 +1922,15 @@ name: sc-modest
 
 &lt;div style="flex:0.86;"&gt;
 &lt;h4&gt;then in 2030&lt;/h4&gt;
-&lt;div class="em"&gt;&amp;#128200; GDP &lt;b&gt;1.6%&lt;/b&gt; above the no-AI path&lt;/div&gt;
-&lt;div class="em"&gt;&amp;#9881;&amp;#65039; measured TFP &lt;b&gt;0.7%&lt;/b&gt;&lt;/div&gt;
-&lt;div class="em"&gt;&amp;#127981; capital stock &lt;b&gt;2.3%&lt;/b&gt;&lt;/div&gt;
-&lt;div class="em"&gt;&amp;#128181; average wage &lt;b&gt;0.7%&lt;/b&gt;&lt;/div&gt;
-&lt;div class="em"&gt;&amp;#129489;&amp;#8205;&amp;#128187; AI-sensitive wage &lt;b&gt;0.4%&lt;/b&gt;&lt;/div&gt;
-&lt;div class="em"&gt;&amp;#128295; all-other wage &lt;b&gt;1.1%&lt;/b&gt;&lt;/div&gt;
-&lt;div class="em"&gt;&amp;#129367; labor share &lt;b&gt;59.4%&lt;/b&gt; of income&lt;/div&gt;
-&lt;div class="em"&gt;&amp;#128101; AI-sensitive employment &lt;b&gt;-0.5%&lt;/b&gt; since mid-2026&lt;/div&gt;
-&lt;div class="em"&gt;&amp;#128269; unemployment: AI-sensitive &lt;b&gt;2.9%&lt;/b&gt;, all other &lt;b&gt;5.4%&lt;/b&gt;, overall &lt;b&gt;3.9%&lt;/b&gt;&lt;/div&gt;
+&lt;div class="em"&gt;GDP &lt;b&gt;1.6%&lt;/b&gt; above the no-AI path&lt;/div&gt;
+&lt;div class="em"&gt;measured TFP &lt;b&gt;0.7%&lt;/b&gt;&lt;/div&gt;
+&lt;div class="em"&gt;capital stock &lt;b&gt;2.3%&lt;/b&gt;&lt;/div&gt;
+&lt;div class="em"&gt;average wage &lt;b&gt;0.7%&lt;/b&gt;&lt;/div&gt;
+&lt;div class="em"&gt;AI-sensitive wage &lt;b&gt;0.4%&lt;/b&gt;&lt;/div&gt;
+&lt;div class="em"&gt;all-other wage &lt;b&gt;1.1%&lt;/b&gt;&lt;/div&gt;
+&lt;div class="em"&gt;labor share &lt;b&gt;59.4%&lt;/b&gt; of income&lt;/div&gt;
+&lt;div class="em"&gt;AI-sensitive employment &lt;b&gt;-0.5%&lt;/b&gt; since mid-2026&lt;/div&gt;
+&lt;div class="em"&gt;unemployment: AI-sensitive &lt;b&gt;2.9%&lt;/b&gt;, all other &lt;b&gt;5.4%&lt;/b&gt;, overall &lt;b&gt;3.9%&lt;/b&gt;&lt;/div&gt;
 &lt;span class="note"&gt;Normal times: unemployment 2.82 and 5.39 by group, 3.80 overall,
 labor share 60.0.&lt;/span&gt;
 &lt;/div&gt;
@@ -1936,11 +1942,11 @@ labor share 60.0.&lt;/span&gt;
 every channel is small at the same time.&lt;br&gt;&lt;br&gt;
 &lt;b&gt;What little happens comes through capital, not labor.&lt;/b&gt; A slightly better return on machines
 calls forth more of them than the productivity gain itself amounts to: the capital stock ends
-2.3 percent up against a TFP gain of 0.7
+2.3 percent up against a TFP gain of 0.7 percent
 (&amp;epsilon; = 3).&lt;br&gt;&lt;br&gt;
 &lt;b&gt;The frictions never bind.&lt;/b&gt; Displaced workers move between occupations as easily as they do
-today (&amp;mu; at its normal-times 0.17), so unemployment ends 3.86 against a
-normal 3.80 and the two groups&amp;rsquo; wages move together.
+today (&amp;mu; at its normal-times 0.17), so unemployment ends 3.86 percent against a
+normal 3.80 percent and the two groups&amp;rsquo; wages move together.
 &lt;/div&gt;
 
 &lt;/div&gt;
@@ -1967,15 +1973,15 @@ name: sc-substantial
 
 &lt;div style="flex:0.86;"&gt;
 &lt;h4&gt;then in 2030&lt;/h4&gt;
-&lt;div class="em"&gt;&amp;#128200; GDP &lt;b&gt;8.3%&lt;/b&gt; above the no-AI path&lt;/div&gt;
-&lt;div class="em"&gt;&amp;#9881;&amp;#65039; measured TFP &lt;b&gt;3.1%&lt;/b&gt;&lt;/div&gt;
-&lt;div class="em"&gt;&amp;#127981; capital stock &lt;b&gt;13.8%&lt;/b&gt;&lt;/div&gt;
-&lt;div class="em"&gt;&amp;#128181; average wage &lt;b&gt;2.1%&lt;/b&gt;&lt;/div&gt;
-&lt;div class="em"&gt;&amp;#129489;&amp;#8205;&amp;#128187; AI-sensitive wage &lt;b&gt;-0.3%&lt;/b&gt;&lt;/div&gt;
-&lt;div class="em"&gt;&amp;#128295; all-other wage &lt;b&gt;5.9%&lt;/b&gt;&lt;/div&gt;
-&lt;div class="em"&gt;&amp;#129367; labor share &lt;b&gt;56.1%&lt;/b&gt; of income&lt;/div&gt;
-&lt;div class="em"&gt;&amp;#128101; AI-sensitive employment &lt;b&gt;-3.9%&lt;/b&gt; since mid-2026&lt;/div&gt;
-&lt;div class="em"&gt;&amp;#128269; unemployment: AI-sensitive &lt;b&gt;4.5%&lt;/b&gt;, all other &lt;b&gt;4.6%&lt;/b&gt;, overall &lt;b&gt;4.5%&lt;/b&gt;&lt;/div&gt;
+&lt;div class="em"&gt;GDP &lt;b&gt;8.3%&lt;/b&gt; above the no-AI path&lt;/div&gt;
+&lt;div class="em"&gt;measured TFP &lt;b&gt;3.1%&lt;/b&gt;&lt;/div&gt;
+&lt;div class="em"&gt;capital stock &lt;b&gt;13.8%&lt;/b&gt;&lt;/div&gt;
+&lt;div class="em"&gt;average wage &lt;b&gt;2.1%&lt;/b&gt;&lt;/div&gt;
+&lt;div class="em"&gt;AI-sensitive wage &lt;b&gt;-0.3%&lt;/b&gt;&lt;/div&gt;
+&lt;div class="em"&gt;all-other wage &lt;b&gt;5.9%&lt;/b&gt;&lt;/div&gt;
+&lt;div class="em"&gt;labor share &lt;b&gt;56.1%&lt;/b&gt; of income&lt;/div&gt;
+&lt;div class="em"&gt;AI-sensitive employment &lt;b&gt;-3.9%&lt;/b&gt; since mid-2026&lt;/div&gt;
+&lt;div class="em"&gt;unemployment: AI-sensitive &lt;b&gt;4.5%&lt;/b&gt;, all other &lt;b&gt;4.6%&lt;/b&gt;, overall &lt;b&gt;4.5%&lt;/b&gt;&lt;/div&gt;
 &lt;span class="note"&gt;Normal times: unemployment 2.82 and 5.39 by group, 3.80 overall,
 labor share 60.0.&lt;/span&gt;
 &lt;/div&gt;
@@ -1985,10 +1991,10 @@ labor share 60.0.&lt;/span&gt;
 &lt;b&gt;Displacement starts to outrun reinstatement.&lt;/b&gt; Three quarters of AI use replaces the
 worker, and only a quarter of displaced tasks come back (&amp;psi; = 0.75, &amp;rho; = 0.25), so the labor
 share falls 60.0 to
-56.1.&lt;br&gt;&lt;br&gt;
+56.1 percent.&lt;br&gt;&lt;br&gt;
 &lt;b&gt;Complementarity does the distributing.&lt;/b&gt; Because tasks are complements (&amp;sigma; = 0.5),
 cheapening some tilts spending toward the work labor keeps: the all-other wage rises 5.9 percent while the AI-sensitive wage
-sits at -0.3.&lt;br&gt;&lt;br&gt;
+sits 0.3 percent below its no-AI path.&lt;br&gt;&lt;br&gt;
 &lt;b&gt;Reallocation is slow, but still feasible.&lt;/b&gt; Crossing occupations is half as easy as normal
 (&amp;mu; = 0.08), which lifts AI-sensitive unemployment only to
 4.5 percent: employment falls
@@ -2019,15 +2025,15 @@ name: sc-extreme
 
 &lt;div style="flex:0.86;"&gt;
 &lt;h4&gt;then in 2030&lt;/h4&gt;
-&lt;div class="em"&gt;&amp;#128200; GDP &lt;b&gt;32.4%&lt;/b&gt; above the no-AI path&lt;/div&gt;
-&lt;div class="em"&gt;&amp;#9881;&amp;#65039; measured TFP &lt;b&gt;13.4%&lt;/b&gt;&lt;/div&gt;
-&lt;div class="em"&gt;&amp;#127981; capital stock &lt;b&gt;56.3%&lt;/b&gt;&lt;/div&gt;
-&lt;div class="em"&gt;&amp;#128181; average wage &lt;b&gt;9.7%&lt;/b&gt;&lt;/div&gt;
-&lt;div class="em"&gt;&amp;#129489;&amp;#8205;&amp;#128187; AI-sensitive wage &lt;b&gt;-11.5%&lt;/b&gt;&lt;/div&gt;
-&lt;div class="em"&gt;&amp;#128295; all-other wage &lt;b&gt;33.6%&lt;/b&gt;&lt;/div&gt;
-&lt;div class="em"&gt;&amp;#129367; labor share &lt;b&gt;45.2%&lt;/b&gt; of income&lt;/div&gt;
-&lt;div class="em"&gt;&amp;#128101; AI-sensitive employment &lt;b&gt;-21.4%&lt;/b&gt; since mid-2026&lt;/div&gt;
-&lt;div class="em"&gt;&amp;#128269; unemployment: AI-sensitive &lt;b&gt;17.9%&lt;/b&gt;, all other &lt;b&gt;3.9%&lt;/b&gt;, overall &lt;b&gt;11.9%&lt;/b&gt;&lt;/div&gt;
+&lt;div class="em"&gt;GDP &lt;b&gt;32.4%&lt;/b&gt; above the no-AI path&lt;/div&gt;
+&lt;div class="em"&gt;measured TFP &lt;b&gt;13.4%&lt;/b&gt;&lt;/div&gt;
+&lt;div class="em"&gt;capital stock &lt;b&gt;56.3%&lt;/b&gt;&lt;/div&gt;
+&lt;div class="em"&gt;average wage &lt;b&gt;9.7%&lt;/b&gt;&lt;/div&gt;
+&lt;div class="em"&gt;AI-sensitive wage &lt;b&gt;-11.5%&lt;/b&gt;&lt;/div&gt;
+&lt;div class="em"&gt;all-other wage &lt;b&gt;33.6%&lt;/b&gt;&lt;/div&gt;
+&lt;div class="em"&gt;labor share &lt;b&gt;45.2%&lt;/b&gt; of income&lt;/div&gt;
+&lt;div class="em"&gt;AI-sensitive employment &lt;b&gt;-21.4%&lt;/b&gt; since mid-2026&lt;/div&gt;
+&lt;div class="em"&gt;unemployment: AI-sensitive &lt;b&gt;17.9%&lt;/b&gt;, all other &lt;b&gt;3.9%&lt;/b&gt;, overall &lt;b&gt;11.9%&lt;/b&gt;&lt;/div&gt;
 &lt;span class="note"&gt;Normal times: unemployment 2.82 and 5.39 by group, 3.80 overall,
 labor share 60.0.&lt;/span&gt;
 &lt;/div&gt;
@@ -2037,13 +2043,13 @@ labor share 60.0.&lt;/span&gt;
 &lt;b&gt;Two forces compound.&lt;/b&gt; Nearly all AI use replaces the worker, and nothing at
 all comes back as new labor tasks (&amp;psi; = 0.90, &amp;rho; = 0), so virtually the whole wage bill of
 every automated task moves to capital: the labor share falls 60.0 to
-45.2 even as GDP rises 32.4 percent.&lt;br&gt;&lt;br&gt;
+45.2 percent even as GDP rises 32.4 percent.&lt;br&gt;&lt;br&gt;
 &lt;b&gt;The frictions turn reallocation into rationing.&lt;/b&gt; Crossing occupations is four times harder
 than normal and the wage falls only slowly (&amp;mu; = 0.04, &amp;xi; = 0.5), so firms want fewer
 AI-sensitive workers than are attached at that wage and layoffs do the adjusting: unemployment
 there ends 17.9 percent.&lt;br&gt;&lt;br&gt;
 &lt;b&gt;The other group becomes scarce, not spare.&lt;/b&gt; Its unemployment &lt;i&gt;falls&lt;/i&gt; to
-3.9 percent while its wage rises 33.6: the same
+3.9 percent while its wage rises 33.6 percent: the same
 complementarity, from the other side.
 &lt;/div&gt;
 
@@ -2134,15 +2140,13 @@ name: survey
 10,980 US adults, Morning Consult, August 2026. Five questions mapped to five of the
 seven inputs.
 
-.small[
 | Object | Survey median | Modest / Substantial / Extreme |
 |---|---|---|
-| `\(m_{2030}\)` | 0.44 | 0.2 / 0.3 / 0.5 |
-| `\(d_{2030}\)` | 0.40 | 0.2 / 0.4 / 0.6 |
+| `\(m_{2030}\)` | 0.44 | 0.20 / 0.30 / 0.50 |
+| `\(d_{2030}\)` | 0.40 | 0.20 / 0.40 / 0.60 |
 | `\(\psi\)` | 0.47 | 0.50 / 0.75 / 0.90 |
 | `\(a_{2030}\)` | 0.44 | 0.30 / 0.45 / 0.80 |
 | `\(\mu\)` | 0.064 | 0.17 / 0.08 / 0.04 |
-]
 
 The median respondent expects **capable but narrowly deployed** AI: capability between
 the substantial and extreme scenarios, adoption at the substantial level, and
@@ -2231,8 +2235,8 @@ name: takeaways
 
 1. **The claim is conditional, and the conditioning set is small.** Five numbers about
    AI, two about labor-market frictions.
-2. **TFP and distribution are separate questions.** `\(\psi\)` moves the labor share
-   while measured TFP barely changes.
+2. **TFP and distribution are separate questions.** How much of AI use replaces workers,
+   `\(\psi\)`, moves the labor share while measured TFP barely changes.
 3. **The inequality `\(\sigma &lt; 1\)` is load-bearing.** Set it above one and the labor-share results
    change sign.
 4. **Capital supply decides whether workers gain**, and wage rigidity decides whether
