@@ -135,14 +135,11 @@ def test_explorer_one_at_a_time_ranges():
     rho6 = _spread("rho", LEVELS["rho"])
     rho3 = _spread("rho", [0.5, 0.25, 0.0])
     mu, th, psi = (_spread(k, LEVELS[k]) for k in ("mu", "theta_H", "psi"))
-    others = [_spread(k, LEVELS[k]) for k in KEYS if k != "rho"]
-    assert f"by {f2(rho6)} points over the six values offered here" in EXPLORER
-    assert rho6 > max(others)                               # "a shade more than any other"
-    assert f"over the paper's own three levels it moves it by {f2(rho3)}" in EXPLORER
+    assert f"by {f2(rho3)} points over the paper's three levels ({f2(rho6)} over all six here)" in EXPLORER
     assert f"unemployment by {f2(mu)} points over the paper's three levels" in EXPLORER
-    assert mu == max(mu, rho3, psi, th)                     # widest of the four (panel C)
+    assert mu == max(mu, rho3, psi, th)                     # "the most of the four panel C inputs"
     assert f"unemployment by {f2(th)} points" in EXPLORER
-    assert th == min(mu, rho3, psi, th)                     # smallest of the four
+    assert th == min(mu, rho3, psi, th)                     # "the least of the four panel C inputs"
 
 
 def test_explorer_highest_gdp_cell_is_extreme_with_normal_search():
