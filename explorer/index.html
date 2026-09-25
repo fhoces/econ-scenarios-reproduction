@@ -801,7 +801,10 @@ The paper keeps the extreme scenario's own
   });
 
   // ---- chart -------------------------------------------------------------
-  var W = 400, H = 208, L = 40, R = 30, T = 12, B = 24;
+  // Margins of the chart, in SVG units. The width and height are set per draw from the
+  // container, so one SVG unit is one CSS pixel and the 9 to 11 px labels render at
+  // their true size on a phone and on a wide screen alike (the aspect is kept at 400:208).
+  var L = 40, R = 30, T = 12, B = 24;
   var SVG = "http://www.w3.org/2000/svg";
 
   function el(name, attrs) {
@@ -827,6 +830,7 @@ The paper keeps the extreme scenario's own
 
   function drawChart(host, series, refKeys, cls, dotCls) {
     host.textContent = "";
+    var W = host.clientWidth || 400, H = Math.round(W * 208 / 400);
     var t = G.t;
     var all = series.slice();
     refKeys.forEach(function (r) { all = all.concat(r.values); });
@@ -927,6 +931,15 @@ The paper keeps the extreme scenario's own
   var tbody = document.querySelector("#cmp tbody");
 
   document.getElementById("cell-count").textContent = G.snap.length;
+  // Redraw at the new width when the window is resized (debounced). A height-only
+  // resize, such as a phone's address bar hiding on scroll, is ignored.
+  var resizeTimer = null, lastWidth = window.innerWidth;
+  window.addEventListener("resize", function () {
+    if (window.innerWidth === lastWidth) return;
+    lastWidth = window.innerWidth;
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(render, 150);
+  });
 
   function render() {
     var i = idx(state);
