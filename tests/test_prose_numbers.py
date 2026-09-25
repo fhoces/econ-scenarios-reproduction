@@ -14,8 +14,6 @@ import pathlib
 import re
 from dataclasses import replace
 
-import pytest
-
 from aiscen import simulate, slop
 from aiscen.params import SCENARIOS, Fixed, gain_path, scenario_from_2030_values
 from aiscen.report import table3_column
@@ -38,6 +36,7 @@ EXPLORER = _text("explorer/index.html")
 DECK = _text("slides/slides.Rmd")
 
 
+# Format the way the prose prints: one or two decimals, and the deck's U+2212 minus.
 def f1(x): return f"{x:.1f}"
 def f2(x): return f"{x:.2f}"
 def neg(x, fmt=f1): return ("−" + fmt(-x)) if x < 0 else fmt(x)     # the deck's U+2212 minus
@@ -46,6 +45,7 @@ def neg(x, fmt=f1): return ("−" + fmt(-x)) if x < 0 else fmt(x)     # the deck
 # ---------------------------------------------------------------- explorer grid ----
 
 def _grid():
+    """The committed explorer/grid.js as a dict."""
     s = (ROOT / "explorer" / "grid.js").read_text()
     return json.loads(s[s.index("=") + 1:].rstrip().rstrip(";"))
 
@@ -58,6 +58,7 @@ GDP, WAGE_C, CAP, TFP, LSHARE, U_C, U_ALL, GROWTH, WAGE = range(9)
 
 
 def _idx(levels):
+    """Mixed-radix cell index from a list of level indices, as the explorer's JS does."""
     i = 0
     for k, v in enumerate(levels):
         i = i * SIZES[k] + v
@@ -99,6 +100,7 @@ def _spread(key, values):
 
 
 def test_explorer_psi_popup():
+    """The automation-share popup: labor share and TFP at psi = 0.5 and 0.9."""
     lo, hi = _cell("substantial", psi=0.5), _cell("substantial", psi=0.9)
     assert (f"labor share from {f1(lo[LSHARE])} to {f1(hi[LSHARE])} percent while measured "
             f"TFP moves only from {f2(lo[TFP])} to {f2(hi[TFP])}") in EXPLORER
@@ -112,12 +114,14 @@ def test_explorer_psi_popup():
 
 
 def test_explorer_gain_popup_minutes():
+    """The gain popup's worked instance: 100 minutes becomes exp(-a) x 100."""
     m = [round(100 * math.exp(-a)) for a in (0.30, 0.45, 0.80)]
     assert f"at 0.30 a task that took 100 minutes takes {m[0]}, at 0.45 it takes {m[1]}, " \
            f"at 0.80 it takes {m[2]}" in EXPLORER
 
 
 def test_explorer_one_at_a_time_ranges():
+    """The popups' one-dial-at-a-time spreads of cognitive unemployment, and their ranking."""
     rho6 = _spread("rho", LEVELS["rho"])
     rho3 = _spread("rho", [0.5, 0.25, 0.0])
     mu, th, psi = (_spread(k, LEVELS[k]) for k in ("mu", "theta_H", "psi"))
@@ -132,11 +136,13 @@ def test_explorer_one_at_a_time_ranges():
 
 
 def test_explorer_highest_gdp_cell_is_extreme_with_normal_search():
+    """The "Highest GDP cell" preset is the extreme corner with mu at its normal 0.17."""
     best = max(range(len(G["snap"])), key=lambda i: G["snap"][i][GDP])
     assert G["snap"][best] == _cell("extreme", mu=0.17)
 
 
 def test_explorer_note_numbers():
+    """The note under the dials: 0.448, and the grid-versus-run gaps it discloses."""
     run = {n: table3_column(simulate.run(F, SCENARIOS[n])) for n in ("substantial", "extreme")}
     sub, ext = _cell("substantial"), _cell("extreme")
     assert f"{S.a_anchor + S.g_a * (2030.0 - F.t_anchor):.3f}" == "0.448"
@@ -164,6 +170,7 @@ def test_explorer_corners_against_their_runs():
 
 
 def test_explorer_reinstatement_075_count():
+    """How many rho = 0.75 cells end with a labor share above 60 percent."""
     ri = KEYS.index("rho")
     above = total = 0
     for i, snap in enumerate(G["snap"]):
@@ -178,6 +185,7 @@ def test_explorer_reinstatement_075_count():
 
 
 def test_explorer_table_caption():
+    """The table caption's three grid-versus-paper cells, and that they still differ."""
     from aiscen.report import PUBLISHED
     sub, ext = _cell("substantial"), _cell("extreme")
     p_w = PUBLISHED["Average wage, pct above no-AI"][2]
@@ -191,6 +199,7 @@ def test_explorer_table_caption():
 
 
 def test_explorer_printed_digit_count():
+    """"153 of them to the printed digit" follows the allowlist in test_printed_precision."""
     from tests.test_printed_precision import MISSES
     assert f"{169 - len(MISSES)} of them to the printed digit" in EXPLORER
 
@@ -198,10 +207,12 @@ def test_explorer_printed_digit_count():
 # ------------------------------------------------------------------------ deck ----
 
 def _col(**moves):
+    """Table 3 column of the substantial scenario with some inputs replaced."""
     return table3_column(simulate.run(F, replace(S, **moves)))
 
 
 def test_deck_psi_full_range():
+    """The deck's psi box over the full 0 to 1 range."""
     lo, hi = _col(psi=0.0), _col(psi=1.0)
     tfp, ls = "Measured TFP, pct above no-AI", "Labor share, pct of income"
     emp, gdp = "Cognitive employment, pct since mid-2026", "GDP, pct above no-AI"
@@ -212,6 +223,7 @@ def test_deck_psi_full_range():
 
 
 def test_deck_psi_paper_range():
+    """The deck's psi box over the paper's 0.5 to 0.9 range."""
     lo, hi = _col(psi=0.5), _col(psi=0.9)
     assert (f"labor share from {f1(lo['Labor share, pct of income'])} to "
             f"{f1(hi['Labor share, pct of income'])} percent while TFP moves only "
@@ -220,6 +232,7 @@ def test_deck_psi_paper_range():
 
 
 def test_deck_one_at_a_time_ranges():
+    """The deck's one-dial-at-a-time spreads, on the scenario's own gain path."""
     def spread(**pairs):
         (k, (a, b)), = pairs.items()
         return abs(_col(**{k: a})[UC] - _col(**{k: b})[UC])
@@ -236,6 +249,7 @@ def test_deck_one_at_a_time_ranges():
 
 
 def test_deck_pool_rounding_box():
+    """The verification box's two U-bar gaps and the 0.0384 rerun."""
     from aiscen.report import PUBLISHED, build_table3
     t3, t3b = build_table3(), build_table3(Fixed(U_bar=0.0384))
     all_gap = PUBLISHED["Unemployment rate, all workers, pct"][2] - t3["Unemployment rate, all workers, pct"][2]
@@ -246,6 +260,7 @@ def test_deck_pool_rounding_box():
 
 
 def test_deck_slop_numbers():
+    """The slop slide's pure-slop row and the checking-becomes-work case."""
     pure = table3_column(simulate.run(F, slop.scale_gain(slop.BASE, 1e-6)))
     assert (f"GDP **+{f1(pure['GDP, pct above no-AI'])} percent**, capital "
             f"**+{f1(pure['Capital stock, pct above no-AI'])}**, measured TFP "

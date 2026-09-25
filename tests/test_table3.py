@@ -1,10 +1,8 @@
 """The headline test: reproduce Table 3 of the paper (p. 31), cell by cell."""
 
-import math
 import pytest
 
-from aiscen import simulate
-from aiscen.params import Fixed, SCENARIOS
+from aiscen.params import Fixed
 from aiscen.report import PUBLISHED, ROW_ORDER, build_table3
 
 # Two cells sit just outside a 0.05 tolerance because of the normal-pool rounding:
@@ -20,6 +18,7 @@ TABLE3 = build_table3()
 
 
 def tol(want: float, key) -> float:
+    """0.05 points, 0.10 at 10 and above, or the widened value for the two U-bar cells."""
     if key in WIDE:
         return WIDE[key]
     return 0.10 if abs(want) >= 10.0 else 0.05
@@ -27,6 +26,7 @@ def tol(want: float, key) -> float:
 
 @pytest.mark.parametrize("row", ROW_ORDER)
 def test_table3_row(row):
+    """One row of Table 3, all four columns against the published digits."""
     got, want = TABLE3[row], PUBLISHED[row]
     for j, (g, w) in enumerate(zip(got, want)):
         assert g == pytest.approx(w, abs=tol(w, (row, j))), \

@@ -56,6 +56,7 @@ def test_redundant_flow_condition_holds():
 
 
 def test_hires_replace_quits():
+    """Equation (38): H_bar = q_bar l_t0 = f_bar U_bar, group by group."""
     assert SS.H_C == pytest.approx(SS.q_C * F.l_C0, rel=1e-12)
     assert SS.H_N == pytest.approx(SS.q_N * F.l_N0, rel=1e-12)
     assert SS.f_C * SS.U_C == pytest.approx(SS.H_C, rel=1e-9)

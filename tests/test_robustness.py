@@ -1,6 +1,5 @@
 """Tables 5 and 6 (pp. 37-38): the capital-supply and wage-rigidity variants."""
 
-import math
 import pytest
 
 from aiscen import simulate
@@ -17,11 +16,13 @@ F = Fixed()
 
 
 def tol(want: float) -> float:
+    """0.12 points, or 0.4 percent of the published value if that is larger."""
     return max(0.12, 0.004 * abs(want))
 
 
 @pytest.mark.parametrize("key,want", list(TABLE5.items()))
 def test_table5(key, want):
+    """Every Table 5 cell, at its capital-supply elasticity."""
     scen, eps = key
     col = table3_column(simulate.run(Fixed(eps=eps), SCENARIOS[scen]))
     for row, w in zip(TABLE5_ROWS, want):
@@ -30,6 +31,7 @@ def test_table5(key, want):
 
 @pytest.mark.parametrize("key,want", list(TABLE6.items()))
 def test_table6(key, want):
+    """Every Table 6 cell, at its wage rigidity."""
     scen, xi = key
     col = table3_column(simulate.run(Fixed(xi=xi), SCENARIOS[scen]))
     for row, w in zip(TABLE6_ROWS, want):
@@ -73,8 +75,8 @@ def test_slop_raises_the_wage_threshold_through_the_calibrated_elasticity():
 
 
 def test_critical_gain_is_where_the_wage_changes_sign():
+    """critical_gain() returns the gain at which the average wage crosses zero."""
     from aiscen import slop
-    from aiscen.report import TABLE5, TABLE5_ROWS, TABLE6, TABLE6_ROWS, table3_column
     a_crit = slop.critical_gain(F)
     assert 0.15 < a_crit < 0.35
     below = table3_column(simulate.run(F, slop.scale_gain(slop.BASE, a_crit * 0.8)))

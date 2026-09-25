@@ -68,6 +68,7 @@ def test_worked_example_of_section_213():
 
 
 def test_labor_share_without_ai_is_the_base_share():
+    """With m d = 0 nothing moves: the labor share is 0.60 and every gap is zero."""
     fr = statics.frictionless(F, 0.0, 0.0, 0.75, 0.25)
     assert fr.s_L == pytest.approx(F.s_L0, abs=1e-12)
     assert fr.dlnr == pytest.approx(0.0, abs=1e-10)

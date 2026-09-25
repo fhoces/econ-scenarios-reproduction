@@ -7,11 +7,13 @@ length and order; the committed `grid.js` can fall behind the model; and the thr
 named scenarios, which the explorer advertises as sitting "at the corners of this
 grid", can drift away from a real scenario run.
 
-The last one is the interesting case. Every cell of the grid builds `a_t` from the
-*substantial* mid-2026 anchor, because the explorer has no per-cell anchor to use,
-so an off-anchor corner reproduces the scenario's 2030 levels but not a rate defined
-over the preceding twelve months. GDP growth is the only such rate here, and it is
-the only outcome allowed a wide tolerance below.
+The last one is the interesting case. A cell whose 2030 gain is above 0.35 builds
+`a_t` as a line rising from the *substantial* mid-2026 anchor, because the explorer
+has no per-cell anchor to use (a gain at or below 0.35 is held flat at its own value,
+see `aiscen.params.gain_path`). So the extreme corner, whose own anchor is 0.45, takes
+a different path to the same 2030 gain: it reproduces the scenario's 2030 levels but
+not a rate defined over the preceding twelve months. GDP growth is the only such rate
+here, and it is the only outcome allowed a wide tolerance below.
 """
 
 import json
@@ -37,6 +39,7 @@ GROWTH_TOL = 0.25       # what the extreme corner actually needs
 
 @pytest.fixture(scope="module")
 def grid():
+    """The committed explorer/grid.js, parsed once for the module."""
     if not GRID_JS.exists():                       # pragma: no cover
         pytest.skip("explorer/grid.js not built; run python3 slides/make_grid_app.py")
     text = GRID_JS.read_text().strip()
@@ -45,6 +48,7 @@ def grid():
 
 
 def test_the_outcome_arrays_stay_the_same_length_and_order(grid):
+    """Eleven outcomes, GDP growth at index 7, and no "cognitive" in a displayed label."""
     assert len(grid["outcomes"]) == len(grid["units"]) == N_OUTCOMES
     assert all(len(row) == N_OUTCOMES for row in grid["snap"])
     assert grid["outcomes"][GDP_GROWTH] == "GDP growth"
@@ -53,6 +57,7 @@ def test_the_outcome_arrays_stay_the_same_length_and_order(grid):
 
 
 def test_the_dials_match_the_exporter(grid):
+    """The dial keys, levels and cell count in grid.js are the exporter's own."""
     assert [d["key"] for d in grid["dials"]] == [k for k, _, _, _ in mga.DIALS]
     assert [d["levels"] for d in grid["dials"]] == [list(lv) for _, _, _, lv in mga.DIALS]
     n = math.prod(len(lv) for _, _, _, lv in mga.DIALS)

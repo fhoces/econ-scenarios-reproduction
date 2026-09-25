@@ -19,6 +19,7 @@ def test_labor_force_adds_up_every_month(name):
 
 @pytest.mark.parametrize("name", ["modest", "substantial", "extreme"])
 def test_no_negative_stocks_or_rates(name):
+    """Head counts stay positive, finding rates stay in [0, 1], hires are never negative."""
     for r in RUNS[name].months:
         assert r.l_C > 0 and r.l_N > 0 and r.U_C > 0 and r.U_N > 0
         assert 0.0 <= r.f_C <= 1.0 and 0.0 <= r.f_N <= 1.0
@@ -42,6 +43,7 @@ def test_every_hire_leaves_the_pool(name):
 
 @pytest.mark.parametrize("name", ["modest", "substantial", "extreme"])
 def test_starts_at_the_steady_state(name):
+    """Month 0 is the steady state of (38) with no ideas gap (Appendix A, p. 40)."""
     res = RUNS[name]
     first = res.months[0]
     assert first.U_C == pytest.approx(res.ss.U_C, rel=1e-12)

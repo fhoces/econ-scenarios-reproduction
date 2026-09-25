@@ -77,6 +77,7 @@ def _all_cells(U_bar: float = None):
 
 
 def _misses(U_bar: float = None) -> dict:
+    """The cells that round to a different printed digit, keyed (table, column, row)."""
     out = {}
     for table, col, row, got, want in _all_cells(U_bar):
         if round_half_up(got, DECIMALS.get(row, 1)) != want:
@@ -88,6 +89,7 @@ MISSES = _misses()
 
 
 def test_the_compared_grid_is_169_cells():
+    """80 Table 3 cells + 40 Table 5 + 49 Table 6, the count the prose quotes."""
     assert sum(1 for _ in _all_cells()) == TOTAL_CELLS
 
 
