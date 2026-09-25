@@ -334,9 +334,9 @@
   svg { display: block; width: 100%; height: auto; overflow: visible; }
   .grid-line { stroke: var(--rule); stroke-width: 1; fill: none; }
   .grid-line.zero { stroke: var(--ref); }
-  .axis-text { font-family: var(--mono); font-size: 9px; fill: var(--ink-3); }
+  .axis-text { font-family: var(--mono); font-size: 11px; fill: var(--ink-3); }
   .ref-line { fill: none; stroke: var(--ref); stroke-width: 1; }
-  .ref-text { font-family: var(--mono); font-size: 10px; fill: var(--ink-3); }
+  .ref-text { font-family: var(--mono); font-size: 11px; fill: var(--ink-3); }
   .main-1 { fill: none; stroke: var(--series-1); stroke-width: 2; stroke-linejoin: round; }
   .main-2 { fill: none; stroke: var(--series-2); stroke-width: 2; stroke-linejoin: round; }
   .main-3 { fill: none; stroke: var(--series-3); stroke-width: 2; stroke-linejoin: round; }
@@ -802,7 +802,7 @@ The paper keeps the extreme scenario's own
 
   // ---- chart -------------------------------------------------------------
   // Margins of the chart, in SVG units. The width and height are set per draw from the
-  // container, so one SVG unit is one CSS pixel and the 9 to 11 px labels render at
+  // container, so one SVG unit is one CSS pixel and the 11 px labels render at
   // their true size on a phone and on a wide screen alike (the aspect is kept at 400:208).
   var L = 40, R = 30, T = 12, B = 24;
   var SVG = "http://www.w3.org/2000/svg";
