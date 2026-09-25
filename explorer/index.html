@@ -611,7 +611,9 @@ The paper keeps the extreme scenario's own
   function percentile(v) {
     var lo = 0, hi = gdpSorted.length;
     while (lo < hi) { var mid = (lo + hi) >> 1; if (gdpSorted[mid] <= v) lo = mid + 1; else hi = mid; }
-    return Math.round(100 * lo / gdpSorted.length);
+    // Floor, not round: only the top cell itself reads "100th" (the extreme corner sits at
+    // 99.86 and reads "99th").
+    return Math.floor(100 * lo / gdpSorted.length);
   }
   function ordinal(n) {
     var t = n % 100;
