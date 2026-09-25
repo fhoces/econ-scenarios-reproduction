@@ -241,9 +241,9 @@ def show(df, **kw):
 
 ### 2.1.1 Technology and factor markets
 
-Output is a constant-elasticity-of-substitution (CES) aggregate, a bundle whose inputs
-substitute for one another at one fixed rate, and the inputs are not capital and labor but
-**task instances**: a
+Output is a constant-elasticity-of-substitution (CES) aggregate: a bundle in which a one
+percent rise in an input's relative cost always cuts its relative use by the same $\sigma$
+percent, whatever the mix. The inputs are not capital and labor but **task instances**: a
 task is a type of work (reviewing a contract), an instance is one performance of it
 (this contract).
 
@@ -1287,8 +1287,8 @@ falling target, an *overhang*, and all-other employment below its rising one, a
 *shortfall*, both measured in (28). The cognitive wage does not fall enough to keep
 everyone employed: by (30) it closes only a fraction of its gap to the wage that would
 clear the group, at a speed set by the rigidity $\xi$, so firms want fewer cognitive
-workers than they have. The wage has to clear the group's attached force, its employed plus
-its own unemployed above the normal pool (29). Quits, which rise when jobs are easy to find
+workers than they have. The wage it moves toward is the one that would clear the group's
+attached force: its employed plus its own unemployed above the normal pool (29). Quits, which rise when jobs are easy to find
 (27), remove part of the surplus and layoffs remove the rest (31).
 
 The expanding occupations, meanwhile, post
