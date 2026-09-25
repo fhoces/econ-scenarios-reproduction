@@ -117,6 +117,8 @@ following the
 the model, its tests and every exported CSV
 ]
 
+.credit[OPA done by [Fernando Hoces de la Guardia](https://fhoces.github.io)]
+
 ---
 
 &lt;style type="text/css"&gt;
@@ -238,6 +240,12 @@ a.reflink:hover { color: #1a237e; border-bottom-color: #1a237e; }
   position: absolute; top: 26px; right: 34px; height: 190px; width: auto;
   opacity: 0.218; z-index: -1; pointer-events: none;
 }
+/* Author credit, pinned to the slide's lower-left corner, clear of the legend above
+   it and of the slide number at the lower right. */
+.opa-slide .credit {
+  position: absolute; left: 2em; bottom: 14px; font-size: 65%; color: #5b6873;
+}
+.opa-slide .credit a { color: #1a237e; }
 &lt;/style&gt;
 
 .site-nav[
@@ -1752,13 +1760,14 @@ name: read-prices
 
 # Reading Prices Off Quantities
 
-&lt;img src="img/seq29.png" alt="The month as a sequence: AI inputs to targets by Proposition 1, targets to realized employment by the flows, realized employment to prices by system 39" style="display:block; width:100%; max-width:1210px; margin:4px auto 8px;"&gt;
+&lt;img src="img/seq29.png" alt="The month as a sequence: AI inputs to targets by Proposition 1, targets to realized employment by the flows, realized employment to prices by system 39" style="display:block; width:100%; max-width:1060px; margin:2px auto 4px;"&gt;
 
-`$$s_{L,t0}\Lambda_{C,t} e^{(1-\sigma)\Delta \ln w_{C,t}} + s_{N,t0} e^{(1-\sigma)\Delta \ln w_{N,t}} + B_t e^{(1-\sigma)\Delta \ln r_t} = 1$$`
+`$$s_{L,t0}\Lambda_{C,t} e^{(1-\sigma)\Delta \ln \tilde w_{C,t}} + s_{N,t0} e^{(1-\sigma)\Delta \ln \tilde w_{N,t}} + B_t e^{(1-\sigma)\Delta \ln r_t} = 1$$`
 
 .small[
 The first of the three rows the paper tags &lt;a href="../repro.html#eq-39" class="reflink"&gt;(39)&lt;/a&gt;,
 its system for the actual economy: this price index, the two CES labor demands, and capital supply.
+The tilde marks a wage deflated by the ideas stock `\(A_t\)`, as Table A.1's note requires.
 ]
 
 Employment is a *state variable* handed over by the flow block

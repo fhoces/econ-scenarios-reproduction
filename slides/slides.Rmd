@@ -1691,7 +1691,7 @@ name: read-prices
 
 # Reading Prices Off Quantities
 
-<img src="img/seq29.png" alt="The month as a sequence: AI inputs to targets by Proposition 1, targets to realized employment by the flows, realized employment to prices by system 39" style="display:block; width:100%; max-width:1210px; margin:4px auto 8px;">
+<img src="img/seq29.png" alt="The month as a sequence: AI inputs to targets by Proposition 1, targets to realized employment by the flows, realized employment to prices by system 39" style="display:block; width:100%; max-width:1060px; margin:2px auto 4px;">
 
 $$s_{L,t0}\Lambda_{C,t} e^{(1-\sigma)\Delta \ln \tilde w_{C,t}} + s_{N,t0} e^{(1-\sigma)\Delta \ln \tilde w_{N,t}} + B_t e^{(1-\sigma)\Delta \ln r_t} = 1$$
 
