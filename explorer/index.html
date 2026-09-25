@@ -891,9 +891,17 @@ The paper keeps the extreme scenario's own
     svg.appendChild(el("path", { class: cls, d: path(series) }));
     var last = series[series.length - 1];
     svg.appendChild(el("circle", { class: dotCls, cx: x(t.length - 1), cy: y(last), r: 3.5 }));
+    // The end label sits just above the end dot. If a reference letter (M, S, E) at the
+    // right edge is within 10 px of that height, the two read as one ("-0.3%M"), so move
+    // the label clear of the letter: above it if there is room, otherwise below.
+    var etY = Math.min(H - B - 4, Math.max(T + 9, y(last) - 8));
+    refLabels.forEach(function (lbl) {
+      if (Math.abs(lbl.y - etY) < 10) {
+        etY = lbl.y - 12 >= T + 9 ? lbl.y - 12 : Math.min(H - B - 4, lbl.y + 14);
+      }
+    });
     var et = el("text", {
-      class: "end-text", x: x(t.length - 1) - 6,
-      y: Math.min(H - B - 4, Math.max(T + 9, y(last) - 8)), "text-anchor": "end"
+      class: "end-text", x: x(t.length - 1) - 6, y: etY, "text-anchor": "end"
     });
     et.textContent = last.toFixed(1) + "%";
     svg.appendChild(et);
