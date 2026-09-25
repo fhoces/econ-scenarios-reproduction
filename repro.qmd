@@ -217,6 +217,15 @@ def v(scen, col, d=1, t=2030.0):
     return f"{row[col]:,.{d}f}"
 
 
+def neg(scen, col, d=1, t=2030.0):
+    """The same lookup as v(), with the sign flipped, for prose that says "x percent
+    below": a stored gap of -3.9 prints as 3.9, so the sentence does not read
+    "-3.9 percent below"."""
+    df = D[scen]
+    row = df.iloc[(df["t"] - t).abs().idxmin()]
+    return f"{-row[col]:,.{d}f}"
+
+
 def num(x, d=1):
     """Format a number for prose: 1 decimal by default, with thousands separators.
 
@@ -818,7 +827,7 @@ for n in NAMES:
         rows.append({"scenario": n, "variable": label, "exact": ev, "first order": ov,
                      "gap, pct of exact": 100 * (ov - ev) / ev})
 fo_df = pd.DataFrame(rows)
-show(fo_df, floatfmt=(".0f", "", "", ".4f", ".4f", ".1f"))
+show(fo_df, floatfmt=("", "", ".4f", ".4f", ".1f"))
 ```
 
 The table says how good the shortcut is. Across the six variables, the first-order rows
@@ -2009,7 +2018,7 @@ ordinary growth accumulated since 2024, and the economy grows at
 `{python} num(100 * (F.r_bar - F.delta), 1)`, the capital stock is
 `{python} v('modest', 'capital')` percent larger, and the labor share falls from
 `{python} num(100 * F.s_L0, 1)` to `{python} v('modest', 'labor_share')` percent of
-income. Cognitive employment is `{python} v('modest', 'cog_emp')` percent below its
+income. Cognitive employment is `{python} neg('modest', 'cog_emp')` percent below its
 mid-2026 level and the unemployment rate is `{python} v('modest', 'u_all')` percent
 against a normal `{python} num(100 * F.U_bar, 1)`.
 
@@ -2032,7 +2041,7 @@ labor share falls to `{python} v('substantial', 'labor_share')` percent and the
 capital share rises to `{python} num(100 - float(v('substantial', 'labor_share', 4)), 1)`
 percent, a shift of
 `{python} num(100 * F.s_L0 - float(v('substantial', 'labor_share', 4)), 1)` points
-since 2024. Cognitive employment is `{python} v('substantial', 'cog_emp')` percent
+since 2024. Cognitive employment is `{python} neg('substantial', 'cog_emp')` percent
 below its mid-2026 level while all-other employment is
 `{python} v('substantial', 'oth_emp')` percent above it, and because reallocation
 takes time the cognitive unemployment rate rises to
@@ -2078,7 +2087,7 @@ GDP is `{python} v('extreme', 'gdp')` percent above its no-AI path, growing at
 Within labor the split is stark: the cognitive wage is
 `{python} v('extreme', 'wC')` percent relative to no AI while the all-other wage is
 `{python} v('extreme', 'wN')` percent above it. Cognitive employment is
-`{python} v('extreme', 'cog_emp')` percent below mid-2026,
+`{python} neg('extreme', 'cog_emp')` percent below mid-2026,
 `{python} v('extreme', 'u_C')` percent of cognitive workers are unemployed, nearly
 one in five, and the unemployment rate for all workers is
 `{python} v('extreme', 'u_all')` percent. Capital is
