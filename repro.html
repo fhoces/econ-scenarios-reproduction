@@ -5223,7 +5223,7 @@ Figure 2: GDP and its growth rate in the three scenarios, 2025-2030, reproducin
 <section id="the-substantial-change-scenario" class="level3">
 <h3 class="anchored" data-anchor-id="the-substantial-change-scenario">4.2 The substantial change scenario</h3>
 <p>Here 12 percent of the economy’s tasks are affected, roughly 19 percent of the tasks cognitive workers performed in 2025, AI raises productivity by about 57 percent on them, and three quarters of affected instances are automated.</p>
-<p>GDP is 8.3 percent above the no-AI path and growth over the twelve months to 2030 is 5.4 percent a year, against a fastest dot-com-boom year of 4.7 percent in 1999. The average wage rises 2.1 percent, far less than GDP: the cognitive wage is -0.3 percent relative to no AI while wages in the rest of the economy are 5.9 percent higher. The labor share falls to 56.1 percent and the capital share rises to 43.9 percent, a shift of 3.9 points since 2024. Cognitive employment is 3.9 percent below its mid-2026 level while all-other employment is 4.6 percent above it, and because reallocation takes time the cognitive unemployment rate rises to 4.5 percent in 2030, from 2.8 percent in normal times, an increase of 60 percent. Section 4.2 puts the same rise at “more than a 50 percent increase”, from 2.9 percent; note that the base is the normal-times rate, since by mid-2026 this model is already at 3.0 percent.</p>
+<p>GDP is 8.3 percent above the no-AI path and growth over the twelve months to 2030 is 5.4 percent a year, against a fastest dot-com-boom year of 4.7 percent in 1999. The average wage rises 2.1 percent, far less than GDP: the cognitive wage is 0.3 percent below its no-AI path while wages in the rest of the economy are 5.9 percent higher. The labor share falls to 56.1 percent and the capital share rises to 43.9 percent, a shift of 3.9 points since 2024. Cognitive employment is 3.9 percent below its mid-2026 level while all-other employment is 4.6 percent above it, and because reallocation takes time the cognitive unemployment rate rises to 4.5 percent in 2030, from 2.8 percent in normal times, an increase of 60 percent. Section 4.2 puts the same rise at “more than a 50 percent increase”, from 2.9 percent; note that the base is the normal-times rate, since by mid-2026 this model is already at 3.0 percent.</p>
 <div id="cell-fig-3" class="cell" data-execution_count="17">
 <details class="code-fold">
 <summary>Figure 3</summary>
@@ -5257,7 +5257,7 @@ Figure 3: Factor prices and the labor share in the three scenarios, 2025-2030, 
 <section id="the-extreme-change-scenario" class="level3">
 <h3 class="anchored" data-anchor-id="the-extreme-change-scenario">4.3 The extreme change scenario</h3>
 <p>By 2030 30 percent of the economy’s tasks are affected, roughly 48 percent of the tasks cognitive workers performed in 2025; AI more than doubles productivity on them (<span class="math inline">\(e^{a} =\)</span> 2.2), 90 percent of affected instances are automated, and no new tasks are reinstated.</p>
-<p>GDP is 32.4 percent above its no-AI path, growing at 15.5 percent a year. The labor share falls from 60.0 to 45.2 percent. Within labor the split is stark: the cognitive wage is -11.5 percent relative to no AI while the all-other wage is 33.6 percent above it. Cognitive employment is 21.4 percent below mid-2026, 17.9 percent of cognitive workers are unemployed, nearly one in five, and the unemployment rate for all workers is 11.9 percent. Capital is 56.3 percent above its no-AI path and measured TFP 13.4 percent.</p>
+<p>GDP is 32.4 percent above its no-AI path, growing at 15.5 percent a year. The labor share falls from 60.0 to 45.2 percent. Within labor the split is stark: the cognitive wage is 11.5 percent below its no-AI path while the all-other wage is 33.6 percent above it. Cognitive employment is 21.4 percent below mid-2026, 17.9 percent of cognitive workers are unemployed, nearly one in five, and the unemployment rate for all workers is 11.9 percent. Capital is 56.3 percent above its no-AI path and measured TFP 13.4 percent.</p>
 <div id="cell-fig-4" class="cell" data-execution_count="18">
 <details class="code-fold">
 <summary>Figure 4</summary>
@@ -5578,7 +5578,7 @@ Figure 4: The labor market in the three scenarios, 2025-2030, reproducing the p
 </section>
 <section id="robustness-wage-rigidity" class="level3">
 <h3 class="anchored" data-anchor-id="robustness-wage-rigidity">4.6 Robustness: wage rigidity</h3>
-<p>Table 6 reruns them at four rigidities of the cognitive wage. The parameter governs where the cost to cognitive workers shows up: at <span class="math inline">\(\xi = 0\)</span> the wage takes it all and unemployment barely moves; at <span class="math inline">\(\xi = 0.9\)</span> the cognitive wage ends <em>above</em> its no-AI path while cognitive unemployment reaches 24 percent.</p>
+<p>Table 6 reruns them at four rigidities of the cognitive wage. The parameter governs where the cost to cognitive workers shows up: at <span class="math inline">\(\xi = 0\)</span> the wage takes it all and unemployment barely moves; at <span class="math inline">\(\xi = 0.9\)</span> the cognitive wage ends <em>above</em> its no-AI path while cognitive unemployment reaches 24 percent in the extreme scenario.</p>
 <div id="cell-table6" class="cell" data-execution_count="21">
 <details class="code-fold">
 <summary>Table 6: four rigidities of the cognitive wage</summary>
@@ -5717,7 +5717,7 @@ Figure 4: The labor market in the three scenarios, 2025-2030, reproducing the p
 <span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>rows <span class="op">=</span> [slop.decomposition(F, slop.scale_gain(slop.BASE, a))</span>
 <span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> a <span class="kw">in</span> (a0, a0 <span class="op">/</span> <span class="dv">2</span>, <span class="fl">0.09</span>)]        <span class="co"># 0.09 is the survey&#39;s own lower quartile</span></span>
 <span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>show(pd.DataFrame(rows)[[<span class="st">&quot;a_2030&quot;</span>, <span class="st">&quot;displacement&quot;</span>, <span class="st">&quot;weak-link cushion&quot;</span>, <span class="st">&quot;ratio&quot;</span>]],</span>
-<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>     floatfmt<span class="op">=</span>(<span class="st">&quot;.3f&quot;</span>, <span class="st">&quot;.3f&quot;</span>, <span class="st">&quot;.4f&quot;</span>, <span class="st">&quot;.4f&quot;</span>, <span class="st">&quot;.1f&quot;</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>     floatfmt<span class="op">=</span>(<span class="st">&quot;.3f&quot;</span>, <span class="st">&quot;.4f&quot;</span>, <span class="st">&quot;.4f&quot;</span>, <span class="st">&quot;.1f&quot;</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div id="slop-decomposition" class="cell-output cell-output-display cell-output-markdown" data-execution_count="22">
 <table class="caption-top table table-sm table-striped small">
@@ -5732,21 +5732,21 @@ Figure 4: The labor market in the three scenarios, 2025-2030, reproducing the p
 <tbody>
 <tr class="odd">
 <td style="text-align: right;">0.448</td>
-<td style="text-align: right;">0.068</td>
+<td style="text-align: right;">0.0675</td>
 <td style="text-align: right;">0.0202</td>
-<td style="text-align: right;">3.3482</td>
+<td style="text-align: right;">3.3</td>
 </tr>
 <tr class="even">
 <td style="text-align: right;">0.224</td>
-<td style="text-align: right;">0.068</td>
+<td style="text-align: right;">0.0675</td>
 <td style="text-align: right;">0.0101</td>
-<td style="text-align: right;">6.6964</td>
+<td style="text-align: right;">6.7</td>
 </tr>
 <tr class="odd">
 <td style="text-align: right;">0.090</td>
-<td style="text-align: right;">0.068</td>
+<td style="text-align: right;">0.0675</td>
 <td style="text-align: right;">0.0041</td>
-<td style="text-align: right;">16.6667</td>
+<td style="text-align: right;">16.7</td>
 </tr>
 </tbody>
 </table>
@@ -5881,7 +5881,7 @@ Figure 4: The labor market in the three scenarios, 2025-2030, reproducing the p
 </div>
 </div>
 <p>That threshold is not exotic relative to what people believe. Table 2’s interquartile range for <span class="math inline">\(a_{2030}\)</span> runs from 0.09 to 1.02, and Section 3.5 reports that about 30 percent of respondents expect AI to save no time at all on a task it is suited to. The lower half of the survey’s own distribution is a slop world.</p>
-<p><strong>Slop does not show up as a GDP disappointment.</strong> In the limiting case where AI saves nothing at all, GDP is still 4.9 percent above the no-AI path while measured TFP is 0.1 and the average wage is -3.0. Automation converts work from a fixed factor into an accumulable one: the rental rate rises, capital deepens, output rises, and labor pays for it. The signature of slop in this model is therefore “output fine, wages falling, labor share sliding”, not “the boom failed to arrive”. That is Acemoglu and Restrepo’s so-so automation in its purest form.</p>
+<p><strong>Slop does not show up as a GDP disappointment.</strong> In the limiting case where AI saves nothing at all, GDP is still 4.9 percent above the no-AI path while measured TFP is 0.1 percent above it, and the average wage is 3.0 percent below it. Automation converts work from a fixed factor into an accumulable one: the rental rate rises, capital deepens, output rises, and labor pays for it. The signature of slop in this model is therefore “output fine, wages falling, labor share sliding”, not “the boom failed to arrive”. That is Acemoglu and Restrepo’s so-so automation in its purest form.</p>
 <p><strong>One version of slop helps workers.</strong> If checking and fixing is genuinely new human work rather than pure waste, that is a rise in the reinstatement ratio <span class="math inline">\(\rho\)</span>, and it is the only case here in which the average wage still rises (+0.7). It lifts the labor share to 57.3, as stalled adoption also does, at the cost of lower output. “Slop that makes work” and “slop that just does not deliver” are different worlds, and the model separates them.</p>
 <div class="callout callout-style-simple callout-note callout-titled" title="What the model cannot say about slop">
 <div class="callout-header d-flex align-content-center">
@@ -8628,7 +8628,7 @@ Figure 4: The labor market in the three scenarios, 2025-2030, reproducing the p
 <span id="cb30-2067"><a href="#cb30-2067" aria-hidden="true" tabindex="-1"></a>over the twelve months to 2030 is <span class="in">`{python} v(&#39;substantial&#39;, &#39;gdp_growth&#39;)`</span> percent</span>
 <span id="cb30-2068"><a href="#cb30-2068" aria-hidden="true" tabindex="-1"></a>a year, against a fastest dot-com-boom year of 4.7 percent in 1999. The average wage</span>
 <span id="cb30-2069"><a href="#cb30-2069" aria-hidden="true" tabindex="-1"></a>rises <span class="in">`{python} v(&#39;substantial&#39;, &#39;wage&#39;)`</span> percent, far less than GDP: the cognitive</span>
-<span id="cb30-2070"><a href="#cb30-2070" aria-hidden="true" tabindex="-1"></a>wage is <span class="in">`{python} v(&#39;substantial&#39;, &#39;wC&#39;)`</span> percent relative to no AI while wages in</span>
+<span id="cb30-2070"><a href="#cb30-2070" aria-hidden="true" tabindex="-1"></a>wage is <span class="in">`{python} neg(&#39;substantial&#39;, &#39;wC&#39;)`</span> percent below its no-AI path while wages in</span>
 <span id="cb30-2071"><a href="#cb30-2071" aria-hidden="true" tabindex="-1"></a>the rest of the economy are <span class="in">`{python} v(&#39;substantial&#39;, &#39;wN&#39;)`</span> percent higher. The</span>
 <span id="cb30-2072"><a href="#cb30-2072" aria-hidden="true" tabindex="-1"></a>labor share falls to <span class="in">`{python} v(&#39;substantial&#39;, &#39;labor_share&#39;)`</span> percent and the</span>
 <span id="cb30-2073"><a href="#cb30-2073" aria-hidden="true" tabindex="-1"></a>capital share rises to <span class="in">`{python} num(100 - float(v(&#39;substantial&#39;, &#39;labor_share&#39;, 4)), 1)`</span></span>
@@ -8678,7 +8678,7 @@ Figure 4: The labor market in the three scenarios, 2025-2030, reproducing the p
 <span id="cb30-2119"><a href="#cb30-2119" aria-hidden="true" tabindex="-1"></a><span class="in">`{python} v(&#39;extreme&#39;, &#39;gdp_growth&#39;)`</span> percent a year. The labor share falls from</span>
 <span id="cb30-2120"><a href="#cb30-2120" aria-hidden="true" tabindex="-1"></a><span class="in">`{python} num(100 * F.s_L0, 1)`</span> to <span class="in">`{python} v(&#39;extreme&#39;, &#39;labor_share&#39;)`</span> percent.</span>
 <span id="cb30-2121"><a href="#cb30-2121" aria-hidden="true" tabindex="-1"></a>Within labor the split is stark: the cognitive wage is</span>
-<span id="cb30-2122"><a href="#cb30-2122" aria-hidden="true" tabindex="-1"></a><span class="in">`{python} v(&#39;extreme&#39;, &#39;wC&#39;)`</span> percent relative to no AI while the all-other wage is</span>
+<span id="cb30-2122"><a href="#cb30-2122" aria-hidden="true" tabindex="-1"></a><span class="in">`{python} neg(&#39;extreme&#39;, &#39;wC&#39;)`</span> percent below its no-AI path while the all-other wage is</span>
 <span id="cb30-2123"><a href="#cb30-2123" aria-hidden="true" tabindex="-1"></a><span class="in">`{python} v(&#39;extreme&#39;, &#39;wN&#39;)`</span> percent above it. Cognitive employment is</span>
 <span id="cb30-2124"><a href="#cb30-2124" aria-hidden="true" tabindex="-1"></a><span class="in">`{python} neg(&#39;extreme&#39;, &#39;cog_emp&#39;)`</span> percent below mid-2026,</span>
 <span id="cb30-2125"><a href="#cb30-2125" aria-hidden="true" tabindex="-1"></a><span class="in">`{python} v(&#39;extreme&#39;, &#39;u_C&#39;)`</span> percent of cognitive workers are unemployed, nearly</span>
@@ -8795,7 +8795,7 @@ Figure 4: The labor market in the three scenarios, 2025-2030, reproducing the p
 <span id="cb30-2242"><a href="#cb30-2242" aria-hidden="true" tabindex="-1"></a>Table 6 reruns them at four rigidities of the cognitive wage. The parameter governs</span>
 <span id="cb30-2243"><a href="#cb30-2243" aria-hidden="true" tabindex="-1"></a>where the cost to cognitive workers shows up: at $\xi = 0$ the wage takes it all and</span>
 <span id="cb30-2244"><a href="#cb30-2244" aria-hidden="true" tabindex="-1"></a>unemployment barely moves; at $\xi = 0.9$ the cognitive wage ends *above* its no-AI</span>
-<span id="cb30-2245"><a href="#cb30-2245" aria-hidden="true" tabindex="-1"></a>path while cognitive unemployment reaches 24 percent.</span>
+<span id="cb30-2245"><a href="#cb30-2245" aria-hidden="true" tabindex="-1"></a>path while cognitive unemployment reaches 24 percent in the extreme scenario.</span>
 <span id="cb30-2246"><a href="#cb30-2246" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb30-2249"><a href="#cb30-2249" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
 <span id="cb30-2250"><a href="#cb30-2250" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: table6</span></span>
@@ -8845,7 +8845,7 @@ Figure 4: The labor market in the three scenarios, 2025-2030, reproducing the p
 <span id="cb30-2296"><a href="#cb30-2296" aria-hidden="true" tabindex="-1"></a>rows <span class="op">=</span> [slop.decomposition(F, slop.scale_gain(slop.BASE, a))</span>
 <span id="cb30-2297"><a href="#cb30-2297" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> a <span class="kw">in</span> (a0, a0 <span class="op">/</span> <span class="dv">2</span>, <span class="fl">0.09</span>)]        <span class="co"># 0.09 is the survey&#39;s own lower quartile</span></span>
 <span id="cb30-2298"><a href="#cb30-2298" aria-hidden="true" tabindex="-1"></a>show(pd.DataFrame(rows)[[<span class="st">&quot;a_2030&quot;</span>, <span class="st">&quot;displacement&quot;</span>, <span class="st">&quot;weak-link cushion&quot;</span>, <span class="st">&quot;ratio&quot;</span>]],</span>
-<span id="cb30-2299"><a href="#cb30-2299" aria-hidden="true" tabindex="-1"></a>     floatfmt<span class="op">=</span>(<span class="st">&quot;.3f&quot;</span>, <span class="st">&quot;.3f&quot;</span>, <span class="st">&quot;.4f&quot;</span>, <span class="st">&quot;.4f&quot;</span>, <span class="st">&quot;.1f&quot;</span>))</span>
+<span id="cb30-2299"><a href="#cb30-2299" aria-hidden="true" tabindex="-1"></a>     floatfmt<span class="op">=</span>(<span class="st">&quot;.3f&quot;</span>, <span class="st">&quot;.4f&quot;</span>, <span class="st">&quot;.4f&quot;</span>, <span class="st">&quot;.1f&quot;</span>))</span>
 <span id="cb30-2300"><a href="#cb30-2300" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb30-2301"><a href="#cb30-2301" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb30-2302"><a href="#cb30-2302" aria-hidden="true" tabindex="-1"></a>Displacement, $(1-\rho)\psi_t m_t d_t$, contains no $a_t$: an automated instance takes</span>
@@ -8888,179 +8888,180 @@ Figure 4: The labor market in the three scenarios, 2025-2030, reproducing the p
 <span id="cb30-2343"><a href="#cb30-2343" aria-hidden="true" tabindex="-1"></a><span class="in">`{python} num(slop_tbl.loc[slop_tbl.case.str.startswith(&#39;pure slop&#39;), &#39;GDP, pct above no-AI&#39;].iloc[0], 1)`</span></span>
 <span id="cb30-2344"><a href="#cb30-2344" aria-hidden="true" tabindex="-1"></a>percent above the no-AI path while measured TFP is</span>
 <span id="cb30-2345"><a href="#cb30-2345" aria-hidden="true" tabindex="-1"></a><span class="in">`{python} num(slop_tbl.loc[slop_tbl.case.str.startswith(&#39;pure slop&#39;), &#39;Measured TFP, pct above no-AI&#39;].iloc[0], 1)`</span></span>
-<span id="cb30-2346"><a href="#cb30-2346" aria-hidden="true" tabindex="-1"></a>and the average wage is</span>
-<span id="cb30-2347"><a href="#cb30-2347" aria-hidden="true" tabindex="-1"></a><span class="in">`{python} num(slop_tbl.loc[slop_tbl.case.str.startswith(&#39;pure slop&#39;), &#39;Average wage, pct above no-AI&#39;].iloc[0], 1)`</span>.</span>
-<span id="cb30-2348"><a href="#cb30-2348" aria-hidden="true" tabindex="-1"></a>Automation converts work from a fixed factor into an accumulable one: the rental rate</span>
-<span id="cb30-2349"><a href="#cb30-2349" aria-hidden="true" tabindex="-1"></a>rises, capital deepens, output rises, and labor pays for it. The signature of slop in</span>
-<span id="cb30-2350"><a href="#cb30-2350" aria-hidden="true" tabindex="-1"></a>this model is therefore &quot;output fine, wages falling, labor share sliding&quot;, not &quot;the</span>
-<span id="cb30-2351"><a href="#cb30-2351" aria-hidden="true" tabindex="-1"></a>boom failed to arrive&quot;. That is Acemoglu and Restrepo&#39;s so-so automation in its purest</span>
-<span id="cb30-2352"><a href="#cb30-2352" aria-hidden="true" tabindex="-1"></a>form.</span>
-<span id="cb30-2353"><a href="#cb30-2353" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-2354"><a href="#cb30-2354" aria-hidden="true" tabindex="-1"></a>**One version of slop helps workers.** If checking and fixing is genuinely new human</span>
-<span id="cb30-2355"><a href="#cb30-2355" aria-hidden="true" tabindex="-1"></a>work rather than pure waste, that is a rise in the reinstatement ratio $\rho$, and it</span>
-<span id="cb30-2356"><a href="#cb30-2356" aria-hidden="true" tabindex="-1"></a>is the only case here in which the average wage still rises (+0.7). It lifts the labor</span>
-<span id="cb30-2357"><a href="#cb30-2357" aria-hidden="true" tabindex="-1"></a>share to 57.3, as stalled adoption also does, at the cost of lower output. &quot;Slop that makes work&quot; and &quot;slop that just does not deliver&quot; are</span>
-<span id="cb30-2358"><a href="#cb30-2358" aria-hidden="true" tabindex="-1"></a>different worlds, and the model separates them.</span>
-<span id="cb30-2359"><a href="#cb30-2359" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-2360"><a href="#cb30-2360" aria-hidden="true" tabindex="-1"></a>::: {.callout-note appearance=&quot;simple&quot; title=&quot;What the model cannot say about slop&quot;}</span>
-<span id="cb30-2361"><a href="#cb30-2361" aria-hidden="true" tabindex="-1"></a>Three limits, in increasing order of seriousness.</span>
-<span id="cb30-2362"><a href="#cb30-2362" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-2363"><a href="#cb30-2363" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>**Quality.** Instances are homogeneous and prices are quality-adjusted by</span>
-<span id="cb30-2364"><a href="#cb30-2364" aria-hidden="true" tabindex="-1"></a>   assumption, so the model can express slop only as a smaller cost saving, never as</span>
-<span id="cb30-2365"><a href="#cb30-2365" aria-hidden="true" tabindex="-1"></a>   *the same cost for a worse product*. If sloppy output is counted at full price but</span>
-<span id="cb30-2366"><a href="#cb30-2366" aria-hidden="true" tabindex="-1"></a>   is worth less, measured TFP overstates true gains and nothing here records the gap.</span>
-<span id="cb30-2367"><a href="#cb30-2367" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>**Heterogeneity.** The paper&#39;s equations carry $\sum_i m_i d_i a_i$, so &quot;automated</span>
-<span id="cb30-2368"><a href="#cb30-2368" aria-hidden="true" tabindex="-1"></a>   instances are sloppy, augmented ones are not&quot; is representable in principle. The</span>
-<span id="cb30-2369"><a href="#cb30-2369" aria-hidden="true" tabindex="-1"></a>   calibration sets a uniform $a_t$, and this reimplementation follows it, so the</span>
-<span id="cb30-2370"><a href="#cb30-2370" aria-hidden="true" tabindex="-1"></a>   variants above move the gain on both kinds of instance together.</span>
-<span id="cb30-2371"><a href="#cb30-2371" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>**Externalities.** <span class="co">[</span><span class="ot">Equation (9)</span><span class="co">](#eq-9)</span> is Hulten&#39;s theorem, which holds in an *efficient*</span>
-<span id="cb30-2372"><a href="#cb30-2372" aria-hidden="true" tabindex="-1"></a>   economy. If errors propagate downstream, force rework in other tasks, or erode</span>
-<span id="cb30-2373"><a href="#cb30-2373" aria-hidden="true" tabindex="-1"></a>   trust in the output, the Domar-weighted sum is no longer the right aggregation and</span>
-<span id="cb30-2374"><a href="#cb30-2374" aria-hidden="true" tabindex="-1"></a>   the TFP expression is an overstatement rather than an approximation. This is a</span>
-<span id="cb30-2375"><a href="#cb30-2375" aria-hidden="true" tabindex="-1"></a>   structural limit of the framework, not a calibration quibble, and it is the version</span>
-<span id="cb30-2376"><a href="#cb30-2376" aria-hidden="true" tabindex="-1"></a>   of the slop worry the model genuinely cannot host.</span>
-<span id="cb30-2377"><a href="#cb30-2377" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb30-2378"><a href="#cb30-2378" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-2379"><a href="#cb30-2379" aria-hidden="true" tabindex="-1"></a><span class="fu">## 5 Verification summary</span></span>
-<span id="cb30-2380"><a href="#cb30-2380" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-2383"><a href="#cb30-2383" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb30-2384"><a href="#cb30-2384" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: verify</span></span>
-<span id="cb30-2385"><a href="#cb30-2385" aria-hidden="true" tabindex="-1"></a><span class="co">#| code-summary: &quot;deviations against every published table, and the internal identities&quot;</span></span>
-<span id="cb30-2386"><a href="#cb30-2386" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> dev(sim, pub):</span>
-<span id="cb30-2387"><a href="#cb30-2387" aria-hidden="true" tabindex="-1"></a>    <span class="co">&quot;&quot;&quot;Largest absolute gap between a row of simulated and published values.&quot;&quot;&quot;</span></span>
-<span id="cb30-2388"><a href="#cb30-2388" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="bu">max</span>(<span class="bu">abs</span>(a <span class="op">-</span> b) <span class="cf">for</span> a, b <span class="kw">in</span> <span class="bu">zip</span>(sim, pub))</span>
-<span id="cb30-2389"><a href="#cb30-2389" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-2390"><a href="#cb30-2390" aria-hidden="true" tabindex="-1"></a>t3_dev <span class="op">=</span> [(row, dev(T3[row], PUBLISHED[row])) <span class="cf">for</span> row <span class="kw">in</span> ROW_ORDER]</span>
-<span id="cb30-2391"><a href="#cb30-2391" aria-hidden="true" tabindex="-1"></a>t5_dev, t6_dev <span class="op">=</span> [], []</span>
-<span id="cb30-2392"><a href="#cb30-2392" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (scen, eps), want <span class="kw">in</span> TABLE5_PUB.items():</span>
-<span id="cb30-2393"><a href="#cb30-2393" aria-hidden="true" tabindex="-1"></a>    col <span class="op">=</span> table3_column(simulate.run(Fixed(eps<span class="op">=</span>eps), SCENARIOS[scen]))</span>
-<span id="cb30-2394"><a href="#cb30-2394" aria-hidden="true" tabindex="-1"></a>    t5_dev.append((<span class="ss">f&quot;</span><span class="sc">{</span>scen<span class="sc">}</span><span class="ss"> eps=</span><span class="sc">{</span>eps<span class="sc">}</span><span class="ss">&quot;</span>, dev([col[r] <span class="cf">for</span> r <span class="kw">in</span> TABLE5_ROWS], want)))</span>
-<span id="cb30-2395"><a href="#cb30-2395" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (scen, xi), want <span class="kw">in</span> TABLE6_PUB.items():</span>
-<span id="cb30-2396"><a href="#cb30-2396" aria-hidden="true" tabindex="-1"></a>    <span class="co"># same convention as the Table 6 body above: default U_bar = 0.038 everywhere</span></span>
-<span id="cb30-2397"><a href="#cb30-2397" aria-hidden="true" tabindex="-1"></a>    col <span class="op">=</span> table3_column(simulate.run(Fixed(xi<span class="op">=</span>xi), SCENARIOS[scen]))</span>
-<span id="cb30-2398"><a href="#cb30-2398" aria-hidden="true" tabindex="-1"></a>    vals <span class="op">=</span> [col[r] <span class="cf">for</span> r <span class="kw">in</span> TABLE6_ROWS]</span>
-<span id="cb30-2399"><a href="#cb30-2399" aria-hidden="true" tabindex="-1"></a>    t6_dev.append((<span class="ss">f&quot;</span><span class="sc">{</span>scen<span class="sc">}</span><span class="ss"> xi=</span><span class="sc">{</span>xi<span class="sc">}</span><span class="ss">&quot;</span>, dev(vals, want)))</span>
-<span id="cb30-2400"><a href="#cb30-2400" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-2401"><a href="#cb30-2401" aria-hidden="true" tabindex="-1"></a><span class="co"># max(..., key=lambda x: x[1]) finds the element whose SECOND item is largest, then</span></span>
-<span id="cb30-2402"><a href="#cb30-2402" aria-hidden="true" tabindex="-1"></a><span class="co"># [0] takes that element&#39;s first item: the name of the worst-deviating row. The</span></span>
-<span id="cb30-2403"><a href="#cb30-2403" aria-hidden="true" tabindex="-1"></a><span class="co"># underscore in `for _, d in ...` is a conventional name for &quot;a value I must unpack</span></span>
-<span id="cb30-2404"><a href="#cb30-2404" aria-hidden="true" tabindex="-1"></a><span class="co"># but do not use&quot;.</span></span>
-<span id="cb30-2405"><a href="#cb30-2405" aria-hidden="true" tabindex="-1"></a>summary <span class="op">=</span> pd.DataFrame([</span>
-<span id="cb30-2406"><a href="#cb30-2406" aria-hidden="true" tabindex="-1"></a>    (<span class="st">&quot;Table 3, the three scenarios in 2030&quot;</span>, <span class="dv">20</span> <span class="op">*</span> <span class="dv">4</span>,</span>
-<span id="cb30-2407"><a href="#cb30-2407" aria-hidden="true" tabindex="-1"></a>     <span class="bu">max</span>(d <span class="cf">for</span> _, d <span class="kw">in</span> t3_dev), <span class="bu">max</span>(t3_dev, key<span class="op">=</span><span class="kw">lambda</span> x: x[<span class="dv">1</span>])[<span class="dv">0</span>]),</span>
-<span id="cb30-2408"><a href="#cb30-2408" aria-hidden="true" tabindex="-1"></a>    (<span class="st">&quot;Table 5, elasticities of capital supply&quot;</span>, <span class="dv">5</span> <span class="op">*</span> <span class="dv">8</span>,</span>
-<span id="cb30-2409"><a href="#cb30-2409" aria-hidden="true" tabindex="-1"></a>     <span class="bu">max</span>(d <span class="cf">for</span> _, d <span class="kw">in</span> t5_dev), <span class="bu">max</span>(t5_dev, key<span class="op">=</span><span class="kw">lambda</span> x: x[<span class="dv">1</span>])[<span class="dv">0</span>]),</span>
-<span id="cb30-2410"><a href="#cb30-2410" aria-hidden="true" tabindex="-1"></a>    (<span class="st">&quot;Table 6, rigidities of the cognitive wage&quot;</span>, <span class="dv">7</span> <span class="op">*</span> <span class="dv">7</span>,</span>
-<span id="cb30-2411"><a href="#cb30-2411" aria-hidden="true" tabindex="-1"></a>     <span class="bu">max</span>(d <span class="cf">for</span> _, d <span class="kw">in</span> t6_dev), <span class="bu">max</span>(t6_dev, key<span class="op">=</span><span class="kw">lambda</span> x: x[<span class="dv">1</span>])[<span class="dv">0</span>]),</span>
-<span id="cb30-2412"><a href="#cb30-2412" aria-hidden="true" tabindex="-1"></a>], columns<span class="op">=</span>[<span class="st">&quot;published table&quot;</span>, <span class="st">&quot;cells compared&quot;</span>, <span class="st">&quot;largest absolute deviation&quot;</span>,</span>
-<span id="cb30-2413"><a href="#cb30-2413" aria-hidden="true" tabindex="-1"></a>            <span class="st">&quot;where&quot;</span>])</span>
-<span id="cb30-2414"><a href="#cb30-2414" aria-hidden="true" tabindex="-1"></a>show(summary, floatfmt<span class="op">=</span><span class="st">&quot;.3f&quot;</span>)</span>
-<span id="cb30-2415"><a href="#cb30-2415" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb30-2416"><a href="#cb30-2416" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-2417"><a href="#cb30-2417" aria-hidden="true" tabindex="-1"></a>The largest deviation anywhere is</span>
-<span id="cb30-2418"><a href="#cb30-2418" aria-hidden="true" tabindex="-1"></a><span class="in">`{python} num(max(max(d for _, d in t3_dev), max(d for _, d in t5_dev), max(d for _, d in t6_dev)), 2)`</span>,</span>
-<span id="cb30-2419"><a href="#cb30-2419" aria-hidden="true" tabindex="-1"></a>on figures the paper prints to one decimal.</span>
-<span id="cb30-2420"><a href="#cb30-2420" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-2421"><a href="#cb30-2421" aria-hidden="true" tabindex="-1"></a>Four internal identities, none of which involve the published numbers:</span>
-<span id="cb30-2422"><a href="#cb30-2422" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-2425"><a href="#cb30-2425" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb30-2426"><a href="#cb30-2426" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: identities</span></span>
-<span id="cb30-2427"><a href="#cb30-2427" aria-hidden="true" tabindex="-1"></a><span class="co">#| code-summary: &quot;internal consistency checks&quot;</span></span>
-<span id="cb30-2428"><a href="#cb30-2428" aria-hidden="true" tabindex="-1"></a>checks <span class="op">=</span> []</span>
-<span id="cb30-2429"><a href="#cb30-2429" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-2430"><a href="#cb30-2430" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. the labor force adds up every month, in every scenario.</span></span>
-<span id="cb30-2431"><a href="#cb30-2431" aria-hidden="true" tabindex="-1"></a><span class="co"># Two `for` clauses in one comprehension is a nested loop, read left to right: for</span></span>
-<span id="cb30-2432"><a href="#cb30-2432" aria-hidden="true" tabindex="-1"></a><span class="co"># each scenario, for each month of that scenario. It yields one number per month</span></span>
-<span id="cb30-2433"><a href="#cb30-2433" aria-hidden="true" tabindex="-1"></a><span class="co"># across all three runs, and max() keeps the largest. A result near 1e-16 means the</span></span>
-<span id="cb30-2434"><a href="#cb30-2434" aria-hidden="true" tabindex="-1"></a><span class="co"># identity holds to the limit of floating-point precision.</span></span>
-<span id="cb30-2435"><a href="#cb30-2435" aria-hidden="true" tabindex="-1"></a>worst <span class="op">=</span> <span class="bu">max</span>(<span class="bu">abs</span>(m.l_C <span class="op">+</span> m.l_N <span class="op">+</span> m.U_C <span class="op">+</span> m.U_N <span class="op">-</span> F.L)</span>
-<span id="cb30-2436"><a href="#cb30-2436" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> n <span class="kw">in</span> NAMES <span class="cf">for</span> m <span class="kw">in</span> RUNS[n].months)</span>
-<span id="cb30-2437"><a href="#cb30-2437" aria-hidden="true" tabindex="-1"></a>checks.append((<span class="st">&quot;l_C + l_N + U_C + U_N = L, every month (p. 20)&quot;</span>, <span class="ss">f&quot;</span><span class="sc">{</span>worst<span class="sc">:.2e}</span><span class="ss">&quot;</span>, <span class="st">&quot;0&quot;</span>))</span>
-<span id="cb30-2438"><a href="#cb30-2438" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-2439"><a href="#cb30-2439" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. system (39) at the targets reproduces Proposition 1 (Table A.1, panel D)</span></span>
-<span id="cb30-2440"><a href="#cb30-2440" aria-hidden="true" tabindex="-1"></a>worst <span class="op">=</span> <span class="fl">0.0</span></span>
-<span id="cb30-2441"><a href="#cb30-2441" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> n <span class="kw">in</span> NAMES:</span>
-<span id="cb30-2442"><a href="#cb30-2442" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> P[n].at(<span class="fl">2030.0</span>)</span>
-<span id="cb30-2443"><a href="#cb30-2443" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> dlnA <span class="kw">in</span> (<span class="fl">0.0</span>, <span class="fl">0.006</span>):</span>
-<span id="cb30-2444"><a href="#cb30-2444" aria-hidden="true" tabindex="-1"></a>        fr <span class="op">=</span> statics.frictionless(F, x[<span class="st">&quot;md&quot;</span>], x[<span class="st">&quot;a&quot;</span>], x[<span class="st">&quot;psi&quot;</span>], x[<span class="st">&quot;rho&quot;</span>], dlnA)</span>
-<span id="cb30-2445"><a href="#cb30-2445" aria-hidden="true" tabindex="-1"></a>        ac <span class="op">=</span> statics.actual_at_employment(F, x[<span class="st">&quot;md&quot;</span>], x[<span class="st">&quot;a&quot;</span>], x[<span class="st">&quot;psi&quot;</span>], x[<span class="st">&quot;rho&quot;</span>],</span>
-<span id="cb30-2446"><a href="#cb30-2446" aria-hidden="true" tabindex="-1"></a>                                          fr.l_C_star, fr.l_N_star, dlnA)</span>
-<span id="cb30-2447"><a href="#cb30-2447" aria-hidden="true" tabindex="-1"></a>        worst <span class="op">=</span> <span class="bu">max</span>(worst, <span class="bu">abs</span>(ac.dlnY <span class="op">-</span> fr.dlnYL), <span class="bu">abs</span>(ac.s_L <span class="op">-</span> fr.s_L),</span>
-<span id="cb30-2448"><a href="#cb30-2448" aria-hidden="true" tabindex="-1"></a>                    <span class="bu">abs</span>(ac.dlnw_C_tilde <span class="op">-</span> fr.dlnw_tilde))</span>
-<span id="cb30-2449"><a href="#cb30-2449" aria-hidden="true" tabindex="-1"></a>checks.append((<span class="st">&quot;(39) at the targets equals Proposition 1&quot;</span>, <span class="ss">f&quot;</span><span class="sc">{</span>worst<span class="sc">:.2e}</span><span class="ss">&quot;</span>, <span class="st">&quot;0&quot;</span>))</span>
-<span id="cb30-2450"><a href="#cb30-2450" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-2451"><a href="#cb30-2451" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. the monthly ideas step against the closed form (43)</span></span>
-<span id="cb30-2452"><a href="#cb30-2452" aria-hidden="true" tabindex="-1"></a>worst <span class="op">=</span> <span class="bu">max</span>(<span class="bu">abs</span>(RUNS[n].at(<span class="fl">2030.0</span>).dlnA <span class="op">-</span> simulate.ideas_closed_form(RUNS[n], <span class="fl">2030.0</span>))</span>
-<span id="cb30-2453"><a href="#cb30-2453" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> n <span class="kw">in</span> NAMES)</span>
-<span id="cb30-2454"><a href="#cb30-2454" aria-hidden="true" tabindex="-1"></a>checks.append((<span class="st">&quot;monthly ideas step vs closed form (43)&quot;</span>, <span class="ss">f&quot;</span><span class="sc">{</span><span class="dv">100</span> <span class="op">*</span> worst<span class="sc">:.4f}</span><span class="ss"> pp&quot;</span>,</span>
-<span id="cb30-2455"><a href="#cb30-2455" aria-hidden="true" tabindex="-1"></a>               <span class="st">&quot;&lt; 0.02 pp (p. 41)&quot;</span>))</span>
-<span id="cb30-2456"><a href="#cb30-2456" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-2457"><a href="#cb30-2457" aria-hidden="true" tabindex="-1"></a><span class="co"># 4. every hire leaves the pool</span></span>
-<span id="cb30-2458"><a href="#cb30-2458" aria-hidden="true" tabindex="-1"></a>worst <span class="op">=</span> <span class="bu">max</span>(<span class="bu">abs</span>(m.f_C <span class="op">*</span> m.U_C <span class="op">+</span> m.f_N <span class="op">*</span> m.U_N <span class="op">-</span> m.H_C <span class="op">-</span> m.H_N)</span>
-<span id="cb30-2459"><a href="#cb30-2459" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> n <span class="kw">in</span> NAMES <span class="cf">for</span> m <span class="kw">in</span> RUNS[n].months)</span>
-<span id="cb30-2460"><a href="#cb30-2460" aria-hidden="true" tabindex="-1"></a>checks.append((<span class="st">&quot;f_C U_C + f_N U_N = H_C + H_N (p. 20)&quot;</span>, <span class="ss">f&quot;</span><span class="sc">{</span>worst<span class="sc">:.2e}</span><span class="ss">&quot;</span>, <span class="st">&quot;0&quot;</span>))</span>
-<span id="cb30-2461"><a href="#cb30-2461" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-2462"><a href="#cb30-2462" aria-hidden="true" tabindex="-1"></a>show(pd.DataFrame(checks, columns<span class="op">=</span>[<span class="st">&quot;identity&quot;</span>, <span class="st">&quot;largest violation&quot;</span>, <span class="st">&quot;expected&quot;</span>]))</span>
-<span id="cb30-2463"><a href="#cb30-2463" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb30-2464"><a href="#cb30-2464" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-2465"><a href="#cb30-2465" aria-hidden="true" tabindex="-1"></a>All four hold. The two accounting identities, rows 1 and 4, hold to</span>
-<span id="cb30-2466"><a href="#cb30-2466" aria-hidden="true" tabindex="-1"></a><span class="in">`{python} checks[0][1]`</span> and <span class="in">`{python} checks[3][1]`</span>, which is floating-point noise; the</span>
-<span id="cb30-2467"><a href="#cb30-2467" aria-hidden="true" tabindex="-1"></a>system (39) evaluated at the targets returns Proposition 1 to <span class="in">`{python} checks[1][1]`</span>; and</span>
-<span id="cb30-2468"><a href="#cb30-2468" aria-hidden="true" tabindex="-1"></a>the monthly ideas step sits <span class="in">`{python} checks[2][1]`</span> from the closed form, inside the 0.02</span>
-<span id="cb30-2469"><a href="#cb30-2469" aria-hidden="true" tabindex="-1"></a>points the paper reports.</span>
-<span id="cb30-2470"><a href="#cb30-2470" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-2471"><a href="#cb30-2471" aria-hidden="true" tabindex="-1"></a>One further cross-check of the model against itself: the measured TFP index (45) is a</span>
-<span id="cb30-2472"><a href="#cb30-2472" aria-hidden="true" tabindex="-1"></a>base-weighted index, its dual (25) a chained one, and Appendix C.4 says the two agree</span>
-<span id="cb30-2473"><a href="#cb30-2473" aria-hidden="true" tabindex="-1"></a>only to first order. They do, and the wedge grows with the size of the shock, which is</span>
-<span id="cb30-2474"><a href="#cb30-2474" aria-hidden="true" tabindex="-1"></a>how those two index concepts should differ.</span>
-<span id="cb30-2475"><a href="#cb30-2475" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-2478"><a href="#cb30-2478" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb30-2479"><a href="#cb30-2479" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: dual</span></span>
-<span id="cb30-2480"><a href="#cb30-2480" aria-hidden="true" tabindex="-1"></a><span class="co">#| code-summary: &quot;Equation (45) against its dual (25)&quot;</span></span>
-<span id="cb30-2481"><a href="#cb30-2481" aria-hidden="true" tabindex="-1"></a>rows <span class="op">=</span> []</span>
-<span id="cb30-2482"><a href="#cb30-2482" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> n <span class="kw">in</span> NAMES:</span>
-<span id="cb30-2483"><a href="#cb30-2483" aria-hidden="true" tabindex="-1"></a>    res <span class="op">=</span> RUNS[n]</span>
-<span id="cb30-2484"><a href="#cb30-2484" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Start the chain at the no-AI baseline (zero gaps, base labor share), then one</span></span>
-<span id="cb30-2485"><a href="#cb30-2485" aria-hidden="true" tabindex="-1"></a>    <span class="co"># point per month. `+` concatenates two lists.</span></span>
-<span id="cb30-2486"><a href="#cb30-2486" aria-hidden="true" tabindex="-1"></a>    pts <span class="op">=</span> [(F.s_L0, <span class="fl">0.0</span>, <span class="fl">0.0</span>)] <span class="op">+</span> [(m.s_L_star, m.dlnw_common, m.dlnr_star)</span>
-<span id="cb30-2487"><a href="#cb30-2487" aria-hidden="true" tabindex="-1"></a>                                  <span class="cf">for</span> m <span class="kw">in</span> res.months]</span>
-<span id="cb30-2488"><a href="#cb30-2488" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-2489"><a href="#cb30-2489" aria-hidden="true" tabindex="-1"></a>    <span class="co"># zip(pts, pts[1:]) pairs each point with the NEXT one: pts[1:] is the list from</span></span>
-<span id="cb30-2490"><a href="#cb30-2490" aria-hidden="true" tabindex="-1"></a>    <span class="co"># index 1 onward, so the pairs are (point 0, point 1), (point 1, point 2), and so</span></span>
-<span id="cb30-2491"><a href="#cb30-2491" aria-hidden="true" tabindex="-1"></a>    <span class="co"># on. That is the standard way to walk consecutive differences. Each pair is</span></span>
-<span id="cb30-2492"><a href="#cb30-2492" aria-hidden="true" tabindex="-1"></a>    <span class="co"># unpacked into previous (sp, wp, rp) and current (sc, wc, rc) values, and the</span></span>
-<span id="cb30-2493"><a href="#cb30-2493" aria-hidden="true" tabindex="-1"></a>    <span class="co"># sum accumulates the share-weighted change in the two factor prices.</span></span>
-<span id="cb30-2494"><a href="#cb30-2494" aria-hidden="true" tabindex="-1"></a>    dual <span class="op">=</span> <span class="bu">sum</span>(<span class="fl">0.5</span> <span class="op">*</span> (sp <span class="op">+</span> sc) <span class="op">*</span> (wc <span class="op">-</span> wp) <span class="op">+</span> (<span class="dv">1</span> <span class="op">-</span> <span class="fl">0.5</span> <span class="op">*</span> (sp <span class="op">+</span> sc)) <span class="op">*</span> (rc <span class="op">-</span> rp)</span>
-<span id="cb30-2495"><a href="#cb30-2495" aria-hidden="true" tabindex="-1"></a>               <span class="cf">for</span> (sp, wp, rp), (sc, wc, rc) <span class="kw">in</span> <span class="bu">zip</span>(pts, pts[<span class="dv">1</span>:]))</span>
-<span id="cb30-2496"><a href="#cb30-2496" aria-hidden="true" tabindex="-1"></a>    tfp <span class="op">=</span> res.at(<span class="fl">2030.0</span>).dln_tfp</span>
-<span id="cb30-2497"><a href="#cb30-2497" aria-hidden="true" tabindex="-1"></a>    rows.append({<span class="st">&quot;scenario&quot;</span>: n, <span class="st">&quot;TFP gap, index (45)&quot;</span>: <span class="dv">100</span> <span class="op">*</span> tfp,</span>
-<span id="cb30-2498"><a href="#cb30-2498" aria-hidden="true" tabindex="-1"></a>                 <span class="st">&quot;TFP gap, chained dual (25)&quot;</span>: <span class="dv">100</span> <span class="op">*</span> dual,</span>
-<span id="cb30-2499"><a href="#cb30-2499" aria-hidden="true" tabindex="-1"></a>                 <span class="st">&quot;wedge, pct of the gap&quot;</span>: <span class="dv">100</span> <span class="op">*</span> <span class="bu">abs</span>(tfp <span class="op">-</span> dual) <span class="op">/</span> tfp})</span>
-<span id="cb30-2500"><a href="#cb30-2500" aria-hidden="true" tabindex="-1"></a>show(pd.DataFrame(rows), floatfmt<span class="op">=</span><span class="st">&quot;.3f&quot;</span>)</span>
-<span id="cb30-2501"><a href="#cb30-2501" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb30-2502"><a href="#cb30-2502" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-2503"><a href="#cb30-2503" aria-hidden="true" tabindex="-1"></a><span class="fu">## Reproducing this document</span></span>
-<span id="cb30-2504"><a href="#cb30-2504" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-2505"><a href="#cb30-2505" aria-hidden="true" tabindex="-1"></a><span class="in">```sh</span></span>
-<span id="cb30-2506"><a href="#cb30-2506" aria-hidden="true" tabindex="-1"></a><span class="va">QUARTO_PYTHON</span><span class="op">=</span>/opt/anaconda3/bin/python3 <span class="ex">quarto</span> render repro.qmd</span>
-<span id="cb30-2507"><a href="#cb30-2507" aria-hidden="true" tabindex="-1"></a><span class="ex">python3</span> <span class="at">-m</span> pytest <span class="at">-q</span>          <span class="co"># the same checks as assertions, plus the ones not shown here</span></span>
-<span id="cb30-2508"><a href="#cb30-2508" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb30-2509"><a href="#cb30-2509" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-2510"><a href="#cb30-2510" aria-hidden="true" tabindex="-1"></a>The package requires only the standard library; this document additionally uses</span>
-<span id="cb30-2511"><a href="#cb30-2511" aria-hidden="true" tabindex="-1"></a>pandas, matplotlib and tabulate for its tables and figures. <span class="in">`README.md`</span> records the</span>
-<span id="cb30-2512"><a href="#cb30-2512" aria-hidden="true" tabindex="-1"></a>places where the paper leaves a modelling choice implicit and how each was resolved.</span>
-<span id="cb30-2513"><a href="#cb30-2513" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-2514"><a href="#cb30-2514" aria-hidden="true" tabindex="-1"></a>::: {.site-nav}</span>
-<span id="cb30-2515"><a href="#cb30-2515" aria-hidden="true" tabindex="-1"></a>Part of an independent reproduction of Korinek et al. (2026):</span>
-<span id="cb30-2516"><a href="#cb30-2516" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Open Output (the explorer)</span><span class="co">](explorer/)</span> <span class="dv">&amp;middot;</span> Open Analysis: Report (here) and</span>
-<span id="cb30-2517"><a href="#cb30-2517" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Slides</span><span class="co">](slides/slides.html)</span> <span class="dv">&amp;middot;</span></span>
-<span id="cb30-2518"><a href="#cb30-2518" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Open Materials</span><span class="co">](https://github.com/fhoces/opa-ai-macro-econ-scenarios)</span> <span class="dv">&amp;middot;</span></span>
-<span id="cb30-2519"><a href="#cb30-2519" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Overview</span><span class="co">](index.html)</span></span>
-<span id="cb30-2520"><a href="#cb30-2520" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb30-2521"><a href="#cb30-2521" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-2522"><a href="#cb30-2522" aria-hidden="true" tabindex="-1"></a>::: {.credit}</span>
-<span id="cb30-2523"><a href="#cb30-2523" aria-hidden="true" tabindex="-1"></a>OPA done by <span class="co">[</span><span class="ot">Fernando Hoces de la Guardia</span><span class="co">](https://fhoces.github.io)</span></span>
-<span id="cb30-2524"><a href="#cb30-2524" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb30-2346"><a href="#cb30-2346" aria-hidden="true" tabindex="-1"></a>percent above it, and the average wage is</span>
+<span id="cb30-2347"><a href="#cb30-2347" aria-hidden="true" tabindex="-1"></a><span class="in">`{python} num(-slop_tbl.loc[slop_tbl.case.str.startswith(&#39;pure slop&#39;), &#39;Average wage, pct above no-AI&#39;].iloc[0], 1)`</span></span>
+<span id="cb30-2348"><a href="#cb30-2348" aria-hidden="true" tabindex="-1"></a>percent below it.</span>
+<span id="cb30-2349"><a href="#cb30-2349" aria-hidden="true" tabindex="-1"></a>Automation converts work from a fixed factor into an accumulable one: the rental rate</span>
+<span id="cb30-2350"><a href="#cb30-2350" aria-hidden="true" tabindex="-1"></a>rises, capital deepens, output rises, and labor pays for it. The signature of slop in</span>
+<span id="cb30-2351"><a href="#cb30-2351" aria-hidden="true" tabindex="-1"></a>this model is therefore &quot;output fine, wages falling, labor share sliding&quot;, not &quot;the</span>
+<span id="cb30-2352"><a href="#cb30-2352" aria-hidden="true" tabindex="-1"></a>boom failed to arrive&quot;. That is Acemoglu and Restrepo&#39;s so-so automation in its purest</span>
+<span id="cb30-2353"><a href="#cb30-2353" aria-hidden="true" tabindex="-1"></a>form.</span>
+<span id="cb30-2354"><a href="#cb30-2354" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-2355"><a href="#cb30-2355" aria-hidden="true" tabindex="-1"></a>**One version of slop helps workers.** If checking and fixing is genuinely new human</span>
+<span id="cb30-2356"><a href="#cb30-2356" aria-hidden="true" tabindex="-1"></a>work rather than pure waste, that is a rise in the reinstatement ratio $\rho$, and it</span>
+<span id="cb30-2357"><a href="#cb30-2357" aria-hidden="true" tabindex="-1"></a>is the only case here in which the average wage still rises (+0.7). It lifts the labor</span>
+<span id="cb30-2358"><a href="#cb30-2358" aria-hidden="true" tabindex="-1"></a>share to 57.3, as stalled adoption also does, at the cost of lower output. &quot;Slop that makes work&quot; and &quot;slop that just does not deliver&quot; are</span>
+<span id="cb30-2359"><a href="#cb30-2359" aria-hidden="true" tabindex="-1"></a>different worlds, and the model separates them.</span>
+<span id="cb30-2360"><a href="#cb30-2360" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-2361"><a href="#cb30-2361" aria-hidden="true" tabindex="-1"></a>::: {.callout-note appearance=&quot;simple&quot; title=&quot;What the model cannot say about slop&quot;}</span>
+<span id="cb30-2362"><a href="#cb30-2362" aria-hidden="true" tabindex="-1"></a>Three limits, in increasing order of seriousness.</span>
+<span id="cb30-2363"><a href="#cb30-2363" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-2364"><a href="#cb30-2364" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>**Quality.** Instances are homogeneous and prices are quality-adjusted by</span>
+<span id="cb30-2365"><a href="#cb30-2365" aria-hidden="true" tabindex="-1"></a>   assumption, so the model can express slop only as a smaller cost saving, never as</span>
+<span id="cb30-2366"><a href="#cb30-2366" aria-hidden="true" tabindex="-1"></a>   *the same cost for a worse product*. If sloppy output is counted at full price but</span>
+<span id="cb30-2367"><a href="#cb30-2367" aria-hidden="true" tabindex="-1"></a>   is worth less, measured TFP overstates true gains and nothing here records the gap.</span>
+<span id="cb30-2368"><a href="#cb30-2368" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>**Heterogeneity.** The paper&#39;s equations carry $\sum_i m_i d_i a_i$, so &quot;automated</span>
+<span id="cb30-2369"><a href="#cb30-2369" aria-hidden="true" tabindex="-1"></a>   instances are sloppy, augmented ones are not&quot; is representable in principle. The</span>
+<span id="cb30-2370"><a href="#cb30-2370" aria-hidden="true" tabindex="-1"></a>   calibration sets a uniform $a_t$, and this reimplementation follows it, so the</span>
+<span id="cb30-2371"><a href="#cb30-2371" aria-hidden="true" tabindex="-1"></a>   variants above move the gain on both kinds of instance together.</span>
+<span id="cb30-2372"><a href="#cb30-2372" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>**Externalities.** <span class="co">[</span><span class="ot">Equation (9)</span><span class="co">](#eq-9)</span> is Hulten&#39;s theorem, which holds in an *efficient*</span>
+<span id="cb30-2373"><a href="#cb30-2373" aria-hidden="true" tabindex="-1"></a>   economy. If errors propagate downstream, force rework in other tasks, or erode</span>
+<span id="cb30-2374"><a href="#cb30-2374" aria-hidden="true" tabindex="-1"></a>   trust in the output, the Domar-weighted sum is no longer the right aggregation and</span>
+<span id="cb30-2375"><a href="#cb30-2375" aria-hidden="true" tabindex="-1"></a>   the TFP expression is an overstatement rather than an approximation. This is a</span>
+<span id="cb30-2376"><a href="#cb30-2376" aria-hidden="true" tabindex="-1"></a>   structural limit of the framework, not a calibration quibble, and it is the version</span>
+<span id="cb30-2377"><a href="#cb30-2377" aria-hidden="true" tabindex="-1"></a>   of the slop worry the model genuinely cannot host.</span>
+<span id="cb30-2378"><a href="#cb30-2378" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb30-2379"><a href="#cb30-2379" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-2380"><a href="#cb30-2380" aria-hidden="true" tabindex="-1"></a><span class="fu">## 5 Verification summary</span></span>
+<span id="cb30-2381"><a href="#cb30-2381" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-2384"><a href="#cb30-2384" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb30-2385"><a href="#cb30-2385" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: verify</span></span>
+<span id="cb30-2386"><a href="#cb30-2386" aria-hidden="true" tabindex="-1"></a><span class="co">#| code-summary: &quot;deviations against every published table, and the internal identities&quot;</span></span>
+<span id="cb30-2387"><a href="#cb30-2387" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> dev(sim, pub):</span>
+<span id="cb30-2388"><a href="#cb30-2388" aria-hidden="true" tabindex="-1"></a>    <span class="co">&quot;&quot;&quot;Largest absolute gap between a row of simulated and published values.&quot;&quot;&quot;</span></span>
+<span id="cb30-2389"><a href="#cb30-2389" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="bu">max</span>(<span class="bu">abs</span>(a <span class="op">-</span> b) <span class="cf">for</span> a, b <span class="kw">in</span> <span class="bu">zip</span>(sim, pub))</span>
+<span id="cb30-2390"><a href="#cb30-2390" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-2391"><a href="#cb30-2391" aria-hidden="true" tabindex="-1"></a>t3_dev <span class="op">=</span> [(row, dev(T3[row], PUBLISHED[row])) <span class="cf">for</span> row <span class="kw">in</span> ROW_ORDER]</span>
+<span id="cb30-2392"><a href="#cb30-2392" aria-hidden="true" tabindex="-1"></a>t5_dev, t6_dev <span class="op">=</span> [], []</span>
+<span id="cb30-2393"><a href="#cb30-2393" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (scen, eps), want <span class="kw">in</span> TABLE5_PUB.items():</span>
+<span id="cb30-2394"><a href="#cb30-2394" aria-hidden="true" tabindex="-1"></a>    col <span class="op">=</span> table3_column(simulate.run(Fixed(eps<span class="op">=</span>eps), SCENARIOS[scen]))</span>
+<span id="cb30-2395"><a href="#cb30-2395" aria-hidden="true" tabindex="-1"></a>    t5_dev.append((<span class="ss">f&quot;</span><span class="sc">{</span>scen<span class="sc">}</span><span class="ss"> eps=</span><span class="sc">{</span>eps<span class="sc">}</span><span class="ss">&quot;</span>, dev([col[r] <span class="cf">for</span> r <span class="kw">in</span> TABLE5_ROWS], want)))</span>
+<span id="cb30-2396"><a href="#cb30-2396" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (scen, xi), want <span class="kw">in</span> TABLE6_PUB.items():</span>
+<span id="cb30-2397"><a href="#cb30-2397" aria-hidden="true" tabindex="-1"></a>    <span class="co"># same convention as the Table 6 body above: default U_bar = 0.038 everywhere</span></span>
+<span id="cb30-2398"><a href="#cb30-2398" aria-hidden="true" tabindex="-1"></a>    col <span class="op">=</span> table3_column(simulate.run(Fixed(xi<span class="op">=</span>xi), SCENARIOS[scen]))</span>
+<span id="cb30-2399"><a href="#cb30-2399" aria-hidden="true" tabindex="-1"></a>    vals <span class="op">=</span> [col[r] <span class="cf">for</span> r <span class="kw">in</span> TABLE6_ROWS]</span>
+<span id="cb30-2400"><a href="#cb30-2400" aria-hidden="true" tabindex="-1"></a>    t6_dev.append((<span class="ss">f&quot;</span><span class="sc">{</span>scen<span class="sc">}</span><span class="ss"> xi=</span><span class="sc">{</span>xi<span class="sc">}</span><span class="ss">&quot;</span>, dev(vals, want)))</span>
+<span id="cb30-2401"><a href="#cb30-2401" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-2402"><a href="#cb30-2402" aria-hidden="true" tabindex="-1"></a><span class="co"># max(..., key=lambda x: x[1]) finds the element whose SECOND item is largest, then</span></span>
+<span id="cb30-2403"><a href="#cb30-2403" aria-hidden="true" tabindex="-1"></a><span class="co"># [0] takes that element&#39;s first item: the name of the worst-deviating row. The</span></span>
+<span id="cb30-2404"><a href="#cb30-2404" aria-hidden="true" tabindex="-1"></a><span class="co"># underscore in `for _, d in ...` is a conventional name for &quot;a value I must unpack</span></span>
+<span id="cb30-2405"><a href="#cb30-2405" aria-hidden="true" tabindex="-1"></a><span class="co"># but do not use&quot;.</span></span>
+<span id="cb30-2406"><a href="#cb30-2406" aria-hidden="true" tabindex="-1"></a>summary <span class="op">=</span> pd.DataFrame([</span>
+<span id="cb30-2407"><a href="#cb30-2407" aria-hidden="true" tabindex="-1"></a>    (<span class="st">&quot;Table 3, the three scenarios in 2030&quot;</span>, <span class="dv">20</span> <span class="op">*</span> <span class="dv">4</span>,</span>
+<span id="cb30-2408"><a href="#cb30-2408" aria-hidden="true" tabindex="-1"></a>     <span class="bu">max</span>(d <span class="cf">for</span> _, d <span class="kw">in</span> t3_dev), <span class="bu">max</span>(t3_dev, key<span class="op">=</span><span class="kw">lambda</span> x: x[<span class="dv">1</span>])[<span class="dv">0</span>]),</span>
+<span id="cb30-2409"><a href="#cb30-2409" aria-hidden="true" tabindex="-1"></a>    (<span class="st">&quot;Table 5, elasticities of capital supply&quot;</span>, <span class="dv">5</span> <span class="op">*</span> <span class="dv">8</span>,</span>
+<span id="cb30-2410"><a href="#cb30-2410" aria-hidden="true" tabindex="-1"></a>     <span class="bu">max</span>(d <span class="cf">for</span> _, d <span class="kw">in</span> t5_dev), <span class="bu">max</span>(t5_dev, key<span class="op">=</span><span class="kw">lambda</span> x: x[<span class="dv">1</span>])[<span class="dv">0</span>]),</span>
+<span id="cb30-2411"><a href="#cb30-2411" aria-hidden="true" tabindex="-1"></a>    (<span class="st">&quot;Table 6, rigidities of the cognitive wage&quot;</span>, <span class="dv">7</span> <span class="op">*</span> <span class="dv">7</span>,</span>
+<span id="cb30-2412"><a href="#cb30-2412" aria-hidden="true" tabindex="-1"></a>     <span class="bu">max</span>(d <span class="cf">for</span> _, d <span class="kw">in</span> t6_dev), <span class="bu">max</span>(t6_dev, key<span class="op">=</span><span class="kw">lambda</span> x: x[<span class="dv">1</span>])[<span class="dv">0</span>]),</span>
+<span id="cb30-2413"><a href="#cb30-2413" aria-hidden="true" tabindex="-1"></a>], columns<span class="op">=</span>[<span class="st">&quot;published table&quot;</span>, <span class="st">&quot;cells compared&quot;</span>, <span class="st">&quot;largest absolute deviation&quot;</span>,</span>
+<span id="cb30-2414"><a href="#cb30-2414" aria-hidden="true" tabindex="-1"></a>            <span class="st">&quot;where&quot;</span>])</span>
+<span id="cb30-2415"><a href="#cb30-2415" aria-hidden="true" tabindex="-1"></a>show(summary, floatfmt<span class="op">=</span><span class="st">&quot;.3f&quot;</span>)</span>
+<span id="cb30-2416"><a href="#cb30-2416" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb30-2417"><a href="#cb30-2417" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-2418"><a href="#cb30-2418" aria-hidden="true" tabindex="-1"></a>The largest deviation anywhere is</span>
+<span id="cb30-2419"><a href="#cb30-2419" aria-hidden="true" tabindex="-1"></a><span class="in">`{python} num(max(max(d for _, d in t3_dev), max(d for _, d in t5_dev), max(d for _, d in t6_dev)), 2)`</span>,</span>
+<span id="cb30-2420"><a href="#cb30-2420" aria-hidden="true" tabindex="-1"></a>on figures the paper prints to one decimal.</span>
+<span id="cb30-2421"><a href="#cb30-2421" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-2422"><a href="#cb30-2422" aria-hidden="true" tabindex="-1"></a>Four internal identities, none of which involve the published numbers:</span>
+<span id="cb30-2423"><a href="#cb30-2423" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-2426"><a href="#cb30-2426" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb30-2427"><a href="#cb30-2427" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: identities</span></span>
+<span id="cb30-2428"><a href="#cb30-2428" aria-hidden="true" tabindex="-1"></a><span class="co">#| code-summary: &quot;internal consistency checks&quot;</span></span>
+<span id="cb30-2429"><a href="#cb30-2429" aria-hidden="true" tabindex="-1"></a>checks <span class="op">=</span> []</span>
+<span id="cb30-2430"><a href="#cb30-2430" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-2431"><a href="#cb30-2431" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. the labor force adds up every month, in every scenario.</span></span>
+<span id="cb30-2432"><a href="#cb30-2432" aria-hidden="true" tabindex="-1"></a><span class="co"># Two `for` clauses in one comprehension is a nested loop, read left to right: for</span></span>
+<span id="cb30-2433"><a href="#cb30-2433" aria-hidden="true" tabindex="-1"></a><span class="co"># each scenario, for each month of that scenario. It yields one number per month</span></span>
+<span id="cb30-2434"><a href="#cb30-2434" aria-hidden="true" tabindex="-1"></a><span class="co"># across all three runs, and max() keeps the largest. A result near 1e-16 means the</span></span>
+<span id="cb30-2435"><a href="#cb30-2435" aria-hidden="true" tabindex="-1"></a><span class="co"># identity holds to the limit of floating-point precision.</span></span>
+<span id="cb30-2436"><a href="#cb30-2436" aria-hidden="true" tabindex="-1"></a>worst <span class="op">=</span> <span class="bu">max</span>(<span class="bu">abs</span>(m.l_C <span class="op">+</span> m.l_N <span class="op">+</span> m.U_C <span class="op">+</span> m.U_N <span class="op">-</span> F.L)</span>
+<span id="cb30-2437"><a href="#cb30-2437" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> n <span class="kw">in</span> NAMES <span class="cf">for</span> m <span class="kw">in</span> RUNS[n].months)</span>
+<span id="cb30-2438"><a href="#cb30-2438" aria-hidden="true" tabindex="-1"></a>checks.append((<span class="st">&quot;l_C + l_N + U_C + U_N = L, every month (p. 20)&quot;</span>, <span class="ss">f&quot;</span><span class="sc">{</span>worst<span class="sc">:.2e}</span><span class="ss">&quot;</span>, <span class="st">&quot;0&quot;</span>))</span>
+<span id="cb30-2439"><a href="#cb30-2439" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-2440"><a href="#cb30-2440" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. system (39) at the targets reproduces Proposition 1 (Table A.1, panel D)</span></span>
+<span id="cb30-2441"><a href="#cb30-2441" aria-hidden="true" tabindex="-1"></a>worst <span class="op">=</span> <span class="fl">0.0</span></span>
+<span id="cb30-2442"><a href="#cb30-2442" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> n <span class="kw">in</span> NAMES:</span>
+<span id="cb30-2443"><a href="#cb30-2443" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> P[n].at(<span class="fl">2030.0</span>)</span>
+<span id="cb30-2444"><a href="#cb30-2444" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> dlnA <span class="kw">in</span> (<span class="fl">0.0</span>, <span class="fl">0.006</span>):</span>
+<span id="cb30-2445"><a href="#cb30-2445" aria-hidden="true" tabindex="-1"></a>        fr <span class="op">=</span> statics.frictionless(F, x[<span class="st">&quot;md&quot;</span>], x[<span class="st">&quot;a&quot;</span>], x[<span class="st">&quot;psi&quot;</span>], x[<span class="st">&quot;rho&quot;</span>], dlnA)</span>
+<span id="cb30-2446"><a href="#cb30-2446" aria-hidden="true" tabindex="-1"></a>        ac <span class="op">=</span> statics.actual_at_employment(F, x[<span class="st">&quot;md&quot;</span>], x[<span class="st">&quot;a&quot;</span>], x[<span class="st">&quot;psi&quot;</span>], x[<span class="st">&quot;rho&quot;</span>],</span>
+<span id="cb30-2447"><a href="#cb30-2447" aria-hidden="true" tabindex="-1"></a>                                          fr.l_C_star, fr.l_N_star, dlnA)</span>
+<span id="cb30-2448"><a href="#cb30-2448" aria-hidden="true" tabindex="-1"></a>        worst <span class="op">=</span> <span class="bu">max</span>(worst, <span class="bu">abs</span>(ac.dlnY <span class="op">-</span> fr.dlnYL), <span class="bu">abs</span>(ac.s_L <span class="op">-</span> fr.s_L),</span>
+<span id="cb30-2449"><a href="#cb30-2449" aria-hidden="true" tabindex="-1"></a>                    <span class="bu">abs</span>(ac.dlnw_C_tilde <span class="op">-</span> fr.dlnw_tilde))</span>
+<span id="cb30-2450"><a href="#cb30-2450" aria-hidden="true" tabindex="-1"></a>checks.append((<span class="st">&quot;(39) at the targets equals Proposition 1&quot;</span>, <span class="ss">f&quot;</span><span class="sc">{</span>worst<span class="sc">:.2e}</span><span class="ss">&quot;</span>, <span class="st">&quot;0&quot;</span>))</span>
+<span id="cb30-2451"><a href="#cb30-2451" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-2452"><a href="#cb30-2452" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. the monthly ideas step against the closed form (43)</span></span>
+<span id="cb30-2453"><a href="#cb30-2453" aria-hidden="true" tabindex="-1"></a>worst <span class="op">=</span> <span class="bu">max</span>(<span class="bu">abs</span>(RUNS[n].at(<span class="fl">2030.0</span>).dlnA <span class="op">-</span> simulate.ideas_closed_form(RUNS[n], <span class="fl">2030.0</span>))</span>
+<span id="cb30-2454"><a href="#cb30-2454" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> n <span class="kw">in</span> NAMES)</span>
+<span id="cb30-2455"><a href="#cb30-2455" aria-hidden="true" tabindex="-1"></a>checks.append((<span class="st">&quot;monthly ideas step vs closed form (43)&quot;</span>, <span class="ss">f&quot;</span><span class="sc">{</span><span class="dv">100</span> <span class="op">*</span> worst<span class="sc">:.4f}</span><span class="ss"> pp&quot;</span>,</span>
+<span id="cb30-2456"><a href="#cb30-2456" aria-hidden="true" tabindex="-1"></a>               <span class="st">&quot;&lt; 0.02 pp (p. 41)&quot;</span>))</span>
+<span id="cb30-2457"><a href="#cb30-2457" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-2458"><a href="#cb30-2458" aria-hidden="true" tabindex="-1"></a><span class="co"># 4. every hire leaves the pool</span></span>
+<span id="cb30-2459"><a href="#cb30-2459" aria-hidden="true" tabindex="-1"></a>worst <span class="op">=</span> <span class="bu">max</span>(<span class="bu">abs</span>(m.f_C <span class="op">*</span> m.U_C <span class="op">+</span> m.f_N <span class="op">*</span> m.U_N <span class="op">-</span> m.H_C <span class="op">-</span> m.H_N)</span>
+<span id="cb30-2460"><a href="#cb30-2460" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> n <span class="kw">in</span> NAMES <span class="cf">for</span> m <span class="kw">in</span> RUNS[n].months)</span>
+<span id="cb30-2461"><a href="#cb30-2461" aria-hidden="true" tabindex="-1"></a>checks.append((<span class="st">&quot;f_C U_C + f_N U_N = H_C + H_N (p. 20)&quot;</span>, <span class="ss">f&quot;</span><span class="sc">{</span>worst<span class="sc">:.2e}</span><span class="ss">&quot;</span>, <span class="st">&quot;0&quot;</span>))</span>
+<span id="cb30-2462"><a href="#cb30-2462" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-2463"><a href="#cb30-2463" aria-hidden="true" tabindex="-1"></a>show(pd.DataFrame(checks, columns<span class="op">=</span>[<span class="st">&quot;identity&quot;</span>, <span class="st">&quot;largest violation&quot;</span>, <span class="st">&quot;expected&quot;</span>]))</span>
+<span id="cb30-2464"><a href="#cb30-2464" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb30-2465"><a href="#cb30-2465" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-2466"><a href="#cb30-2466" aria-hidden="true" tabindex="-1"></a>All four hold. The two accounting identities, rows 1 and 4, hold to</span>
+<span id="cb30-2467"><a href="#cb30-2467" aria-hidden="true" tabindex="-1"></a><span class="in">`{python} checks[0][1]`</span> and <span class="in">`{python} checks[3][1]`</span>, which is floating-point noise; the</span>
+<span id="cb30-2468"><a href="#cb30-2468" aria-hidden="true" tabindex="-1"></a>system (39) evaluated at the targets returns Proposition 1 to <span class="in">`{python} checks[1][1]`</span>; and</span>
+<span id="cb30-2469"><a href="#cb30-2469" aria-hidden="true" tabindex="-1"></a>the monthly ideas step sits <span class="in">`{python} checks[2][1]`</span> from the closed form, inside the 0.02</span>
+<span id="cb30-2470"><a href="#cb30-2470" aria-hidden="true" tabindex="-1"></a>points the paper reports.</span>
+<span id="cb30-2471"><a href="#cb30-2471" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-2472"><a href="#cb30-2472" aria-hidden="true" tabindex="-1"></a>One further cross-check of the model against itself: the measured TFP index (45) is a</span>
+<span id="cb30-2473"><a href="#cb30-2473" aria-hidden="true" tabindex="-1"></a>base-weighted index, its dual (25) a chained one, and Appendix C.4 says the two agree</span>
+<span id="cb30-2474"><a href="#cb30-2474" aria-hidden="true" tabindex="-1"></a>only to first order. They do, and the wedge grows with the size of the shock, which is</span>
+<span id="cb30-2475"><a href="#cb30-2475" aria-hidden="true" tabindex="-1"></a>how those two index concepts should differ.</span>
+<span id="cb30-2476"><a href="#cb30-2476" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-2479"><a href="#cb30-2479" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb30-2480"><a href="#cb30-2480" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: dual</span></span>
+<span id="cb30-2481"><a href="#cb30-2481" aria-hidden="true" tabindex="-1"></a><span class="co">#| code-summary: &quot;Equation (45) against its dual (25)&quot;</span></span>
+<span id="cb30-2482"><a href="#cb30-2482" aria-hidden="true" tabindex="-1"></a>rows <span class="op">=</span> []</span>
+<span id="cb30-2483"><a href="#cb30-2483" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> n <span class="kw">in</span> NAMES:</span>
+<span id="cb30-2484"><a href="#cb30-2484" aria-hidden="true" tabindex="-1"></a>    res <span class="op">=</span> RUNS[n]</span>
+<span id="cb30-2485"><a href="#cb30-2485" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Start the chain at the no-AI baseline (zero gaps, base labor share), then one</span></span>
+<span id="cb30-2486"><a href="#cb30-2486" aria-hidden="true" tabindex="-1"></a>    <span class="co"># point per month. `+` concatenates two lists.</span></span>
+<span id="cb30-2487"><a href="#cb30-2487" aria-hidden="true" tabindex="-1"></a>    pts <span class="op">=</span> [(F.s_L0, <span class="fl">0.0</span>, <span class="fl">0.0</span>)] <span class="op">+</span> [(m.s_L_star, m.dlnw_common, m.dlnr_star)</span>
+<span id="cb30-2488"><a href="#cb30-2488" aria-hidden="true" tabindex="-1"></a>                                  <span class="cf">for</span> m <span class="kw">in</span> res.months]</span>
+<span id="cb30-2489"><a href="#cb30-2489" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-2490"><a href="#cb30-2490" aria-hidden="true" tabindex="-1"></a>    <span class="co"># zip(pts, pts[1:]) pairs each point with the NEXT one: pts[1:] is the list from</span></span>
+<span id="cb30-2491"><a href="#cb30-2491" aria-hidden="true" tabindex="-1"></a>    <span class="co"># index 1 onward, so the pairs are (point 0, point 1), (point 1, point 2), and so</span></span>
+<span id="cb30-2492"><a href="#cb30-2492" aria-hidden="true" tabindex="-1"></a>    <span class="co"># on. That is the standard way to walk consecutive differences. Each pair is</span></span>
+<span id="cb30-2493"><a href="#cb30-2493" aria-hidden="true" tabindex="-1"></a>    <span class="co"># unpacked into previous (sp, wp, rp) and current (sc, wc, rc) values, and the</span></span>
+<span id="cb30-2494"><a href="#cb30-2494" aria-hidden="true" tabindex="-1"></a>    <span class="co"># sum accumulates the share-weighted change in the two factor prices.</span></span>
+<span id="cb30-2495"><a href="#cb30-2495" aria-hidden="true" tabindex="-1"></a>    dual <span class="op">=</span> <span class="bu">sum</span>(<span class="fl">0.5</span> <span class="op">*</span> (sp <span class="op">+</span> sc) <span class="op">*</span> (wc <span class="op">-</span> wp) <span class="op">+</span> (<span class="dv">1</span> <span class="op">-</span> <span class="fl">0.5</span> <span class="op">*</span> (sp <span class="op">+</span> sc)) <span class="op">*</span> (rc <span class="op">-</span> rp)</span>
+<span id="cb30-2496"><a href="#cb30-2496" aria-hidden="true" tabindex="-1"></a>               <span class="cf">for</span> (sp, wp, rp), (sc, wc, rc) <span class="kw">in</span> <span class="bu">zip</span>(pts, pts[<span class="dv">1</span>:]))</span>
+<span id="cb30-2497"><a href="#cb30-2497" aria-hidden="true" tabindex="-1"></a>    tfp <span class="op">=</span> res.at(<span class="fl">2030.0</span>).dln_tfp</span>
+<span id="cb30-2498"><a href="#cb30-2498" aria-hidden="true" tabindex="-1"></a>    rows.append({<span class="st">&quot;scenario&quot;</span>: n, <span class="st">&quot;TFP gap, index (45)&quot;</span>: <span class="dv">100</span> <span class="op">*</span> tfp,</span>
+<span id="cb30-2499"><a href="#cb30-2499" aria-hidden="true" tabindex="-1"></a>                 <span class="st">&quot;TFP gap, chained dual (25)&quot;</span>: <span class="dv">100</span> <span class="op">*</span> dual,</span>
+<span id="cb30-2500"><a href="#cb30-2500" aria-hidden="true" tabindex="-1"></a>                 <span class="st">&quot;wedge, pct of the gap&quot;</span>: <span class="dv">100</span> <span class="op">*</span> <span class="bu">abs</span>(tfp <span class="op">-</span> dual) <span class="op">/</span> tfp})</span>
+<span id="cb30-2501"><a href="#cb30-2501" aria-hidden="true" tabindex="-1"></a>show(pd.DataFrame(rows), floatfmt<span class="op">=</span><span class="st">&quot;.3f&quot;</span>)</span>
+<span id="cb30-2502"><a href="#cb30-2502" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb30-2503"><a href="#cb30-2503" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-2504"><a href="#cb30-2504" aria-hidden="true" tabindex="-1"></a><span class="fu">## Reproducing this document</span></span>
+<span id="cb30-2505"><a href="#cb30-2505" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-2506"><a href="#cb30-2506" aria-hidden="true" tabindex="-1"></a><span class="in">```sh</span></span>
+<span id="cb30-2507"><a href="#cb30-2507" aria-hidden="true" tabindex="-1"></a><span class="va">QUARTO_PYTHON</span><span class="op">=</span>/opt/anaconda3/bin/python3 <span class="ex">quarto</span> render repro.qmd</span>
+<span id="cb30-2508"><a href="#cb30-2508" aria-hidden="true" tabindex="-1"></a><span class="ex">python3</span> <span class="at">-m</span> pytest <span class="at">-q</span>          <span class="co"># the same checks as assertions, plus the ones not shown here</span></span>
+<span id="cb30-2509"><a href="#cb30-2509" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb30-2510"><a href="#cb30-2510" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-2511"><a href="#cb30-2511" aria-hidden="true" tabindex="-1"></a>The package requires only the standard library; this document additionally uses</span>
+<span id="cb30-2512"><a href="#cb30-2512" aria-hidden="true" tabindex="-1"></a>pandas, matplotlib and tabulate for its tables and figures. <span class="in">`README.md`</span> records the</span>
+<span id="cb30-2513"><a href="#cb30-2513" aria-hidden="true" tabindex="-1"></a>places where the paper leaves a modelling choice implicit and how each was resolved.</span>
+<span id="cb30-2514"><a href="#cb30-2514" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-2515"><a href="#cb30-2515" aria-hidden="true" tabindex="-1"></a>::: {.site-nav}</span>
+<span id="cb30-2516"><a href="#cb30-2516" aria-hidden="true" tabindex="-1"></a>Part of an independent reproduction of Korinek et al. (2026):</span>
+<span id="cb30-2517"><a href="#cb30-2517" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Open Output (the explorer)</span><span class="co">](explorer/)</span> <span class="dv">&amp;middot;</span> Open Analysis: Report (here) and</span>
+<span id="cb30-2518"><a href="#cb30-2518" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Slides</span><span class="co">](slides/slides.html)</span> <span class="dv">&amp;middot;</span></span>
+<span id="cb30-2519"><a href="#cb30-2519" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Open Materials</span><span class="co">](https://github.com/fhoces/opa-ai-macro-econ-scenarios)</span> <span class="dv">&amp;middot;</span></span>
+<span id="cb30-2520"><a href="#cb30-2520" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Overview</span><span class="co">](index.html)</span></span>
+<span id="cb30-2521"><a href="#cb30-2521" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb30-2522"><a href="#cb30-2522" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-2523"><a href="#cb30-2523" aria-hidden="true" tabindex="-1"></a>::: {.credit}</span>
+<span id="cb30-2524"><a href="#cb30-2524" aria-hidden="true" tabindex="-1"></a>OPA done by <span class="co">[</span><span class="ot">Fernando Hoces de la Guardia</span><span class="co">](https://fhoces.github.io)</span></span>
+<span id="cb30-2525"><a href="#cb30-2525" aria-hidden="true" tabindex="-1"></a>:::</span>
 </code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
