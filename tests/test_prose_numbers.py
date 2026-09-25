@@ -260,7 +260,8 @@ def test_deck_pool_rounding_box():
 
 
 def test_deck_slop_numbers():
-    """The slop slide's pure-slop row and the checking-becomes-work case."""
+    """The slop slides' typed numbers: the pure-slop row, the checking-becomes-work case,
+    the displacement-versus-cushion table with its eps* values, and the critical gain."""
     pure = table3_column(simulate.run(F, slop.scale_gain(slop.BASE, 1e-6)))
     assert (f"GDP **+{f1(pure['GDP, pct above no-AI'])} percent**, capital "
             f"**+{f1(pure['Capital stock, pct above no-AI'])}**, measured TFP "
@@ -271,6 +272,19 @@ def test_deck_slop_numbers():
     work = rows["gain halved, checking becomes new human work"]
     assert f"average wage still rises (+{f1(work['Average wage, pct above no-AI'])})" in DECK
     assert f"labor share to {f1(work['Labor share, pct of income'])}" in DECK
+    # The slop-mechanism slide: Equation (11)'s displacement term against the weak-link
+    # cushion at the substantial gain, half of it, and the survey's lower quartile 0.09,
+    # then the eps* threshold each implies, and the critical gain of the postscript box.
+    a0 = slop.gain_2030(slop.BASE)
+    eps = []
+    for a in (a0, a0 / 2, 0.09):
+        scen = slop.scale_gain(slop.BASE, a)
+        d = slop.decomposition(F, scen)
+        assert (f"| {d['a_2030']:.2f} | {f2(100 * d['displacement'])} pp | "
+                f"{f2(100 * d['weak-link cushion'])} pp | {d['ratio']:.1f}x |") in DECK
+        eps.append(f2(slop.eps_star(F, scen)))
+    assert f"elasticity from {eps[0]} to {eps[1]} and then {eps[2]} across the three rows" in DECK
+    assert f"falls below **{f2(slop.critical_gain(F))}**" in DECK
 
 
 def test_deck_squeeze():
