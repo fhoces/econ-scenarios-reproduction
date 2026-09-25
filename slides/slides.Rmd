@@ -560,7 +560,7 @@ name: input-psi
 .pull-right[
 **What is measured today.** The low end comes from the Anthropic Economic Index automation-versus-augmentation split of observed usage: about half of chat use and three quarters of API use looks like automation. The 0.9 end is an assumed world where agentic use dominates. Of the four disruptiveness inputs, this has the best contemporaneous data.
 
-**What would settle it.** Classifying observed AI interactions by whether a human stays in the loop, weighted to the economy rather than to the users of one product. Survey median **0.47**, the modest scenario's value.
+**What would settle it.** Classifying observed AI interactions by whether a human stays in the loop, weighted to the economy rather than to the users of one product. Survey median **0.47**, close to the modest scenario's 0.50.
 ]
 
 .small[
