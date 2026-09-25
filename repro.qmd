@@ -75,7 +75,8 @@ in the paper.
 
 Every quantity the model reports is a **gap against a counterfactual without AI**,
 not a level: $\Delta \ln x_t \equiv \ln x_t - \ln \bar x_t$, where the bar is the
-no-AI path along which the economy grows at $g + n$. So "GDP is 8.3 percent above
+no-AI path along which the economy grows at $g + n$, trend ideas growth plus labor-force
+growth, 2 percent a year together. So "GDP is 8.3 percent above
 the no-AI path" says nothing about whether GDP is high or low in absolute terms.
 
 Four more conventions worth holding onto:
@@ -240,7 +241,9 @@ def show(df, **kw):
 
 ### 2.1.1 Technology and factor markets
 
-Output is a CES aggregate not over capital and labor but over **task instances**: a
+Output is a constant-elasticity-of-substitution (CES) aggregate, a bundle whose inputs
+substitute for one another at one fixed rate, and the inputs are not capital and labor but
+**task instances**: a
 task is a type of work (reviewing a contract), an instance is one performance of it
 (this contract).
 
@@ -438,8 +441,9 @@ show(pd.DataFrame({"object": [r[0] for r in base],
 The five exogenous objects are the affected mass $m_t$, the diffusion share $d_t$,
 the log gain per instance $a_t$, the automation share $\psi_t$ and the reinstatement
 ratio $\rho$. All three scenarios share the mid-2026 anchors $m = 0.14$ and
-$d = 0.10$, so they coincide there and separate only afterwards; each logistic's
-slope follows from the anchor, the 2030 value and the ceiling by Equation (8').
+$d = 0.10$, so they coincide there and separate only afterwards; reach and use follow S-shaped
+(logistic) curves, and each curve's slope follows from the anchor, the 2030 value and the
+ceiling by Equation (8').
 
 ```{python}
 #| label: paths-table
@@ -592,6 +596,11 @@ is irrelevant whether the cheaper instance ends up in a machine's hands or a wor
 because the unit cost falls by $a_{i,t}$ either way. $\psi_t$ matters enormously for
 the *distribution* of the gain, and not at all for its size.
 :::
+
+Equation (10) is the factor-price frontier: the TFP gain of (9) has to be paid to someone,
+so the wage rise weighted by the labor share plus the rental-rate rise weighted by the
+capital share adds up to it. Who gets how much is what the capital-supply elasticity
+decides.
 
 []{#eq-10}
 $$
@@ -824,8 +833,8 @@ scenario's numbers.
 
 ### 2.1.5 Employment in the two groups
 
-The employment targets are the destination that the flow block of Section 2.3 works
-toward: the employment each group would have if the labor market cleared. Equation (13)
+The employment targets are the destination that the month-by-month labor-market block
+of Section 2.3 (the paper's "flow block") works toward: the employment each group would have if the labor market cleared. Equation (13)
 pins them from the group AI does not touch: demand for all-other labor is an ordinary CES
 demand curve, and the cognitive target is whatever is left of base employment.
 
@@ -866,7 +875,10 @@ gives $\Delta \ln \ell_N = \Delta \ln Y - \sigma \Delta \ln w -
 :::
 
 Proposition 1 collects the exact solution, replacing every $\approx$ above with an
-equality:
+equality. Read in order: (14) is the labor share, (15) how much demand for all-other labor
+rises, (16) the wage and output per worker that follow from the two, and (17) with (18) the
+rental rate at which the capital firms want equals the capital savers offer; once that last
+one is solved everything else is a lookup.
 
 []{#eq-14}
 $$
@@ -1011,6 +1023,11 @@ So far $A_t$ has been held on its no-AI path. This section makes it
 semi-endogenous: AI raises GDP, a fixed share of GDP is spent on research, so AI buys
 more research.
 
+Equation (20) is the ideas production function: new ideas come from research spending
+$R_t$ with returns $\lambda$, and get harder to find as the stock $A_t$ grows ($\phi_R$
+below one). Equation (21) says research is a share $\iota_{R,t}$ of output, a share that
+rises on its own trend with or without AI.
+
 []{#eq-20}
 $$
 \dot A_t = \nu R_t^{\lambda} A_t^{\phi_R},
@@ -1047,6 +1064,8 @@ research uses final output rather than a separate stock of scientists. That choi
 what makes the AI channel mechanical. AI raises $Y$, the research budget is a fixed
 share of $Y$, so the research budget rises without anyone deciding anything.
 :::
+
+So the research gap is the GDP gap:
 
 []{#eq-22}
 $$
@@ -1110,6 +1129,10 @@ no-AI path after six years. Compare that with the level channel of Section 2.1, 
 `{python} v('extreme', 'gdp', 1)` percent of GDP. Over a six-year horizon the
 innovation block is a rounding error; over fifty years it would not be.
 :::
+
+In the long run a permanent one percent rise in research raises the ideas stock by
+$\gamma$ percent, (24); and (40) converts the fishing-out estimate of Bloom et al. (2020)
+into the units of (20), which is where the 2.86 comes from.
 
 []{#eq-24}
 $$
@@ -1264,8 +1287,11 @@ falling target, an *overhang*, and all-other employment below its rising one, a
 *shortfall*, both measured in (28). The cognitive wage does not fall enough to keep
 everyone employed: by (30) it closes only a fraction of its gap to the wage that would
 clear the group, at a speed set by the rigidity $\xi$, so firms want fewer cognitive
-workers than they have. Quits, which rise when jobs are easy to find (27), remove part of
-the surplus and layoffs remove the rest (31). The expanding occupations, meanwhile, post
+workers than they have. The wage has to clear the group's attached force, its employed plus
+its own unemployed above the normal pool (29). Quits, which rise when jobs are easy to find
+(27), remove part of the surplus and layoffs remove the rest (31).
+
+The expanding occupations, meanwhile, post
 openings for a fraction $\theta_H$ of their shortfall each month on top of replacing
 their quits (32). The unemployed search in both groups, but at a discount $\mu$ outside
 their group of origin (33); openings and searchers meet through a matching function that
@@ -1350,7 +1376,7 @@ $D_{C,t}$ remove the rest. This is **job rationing** in the sense of Michaillat
 too high and the jobs simply are not offered. It is also the mechanism behind the
 Table 6 trade-off: rigid wages convert the shock into unemployment, flexible wages
 convert it into wage declines.
-:::
+::: In symbols, $\ell^d_{C,t}$ is the cognitive employment firms demand at the wage (30) delivers, and $E_t$ the surplus above it.
 
 []{#eq-32}
 $$
@@ -1393,7 +1419,7 @@ more than ten vacancies, because only $\bar\pi_o \approx$
 `{python} num(F.fill_bar, 2)` of postings fill within the month. $\theta_H$ is the
 recruiting-and-training speed limit: at $\theta_H = 1$ the expanding group posts its
 entire shortfall at once, at `{python} num(SCENARIOS['modest'].theta_H, 2)` it closes
-a tenth of the gap per month.
+a tenth of the gap per month. $Z_t$ is the cognitive group's own shortfall, demand at the sticky wage above employment; on the three scenario paths it peaks at `{python} num(100 * max(max(RUNS[n].series('Z')) for n in NAMES), 3)` percent of the labor force, so it is negligible.
 
 **(33) Effective search, and where occupational specificity lives.** A worker supplies
 one unit of search in their own group and only $\mu \le 1$ units in the other. This
