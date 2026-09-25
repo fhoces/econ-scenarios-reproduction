@@ -299,7 +299,10 @@ t3 |>
                     "Labor share, pct of income",
                     "Cognitive employment, pct since mid-2026",
                     "Unemployment rate, cognitive, pct")) |>
-  transmute(Outcome = relabel(str_trim(row)),
+  # The paper's w_C row sits indented under the average wage; on its own here it
+  # needs a full name (display only, the CSV row name is unchanged).
+  transmute(Outcome = if_else(str_trim(row) == "cognitive occupations w_C",
+                              "AI-sensitive wage, pct above no-AI", relabel(str_trim(row))),
             `No AI` = no_ai, Modest = modest,
             Substantial = substantial, Extreme = extreme) |>
   knitr::kable(digits = 1, format = "html")
