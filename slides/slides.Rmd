@@ -754,17 +754,17 @@ from 2024 to 2030.</span>
 
 <div class="col" style="flex:1.05; border-left:4px solid #1baf7a;">
 <h4>3 &nbsp;What comes out</h4>
-<div class="ser">&#128200; GDP</div>
-<div class="ser">&#9881;&#65039; measured TFP</div>
-<div class="ser">&#128181; the average wage</div>
-<div class="ser">&#129489;&#8205;&#128187; the AI-sensitive wage</div>
-<div class="ser">&#128295; the all-other wage</div>
-<div class="ser">&#129367; the labor share of income</div>
-<div class="ser">&#127981; the capital stock</div>
-<div class="ser">&#128101; employment, by group</div>
-<div class="ser">&#128269; unemployment, by group and overall</div>
-<div class="ser">&#128260; workers changing occupation</div>
-<div class="ser">&#128161; the stock of ideas</div>
+<div class="ser">GDP</div>
+<div class="ser">measured TFP</div>
+<div class="ser">the average wage</div>
+<div class="ser">the AI-sensitive wage</div>
+<div class="ser">the all-other wage</div>
+<div class="ser">the labor share of income</div>
+<div class="ser">the capital stock</div>
+<div class="ser">employment, by group</div>
+<div class="ser">unemployment, by group and overall</div>
+<div class="ser">workers changing occupation</div>
+<div class="ser">the stock of ideas</div>
 <span class="foot">Each one monthly, and each one a <b>gap against the same economy without
 AI</b>, never a forecast of the level.</span>
 
@@ -1782,17 +1782,17 @@ name: series-to-plots
 <div style="display:flex; align-items:stretch; gap:0; margin-top:0;">
 
 <div style="flex:0 0 330px; display:flex; flex-direction:column; font-size:12.5px;">
-<div class="ser" style="flex:1; display:flex; align-items:center; border-left:3px solid #5b6873; padding-left:7px; margin:0; color:#101519;">&#128200;&nbsp; GDP</div>
-<div class="ser" style="flex:1; display:flex; align-items:center; border-left:3px solid #e2e7ec; padding-left:7px; margin:0; color:#9aa6b2;">&#9881;&#65039;&nbsp; measured TFP</div>
-<div class="ser" style="flex:1; display:flex; align-items:center; border-left:3px solid #e2e7ec; padding-left:7px; margin:0; color:#9aa6b2;">&#128181;&nbsp; the average wage</div>
-<div class="ser" style="flex:1; display:flex; align-items:center; border-left:3px solid #5b6873; padding-left:7px; margin:0; color:#101519;">&#129489;&#8205;&#128187;&nbsp; the AI-sensitive wage</div>
-<div class="ser" style="flex:1; display:flex; align-items:center; border-left:3px solid #5b6873; padding-left:7px; margin:0; color:#101519;">&#128295;&nbsp; the all-other wage</div>
-<div class="ser" style="flex:1; display:flex; align-items:center; border-left:3px solid #e2e7ec; padding-left:7px; margin:0; color:#9aa6b2;">&#129367;&nbsp; the labor share of income</div>
-<div class="ser" style="flex:1; display:flex; align-items:center; border-left:3px solid #e2e7ec; padding-left:7px; margin:0; color:#9aa6b2;">&#127981;&nbsp; the capital stock</div>
-<div class="ser" style="flex:1; display:flex; align-items:center; border-left:3px solid #e2e7ec; padding-left:7px; margin:0; color:#9aa6b2;">&#128101;&nbsp; employment, by group</div>
-<div class="ser" style="flex:1; display:flex; align-items:center; border-left:3px solid #5b6873; padding-left:7px; margin:0; color:#101519;">&#128269;&nbsp; unemployment, by group</div>
-<div class="ser" style="flex:1; display:flex; align-items:center; border-left:3px solid #e2e7ec; padding-left:7px; margin:0; color:#9aa6b2;">&#128260;&nbsp; workers changing occupation</div>
-<div class="ser" style="flex:1; display:flex; align-items:center; border-left:3px solid #e2e7ec; padding-left:7px; margin:0; color:#9aa6b2;">&#128161;&nbsp; the stock of ideas</div>
+<div class="ser" style="flex:1; display:flex; align-items:center; border-left:3px solid #5b6873; padding-left:7px; margin:0; color:#101519;"> GDP</div>
+<div class="ser" style="flex:1; display:flex; align-items:center; border-left:3px solid #e2e7ec; padding-left:7px; margin:0; color:#9aa6b2;"> measured TFP</div>
+<div class="ser" style="flex:1; display:flex; align-items:center; border-left:3px solid #e2e7ec; padding-left:7px; margin:0; color:#9aa6b2;"> the average wage</div>
+<div class="ser" style="flex:1; display:flex; align-items:center; border-left:3px solid #5b6873; padding-left:7px; margin:0; color:#101519;"> the AI-sensitive wage</div>
+<div class="ser" style="flex:1; display:flex; align-items:center; border-left:3px solid #5b6873; padding-left:7px; margin:0; color:#101519;"> the all-other wage</div>
+<div class="ser" style="flex:1; display:flex; align-items:center; border-left:3px solid #e2e7ec; padding-left:7px; margin:0; color:#9aa6b2;"> the labor share of income</div>
+<div class="ser" style="flex:1; display:flex; align-items:center; border-left:3px solid #e2e7ec; padding-left:7px; margin:0; color:#9aa6b2;"> the capital stock</div>
+<div class="ser" style="flex:1; display:flex; align-items:center; border-left:3px solid #e2e7ec; padding-left:7px; margin:0; color:#9aa6b2;"> employment, by group</div>
+<div class="ser" style="flex:1; display:flex; align-items:center; border-left:3px solid #5b6873; padding-left:7px; margin:0; color:#101519;"> unemployment, by group</div>
+<div class="ser" style="flex:1; display:flex; align-items:center; border-left:3px solid #e2e7ec; padding-left:7px; margin:0; color:#9aa6b2;"> workers changing occupation</div>
+<div class="ser" style="flex:1; display:flex; align-items:center; border-left:3px solid #e2e7ec; padding-left:7px; margin:0; color:#9aa6b2;"> the stock of ideas</div>
 </div>
 
 <div style="flex:0 0 135px; position:relative;">
