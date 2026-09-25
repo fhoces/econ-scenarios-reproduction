@@ -1,7 +1,7 @@
 panel,eq,variable,what,value
 A,22,Δln R,research uplift = the GDP gap,0.00125964
 A,42,Δg,growth gap of the ideas stock,2.10492e-05
-A,43,Δln A,"ideas stock, carried into t+1",0
+A,43,Δln A_t+1,"ideas stock, carried into t+1",1.7541e-06
 B,"18, 6",Δln r*,rental gap clearing the capital market,0.000776469
 B,15,ℓ̃_N,shift in demand for all-other labor,0.00124632
 B,14,s_L*,labor share at the targets,0.599261

@@ -32,7 +32,9 @@ def main() -> None:
         # panel, eq, variable, what it is, value
         ("A", "22", "Δln R", "research uplift = the GDP gap", r.dlnR),
         ("A", "42", "Δg", "growth gap of the ideas stock", r.dg),
-        ("A", "43", "Δln A", "ideas stock, carried into t+1", r.dlnA),
+        # Month 0 starts at the no-AI ideas stock (dlnA = 0 by construction); what (43)
+        # produces this month is next month's stock, stored on months[1].
+        ("A", "43", "Δln A_t+1", "ideas stock, carried into t+1", res.months[1].dlnA),
 
         ("B", "18, 6", "Δln r*", "rental gap clearing the capital market", r.dlnr_star),
         ("B", "15", "ℓ̃_N", "shift in demand for all-other labor", r.ell_N_tilde),
