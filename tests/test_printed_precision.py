@@ -10,6 +10,8 @@ It is written as an exact allowlist rather than a tolerance, so that a cell movi
 or out of agreement fails here and the prose has to be updated with it.
 """
 
+import pathlib
+import re
 from decimal import Decimal, ROUND_HALF_UP
 
 import pytest
@@ -102,6 +104,16 @@ def test_exactly_the_allowlisted_cells_miss_the_printed_digit():
     assert sum(1 for k in KNOWN_DIFFERENT if k[0] == "Table 3") == 7
     assert sum(1 for k in KNOWN_DIFFERENT if k[0] == "Table 5") == 1
     assert sum(1 for k in KNOWN_DIFFERENT if k[0] == "Table 6") == 8
+    # README.md lists the sixteen cells as "| table | cell | reproduced | published |":
+    # the reproduced value one decimal finer than the paper prints, the published one as
+    # printed. Every miss must appear there, and the table must have no extra row.
+    readme = (pathlib.Path(__file__).resolve().parent.parent / "README.md").read_text()
+    listed = [ln for ln in readme.splitlines() if re.match(r"\| Table [356] \| .* \| -?[\d.]+ \| -?[\d.]+ \|$", ln)]
+    assert len(listed) == len(MISSES)
+    for (table, col, row), (got, want) in MISSES.items():
+        d = DECIMALS.get(row, 1)
+        assert any(ln.startswith(f"| {table} |") and ln.endswith(f"| {got:.{d + 1}f} | {want:.{d}f} |")
+                   for ln in listed), f"README misses row for {table}, {col}, {row}"
 
 
 def test_no_difference_is_larger_than_a_last_digit():
