@@ -843,6 +843,10 @@ $$
 \tag{16}
 $$
 
+The $+\,\Delta \ln A_t$ is not in the main text's (16), which holds the ideas stock at
+its no-AI path. This is Table A.1's row tagged "(16), (44)": the same wage equation
+with the ideas pass-through of Appendix C.3 added, and the form the code uses.
+
 []{#eq-17}
 $$
 \Delta \ln K_t = \ln \frac{1 - s_{L,t}}{s_{K,t0}} + \Delta \ln (Y_t/L_t) - \Delta \ln r_t
@@ -901,8 +905,12 @@ cognitive jobs:
 
 []{#eq-19}
 $$
-\tilde \ell_{N,t} \approx \underbrace{(1-\rho)\psi_t m_t d_t}_{\text{net displacement}}
-+ \underbrace{(1-\sigma)(1-\psi_t) m_t d_t a_t}_{\text{labor released by the gains}}
+\begin{aligned}
+\tilde \ell_{N,t} &\approx \underbrace{(1-\rho)\psi_t m_t d_t}_{\text{net displacement}}
++ \underbrace{(1-\sigma)(1-\psi_t) m_t d_t a_t}_{\text{labor released by the gains}}, \\[6pt]
+\tilde \ell_{C,t} &\approx -\frac{s_{N,t0}}{s_{C,t0}}\, \tilde \ell_{N,t},
+\qquad \tilde \ell_{C,t} \equiv \ln(\ell^*_{C,t}/\ell_{C,t0})
+\end{aligned}
 \tag{19}
 $$
 
@@ -917,6 +925,11 @@ by $\sigma a_t$, so only the fraction $1 - \sigma$ of the saved time is actually
 released. At $\sigma =$ `{python} num(F.sigma, 1)`, half of every efficiency gain is
 spent on doing more of the same task and half shows up as labor no longer needed
 there. Set $\sigma = 1$ and this channel vanishes entirely.
+
+The second line is the mirror image. The two targets add up to base employment
+(the rule (13)), so the cognitive target falls by what the other group's rises, scaled by
+the ratio of the base shares. It is the $\tilde \ell_{C,t}$ the targets chunk below computes
+and the deck's panel D reads.
 :::
 
 Target employment in the unaffected group follows from [Equation (15)](#eq-15) and the
@@ -992,6 +1005,19 @@ $$
 \Delta \ln R_t = \Delta \ln Y_t
 \tag{22}
 $$
+
+Log-differencing (20) against the no-AI path turns that research uplift into a gap in
+the growth rate of ideas, which the paper calls the key equation of the section:
+
+[]{#eq-23}
+$$
+\Delta \ln g_t = \lambda\, \Delta \ln R_t - (1-\phi_R)\, \Delta \ln A_t
+\tag{23}
+$$
+
+The simulation uses (23) in its exact form, [Equation (42)](#eq-42): the same right-hand
+side, with the gap written in levels of the growth rate, $\Delta g_t = g_{A,t} - g =
+g\,(e^{\Delta \ln g_t} - 1)$,
 
 []{#eq-42}
 $$
