@@ -141,10 +141,16 @@ def _price_index_resid(f: Fixed, LamC: float, B: float, wtC: float, wtN: float,
             + B * math.exp(oms * dlnr) - 1.0)
 
 
+def _wage_N_at_employment(f: Fixed, y: float, l_N: float) -> float:
+    """The all-other labour-demand row of (39), inverted for the A-deflated wage
+    that makes l_N the demanded quantity at the A-deflated output gap y."""
+    return (y - math.log(l_N / f.l_N0)) / f.sigma
+
+
 def _wages_at_employment(f: Fixed, LamC: float, y: float, l_C: float, l_N: float) -> tuple:
     """The two labour-demand rows of (39), inverted for the wages that make
     (l_C, l_N) the demanded quantities at the A-deflated output gap y."""
-    wtN = (y - math.log(l_N / f.l_N0)) / f.sigma
+    wtN = _wage_N_at_employment(f, y, l_N)
     wtC = (y + math.log(LamC / f.cog_share) - math.log(l_C / f.l_C0)) / f.sigma
     return wtC, wtN
 
@@ -174,15 +180,12 @@ def actual_at_employment(f: Fixed, md: float, a: float, psi: float, rho: float,
 
     def resid(dlnr: float) -> float:
         y = _y_of_dlnr(f, B, dlnr, dlnA)
-        wtN = (y - math.log(l_N / f.l_N0)) / f.sigma
-        wtC = (y + math.log(LamC / f.cog_share) - math.log(l_C / f.l_C0)) / f.sigma
+        wtC, wtN = _wages_at_employment(f, LamC, y, l_C, l_N)
         return _price_index_resid(f, LamC, B, wtC, wtN, dlnr)
 
     dlnr = expand_and_bisect(resid, 0.0, step=0.01)
     y = _y_of_dlnr(f, B, dlnr, dlnA)
-    wtN = (y - math.log(l_N / f.l_N0)) / f.sigma
-    wtC = (y + math.log(LamC / f.cog_share) - math.log(l_C / f.l_C0)) / f.sigma
-    oms = 1.0 - f.sigma
+    wtC, wtN = _wages_at_employment(f, LamC, y, l_C, l_N)
     s_C = f.s_L0 * LamC * math.exp(oms * wtC)
     s_N = f.s_N0 * math.exp(oms * wtN)
     s_K = B * math.exp(oms * dlnr)
@@ -198,7 +201,7 @@ def cognitive_demand(f: Fixed, md: float, a: float, psi: float, rho: float,
 
     if math.isinf(f.eps):
         def resid_inf(y: float) -> float:
-            wtN = (y - math.log(l_N / f.l_N0)) / f.sigma
+            wtN = _wage_N_at_employment(f, y, l_N)
             return _price_index_resid(f, LamC, B, wtC, wtN, 0.0)
 
         y = expand_and_bisect(resid_inf, 0.0, step=0.02)
@@ -207,7 +210,7 @@ def cognitive_demand(f: Fixed, md: float, a: float, psi: float, rho: float,
 
     def resid(dlnr: float) -> float:
         y = _y_of_dlnr(f, B, dlnr, dlnA)
-        wtN = (y - math.log(l_N / f.l_N0)) / f.sigma
+        wtN = _wage_N_at_employment(f, y, l_N)
         return _price_index_resid(f, LamC, B, wtC, wtN, dlnr)
 
     dlnr = expand_and_bisect(resid, 0.0, step=0.01)
