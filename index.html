@@ -161,6 +161,17 @@
   table.scen td:first-child, table.scen th:first-child { text-align: left; }
   table.scen .repro { display: block; font-size: 11px; line-height: 1.2; color: var(--ink-3); }
 
+  /* The two-panel comparison at the foot of the page. */
+  .compare { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 18px 0 4px; }
+  .compare figure {
+    margin: 0; padding: 16px 18px 14px; border: 1px solid var(--rule); border-radius: 10px;
+    background: var(--panel); color: var(--ink-3);
+  }
+  .compare svg { width: 100%; max-width: 300px; height: auto; display: block; margin: 6px auto 0; }
+  .compare figcaption { font-size: 14px; color: var(--ink-2); margin-top: 10px; line-height: 1.5; }
+  .compare figcaption strong { color: var(--ink); font-weight: 600; }
+  @media (max-width: 560px) { .compare { grid-template-columns: 1fr; } }
+
   footer {
     margin-top: 52px; padding-top: 20px; border-top: 1px solid var(--rule);
     font-size: 14px; color: var(--ink-3);
@@ -392,6 +403,54 @@ confirm he has independently worked through why they should.</p>
   itself Version 1.0 when this reproduction was written, so later versions may move the page
   and equation numbers cited throughout.
 </div>
+
+<h2 id="difference">Difference between this OPA and the original analysis</h2>
+
+<p>Everything of substance on this site belongs to the original analysis: Korinek, Jones,
+   Sacher, Cotter and McCrory (2026), <cite><a href="https://www.anthropic.com/institute/econ-scenarios">Economic Scenarios for Transformative AI</a></cite>, The Anthropic Institute Working
+   Paper No. 2026-02. The questions, the task-based model, its calibration to US data
+   (their Tables 1 and A.2), the expert survey behind the scenarios (their Section 3.5
+   and Table 2), the three scenarios themselves and every conclusion drawn from them are
+   the authors' work. This site adds no model, no data and no finding. Its one extension,
+   the AI-slop exercise, is labelled as something the paper does not run.</p>
+
+<p>What this Open Policy Analysis adds is a small contribution of transparency on top of
+   that work. The paper already publishes two of the three layers: an <strong>output</strong>
+   (its Table 3, its figures and the authors' own scenario explorer on the
+   <a href="https://www.anthropic.com/institute/econ-scenarios">Anthropic Institute page</a>)
+   and the <strong>details</strong> of how that output was produced (its 45 numbered equations,
+   the 44-equation monthly system of Table A.1, the simulation procedure of Appendix A and
+   the innovation block of Appendix C). What no reader can do from the paper alone is move
+   between the two: there is no published code that turns those equations into those numbers,
+   so the output cannot be regenerated, a table cannot be checked cell by cell, and an input
+   cannot be changed to see what follows. The <strong>materials</strong> layer is absent.</p>
+
+<div class="compare">
+  <figure>
+    <span class="kicker">The original analysis</span>
+    <svg viewBox="0 0 300 250" role="img" aria-label="The original analysis: an output layer and a details layer, offset from each other and with a gap between them, above an empty dashed outline where a materials layer would be" xmlns="http://www.w3.org/2000/svg"><polygon points="190,159 282,205 282,231 190,277 98,231 98,205" fill="none" stroke="currentColor" stroke-width="1.5" stroke-dasharray="5 4" opacity="0.55"/><polyline points="98,205 190,251 282,205" fill="none" stroke="currentColor" stroke-width="1.5" stroke-dasharray="5 4" opacity="0.55"/><polygon points="98,130 190,176 190,202 98,156" fill="#1581ab"/><polygon points="190,176 282,130 282,156 190,202" fill="#1582b8"/><polygon points="190,84 282,130 190,176 98,130" fill="#1484c5"/><text transform="matrix(0.894 -0.447 0 1 236.0 171.7)" text-anchor="middle" font-family="IBM Plex Sans, Segoe UI, sans-serif" font-weight="600" font-size="11" letter-spacing="1.5" fill="#fff">DETAILS</text><polygon points="13,55 105,101 105,127 13,81" fill="#da9516"/><polygon points="105,101 197,55 197,81 105,127" fill="#eca516"/><polygon points="105,9 197,55 105,101 13,55" fill="#fcb415"/><text transform="matrix(0.894 -0.447 0 1 151.0 96.7)" text-anchor="middle" font-family="IBM Plex Sans, Segoe UI, sans-serif" font-weight="600" font-size="11" letter-spacing="1.5" fill="#fff">OUTPUT</text></svg>
+    <figcaption><strong>Two layers, not in the same plane.</strong> The paper gives its
+      output and the details behind it, but nothing connects them: a reader cannot get from
+      the equations to the explorer's numbers, and there is no materials layer to run.</figcaption>
+  </figure>
+  <figure>
+    <span class="kicker">This OPA</span>
+    <svg viewBox="0 0 300 250" role="img" aria-label="This OPA: output, details and materials stacked tightly in one vertical plane" xmlns="http://www.w3.org/2000/svg"><polygon points="58,132 150,178 150,204 58,158" fill="#002547"/><polygon points="150,178 242,132 242,158 150,204" fill="#003262"/><polygon points="150,86 242,132 150,178 58,132" fill="#0b4a7c"/><text transform="matrix(0.894 -0.447 0 1 196.0 173.7)" text-anchor="middle" font-family="IBM Plex Sans, Segoe UI, sans-serif" font-weight="600" font-size="10" letter-spacing="1.5" fill="#fff">MATERIALS</text><polygon points="58,101 150,147 150,173 58,127" fill="#1581ab"/><polygon points="150,147 242,101 242,127 150,173" fill="#1582b8"/><polygon points="150,55 242,101 150,147 58,101" fill="#1484c5"/><text transform="matrix(0.894 -0.447 0 1 196.0 142.7)" text-anchor="middle" font-family="IBM Plex Sans, Segoe UI, sans-serif" font-weight="600" font-size="11" letter-spacing="1.5" fill="#fff">DETAILS</text><polygon points="58,70 150,116 150,142 58,96" fill="#da9516"/><polygon points="150,116 242,70 242,96 150,142" fill="#eca516"/><polygon points="150,24 242,70 150,116 58,70" fill="#fcb415"/><text transform="matrix(0.894 -0.447 0 1 196.0 111.7)" text-anchor="middle" font-family="IBM Plex Sans, Segoe UI, sans-serif" font-weight="600" font-size="11" letter-spacing="1.5" fill="#fff">OUTPUT</text></svg>
+    <figcaption><strong>Three layers, tightly connected.</strong> Every number in the
+      <a href="explorer/">explorer</a> is computed by the code in the
+      <a href="https://github.com/fhoces/opa-ai-macro-econ-scenarios">repository</a>, every
+      equation in the <a href="repro.html">report</a> is the paper's own, cited by number, and
+      the test suite ties the three together.</figcaption>
+  </figure>
+</div>
+
+<p style="margin-top:14px;">So the difference is not in what is claimed but in what can be
+   checked. The reimplementation follows the paper's equations line by line, reproduces its
+   published Tables 3, 5 and 6, and records the few places where the text leaves a choice
+   implicit. Where this site and the paper disagree, the paper's own numbers are shown beside
+   the reproduced ones, and the paper is the reference. Readers who want the analysis should
+   read the paper; this site is for readers who want to see how its numbers come about, and
+   to change them.</p>
 
 <footer>
   Version 1.0, September 2026 (git tag <code>v1.0</code>).
