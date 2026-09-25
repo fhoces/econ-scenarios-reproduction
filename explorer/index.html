@@ -402,6 +402,13 @@
     background: var(--chip);
     padding: 1px 4px;
   }
+  .note p { margin: 0 0 10px; }
+  .note p:last-child { margin-bottom: 0; }
+  /* The fold overrides the page's generic details rule (a top border for the numbers
+     table); the display:none guard keeps the closed body out of the page's width. */
+  .note details { margin: 0 0 10px; border-top: none; padding-top: 0; }
+  .note summary { font-size: 12.5px; color: var(--ink); font-weight: 500; }
+  .note details:not([open]) > *:not(summary) { display: none; }
   .credit { margin: 14px 0 0; font-size: 11.5px; color: var(--ink-2); }
   .credit a { color: var(--series-1); text-decoration: none; }
   .credit a:hover { text-decoration: underline; }
@@ -414,8 +421,9 @@
 
 <div class="wrap">
   <p class="site-nav">
-    Part of an independent reproduction of Korinek et al. (2026):
-    Open Output (here) &middot;
+    An independent reproduction of Korinek et al. (2026), following the
+    <a href="https://tinyurl.com/1qypbihb">Open Policy Analysis</a> framework.
+    This page is its Open Output &middot;
     Open Analysis: <a href="../repro.html">Report</a> and
     <a href="../slides/slides.html">Slides</a> &middot;
     <a href="https://github.com/fhoces/opa-ai-macro-econ-scenarios">Open Materials</a> &middot;
@@ -425,29 +433,19 @@
     <img class="header-layer" src="../assets/opa/opa-assumptions-solo.png" alt="" aria-hidden="true">
     <h1>AI Scenario Explorer</h1>
     <p class="standfirst">
-      An independent reproduction of
-      <a href="https://www.anthropic.com/institute/econ-scenarios">Economic Scenarios for
-      Transformative AI</a>, following the
-      <a href="https://tinyurl.com/1qypbihb">Open Policy Analysis</a> framework: this page
-      is its <strong>open output</strong>.
+      <a href="https://www.anthropic.com/institute/econ-scenarios">Korinek, Jones, Sacher,
+      Cotter and McCrory</a> run their transformative-AI model at three settings,
+      <em>modest</em>, <em>substantial</em> and <em>extreme</em>. But the model takes seven
+      inputs, and the three scenarios move all seven in lockstep. Set them independently
+      here: every one of the <span id="cell-count">4374</span> combinations is precomputed,
+      so the 2030 outcomes appear as you click.
     </p>
     <p class="standfirst">
-      Korinek, Jones, Sacher, Cotter and McCrory run their transformative-AI model at three
-      settings and label them <em>modest</em>, <em>substantial</em> and <em>extreme</em>. But the
-      model takes seven inputs, and those three scenarios move all seven in lockstep. Set them
-      independently here: every one of the <span id="cell-count">4374</span> combinations is
-      precomputed, so the 2030 outcomes appear as you click. Reinstatement is carried on a finer
-      grid than the paper's, including values at and above one.
-    </p>
-    <p class="standfirst">
-      Two things to hold onto while reading the numbers. <strong>Every figure on this page is a
-      gap against the same US economy without AI</strong>, which grows at its ordinary 2 percent
-      a year: "+8.3 percent" means 8.3 percent above that path, never a forecast of growth or of
-      the level. And <strong>the model splits the workforce in two</strong>: the AI-sensitive
-      occupations, whose tasks AI is assumed to touch, and all other occupations. (The paper
-      calls the first group "cognitive"; this page, the deck and the landing page do not, because
-      the label implies the electrician and the home health aide are not thinking. The written report keeps
-      the paper's word, since it follows the paper line by line.)
+      Two things to hold onto. <strong>Every figure is a gap against the same US economy
+      without AI</strong>, which grows at 2 percent a year: "+8.3 percent" means 8.3 percent
+      above that path, not a forecast. And <strong>the model splits the workforce in
+      two</strong>: the AI-sensitive occupations, whose tasks AI is assumed to touch, and all
+      other occupations.
     </p>
   </header>
 
@@ -520,6 +518,7 @@
 
   <footer class="page-foot">
     <div class="note">
+      <p>
       Every cell is a full monthly solve of the model from 2024 to 2030, computed by an independent
       Python reimplementation (<code>aiscen</code>) that reproduces all 169 cells of the paper's
       Tables 3, 5 and 6 within the test suite's tolerance, 153 of them to the printed digit; the
@@ -527,7 +526,12 @@
       The three named scenarios sit at the corners of this grid. One convention to note: the gain
       <code>a</code> follows the paper's own explorer. At 0.30 it is held flat; at 0.45 and 0.80 it
       rises in a straight line from the substantial scenario's mid-2026 anchor (0.35) to the dial's
-      2030 value, so each level lands exactly on its label. The paper keeps the extreme scenario's own
+      2030 value, so each level lands exactly on its label.
+      </p>
+      <details>
+        <summary>Why the corners differ slightly from the paper's own runs</summary>
+        <p>
+The paper keeps the extreme scenario's own
       anchor (0.45), so the extreme corner lands within 0.03 points of this reproduction's own run of
       that scenario rather than exactly on it; the modest corner matches its run. Even
       the substantial corner, which shares the grid's 0.35 anchor, misses slightly: Table 1's literal
@@ -542,6 +546,14 @@
       two of those at or above 1, the labor share rises above its 60 percent starting point,
       territory the paper's own scenarios never enter (at 0.75 it can go either way: it ends above
       60 percent in 162 of that level's 729 cells).
+        </p>
+      </details>
+      <p>
+        The paper calls the AI-sensitive occupations "cognitive". This page, the deck and the
+        landing page do not, because the label implies the electrician and the home health aide
+        are not thinking; the written report keeps the paper's word, since it follows the paper
+        line by line.
+      </p>
     </div>
     <p class="credit">OPA done by <a href="https://fhoces.github.io">Fernando Hoces de la Guardia</a></p>
   </footer>
