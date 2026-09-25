@@ -2763,6 +2763,11 @@ An automated instance takes its **whole wage bill** to capital whether the machi
 saved an hour or a minute. The weak-link cushion that partly protects the labor share
 is proportional to the saving. Slop removes the offset and leaves the harm.
 
+.small[
+What the model cannot host: quality itself. Slop can only be a smaller cost saving, never
+the same cost for a worse product.
+]
+
 | all-in gain | displacement | weak-link cushion | ratio |
 |---|---|---|---|
 | 0.45 | 6.75 pp | 2.02 pp | 3.3x |
@@ -2772,11 +2777,6 @@ is proportional to the saving. Slop removes the offset and leaves the harm.
 Formally this is the $\varepsilon^*$ threshold again, since it contains
 $(1-\rho)/a_t$: slop pushes the required capital-supply elasticity from 1.30 to 3.39
 and then 9.63 across the three rows, straight through the calibrated $\varepsilon = 3$.
-
-.small[
-What the model cannot host: quality itself. Slop can only be a smaller cost saving, never
-the same cost for a worse product.
-]
 
 <a href="#slop-main" class="nav-btn">← back</a>
 
