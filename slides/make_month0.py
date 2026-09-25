@@ -68,14 +68,14 @@ def main() -> None:
         ("C", "37", "U_N,t+1", "pool next month, all other", res.months[1].U_N),
 
         ("D", "19", "ℓ̃_C", "AI-sensitive shift", r.cog_shift),
-        ("D", "—", "u^x", "pool above its normal level", r.u_excess),
+        ("D", "", "u^x", "pool above its normal level", r.u_excess),
         ("D", "39", "Δln Y", "actual GDP", r.dlnY),
         ("D", "39", "Δln w_N", "actual all-other wage", r.dlnw_N),
         ("D", "39", "Δln r", "actual rental rate", r.dlnr),
         ("D", "39", "Δln K", "actual capital stock", r.dlnK),
         ("D", "39", "s_L", "actual labor share", r.s_L),
-        ("D", "—", "X", "reallocation flow", r.reallocation),
-        ("D", "—", "G", "aggregate overhang", r.overhang),
+        ("D", "", "X", "reallocation flow", r.reallocation),
+        ("D", "", "G", "aggregate overhang", r.overhang),
     ]
     assert len(rows) == 44, len(rows)
 

@@ -35,11 +35,11 @@ C,36,"ℓ_N,t+1","employment next month, all other",0.361732
 C,37,"U_C,t+1","pool next month, AI-sensitive",0.0182376
 C,37,"U_N,t+1","pool next month, all other",0.0206439
 D,19,ℓ̃_C,AI-sensitive shift,-0.000751739
-D,—,u^x,pool above its normal level,0
+D,,u^x,pool above its normal level,0
 D,39,Δln Y,actual GDP,0.00125964
 D,39,Δln w_N,actual all-other wage,0.00251928
 D,39,Δln r,actual rental rate,0.000776225
 D,39,Δln K,actual capital stock,0.00232867
 D,39,s_L,actual labor share,0.599261
-D,—,X,reallocation flow,0.00046055
-D,—,G,aggregate overhang,0.000482268
+D,,X,reallocation flow,0.00046055
+D,,G,aggregate overhang,0.000482268
