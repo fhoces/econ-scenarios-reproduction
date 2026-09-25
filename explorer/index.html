@@ -109,13 +109,12 @@
     position: absolute; top: 0; right: 0; height: 150px; width: auto;
     opacity: 0.218; z-index: -1; pointer-events: none;
   }
-  /* On a dark page the same tint reads as a muddy brown block; lift and desaturate it. */
+  /* On a dark page the same tint reads as a muddy brown block, and lifting or
+     desaturating it only dims the mud, so the mark is hidden in dark mode. */
   @media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]) .header-layer {
-      opacity: 0.14; filter: brightness(1.6) saturate(0.6);
-    }
+    :root:not([data-theme="light"]) .header-layer { display: none; }
   }
-  :root[data-theme="dark"] .header-layer { opacity: 0.14; filter: brightness(1.6) saturate(0.6); }
+  :root[data-theme="dark"] .header-layer { display: none; }
   h1 {
     font-family: var(--serif);
     font-weight: 600;
