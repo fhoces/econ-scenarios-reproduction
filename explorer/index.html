@@ -823,6 +823,22 @@ The paper keeps the extreme scenario's own
     }
     return 10 * mag;
   }
+  // Baseline height for the end label ("8.3%"). The default sits 8 px above the end dot,
+  // inside the plot's vertical bounds [lo, hi]. If a reference letter (M, S, E) at the right
+  // edge is within 10 px of it, the two read as one ("-0.3%M"), so try the default, then
+  // 12 px above and 14 px below each letter, and keep the candidate nearest the default
+  // that clears every letter by 10 px. If none does, keep the default.
+  function endLabelY(dotY, tagYs, lo, hi) {
+    var def = Math.min(hi, Math.max(lo, dotY - 8));
+    var clears = function (v) {
+      return tagYs.every(function (ty) { return Math.abs(ty - v) >= 10; });
+    };
+    var cands = [def];
+    tagYs.forEach(function (ty) { cands.push(ty - 12, ty + 14); });
+    cands = cands.filter(function (v) { return v >= lo && v <= hi && clears(v); })
+                 .sort(function (p, q) { return Math.abs(p - def) - Math.abs(q - def); });
+    return cands.length ? cands[0] : def;
+  }
   function stepDecimals(step) {
     if (step >= 1) return 0;
     return step >= 0.1 && Math.abs(step * 10 - Math.round(step * 10)) < 1e-9 ? 1 : 2;
@@ -891,15 +907,8 @@ The paper keeps the extreme scenario's own
     svg.appendChild(el("path", { class: cls, d: path(series) }));
     var last = series[series.length - 1];
     svg.appendChild(el("circle", { class: dotCls, cx: x(t.length - 1), cy: y(last), r: 3.5 }));
-    // The end label sits just above the end dot. If a reference letter (M, S, E) at the
-    // right edge is within 10 px of that height, the two read as one ("-0.3%M"), so move
-    // the label clear of the letter: above it if there is room, otherwise below.
-    var etY = Math.min(H - B - 4, Math.max(T + 9, y(last) - 8));
-    refLabels.forEach(function (lbl) {
-      if (Math.abs(lbl.y - etY) < 10) {
-        etY = lbl.y - 12 >= T + 9 ? lbl.y - 12 : Math.min(H - B - 4, lbl.y + 14);
-      }
-    });
+    // End label: nearest height to the dot that clears every reference letter.
+    var etY = endLabelY(y(last), refLabels.map(function (l) { return l.y; }), T + 9, H - B - 4);
     var et = el("text", {
       class: "end-text", x: x(t.length - 1) - 6, y: etY, "text-anchor": "end"
     });
