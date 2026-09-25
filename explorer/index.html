@@ -285,7 +285,7 @@
   }
   .levels button:focus-visible { outline: 2px solid var(--series-1); outline-offset: 2px; }
 
-  .presets { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+  .presets { display: flex; flex-wrap: wrap; gap: 8px; margin: 2px 0 18px; }
   .presets button {
     font-family: var(--sans);
     font-size: 13px;
@@ -452,7 +452,6 @@
   <div class="cols">
     <section>
       <h2>The seven inputs</h2>
-      <div class="rack" id="rack"></div>
       <div class="presets">
         <button type="button" data-preset="modest">Modest</button>
         <button type="button" data-preset="substantial">Substantial</button>
@@ -460,32 +459,8 @@
         <button type="button" data-preset="best">Highest GDP cell</button>
         <button type="button" data-preset="best-wage">Best AI-sensitive wage</button>
       </div>
+      <div class="rack" id="rack"></div>
 
-      <div class="note">
-        Every cell is a full monthly solve of the model from 2024 to 2030, computed by an independent
-        Python reimplementation (<code>aiscen</code>) that reproduces all 169 cells of the paper's
-        Tables 3, 5 and 6 within the test suite's tolerance, 153 of them to the printed digit; the
-        sixteen that round to a different last digit are listed cell by cell in the repository README.
-        The three named scenarios sit at the corners of this grid. One convention to note: the gain
-        <code>a</code> follows the paper's own explorer. At 0.30 it is held flat; at 0.45 and 0.80 it
-        rises in a straight line from the substantial scenario's mid-2026 anchor (0.35) to the dial's
-        2030 value, so each level lands exactly on its label. The paper keeps the extreme scenario's own
-        anchor (0.45), so the extreme corner lands within 0.03 points of this reproduction's own run of
-        that scenario rather than exactly on it; the modest corner matches its run. Even
-        the substantial corner, which shares the grid's 0.35 anchor, misses slightly: Table 1's literal
-        slope for that scenario, 0.028 per year, only reaches a 2030 gain of 0.448 (which Table 1 itself
-        rounds to "0.45" in prose), while the grid solves backward from the axis label to land on 0.45
-        exactly, so its GDP gap reads 8.30 against 8.28 for the scenario's own run, and its average wage 2.16
-        against 2.14, which rounds to 2.2 rather than the paper's 2.1. GDP growth is
-        the exception, because it is a change over the preceding twelve months rather than a 2030
-        level and so depends on the whole path: at the extreme corner it reads 15.67 here against
-        that scenario's own 15.46 and the paper's 15.4. Reinstatement runs over
-        six values here, three of them (0.75, 1.00 and 1.25) outside the range the paper uses; at the
-        two of those at or above 1, the labor share rises above its 60 percent starting point,
-        territory the paper's own scenarios never enter (at 0.75 it can go either way: it ends above
-        60 percent in 162 of that level's 729 cells).
-      </div>
-      <p class="credit">OPA done by <a href="https://fhoces.github.io">Fernando Hoces de la Guardia</a></p>
     </section>
 
     <section>
@@ -535,6 +510,34 @@
       </details>
     </section>
   </div>
+
+  <footer class="page-foot">
+    <div class="note">
+      Every cell is a full monthly solve of the model from 2024 to 2030, computed by an independent
+      Python reimplementation (<code>aiscen</code>) that reproduces all 169 cells of the paper's
+      Tables 3, 5 and 6 within the test suite's tolerance, 153 of them to the printed digit; the
+      sixteen that round to a different last digit are listed cell by cell in the repository README.
+      The three named scenarios sit at the corners of this grid. One convention to note: the gain
+      <code>a</code> follows the paper's own explorer. At 0.30 it is held flat; at 0.45 and 0.80 it
+      rises in a straight line from the substantial scenario's mid-2026 anchor (0.35) to the dial's
+      2030 value, so each level lands exactly on its label. The paper keeps the extreme scenario's own
+      anchor (0.45), so the extreme corner lands within 0.03 points of this reproduction's own run of
+      that scenario rather than exactly on it; the modest corner matches its run. Even
+      the substantial corner, which shares the grid's 0.35 anchor, misses slightly: Table 1's literal
+      slope for that scenario, 0.028 per year, only reaches a 2030 gain of 0.448 (which Table 1 itself
+      rounds to "0.45" in prose), while the grid solves backward from the axis label to land on 0.45
+      exactly, so its GDP gap reads 8.30 against 8.28 for the scenario's own run, and its average wage 2.16
+      against 2.14, which rounds to 2.2 rather than the paper's 2.1. GDP growth is
+      the exception, because it is a change over the preceding twelve months rather than a 2030
+      level and so depends on the whole path: at the extreme corner it reads 15.67 here against
+      that scenario's own 15.46 and the paper's 15.4. Reinstatement runs over
+      six values here, three of them (0.75, 1.00 and 1.25) outside the range the paper uses; at the
+      two of those at or above 1, the labor share rises above its 60 percent starting point,
+      territory the paper's own scenarios never enter (at 0.75 it can go either way: it ends above
+      60 percent in 162 of that level's 729 cells).
+    </div>
+    <p class="credit">OPA done by <a href="https://fhoces.github.io">Fernando Hoces de la Guardia</a></p>
+  </footer>
 </div>
 
 <script src="grid.js"></script>
