@@ -1879,7 +1879,7 @@ In one line: GDP in 2030 ends `{python} num(T3['GDP, pct above no-AI'][1], 1)`,
 `{python} num(T3['GDP, pct above no-AI'][3], 1)` percent above the no-AI path in the
 three scenarios; in the extreme one the average wage is
 `{python} num(T3['Average wage, pct above no-AI'][3], 1)` percent above that path while
-the cognitive wage is `{python} num(T3['  cognitive occupations w_C'][3], 1)` percent
+the cognitive wage is `{python} num(-T3['  cognitive occupations w_C'][3], 1)` percent
 below it and cognitive unemployment reaches
 `{python} num(T3['Unemployment rate, cognitive, pct'][3], 1)` percent. The largest gap
 between a reproduced cell and its published value is
