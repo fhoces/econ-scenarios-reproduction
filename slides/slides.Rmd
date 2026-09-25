@@ -2090,15 +2090,13 @@ name: survey
 10,980 US adults, Morning Consult, August 2026. Five questions mapped to five of the
 seven inputs.
 
-.small[
 | Object | Survey median | Modest / Substantial / Extreme |
 |---|---|---|
-| $m_{2030}$ | 0.44 | 0.2 / 0.3 / 0.5 |
-| $d_{2030}$ | 0.40 | 0.2 / 0.4 / 0.6 |
+| $m_{2030}$ | 0.44 | 0.20 / 0.30 / 0.50 |
+| $d_{2030}$ | 0.40 | 0.20 / 0.40 / 0.60 |
 | $\psi$ | 0.47 | 0.50 / 0.75 / 0.90 |
 | $a_{2030}$ | 0.44 | 0.30 / 0.45 / 0.80 |
 | $\mu$ | 0.064 | 0.17 / 0.08 / 0.04 |
-]
 
 The median respondent expects **capable but narrowly deployed** AI: capability between
 the substantial and extreme scenarios, adoption at the substantial level, and
