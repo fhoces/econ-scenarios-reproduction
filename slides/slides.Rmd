@@ -1745,10 +1745,10 @@ $Y$ and the labor share all fall out.
 ---
 name: how-solved
 
-# How the Model Is Actually Solved
+# Two Equations Need a Root-Find: Four Solves a Month
 
 .pull-left[
-**Two equations need one, four solves a month**
+**Where the four solves are**
 
 1. The rental rate, (18): capital demanded equals capital supplied. Demand is strictly
    decreasing in $\Delta \ln r$, so exactly one root; bisection. Once a month.
