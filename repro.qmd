@@ -2035,7 +2035,7 @@ GDP is `{python} v('substantial', 'gdp')` percent above the no-AI path and growt
 over the twelve months to 2030 is `{python} v('substantial', 'gdp_growth')` percent
 a year, against a fastest dot-com-boom year of 4.7 percent in 1999. The average wage
 rises `{python} v('substantial', 'wage')` percent, far less than GDP: the cognitive
-wage is `{python} v('substantial', 'wC')` percent relative to no AI while wages in
+wage is `{python} neg('substantial', 'wC')` percent below its no-AI path while wages in
 the rest of the economy are `{python} v('substantial', 'wN')` percent higher. The
 labor share falls to `{python} v('substantial', 'labor_share')` percent and the
 capital share rises to `{python} num(100 - float(v('substantial', 'labor_share', 4)), 1)`
@@ -2085,7 +2085,7 @@ GDP is `{python} v('extreme', 'gdp')` percent above its no-AI path, growing at
 `{python} v('extreme', 'gdp_growth')` percent a year. The labor share falls from
 `{python} num(100 * F.s_L0, 1)` to `{python} v('extreme', 'labor_share')` percent.
 Within labor the split is stark: the cognitive wage is
-`{python} v('extreme', 'wC')` percent relative to no AI while the all-other wage is
+`{python} neg('extreme', 'wC')` percent below its no-AI path while the all-other wage is
 `{python} v('extreme', 'wN')` percent above it. Cognitive employment is
 `{python} neg('extreme', 'cog_emp')` percent below mid-2026,
 `{python} v('extreme', 'u_C')` percent of cognitive workers are unemployed, nearly
