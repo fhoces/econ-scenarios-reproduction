@@ -1915,9 +1915,9 @@ every channel is small at the same time.<br><br>
 <b>What little happens comes through capital, not labor.</b> A slightly better return on machines
 calls forth more of them than the productivity gain itself amounts to: the capital stock ends
 `r f1(ov("modest","capital"))` percent up against a TFP gain of `r f1(ov("modest","tfp"))` percent
-(&epsilon; = 3).<br><br>
+(<i>&epsilon;</i> = 3).<br><br>
 <b>The frictions never bind.</b> Displaced workers move between occupations as easily as they do
-today (&mu; at its normal-times 0.17), so unemployment ends `r f2(ov("modest","u_all"))` percent against a
+today (<i>&mu;</i> at its normal-times 0.17), so unemployment ends `r f2(ov("modest","u_all"))` percent against a
 normal `r f2(nt$u_all)` percent and the two groups&rsquo; wages move together.
 </div>
 
@@ -1961,14 +1961,14 @@ labor share 60.0.</span>
 <div style="flex:1.20;">
 <h4>because, in the model</h4>
 <b>Displacement starts to outrun reinstatement.</b> Three quarters of AI use replaces the
-worker, and only a quarter of displaced tasks come back (&psi; = 0.75, &rho; = 0.25), so the labor
+worker, and only a quarter of displaced tasks come back (<i>&psi;</i> = 0.75, <i>&rho;</i> = 0.25), so the labor
 share falls 60.0 to
 `r f1(ov("substantial","lab_share"))` percent.<br><br>
-<b>Complementarity does the distributing.</b> Because tasks are complements (&sigma; = 0.5),
+<b>Complementarity does the distributing.</b> Because tasks are complements (<i>&sigma;</i> = 0.5),
 cheapening some tilts spending toward the work labor keeps: the all-other wage rises `r f1(ov("substantial","wage_N"))` percent while the AI-sensitive wage
 sits `r f1(abs(ov("substantial","wage_C")))` percent below its no-AI path.<br><br>
 <b>Reallocation is slow, but still feasible.</b> Crossing occupations is half as easy as normal
-(&mu; = 0.08), which lifts AI-sensitive unemployment only to
+(<i>&mu;</i> = 0.08), which lifts AI-sensitive unemployment only to
 `r f1(ov("substantial","u_C"))` percent: employment falls
 `r f1(abs(ov("substantial","cog_emp")))` percent mostly through unreplaced quits, not layoffs.
 </div>
@@ -2013,11 +2013,11 @@ labor share 60.0.</span>
 <div style="flex:1.20;">
 <h4>because, in the model</h4>
 <b>Two forces compound.</b> Nearly all AI use replaces the worker, and nothing at
-all comes back as new labor tasks (&psi; = 0.90, &rho; = 0), so virtually the whole wage bill of
+all comes back as new labor tasks (<i>&psi;</i> = 0.90, <i>&rho;</i> = 0), so virtually the whole wage bill of
 every automated task moves to capital: the labor share falls 60.0 to
 `r f1(ov("extreme","lab_share"))` percent even as GDP rises `r f1(ov("extreme","gdp"))` percent.<br><br>
 <b>The frictions turn reallocation into rationing.</b> Crossing occupations is four times harder
-than normal and the wage falls only slowly (&mu; = 0.04, &xi; = 0.5), so firms want fewer
+than normal and the wage falls only slowly (<i>&mu;</i> = 0.04, <i>&xi;</i> = 0.5), so firms want fewer
 AI-sensitive workers than are attached at that wage and layoffs do the adjusting: unemployment
 there ends `r f1(ov("extreme","u_C"))` percent.<br><br>
 <b>The other group becomes scarce, not spare.</b> Its unemployment <i>falls</i> to
