@@ -95,6 +95,9 @@ class Month:
 
 @dataclass
 class Result:
+    """A simulated scenario: the inputs it was run with (parameters, scenario, fitted
+    paths, steady state) and one Month row per month from t0 to t_end."""
+
     fixed: Fixed
     scen: Scenario
     paths: Paths

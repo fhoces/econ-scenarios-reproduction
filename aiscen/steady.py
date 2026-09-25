@@ -12,6 +12,10 @@ from .params import Fixed
 
 @dataclass(frozen=True)
 class SteadyState:
+    """The normal-times labor market of Equation (38): the pool split by origin,
+    hires, effective search, finding and filling rates, matching efficiency and the
+    quit rates, all per month and in shares of the labor force."""
+
     U_C: float      # pool of cognitive origin, share of L
     U_N: float      # pool of all-other origin
     H_C: float      # hires per month

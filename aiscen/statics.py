@@ -207,8 +207,9 @@ def actual_at_employment(f: Fixed, md: float, a: float, psi: float, rho: float,
 
     # Finite eps: the unknown is the rental gap. For a trial Delta ln r, the capital
     # row gives the output gap, the demand rows give the wages, and the residual is
-    # the price index minus one. A finer step (0.01) than Proposition 1's, since this
-    # solve runs three times a month and the root moves little between calls.
+    # the price index minus one. A finer step (0.01) than Proposition 1's, since
+    # system (39) is solved three times a month (twice through this function, once
+    # through cognitive_demand below) and the root moves little between calls.
     def resid(dlnr: float) -> float:
         y = _y_of_dlnr(f, B, dlnr, dlnA)
         wtC, wtN = _wages_at_employment(f, LamC, y, l_C, l_N)
