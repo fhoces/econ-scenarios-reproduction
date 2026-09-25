@@ -504,7 +504,7 @@
               three scenario settings, so they do not move as you click. They match the paper's
               Table 3 to the printed digit except in three cells: the substantial average wage (2.2
               here, 2.1 in the paper), substantial all-workers unemployment (4.5 against 4.6) and
-              extreme GDP growth (15.7 against 15.4); the note above explains why.</caption>
+              extreme GDP growth (15.7 against 15.4); the note at the foot of the page explains why.</caption>
             <thead>
               <tr><th>Outcome in 2030</th><th>This setting</th><th>Modest</th><th>Substantial</th><th>Extreme</th></tr>
             </thead>
@@ -653,7 +653,7 @@ The paper keeps the extreme scenario's own
             "across its range from the substantial setting takes the labor share from 57.3 to " +
             "55.4 percent while measured TFP moves only from 3.07 to 3.10 (3.06 to 3.09 on the " +
             "scenario's own path, whose 2030 gain is 0.448 rather than this grid's 0.45; see the " +
-            "note under the dials).",
+            "note at the foot of the page).",
       levels: "0.50 / 0.75 / 0.90 of AI use is automation",
       source: "Table 1, panel C. Survey median 0.47, close to the modest scenario's 0.50."
     },
@@ -969,10 +969,10 @@ The paper keeps the extreme scenario's own
     // and wages each broken into all three groupings (AI-sensitive, the rest
     // of the workforce, and the all-workers/all-other-weighted aggregate), so
     // each metric's three rows sit together for direct comparison. Plain GDP
-    // (0) is chart-only, since it has no group split to tabulate; AI-sensitive
-    // unemployment (5) and AI-sensitive wage (1) are charted too but still
-    // belong here alongside their all-other and all-workers counterparts.
-    var TABLE_OUTCOMES = [7, 2, 3, 4, 5, 9, 6, 1, 10, 8];
+    // (0), the headline number, leads the table even though it is charted;
+    // AI-sensitive unemployment (5) and AI-sensitive wage (1) are charted too
+    // but still belong here alongside their all-other and all-workers counterparts.
+    var TABLE_OUTCOMES = [0, 7, 2, 3, 4, 5, 9, 6, 1, 10, 8];
     TABLE_OUTCOMES.forEach(function (oi) {
       // G.units ships beside G.outcomes precisely so the table can say what each row
       // is measured in: most are percent gaps, but the labor share is a share of income
