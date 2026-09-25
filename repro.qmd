@@ -2294,3 +2294,7 @@ Part of an independent reproduction of Korinek et al. (2026):
 [Open Materials](https://github.com/fhoces/opa-ai-macro-econ-scenarios) &middot;
 [Overview](index.html)
 :::
+
+::: {.credit}
+OPA done by [Fernando Hoces de la Guardia](https://fhoces.github.io)
+:::

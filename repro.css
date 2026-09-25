@@ -24,6 +24,11 @@ code.sourceCode { font-size: 0.8rem; }
 .site-nav a { color: #2a78d6; text-decoration: none; }
 .site-nav a:hover { text-decoration: underline; }
 
+/* Author credit, under the closing site-nav line. */
+.credit { font-size: 0.8em; color: #8994a0; margin-top: -1rem; }
+.credit a { color: #2a78d6; text-decoration: none; }
+.credit a:hover { text-decoration: underline; }
+
 /* The full OPA stack, floated beside the opening paragraph and its three-item
    legend of which artifact is which layer. */
 .report-intro { margin-bottom: 1.8rem; overflow: hidden; }

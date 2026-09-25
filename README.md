@@ -342,3 +342,5 @@ nothing in this repository claims them as original. If you use this code, please
 that paper for the analysis. The paper itself is not redistributed (see above), and the
 external data inputs listed under [Where the inputs come from](#where-the-inputs-come-from)
 remain under their publishers' terms.
+
+<sub>OPA done by [Fernando Hoces de la Guardia](https://fhoces.github.io)</sub>

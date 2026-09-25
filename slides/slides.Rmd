@@ -99,6 +99,8 @@ following the
 the model, its tests and every exported CSV
 ]
 
+.credit[OPA done by [Fernando Hoces de la Guardia](https://fhoces.github.io)]
+
 ---
 
 ```{css, echo=FALSE}
@@ -220,6 +222,12 @@ a.reflink:hover { color: #1a237e; border-bottom-color: #1a237e; }
   position: absolute; top: 26px; right: 34px; height: 190px; width: auto;
   opacity: 0.218; z-index: -1; pointer-events: none;
 }
+/* Author credit, pinned to the slide's lower-left corner, clear of the legend above
+   it and of the slide number at the lower right. */
+.opa-slide .credit {
+  position: absolute; left: 2em; bottom: 14px; font-size: 65%; color: #5b6873;
+}
+.opa-slide .credit a { color: #1a237e; }
 ```
 
 .site-nav[
