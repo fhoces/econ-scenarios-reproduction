@@ -1279,17 +1279,17 @@ actual economy, and both are one monotone equation in
 
 <div class="col" style="flex:1.05; border-left:4px solid #1baf7a;">
 <h4>3 &nbsp;What comes out</h4>
-<div class="ser">&#128200; GDP</div>
-<div class="ser">&#9881;&#65039; measured TFP</div>
-<div class="ser">&#128181; the average wage</div>
-<div class="ser">&#129489;&#8205;&#128187; the AI-sensitive wage</div>
-<div class="ser">&#128295; the all-other wage</div>
-<div class="ser">&#129367; the labor share of income</div>
-<div class="ser">&#127981; the capital stock</div>
-<div class="ser">&#128101; employment, by group</div>
-<div class="ser">&#128269; unemployment, by group and overall</div>
-<div class="ser">&#128260; workers changing occupation</div>
-<div class="ser">&#128161; the stock of ideas</div>
+<div class="ser">GDP</div>
+<div class="ser">measured TFP</div>
+<div class="ser">the average wage</div>
+<div class="ser">the AI-sensitive wage</div>
+<div class="ser">the all-other wage</div>
+<div class="ser">the labor share of income</div>
+<div class="ser">the capital stock</div>
+<div class="ser">employment, by group</div>
+<div class="ser">unemployment, by group and overall</div>
+<div class="ser">workers changing occupation</div>
+<div class="ser">the stock of ideas</div>
 <span class="foot">Each one monthly, and each one a <b>gap against the same economy without
 AI</b>, never a forecast of the level.</span>
 
