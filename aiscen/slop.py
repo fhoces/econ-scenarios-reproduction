@@ -23,6 +23,8 @@ from .paths import Paths
 from .report import table3_column
 from .simulate import run
 
+# The extension runs off the substantial scenario, and reports the seven Table 3 rows
+# the deck's slop table shows (in table3_column's row names).
 BASE = SCENARIOS["substantial"]
 REPORT_ROWS = [
     "GDP, pct above no-AI",
@@ -76,7 +78,7 @@ def decomposition(f: Fixed, scen: Scenario, t: float = 2030.0) -> dict:
 
 
 def cases(f: Fixed = None, base: Scenario = BASE) -> list:
-    """The slop variants, each a one-line change to the substantial scenario."""
+    """The slop variants, each one or two field changes to the substantial scenario."""
     f = f or Fixed()
     a0 = gain_2030(base)
     variants = [
@@ -107,6 +109,12 @@ def critical_gain(f: Fixed = None, base: Scenario = BASE, lo: float = 0.02,
     """
     f = f or Fixed()
     hi = hi or gain_2030(base)
+    # Bracket for the bisection. The low end starts a little above zero rather than
+    # at zero: the wage is already negative there (the pure-slop case at a = 1e-6
+    # gives about -3 percent, tests/test_robustness.py), so nothing is lost, and it
+    # keeps the search away from the corner where the (1 - rho)/a term of eps_star
+    # diverges. The high end is the scenario's own 2030 gain, where the wage is
+    # positive, so the sign change lies inside.
 
     def wage(a):
         return table3_column(run(f, scale_gain(base, a)))["Average wage, pct above no-AI"]
