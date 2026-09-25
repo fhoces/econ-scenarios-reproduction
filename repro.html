@@ -2636,7 +2636,7 @@ min-width: 0 !important;
 <h2 class="anchored" data-anchor-id="the-model">2 The model</h2>
 <section id="technology-and-factor-markets" class="level3">
 <h3 class="anchored" data-anchor-id="technology-and-factor-markets">2.1.1 Technology and factor markets</h3>
-<p>Output is a constant-elasticity-of-substitution (CES) aggregate, a bundle whose inputs substitute for one another at one fixed rate, and the inputs are not capital and labor but <strong>task instances</strong>: a task is a type of work (reviewing a contract), an instance is one performance of it (this contract).</p>
+<p>Output is a constant-elasticity-of-substitution (CES) aggregate: a bundle in which a one percent rise in an input’s relative cost always cuts its relative use by the same <span class="math inline">\(\sigma\)</span> percent, whatever the mix. The inputs are not capital and labor but <strong>task instances</strong>: a task is a type of work (reviewing a contract), an instance is one performance of it (this contract).</p>
 <p><span id="eq-1"></span> <span class="math display">\[
 Y_t = \Big[ \sum_i \omega_i^{1/\sigma}\, y_{i,t}^{(\sigma-1)/\sigma} \Big]^{\sigma/(\sigma-1)}
 \tag{1}
@@ -3878,7 +3878,7 @@ e^{-(1-\sigma)\Delta \ln A_t} \Big]
 <section id="unemployment" class="level3">
 <h3 class="anchored" data-anchor-id="unemployment">2.3 Unemployment</h3>
 <p>Sections 2.1 and 2.2 describe where employment <em>should</em> end up. This section is about the fact that getting there takes time, and that the transition is what unemployment is. The whole block runs on a monthly grid.</p>
-<p>Read the twelve equations in the order the model runs them each month. Each group compares its employment with next month’s target: cognitive employment sits above its falling target, an <em>overhang</em>, and all-other employment below its rising one, a <em>shortfall</em>, both measured in (28). The cognitive wage does not fall enough to keep everyone employed: by (30) it closes only a fraction of its gap to the wage that would clear the group, at a speed set by the rigidity <span class="math inline">\(\xi\)</span>, so firms want fewer cognitive workers than they have. The wage has to clear the group’s attached force, its employed plus its own unemployed above the normal pool (29). Quits, which rise when jobs are easy to find (27), remove part of the surplus and layoffs remove the rest (31).</p>
+<p>Read the twelve equations in the order the model runs them each month. Each group compares its employment with next month’s target: cognitive employment sits above its falling target, an <em>overhang</em>, and all-other employment below its rising one, a <em>shortfall</em>, both measured in (28). The cognitive wage does not fall enough to keep everyone employed: by (30) it closes only a fraction of its gap to the wage that would clear the group, at a speed set by the rigidity <span class="math inline">\(\xi\)</span>, so firms want fewer cognitive workers than they have. The wage it moves toward is the one that would clear the group’s attached force: its employed plus its own unemployed above the normal pool (29). Quits, which rise when jobs are easy to find (27), remove part of the surplus and layoffs remove the rest (31).</p>
 <p>The expanding occupations, meanwhile, post openings for a fraction <span class="math inline">\(\theta_H\)</span> of their shortfall each month on top of replacing their quits (32). The unemployed search in both groups, but at a discount <span class="math inline">\(\mu\)</span> outside their group of origin (33); openings and searchers meet through a matching function that never yields more hires than either side offers (34), and each origin’s job-finding rate adds up its chances in the two groups (35). Employment and the two pools then roll forward a month (36) and (37). Unemployment is what accumulates while the sticky wage releases workers faster than search places them. Before AI arrives, (38) takes the normal pool from Table 1, splits it between the two origins, and pins the hiring, finding and filling rates of normal times; every simulation starts from there.</p>
 <p><span id="eq-27"></span> <span class="math display">\[
 q_{o,t} = q^X_o + q^T_o \frac{f_{o,t-1}}{\bar f_o}
@@ -6822,9 +6822,9 @@ Figure 4: The labor market in the three scenarios, 2025-2030, reproducing the p
 <span id="cb30-243"><a href="#cb30-243" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb30-244"><a href="#cb30-244" aria-hidden="true" tabindex="-1"></a><span class="fu">### 2.1.1 Technology and factor markets</span></span>
 <span id="cb30-245"><a href="#cb30-245" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-246"><a href="#cb30-246" aria-hidden="true" tabindex="-1"></a>Output is a constant-elasticity-of-substitution (CES) aggregate, a bundle whose inputs</span>
-<span id="cb30-247"><a href="#cb30-247" aria-hidden="true" tabindex="-1"></a>substitute for one another at one fixed rate, and the inputs are not capital and labor but</span>
-<span id="cb30-248"><a href="#cb30-248" aria-hidden="true" tabindex="-1"></a>**task instances**: a</span>
+<span id="cb30-246"><a href="#cb30-246" aria-hidden="true" tabindex="-1"></a>Output is a constant-elasticity-of-substitution (CES) aggregate: a bundle in which a one</span>
+<span id="cb30-247"><a href="#cb30-247" aria-hidden="true" tabindex="-1"></a>percent rise in an input&#39;s relative cost always cuts its relative use by the same $\sigma$</span>
+<span id="cb30-248"><a href="#cb30-248" aria-hidden="true" tabindex="-1"></a>percent, whatever the mix. The inputs are not capital and labor but **task instances**: a</span>
 <span id="cb30-249"><a href="#cb30-249" aria-hidden="true" tabindex="-1"></a>task is a type of work (reviewing a contract), an instance is one performance of it</span>
 <span id="cb30-250"><a href="#cb30-250" aria-hidden="true" tabindex="-1"></a>(this contract).</span>
 <span id="cb30-251"><a href="#cb30-251" aria-hidden="true" tabindex="-1"></a></span>
@@ -7868,8 +7868,8 @@ Figure 4: The labor market in the three scenarios, 2025-2030, reproducing the p
 <span id="cb30-1305"><a href="#cb30-1305" aria-hidden="true" tabindex="-1"></a>*shortfall*, both measured in (28). The cognitive wage does not fall enough to keep</span>
 <span id="cb30-1306"><a href="#cb30-1306" aria-hidden="true" tabindex="-1"></a>everyone employed: by (30) it closes only a fraction of its gap to the wage that would</span>
 <span id="cb30-1307"><a href="#cb30-1307" aria-hidden="true" tabindex="-1"></a>clear the group, at a speed set by the rigidity $\xi$, so firms want fewer cognitive</span>
-<span id="cb30-1308"><a href="#cb30-1308" aria-hidden="true" tabindex="-1"></a>workers than they have. The wage has to clear the group&#39;s attached force, its employed plus</span>
-<span id="cb30-1309"><a href="#cb30-1309" aria-hidden="true" tabindex="-1"></a>its own unemployed above the normal pool (29). Quits, which rise when jobs are easy to find</span>
+<span id="cb30-1308"><a href="#cb30-1308" aria-hidden="true" tabindex="-1"></a>workers than they have. The wage it moves toward is the one that would clear the group&#39;s</span>
+<span id="cb30-1309"><a href="#cb30-1309" aria-hidden="true" tabindex="-1"></a>attached force: its employed plus its own unemployed above the normal pool (29). Quits, which rise when jobs are easy to find</span>
 <span id="cb30-1310"><a href="#cb30-1310" aria-hidden="true" tabindex="-1"></a>(27), remove part of the surplus and layoffs remove the rest (31).</span>
 <span id="cb30-1311"><a href="#cb30-1311" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb30-1312"><a href="#cb30-1312" aria-hidden="true" tabindex="-1"></a>The expanding occupations, meanwhile, post</span>
