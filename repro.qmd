@@ -2252,7 +2252,7 @@ a0 = slop.gain_2030(slop.BASE)              # the substantial scenario's 2030 ga
 rows = [slop.decomposition(F, slop.scale_gain(slop.BASE, a))
         for a in (a0, a0 / 2, 0.09)]        # 0.09 is the survey's own lower quartile
 show(pd.DataFrame(rows)[["a_2030", "displacement", "weak-link cushion", "ratio"]],
-     floatfmt=(".3f", ".3f", ".4f", ".4f", ".1f"))
+     floatfmt=(".3f", ".4f", ".4f", ".1f"))
 ```
 
 Displacement, $(1-\rho)\psi_t m_t d_t$, contains no $a_t$: an automated instance takes
