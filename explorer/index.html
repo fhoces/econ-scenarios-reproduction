@@ -302,6 +302,7 @@
     padding: 6px 12px;
     cursor: pointer;
   }
+  .presets-break { flex-basis: 100%; height: 0; }   /* row 1: the paper's scenarios; row 2: the grid extremes */
   .presets button:hover { border-color: var(--ink-3); }
   .presets button:focus-visible { outline: 2px solid var(--series-1); outline-offset: 2px; }
 
@@ -329,13 +330,13 @@
   .sw-3 { background: var(--series-3); }
   .sw-ref { background: var(--ref); }
 
-  .plot { position: relative; max-width: 80%; }
+  .plot { position: relative; max-width: 92%; }
   svg { display: block; width: 100%; height: auto; overflow: visible; }
   .grid-line { stroke: var(--rule); stroke-width: 1; fill: none; }
   .grid-line.zero { stroke: var(--ref); }
   .axis-text { font-family: var(--mono); font-size: 9px; fill: var(--ink-3); }
   .ref-line { fill: none; stroke: var(--ref); stroke-width: 1; }
-  .ref-text { font-family: var(--mono); font-size: 8.5px; fill: var(--ink-3); }
+  .ref-text { font-family: var(--mono); font-size: 10px; fill: var(--ink-3); }
   .main-1 { fill: none; stroke: var(--series-1); stroke-width: 2; stroke-linejoin: round; }
   .main-2 { fill: none; stroke: var(--series-2); stroke-width: 2; stroke-linejoin: round; }
   .main-3 { fill: none; stroke: var(--series-3); stroke-width: 2; stroke-linejoin: round; }
@@ -422,7 +423,7 @@
   <p class="site-nav">
     An independent reproduction of Korinek et al. (2026), following the
     <a href="https://tinyurl.com/1qypbihb">Open Policy Analysis</a> framework.
-    This page is its Open Output &middot;
+    This page is its Open Output.<br>
     Open Analysis: <a href="../repro.html">Report</a> and
     <a href="../slides/slides.html">Slides</a> &middot;
     <a href="https://github.com/fhoces/opa-ai-macro-econ-scenarios">Open Materials</a> &middot;
@@ -460,6 +461,7 @@
         <button type="button" data-preset="modest">Modest</button>
         <button type="button" data-preset="substantial">Substantial</button>
         <button type="button" data-preset="extreme">Extreme</button>
+        <span class="presets-break"></span>
         <button type="button" data-preset="best">Highest GDP cell</button>
         <button type="button" data-preset="best-wage">Best AI-sensitive wage</button>
       </div>
@@ -474,7 +476,7 @@
           <figcaption>GDP, percent above the no-AI path</figcaption>
           <div class="legend">
             <span><i class="swatch sw-1"></i>this setting</span>
-            <span><i class="swatch sw-ref"></i>M / S / E scenarios</span>
+            <span><i class="swatch sw-ref"></i>modest / substantial / extreme</span>
           </div>
           <div class="plot" id="plot-gdp"></div>
         </figure>
@@ -482,7 +484,7 @@
           <figcaption>Unemployment rate, AI-sensitive occupations</figcaption>
           <div class="legend">
             <span><i class="swatch sw-2"></i>this setting</span>
-            <span><i class="swatch sw-ref"></i>M / S / E scenarios</span>
+            <span><i class="swatch sw-ref"></i>modest / substantial / extreme</span>
           </div>
           <div class="plot" id="plot-u"></div>
         </figure>
@@ -490,7 +492,7 @@
           <figcaption>AI-sensitive wage, percent above the no-AI path</figcaption>
           <div class="legend">
             <span><i class="swatch sw-3"></i>this setting</span>
-            <span><i class="swatch sw-ref"></i>M / S / E scenarios</span>
+            <span><i class="swatch sw-ref"></i>modest / substantial / extreme</span>
           </div>
           <div class="plot" id="plot-wage"></div>
         </figure>
