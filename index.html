@@ -172,6 +172,24 @@
   .compare figcaption strong { color: var(--ink); font-weight: 600; }
   @media (max-width: 560px) { .compare { grid-template-columns: 1fr; } }
 
+  /* The sections after the cards fold, closed by default, so the page stays short.
+     The chevron is drawn in CSS; the h2 keeps its own style inside the summary. */
+  details.fold > summary { list-style: none; cursor: pointer; display: flex; align-items: center;
+    gap: 12px; margin: 30px 0 0; }
+  details.fold > summary::-webkit-details-marker { display: none; }
+  details.fold > summary h2 { margin: 0; }
+  details.fold > summary::before {
+    content: ""; flex: none; width: 9px; height: 9px; margin-left: 2px;
+    border-right: 2px solid var(--ink-3); border-bottom: 2px solid var(--ink-3);
+    transform: rotate(-45deg); transition: transform .15s;
+  }
+  details.fold[open] > summary::before { transform: rotate(45deg); }
+  details.fold > summary:hover h2, details.fold > summary:focus-visible h2 { color: var(--accent); }
+  details.fold > summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; border-radius: 4px; }
+  details.fold > .fold-body { margin-top: 14px; }
+  details.fold:not([open]) > .fold-body { display: none; }
+  details.fold > .fold-body > h2 { margin-top: 24px; }
+
   footer {
     margin-top: 52px; padding-top: 20px; border-top: 1px solid var(--rule);
     font-size: 14px; color: var(--ink-3);
@@ -266,8 +284,9 @@
   </a>
 </div>
 
-<h2>What the model says</h2>
-
+<details class="fold" id="what-the-model-says">
+  <summary><h2>What the model says</h2></summary>
+  <div class="fold-body">
 <p>The paper's three scenarios, at the start of 2030. Every figure is a gap against the
    same US economy without AI, which grows at its ordinary 2 percent a year: "8.3 percent"
    means 8.3 percent <em>above that path</em>, not 8.3 percent of growth. The workforce is
@@ -294,9 +313,12 @@
    of income), at the paper's own three settings, so its format is the paper's, not this
    project's. This project did not pre-specify it: there is no timestamped record of the
    format from before the reproduction ran.</p>
+  </div>
+</details>
 
-<h2>What reproduces</h2>
-
+<details class="fold" id="what-reproduces">
+  <summary><h2>What reproduces</h2></summary>
+  <div class="fold-body">
 <div class="table-scroll">
 <table>
   <thead><tr><th>Published table</th><th>Result</th></tr></thead>
@@ -328,9 +350,12 @@ and sets out
 <a href="https://github.com/fhoces/opa-ai-macro-econ-scenarios#readings-the-paper-leaves-implicit">the readings the paper leaves implicit</a>.
 A <a href="coverage.html">coverage note</a> tracks the paper's reception: press,
 commentary and any revisions.</p>
+  </div>
+</details>
 
-<h2>How AI was used in this exercise, and what has been verified</h2>
-
+<details class="fold" id="how-ai-was-used">
+  <summary><h2>How AI was used in this exercise, and what has been verified</h2></summary>
+  <div class="fold-body">
 <p>This reproduction was a collaboration between the author and Claude Code
 (Opus and Sonnet models) across many sessions, not an AI working alone. The table records who
 led the work on each public object, using the <a href="https://credit.niso.org/">CRediT</a>
@@ -403,9 +428,12 @@ confirm he has independently worked through why they should.</p>
   itself Version 1.0 when this reproduction was written, so later versions may move the page
   and equation numbers cited throughout.
 </div>
+  </div>
+</details>
 
-<h2 id="difference">Difference between this OPA and the original analysis</h2>
-
+<details class="fold" id="difference">
+  <summary><h2>Difference between this OPA and the original analysis</h2></summary>
+  <div class="fold-body">
 <p>Everything of substance on this site belongs to the original analysis: Korinek, Jones,
    Sacher, Cotter and McCrory (2026), <cite><a href="https://www.anthropic.com/institute/econ-scenarios">Economic Scenarios for Transformative AI</a></cite>, The Anthropic Institute Working
    Paper No. 2026-02. The questions, the task-based model, its calibration to US data
@@ -451,6 +479,8 @@ confirm he has independently worked through why they should.</p>
    the reproduced ones, and the paper is the reference. Readers who want the analysis should
    read the paper; this site is for readers who want to see how its numbers come about, and
    to change them.</p>
+  </div>
+</details>
 
 <footer>
   Version 1.0, September 2026 (git tag <code>v1.0</code>).
@@ -463,5 +493,22 @@ confirm he has independently worked through why they should.</p>
 </footer>
 
 </div>
+
+<script>
+  // A link into a folded section (index.html#difference, or an anchor inside one) opens it.
+  (function () {
+    function reveal() {
+      var id = location.hash.slice(1);
+      if (!id) return;
+      var el = document.getElementById(id);
+      if (!el) return;
+      var d = el.closest ? el.closest("details.fold") : null;
+      if (d) d.open = true;
+      el.scrollIntoView();
+    }
+    window.addEventListener("hashchange", reveal);
+    reveal();
+  })();
+</script>
 </body>
 </html>
