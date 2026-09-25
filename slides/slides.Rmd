@@ -787,6 +787,8 @@ class: center, middle, inverse
 
 # Part 2: The Model
 
+Why the labor share can fall while productivity barely moves, and where unemployment comes from.
+
 ---
 name: tasks-main
 
@@ -1775,6 +1777,8 @@ name: part4-divider
 class: center, middle, inverse
 
 # Part 4: Results: Some Scenarios and the Explorer
+
+What the seven inputs produce by 2030, and how far to trust it.
 
 ---
 class: figfull
