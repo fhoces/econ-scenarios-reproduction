@@ -2178,8 +2178,8 @@ name: takeaways
 
 1. **The claim is conditional, and the conditioning set is small.** Five numbers about
    AI, two about labor-market frictions.
-2. **TFP and distribution are separate questions.** How much of AI use replaces workers
-   ($\psi$) moves the labor share while measured TFP barely changes.
+2. **TFP and distribution are separate questions.** How much of AI use replaces workers,
+   $\psi$, moves the labor share while measured TFP barely changes.
 3. **The inequality $\sigma < 1$ is load-bearing.** Set it above one and the labor-share results
    change sign.
 4. **Capital supply decides whether workers gain**, and wage rigidity decides whether
