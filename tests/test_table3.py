@@ -1,5 +1,7 @@
 """The headline test: reproduce Table 3 of the paper (p. 31), cell by cell."""
 
+import pathlib
+
 import pytest
 
 from aiscen.params import Fixed
@@ -16,6 +18,10 @@ WIDE = {
 
 TABLE3 = build_table3()
 
+LANDING = (pathlib.Path(__file__).resolve().parent.parent / "index.html").read_text()
+LANDING_ROWS = ("GDP, pct above no-AI", "Average wage, pct above no-AI",
+                "Unemployment rate, cognitive, pct", "Labor share, pct of income")
+
 
 def tol(want: float, key) -> float:
     """0.05 points, 0.10 at 10 and above, or the widened value for the two U-bar cells."""
@@ -31,6 +37,11 @@ def test_table3_row(row):
     for j, (g, w) in enumerate(zip(got, want)):
         assert g == pytest.approx(w, abs=tol(w, (row, j))), \
             f"{row!r} column {j}: simulated {g:.3f} vs published {w}"
+    # The landing page shows four of these rows, each scenario cell as the published
+    # digit followed by the reproduced value to two decimals in a <small class="repro">.
+    if row in LANDING_ROWS:
+        for g, w in zip(got[1:], want[1:]):
+            assert f'{w:.1f}<small class="repro">{g:.2f}</small>' in LANDING, (row, g, w)
 
 
 def test_pool_rounding_explains_the_two_wide_cells():
