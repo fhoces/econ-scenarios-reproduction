@@ -159,6 +159,7 @@
   table.scen td { color: var(--ink); }
   table.scen td, table.scen th { text-align: right; }
   table.scen td:first-child, table.scen th:first-child { text-align: left; }
+  table.scen .repro { display: block; font-size: 11px; line-height: 1.2; color: var(--ink-3); }
 
   footer {
     margin-top: 52px; padding-top: 20px; border-top: 1px solid var(--rule);
@@ -266,18 +267,17 @@
 <table class="scen">
   <thead><tr><th>In 2030</th><th>No AI</th><th>Modest</th><th>Substantial</th><th>Extreme</th></tr></thead>
   <tbody>
-    <tr><td>GDP, pct above the no-AI path</td><td>0</td><td>1.6</td><td>8.3</td><td>32.4</td></tr>
-    <tr><td>Average wage, pct above the no-AI path</td><td>0</td><td>0.7</td><td>2.1</td><td>9.7</td></tr>
-    <tr><td>Unemployment rate, AI-sensitive occupations, pct</td><td>2.9</td><td>2.9</td><td>4.5</td><td>17.9</td></tr>
-    <tr><td>Labor share, pct of income</td><td>60.0</td><td>59.4</td><td>56.1</td><td>45.2</td></tr>
+    <tr><td>GDP, pct above the no-AI path</td><td>0</td><td>1.6<small class="repro">1.61</small></td><td>8.3<small class="repro">8.28</small></td><td>32.4<small class="repro">32.42</small></td></tr>
+    <tr><td>Average wage, pct above the no-AI path</td><td>0</td><td>0.7<small class="repro">0.69</small></td><td>2.1<small class="repro">2.14</small></td><td>9.7<small class="repro">9.65</small></td></tr>
+    <tr><td>Unemployment rate, AI-sensitive occupations, pct</td><td>2.9</td><td>2.9<small class="repro">2.91</small></td><td>4.5<small class="repro">4.50</small></td><td>17.9<small class="repro">17.89</small></td></tr>
+    <tr><td>Labor share, pct of income</td><td>60.0</td><td>59.4<small class="repro">59.41</small></td><td>56.1<small class="repro">56.10</small></td><td>45.2<small class="repro">45.21</small></td></tr>
   </tbody>
 </table>
 </div>
 
 <p style="margin-top:14px;">Those are the paper's numbers, from its Table 3. This
-   reproduction recomputes every one of them from the printed equations, and the four rows
-   above come back as 1.61 / 8.28 / 32.42, 0.69 / 2.14 / 9.65, 2.91 / 4.50 / 17.89 and
-   59.41 / 56.10 / 45.21. Nothing in the model assigns the three scenarios probabilities,
+   reproduction recomputes every one of them from the printed equations (the smaller figure
+   under each). Nothing in the model assigns the three scenarios probabilities,
    so the spread between them is the result, not any one column. The table is the four rows
    of the paper's Table 3 that carry the gains and losses (output, pay, joblessness, the split
    of income), at the paper's own three settings, so its format is the paper's, not this
@@ -370,8 +370,10 @@ machine, and also rebuilds the explorer's grid and fails if the committed copy d
 transcribed from the paper's PDF by AI into <code>aiscen/</code>. The author reviewed them as
 they are presented in the report and the deck, not in the code itself; they have not been
 checked against the paper by a second, independent reader, or confirmed with the paper's
-authors. Where the paper's text left a modelling choice
-implicit, the reading adopted here was chosen for internal consistency (see the README).</p>
+authors: the automated tests are mechanical checks, not an outside review, though several
+independent AI review passes have audited the site for consistency. Where the paper's text
+left a modelling choice implicit, the reading adopted here was chosen for internal
+consistency (see the README).</p>
 
 <p style="margin-top:14px;">A separate question, with weaker evidence behind it, is whether the
 author can explain each object unaided, without relying on the AI's own explanation of it,
@@ -381,10 +383,6 @@ month-by-month numerical solution, but not yet for the equation-by-equation deri
 the report and the slides alike, or for the internal layout of the code in
 <code>aiscen/</code>. Mechanical verification confirms the numbers match; it does not by itself
 confirm he has independently worked through why they should.</p>
-
-<p style="margin-top:14px;">The automated tests are mechanical checks, not an outside review:
-no other person has verified any of this, though several independent AI review passes have
-audited the site for consistency.</p>
 
 <div class="note">
   <strong>The paper itself is not hosted here.</strong> It is third-party content. Get it
