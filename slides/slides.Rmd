@@ -145,7 +145,7 @@ the model, its tests and every exported CSV
 .cols3 .note { color: #5b6873; margin-top: 12px; display: block; font-size: 0.8em; }
 .s2p img { height: 566px; width: auto; max-width: 100%; }
 .eqstep .eqnote { font-size: 15px; color: #333; margin: 0 0 6px; }
-.eqwall .eqnote { font-size: 15px; color: #333; margin: 0 0 4px; }
+.eqwall .eqnote { font-size: 15px; color: #333; margin: 0 0 4px 92px; }
 .tiny td, .tiny th { padding: 1px 5px 1px 0; }
 .highlight-box {
   background: #fff3e0;
