@@ -102,6 +102,40 @@ the model, its tests and every exported CSV
 .credit[OPA done by [Fernando Hoces de la Guardia](https://fhoces.github.io), using [agentic coding tools](../index.html#how-ai-was-used)]
 
 ---
+name: opa-compare
+
+# What This OPA Adds to the Paper
+
+.opa-compare-lead[
+Everything of substance here is the authors' work: the model, the calibration, the survey, the
+three scenarios and every conclusion in
+[Korinek, Jones, Sacher, Cotter and McCrory (2026)](https://www.anthropic.com/institute/econ-scenarios).
+This OPA adds one small layer of transparency on top.
+]
+
+.pull-left[
+.opa-compare-fig[
+<img src="../assets/opa/opa-compare-original.svg" alt="The original analysis: output and details layers, offset and disconnected, with an empty outline where materials would be">
+]
+.opa-compare-cap[
+**The paper: two layers, not connected.** It publishes an output (Table 3, its figures, its own
+explorer) and the details (45 equations, Table A.1, Appendices A and C), but no code joins
+them, so no number can be regenerated or changed.
+]
+]
+
+.pull-right[
+.opa-compare-fig[
+<img src="../assets/opa/opa-compare-opa.svg" alt="This OPA: output, details and materials stacked tightly in one plane">
+]
+.opa-compare-cap[
+**This OPA: three layers, tightly connected.** The explorer's numbers come from the code in the
+repository, the report and this deck cite the paper's equations by number, and the test suite
+ties the three together.
+]
+]
+
+---
 name: deck-map
 
 ```{css, echo=FALSE}
@@ -218,6 +252,9 @@ a.reflink:hover { color: #1a237e; border-bottom-color: #1a237e; }
    is. The slide needs its own stacking context or .opa-mark's negative z-index
    drops the figure behind the slide background. */
 .remark-slide-content.opa-slide { position: relative; z-index: 0; overflow: hidden; }
+.opa-compare-lead { font-size: 88%; margin: -4px 0 10px; }
+.opa-compare-fig img { display: block; height: 285px; width: auto; margin: 0 auto; }
+.opa-compare-cap { font-size: 78%; line-height: 1.35; margin-top: 6px; }
 .opa-intro { font-size: 92%; max-width: 30em; margin: 0 auto 1.1em; }
 .opa-legend { font-size: 85%; line-height: 1.75; max-width: 34em; margin: 0 auto;
               text-align: left; }
@@ -246,11 +283,11 @@ Part of an independent reproduction of Korinek et al. (2026):
 
 <table style="width:100%; font-size:85%; border-collapse:collapse;">
 <tr style="background:#e8eaf6;"><th style="text-align:left; padding:6px;">Part</th><th style="text-align:left; padding:6px;">What it covers</th><th style="padding:6px;">Slides</th></tr>
-<tr><td style="padding:6px;"><b>1. The claim</b></td><td style="padding:6px;">What the paper asserts, and the seven inputs it rests on</td><td style="text-align:center;">4&ndash;18</td></tr>
-<tr><td style="padding:6px;"><b>2. The model</b></td><td style="padding:6px;">Task-based production, the assignment rule, prices and shares, TFP, the labor share, employment, ideas, unemployment: where every equation comes from</td><td style="text-align:center;">19&ndash;34</td></tr>
-<tr><td style="padding:6px;"><b>3. Solving the model for US inputs</b></td><td style="padding:6px;">Calibration, the steady state, all 44 equations and the order they run in, the root-finds</td><td style="text-align:center;">35&ndash;48</td></tr>
-<tr><td style="padding:6px;"><b>4. Results: some scenarios and the explorer</b></td><td style="padding:6px;">The three scenarios one at a time, robustness, the survey, what reproduces, takeaways, and two postscripts (the whole grid, AI slop)</td><td style="text-align:center;">49&ndash;61</td></tr>
-<tr><td style="padding:6px;"><b>Backup</b></td><td style="padding:6px;">A CES refresher, solving the steady state, month 0 step by step, the 44 equations in the code, five derivations, matching, why slop flips the wage, the pool rounding, growth against levels, the gain <i>a</i></td><td style="text-align:center;">62&ndash;81</td></tr>
+<tr><td style="padding:6px;"><b>1. The claim</b></td><td style="padding:6px;">What the paper asserts, and the seven inputs it rests on</td><td style="text-align:center;">5&ndash;19</td></tr>
+<tr><td style="padding:6px;"><b>2. The model</b></td><td style="padding:6px;">Task-based production, the assignment rule, prices and shares, TFP, the labor share, employment, ideas, unemployment: where every equation comes from</td><td style="text-align:center;">20&ndash;35</td></tr>
+<tr><td style="padding:6px;"><b>3. Solving the model for US inputs</b></td><td style="padding:6px;">Calibration, the steady state, all 44 equations and the order they run in, the root-finds</td><td style="text-align:center;">36&ndash;49</td></tr>
+<tr><td style="padding:6px;"><b>4. Results: some scenarios and the explorer</b></td><td style="padding:6px;">The three scenarios one at a time, robustness, the survey, what reproduces, takeaways, and two postscripts (the whole grid, AI slop)</td><td style="text-align:center;">50&ndash;62</td></tr>
+<tr><td style="padding:6px;"><b>Backup</b></td><td style="padding:6px;">A CES refresher, solving the steady state, month 0 step by step, the 44 equations in the code, five derivations, matching, why slop flips the wage, the pool rounding, growth against levels, the gain <i>a</i></td><td style="text-align:center;">63&ndash;82</td></tr>
 </table>
 
 .blue-box[
