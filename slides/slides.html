@@ -51,7 +51,7 @@
 
       function positionLink() {
         // Read the VISIBLE slide's own scaler, not just the first one in the DOM: each
-        // of the 82 slides has its own .remark-slide-scaler, and while a fresh page load
+        // of the 83 slides has its own .remark-slide-scaler, and while a fresh page load
         // gives them all identical inline styles, there is no guarantee every hidden one
         // stays in sync with every resize/fullscreen toggle. The visible one is always
         // authoritative for what is actually on screen.
@@ -131,26 +131,32 @@ three scenarios and every conclusion in
 This OPA adds one small, important but missing, layer of transparency on top.
 ]
 
-.pull-left[
-.opa-compare-fig[
-&lt;img src="../assets/opa/opa-compare-original.svg" alt="The original analysis: output and details layers, offset and disconnected, with an empty outline where materials would be"&gt;
-]
+&lt;div class="opa-fig"&gt;&lt;svg class="opa-anim" viewBox="0 0 300 290" role="img" aria-label="The original analysis: output and details layers, offset and disconnected, with an empty outline where a materials layer would be" xmlns="http://www.w3.org/2000/svg"&gt;&lt;g transform="translate(208,212)"&gt;&lt;g class=""&gt;&lt;polygon points="0,-46 92,0 92,26 0,72 -92,26 -92,0" fill="none" stroke="#6b7682" stroke-width="1.5" stroke-dasharray="5 4" opacity="0.55"/&gt;&lt;polyline points="-92,0 0,46 92,0" fill="none" stroke="#6b7682" stroke-width="1.5" stroke-dasharray="5 4" opacity="0.55"/&gt;&lt;/g&gt;&lt;/g&gt;&lt;g transform="translate(208,138)"&gt;&lt;g class=""&gt;&lt;polygon points="-92,0 0,46 0,72 -92,26" fill="#1581ab"/&gt;&lt;polygon points="0,46 92,0 92,26 0,72" fill="#1582b8"/&gt;&lt;polygon points="0,-46 92,0 0,46 -92,0" fill="#1484c5"/&gt;&lt;text transform="matrix(0.894 -0.447 0 1 46.0 41.7)" text-anchor="middle" font-family="IBM Plex Sans, Segoe UI, sans-serif" font-weight="600" font-size="11" letter-spacing="1.5" fill="#fff"&gt;DETAILS&lt;/text&gt;&lt;/g&gt;&lt;/g&gt;&lt;g transform="translate(92,52)"&gt;&lt;g class=""&gt;&lt;polygon points="-92,0 0,46 0,72 -92,26" fill="#da9516"/&gt;&lt;polygon points="0,46 92,0 92,26 0,72" fill="#eca516"/&gt;&lt;polygon points="0,-46 92,0 0,46 -92,0" fill="#fcb415"/&gt;&lt;text transform="matrix(0.894 -0.447 0 1 46.0 41.7)" text-anchor="middle" font-family="IBM Plex Sans, Segoe UI, sans-serif" font-weight="600" font-size="11" letter-spacing="1.5" fill="#fff"&gt;OUTPUT&lt;/text&gt;&lt;/g&gt;&lt;/g&gt;&lt;/svg&gt;&lt;/div&gt;
+
 .opa-compare-cap[
 **The paper: two layers, not connected.** It publishes an output (Table 3, its figures, its own
 explorer) and the details (45 equations, Table A.1, Appendices A and C), but no code joins
 them, so no number can be regenerated or changed.
 ]
+
+---
+name: opa-compare-opa
+
+# What This OPA Adds to the Paper
+
+.opa-compare-lead[
+Everything of substance here is the authors' work: the model, the calibration, the survey, the
+three scenarios and every conclusion in
+[Korinek, Jones, Sacher, Cotter and McCrory (2026)](https://www.anthropic.com/institute/econ-scenarios).
+This OPA adds one small, important but missing, layer of transparency on top.
 ]
 
-.pull-right[
-.opa-compare-fig[
-&lt;img src="../assets/opa/opa-compare-opa.svg" alt="This OPA: output, details and materials stacked tightly in one plane"&gt;
-]
+&lt;div class="opa-fig"&gt;&lt;svg class="opa-anim" viewBox="0 0 300 290" role="img" aria-label="This OPA: output, details and materials stacked tightly in one plane" xmlns="http://www.w3.org/2000/svg"&gt;&lt;g transform="translate(208,212)"&gt;&lt;g class="lyr-ghost"&gt;&lt;polygon points="0,-46 92,0 92,26 0,72 -92,26 -92,0" fill="none" stroke="#6b7682" stroke-width="1.5" stroke-dasharray="5 4" opacity="0.55"/&gt;&lt;polyline points="-92,0 0,46 92,0" fill="none" stroke="#6b7682" stroke-width="1.5" stroke-dasharray="5 4" opacity="0.55"/&gt;&lt;/g&gt;&lt;/g&gt;&lt;g transform="translate(150,157)"&gt;&lt;g class="lyr-mat"&gt;&lt;polygon points="-92,0 0,46 0,72 -92,26" fill="#002547"/&gt;&lt;polygon points="0,46 92,0 92,26 0,72" fill="#003262"/&gt;&lt;polygon points="0,-46 92,0 0,46 -92,0" fill="#0b4a7c"/&gt;&lt;text transform="matrix(0.894 -0.447 0 1 46.0 41.7)" text-anchor="middle" font-family="IBM Plex Sans, Segoe UI, sans-serif" font-weight="600" font-size="10" letter-spacing="1.5" fill="#fff"&gt;MATERIALS&lt;/text&gt;&lt;/g&gt;&lt;/g&gt;&lt;g transform="translate(150,126)"&gt;&lt;g class="lyr-det"&gt;&lt;polygon points="-92,0 0,46 0,72 -92,26" fill="#1581ab"/&gt;&lt;polygon points="0,46 92,0 92,26 0,72" fill="#1582b8"/&gt;&lt;polygon points="0,-46 92,0 0,46 -92,0" fill="#1484c5"/&gt;&lt;text transform="matrix(0.894 -0.447 0 1 46.0 41.7)" text-anchor="middle" font-family="IBM Plex Sans, Segoe UI, sans-serif" font-weight="600" font-size="11" letter-spacing="1.5" fill="#fff"&gt;DETAILS&lt;/text&gt;&lt;/g&gt;&lt;/g&gt;&lt;g transform="translate(150,86)"&gt;&lt;g class="lyr-out"&gt;&lt;polygon points="-92,0 0,46 0,72 -92,26" fill="#da9516"/&gt;&lt;polygon points="0,46 92,0 92,26 0,72" fill="#eca516"/&gt;&lt;polygon points="0,-46 92,0 0,46 -92,0" fill="#fcb415"/&gt;&lt;text transform="matrix(0.894 -0.447 0 1 46.0 41.7)" text-anchor="middle" font-family="IBM Plex Sans, Segoe UI, sans-serif" font-weight="600" font-size="11" letter-spacing="1.5" fill="#fff"&gt;OUTPUT&lt;/text&gt;&lt;/g&gt;&lt;/g&gt;&lt;/svg&gt;&lt;/div&gt;
+
 .opa-compare-cap[
 **This OPA: three layers, tightly connected.** The explorer's numbers come from the code in the
 repository, the report and this deck cite the paper's equations by number, and the test suite
 ties the three together.
-]
 ]
 
 ---
@@ -270,9 +276,22 @@ a.reflink:hover { color: #1a237e; border-bottom-color: #1a237e; }
    is. The slide needs its own stacking context or .opa-mark's negative z-index
    drops the figure behind the slide background. */
 .remark-slide-content.opa-slide { position: relative; z-index: 0; overflow: hidden; }
-.opa-compare-lead { font-size: 88%; margin: -4px 0 10px; }
-.opa-compare-fig img { display: block; height: 285px; width: auto; margin: 0 auto; }
-.opa-compare-cap { font-size: 78%; line-height: 1.35; margin-top: 6px; }
+.opa-compare-lead { font-size: 88%; margin: -4px 0 6px; }
+/* opa-compare build: slide B's layers animate from slide A's positions into the stack.
+   Offsets are A minus B in SVG user units (one CSS px = one user unit inside the SVG). */
+.opa-anim { display: block; height: 330px; width: auto; margin: 4px auto 0; overflow: visible; }
+.opa-anim .lyr-ghost { opacity: 0; }
+.remark-visible .opa-anim .lyr-out  { animation: opa-out 1s ease-out both; }
+.remark-visible .opa-anim .lyr-det  { animation: opa-det 1s ease-out both; }
+.remark-visible .opa-anim .lyr-mat  { animation: opa-mat 1s ease-out both; }
+.remark-visible .opa-anim .lyr-ghost { animation: opa-ghost 1s ease-out both; }
+@keyframes opa-out   { from { transform: translate(-58px, -34px); } to { transform: none; } }
+@keyframes opa-det   { from { transform: translate(58px, 12px); } to { transform: none; } }
+@keyframes opa-mat   { from { transform: translate(58px, 55px); opacity: 0; }
+                        60% { opacity: 0.6; } to { transform: none; opacity: 1; } }
+@keyframes opa-ghost { from { opacity: 1; } to { opacity: 0; } }
+@media print { .opa-anim g { animation: none !important; } }
+.opa-compare-cap { font-size: 80%; line-height: 1.4; max-width: 760px; margin: 8px auto 0; text-align: center; }
 .opa-intro { font-size: 92%; max-width: 30em; margin: 0 auto 1.1em; }
 .opa-legend { font-size: 85%; line-height: 1.75; max-width: 34em; margin: 0 auto;
               text-align: left; }
@@ -301,11 +320,11 @@ Part of an independent reproduction of Korinek et al. (2026):
 
 &lt;table style="width:100%; font-size:85%; border-collapse:collapse;"&gt;
 &lt;tr style="background:#e8eaf6;"&gt;&lt;th style="text-align:left; padding:6px;"&gt;Part&lt;/th&gt;&lt;th style="text-align:left; padding:6px;"&gt;What it covers&lt;/th&gt;&lt;th style="padding:6px;"&gt;Slides&lt;/th&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;td style="padding:6px;"&gt;&lt;b&gt;1. The claim&lt;/b&gt;&lt;/td&gt;&lt;td style="padding:6px;"&gt;What the paper asserts, and the seven inputs it rests on&lt;/td&gt;&lt;td style="text-align:center;"&gt;5&amp;ndash;19&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;td style="padding:6px;"&gt;&lt;b&gt;2. The model&lt;/b&gt;&lt;/td&gt;&lt;td style="padding:6px;"&gt;Task-based production, the assignment rule, prices and shares, TFP, the labor share, employment, ideas, unemployment: where every equation comes from&lt;/td&gt;&lt;td style="text-align:center;"&gt;20&amp;ndash;35&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;td style="padding:6px;"&gt;&lt;b&gt;3. Solving the model for US inputs&lt;/b&gt;&lt;/td&gt;&lt;td style="padding:6px;"&gt;Calibration, the steady state, all 44 equations and the order they run in, the root-finds&lt;/td&gt;&lt;td style="text-align:center;"&gt;36&amp;ndash;49&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;td style="padding:6px;"&gt;&lt;b&gt;4. Results: some scenarios and the explorer&lt;/b&gt;&lt;/td&gt;&lt;td style="padding:6px;"&gt;The three scenarios one at a time, robustness, the survey, what reproduces, takeaways, and two postscripts (the whole grid, AI slop)&lt;/td&gt;&lt;td style="text-align:center;"&gt;50&amp;ndash;62&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;td style="padding:6px;"&gt;&lt;b&gt;Backup&lt;/b&gt;&lt;/td&gt;&lt;td style="padding:6px;"&gt;A CES refresher, solving the steady state, month 0 step by step, the 44 equations in the code, five derivations, matching, why slop flips the wage, the pool rounding, growth against levels, the gain &lt;i&gt;a&lt;/i&gt;&lt;/td&gt;&lt;td style="text-align:center;"&gt;63&amp;ndash;82&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td style="padding:6px;"&gt;&lt;b&gt;1. The claim&lt;/b&gt;&lt;/td&gt;&lt;td style="padding:6px;"&gt;What the paper asserts, and the seven inputs it rests on&lt;/td&gt;&lt;td style="text-align:center;"&gt;6&amp;ndash;20&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td style="padding:6px;"&gt;&lt;b&gt;2. The model&lt;/b&gt;&lt;/td&gt;&lt;td style="padding:6px;"&gt;Task-based production, the assignment rule, prices and shares, TFP, the labor share, employment, ideas, unemployment: where every equation comes from&lt;/td&gt;&lt;td style="text-align:center;"&gt;21&amp;ndash;36&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td style="padding:6px;"&gt;&lt;b&gt;3. Solving the model for US inputs&lt;/b&gt;&lt;/td&gt;&lt;td style="padding:6px;"&gt;Calibration, the steady state, all 44 equations and the order they run in, the root-finds&lt;/td&gt;&lt;td style="text-align:center;"&gt;37&amp;ndash;50&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td style="padding:6px;"&gt;&lt;b&gt;4. Results: some scenarios and the explorer&lt;/b&gt;&lt;/td&gt;&lt;td style="padding:6px;"&gt;The three scenarios one at a time, robustness, the survey, what reproduces, takeaways, and two postscripts (the whole grid, AI slop)&lt;/td&gt;&lt;td style="text-align:center;"&gt;51&amp;ndash;63&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td style="padding:6px;"&gt;&lt;b&gt;Backup&lt;/b&gt;&lt;/td&gt;&lt;td style="padding:6px;"&gt;A CES refresher, solving the steady state, month 0 step by step, the 44 equations in the code, five derivations, matching, why slop flips the wage, the pool rounding, growth against levels, the gain &lt;i&gt;a&lt;/i&gt;&lt;/td&gt;&lt;td style="text-align:center;"&gt;64&amp;ndash;83&lt;/td&gt;&lt;/tr&gt;
 &lt;/table&gt;
 
 .blue-box[
